@@ -9,7 +9,7 @@ function CreateAuthorizationWindow()
     {
         width: 900,                 
         height: 700,      
-        minWidth: 300,
+        minWidth: 400,
         icon: 'src/img/icon.png',           
         webPreferences: { nodeIntegration: true},
         title: 'TechX Compass'
