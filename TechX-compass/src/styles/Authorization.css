@@ -16,10 +16,10 @@ body {
 
   border-radius: 30px;
 
- background-color: #000000;
-opacity: 1;
-background-image: radial-gradient(#7d7dbf 1.5px, #000000 1.5px);
-background-size: 30px 30px;
+  background-color: #000000;
+  opacity: 1;
+  background-image: radial-gradient(#7d7dbf 1.5px, #000000 1.5px);
+  background-size: 30px 30px;
   background-size: 30px 30px;
   box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
 }
@@ -33,11 +33,11 @@ background-size: 30px 30px;
   padding: 10px 20px;
   width: 260px;
   font-size: 16px;
-  color: #fff;
+  color: black;
   border: none;
   border-radius: 9999px;
   background: none;
-  background-color: black;
-  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  background-color: white;
+
   outline: none;
 }
