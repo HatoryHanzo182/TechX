@@ -2,7 +2,7 @@
   * AUTHORIZATION WINDOW LOGIC.💊
 */
 
-// <==-- Accessibility check sector. --==>
+/*========== Accessibility check sector. ==========*/
 function Confuse(str)  // <-- This function takes a string and returns the SHA-256 
 {                     // hash of that string for the password verification function.
     return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(buffer =>
@@ -29,10 +29,9 @@ function Validator()  // <-- Password check function.
             ShowErrorMessage("Incorrect password");
     });
 }
-// <==-- --==>
+/*========================================*/
 
-
-// <==-- Error message display area. --==>
+/*========== Error message display area. ==========*/
 function ShowErrorMessage(mess)  // <-- Displaying the error window.
 {
     const error_message = document.getElementById("id-error-message");
@@ -50,10 +49,10 @@ function BreakErrorMessage()
     
     error_message.style.display = "none";
 }
-// <==-- --==>
+/*========================================*/
 
 
-// <==-- Event Handler Sector. --==>
+/*========== Event Handler Sector. ==========*/
 document.getElementById("id-button-confirm").onclick = Validator;
 document.getElementById("id-close-error-message").onclick = BreakErrorMessage;
-// <==-- --==>
+/*========================================*/

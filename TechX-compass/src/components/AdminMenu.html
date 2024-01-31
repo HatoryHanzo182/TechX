@@ -6,7 +6,117 @@
     <link rel="stylesheet" href="../styles/AdminMenu.css">
 </head>
 <body>
-    <h1>Admin Menu</h1>
+    <div class="container">
+        <!--Vertical menu region.-->
+        <div class="navigation">
+            <div class="menu-toggle"></div>
+            <ul class="list">
+                <!--Products item sector.-->
+                <li class="list-item active" style="--color: #10e010">
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="bag-handle-outline"></ion-icon>
+                        </span>
+                        <span class="text">Product Management</span>
+                    </a>
+                </li>
+                <!--Orders item sector.-->
+                <li class="list-item active" style="--color: #fc0a0a">
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="file-tray-outline"></ion-icon>
+                        </span>
+                        <span class="text">Orders</span>
+                    </a>
+                </li>
+                <!--Activity item sector.-->
+                <li class="list-item active" style="--color: #ebdf05">
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="analytics-outline"></ion-icon>
+                        </span>
+                        <span class="text">Activity</span>
+                    </a>
+                </li>
+                <!--User reviews item sector.-->
+                <li class="list-item active" style="--color: #2196f3">
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="chatbox-outline"></ion-icon>
+                        </span>
+                        <span class="text">User reviews</span>
+                    </a>
+                </li>
+                <!--Sales accounting item sector.-->
+                <li class="list-item active" style="--color: #b145e9">
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="cash-outline"></ion-icon>
+                        </span>
+                        <span class="text">Sales accounting</span>
+                    </a>
+                </li>
+                <!--Settings item sector.-->
+                <li class="list-item active" style="--color: #10ded0">
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <!--Exit item sector.-->
+                <li class="list-item active" style="--color: #000000">
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="exit-outline"></ion-icon>
+                        </span>
+                        <span class="text">Exit</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--PRODUCTS CONTENT-->
+        <div id="id-products-content" class="products-content" style="display: none;">
+            <h1>products</h1>
+        </div>
+        <!--ORDERS CONTENT-->
+        <div id="id-orders-content" class="orders-content" style="display: none;">
+            <h1>orders</h1>
+        </div>
+        <!--ACTIVITY CONTENT-->
+        <div id="id-activity-content" class="activity-content" style="display: none;">
+            <h1>activity</h1>
+        </div>
+        <!--REVIEWS CONTENT-->
+        <div id="id-reviews-content" class="reviews-content" style="display: none;">
+            <h1>reviews</h1>
+        </div>
+        <!--ACCOUNTING CONTENT-->
+        <div id="id-accounting-content" class="accounting-content" style="display: none;">
+            <h1>accounting</h1>
+        </div>
+        <!--SETTINGS CONTENT-->
+        <div id="id-settings-content" class="settings-content" style="display: none;">
+            <h1>settings</h1>
+        </div>
+        <!--EXIT CONTENT-->
+        <div id="id-exit-content" style="display: none;">
+            <div class="exit-content">
+                <div class="confirmation-card">
+                    <ion-icon name="exit-outline" class="exit-icon"></ion-icon>
+                    <h2>Exit confirmation</h2>
+                    <p>Are you sure you want to leave the admin panel?</p>
+                    <div class="button-container">
+                        <button id="id-cancel-exit" class="cancel-button">Cancel</button>
+                        <button id="id-exit-exit"class="exit-button">Go out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="../js/AdminMenu.js"></script>
 </html>
