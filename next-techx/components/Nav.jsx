@@ -19,7 +19,7 @@ const navigation = [
 ];
 
 export default function Nav() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
