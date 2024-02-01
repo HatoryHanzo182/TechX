@@ -18,6 +18,36 @@ body {
                       radial-gradient(circle at 0    50%, white 5%, silver 5%, silver 15%, white 15%, white 20%, silver 20%, silver 29%, white 29%, white 34%, silver 34%, silver 44%, white 44%, white 49%, transparent 49%, transparent);
     background-size: 100px 50px;
 }
+
+
+/*---------------------
+  Scrollbar style 
+  sector.
+-----------------------*/
+::-webkit-scrollbar {
+    width: 12px;
+}
+  
+
+::-webkit-scrollbar-track {
+    background-color: #bbbbbb;
+    border-radius: 6px;
+}
+  
+::-webkit-scrollbar-thumb {
+    background-color: #141414;
+    border-radius: 6px;
+}
+  
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #000000;
+}
+  
+
+::-webkit-scrollbar-thumb:active {
+    background-color: #333;
+}
   
 
 /*---------------------
@@ -29,7 +59,6 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .navigation {
@@ -192,8 +221,58 @@ body {
   Product sector styles.
 -----------------------*/
 .products-content {
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
+
+.products-card {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 10px;
+    width: 290px;
+    height: 354px;
+    background: rgba(217, 217, 217, 0.58);
+    border: 1px solid white;
+    box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(6px);
+    border-radius: 17px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    font-weight: bolder;
+    color: black;
+}
+
+.products-card ion-icon {
+    margin-top: 50px;
+    font-size: 64px;
+}
+  
+.products-card > p {
+    margin-top: 40px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.products-card:hover {
+    border: 1px solid black;
+    transform: scale(1.05);
+}
+  
+.products-card:active {
+    transform: scale(0.95) rotateZ(1.7deg);
+}
+
+/*  Create product sector */
+
+
 
 
 /*---------------------
