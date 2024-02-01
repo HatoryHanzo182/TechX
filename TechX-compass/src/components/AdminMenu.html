@@ -81,7 +81,7 @@
             <!--Creation product item-->
             <div id="id-create-product" class="products-card">
                 <ion-icon name="color-wand-outline"></ion-icon>
-                <h2>Create new product</h4>
+                <h2>Create new product</h2>
                 <p>
                     Here you can create a product for your website. Some of the vehicle models are already saved, 
                     so you do not have to manually fill in all the characteristics. After creating the product, go to the 
@@ -90,7 +90,7 @@
             </div>
             <div class="products-card">
                 <ion-icon name="bandage-outline"></ion-icon>
-                <h2>Edit product</h4>
+                <h2>Edit product</h2>
                 <p>
                     Here you can edit the content of your products. Attention, only those products that are not yet 
                     listed on the site are edited.
@@ -98,7 +98,7 @@
             </div>
             <div class="products-card">
                 <ion-icon name="document-text-outline"></ion-icon>
-                <h2>Display and manage all products</h4>
+                <h2>Display and manage all products</h2>
                 <p>
                     All your products will be displayed here. After adding products, 
                     you can display it on the site, or leave the best time. If the product is no longer needed, 
@@ -112,23 +112,30 @@
         </div>
         <!--ORDERS CONTENT-->
         <div id="id-orders-content" class="orders-content" style="display: none;">
-            <h1>orders</h1>
+            <h1>Orders</h1>
         </div>
         <!--ACTIVITY CONTENT-->
         <div id="id-activity-content" class="activity-content" style="display: none;">
-            <h1>activity</h1>
+            <h1>Activity</h1>
         </div>
         <!--REVIEWS CONTENT-->
         <div id="id-reviews-content" class="reviews-content" style="display: none;">
-            <h1>reviews</h1>
+            <h1>Reviews</h1>
         </div>
         <!--ACCOUNTING CONTENT-->
         <div id="id-accounting-content" class="accounting-content" style="display: none;">
-            <h1>accounting</h1>
+            <h1>Accounting</h1>
         </div>
         <!--SETTINGS CONTENT-->
         <div id="id-settings-content" class="settings-content" style="display: none;">
-            <h1>settings</h1>
+            <h1>Settings</h1>
+            <div>
+                <label for="language-select">Select Language:</label>
+                <select id="language-select">
+                  <option value="en">English</option>
+                  <option value="ru">Русский</option>
+                </select>
+            </div>
         </div>
         <!--EXIT CONTENT-->
         <div id="id-exit-content" style="display: none;">
@@ -148,5 +155,5 @@
 </body>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="../js/AdminMenu.js"></script>
+<script type="module" src="../js/AdminMenu.js"></script>
 </html>

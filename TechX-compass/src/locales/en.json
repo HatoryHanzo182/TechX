@@ -1,0 +1,24 @@
+{
+  "product_management" : {
+    "label" : "Product Management",
+    "create_new_product": "Create new product",
+    "create_new_product_desc": "Here you can create a product for your website. Some of the vehicle models are already saved, so you do not have to manually fill in all the characteristics. After creating the product, go to the \"All Products\" tab.",
+    "edit_product": "Edit product",
+    "edit_product_desc": "Here you can edit the content of your products. Attention, only those products that are not yet listed on the site are edited.",
+    "manage_products": "Display and manage all products",
+    "manage_products_desc": "All your products will be displayed here. After adding products, you can display it on the site, or leave the best time. If the product is no longer needed, the delete function is available."
+  },
+  "orders": "Orders",
+  "activity": "Activity",
+  "user_reviews": "User reviews",
+  "sales_accounting": "Sales accounting",
+  "settings": "Settings",
+  "language_select_label": "Select Language:",
+  "exit": {
+    "label": "Exit",
+    "confirmation_title": "Exit confirmation",
+    "confirmation_message": "Are you sure you want to leave the admin panel?",
+    "cancel_button": "Cancel",
+    "exit_button": "Go out"
+  }
+}

@@ -1,3 +1,6 @@
+/*==========Import Sector.==========*/
+import { changeLanguage } from "./localizationManager.js";
+
 /*==========Global Variables Sector.==========*/
 /*** Menu elements ***/
 const menu_toggle = document.querySelector('.menu-toggle');
@@ -138,7 +141,11 @@ function ClickCancelAccount()
     list_item[6].classList.remove('active');
     list_item[user_position_index_menu].classList.add('active');
 }
-
+document
+  .getElementById("language-select")
+  .addEventListener("change", function () {
+    changeLanguage(this.value, list_item);
+  });
 document.getElementById('id-exit-exit').addEventListener('click', ClickExitAccount);
 document.getElementById('id-cancel-exit').addEventListener('click', ClickCancelAccount);
 /*========================================*/
