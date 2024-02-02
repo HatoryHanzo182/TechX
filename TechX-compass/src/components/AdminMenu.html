@@ -1,159 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/AdminMenu.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/AdminMenu.css" />
+  </head>
+  <body>
     <div class="container">
-        <!--Vertical menu region.-->
-        <div class="navigation">
-            <div class="menu-toggle"></div>
-            <ul class="list">
-                <!--Products item sector.-->
-                <li class="list-item active" style="--color: #10e010">
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="bag-handle-outline"></ion-icon>
-                        </span>
-                        <span class="text">Product Management</span>
-                    </a>
-                </li>
-                <!--Orders item sector.-->
-                <li class="list-item active" style="--color: #fc0a0a">
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="file-tray-outline"></ion-icon>
-                        </span>
-                        <span class="text">Orders</span>
-                    </a>
-                </li>
-                <!--Activity item sector.-->
-                <li class="list-item active" style="--color: #ebdf05">
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="analytics-outline"></ion-icon>
-                        </span>
-                        <span class="text">Activity</span>
-                    </a>
-                </li>
-                <!--User reviews item sector.-->
-                <li class="list-item active" style="--color: #2196f3">
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="chatbox-outline"></ion-icon>
-                        </span>
-                        <span class="text">User reviews</span>
-                    </a>
-                </li>
-                <!--Sales accounting item sector.-->
-                <li class="list-item active" style="--color: #b145e9">
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="cash-outline"></ion-icon>
-                        </span>
-                        <span class="text">Sales accounting</span>
-                    </a>
-                </li>
-                <!--Settings item sector.-->
-                <li class="list-item active" style="--color: #10ded0">
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="settings-outline"></ion-icon>
-                        </span>
-                        <span class="text">Settings</span>
-                    </a>
-                </li>
-                <!--Exit item sector.-->
-                <li class="list-item active" style="--color: #000000">
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="exit-outline"></ion-icon>
-                        </span>
-                        <span class="text">Exit</span>
-                    </a>
-                </li>
-            </ul>
+      <!--Vertical menu region.-->
+      <div class="navigation">
+        <div class="menu-toggle"></div>
+        <ul class="list">
+          <!--Products item sector.-->
+          <li class="list-item active" style="--color: #10e010">
+            <a href="#">
+              <span class="icon">
+                <ion-icon name="bag-handle-outline"></ion-icon>
+              </span>
+              <span class="text">Product Management</span>
+            </a>
+          </li>
+          <!--Orders item sector.-->
+          <li class="list-item active" style="--color: #fc0a0a">
+            <a href="#">
+              <span class="icon">
+                <ion-icon name="file-tray-outline"></ion-icon>
+              </span>
+              <span class="text">Orders</span>
+            </a>
+          </li>
+          <!--Activity item sector.-->
+          <li class="list-item active" style="--color: #ebdf05">
+            <a href="#">
+              <span class="icon">
+                <ion-icon name="analytics-outline"></ion-icon>
+              </span>
+              <span class="text">Activity</span>
+            </a>
+          </li>
+          <!--User reviews item sector.-->
+          <li class="list-item active" style="--color: #2196f3">
+            <a href="#">
+              <span class="icon">
+                <ion-icon name="chatbox-outline"></ion-icon>
+              </span>
+              <span class="text">User reviews</span>
+            </a>
+          </li>
+          <!--Sales accounting item sector.-->
+          <li class="list-item active" style="--color: #b145e9">
+            <a href="#">
+              <span class="icon">
+                <ion-icon name="cash-outline"></ion-icon>
+              </span>
+              <span class="text">Sales accounting</span>
+            </a>
+          </li>
+          <!--Settings item sector.-->
+          <li class="list-item active" style="--color: #10ded0">
+            <a href="#">
+              <span class="icon">
+                <ion-icon name="settings-outline"></ion-icon>
+              </span>
+              <span class="text">Settings</span>
+            </a>
+          </li>
+          <!--Exit item sector.-->
+          <li class="list-item active" style="--color: #000000">
+            <a href="#">
+              <span class="icon">
+                <ion-icon name="exit-outline"></ion-icon>
+              </span>
+              <span class="text">Exit</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!--PRODUCTS CONTENT-->
+      <div
+        id="id-products-content"
+        class="products-content"
+        style="display: none"
+      >
+        <!--Creation product item-->
+        <div id="id-create-product" class="products-card">
+          <ion-icon name="color-wand-outline"></ion-icon>
+          <h2>Create new product</h2>
+          <p>
+            Here you can create a product for your website. Some of the vehicle
+            models are already saved, so you do not have to manually fill in all
+            the characteristics. After creating the product, go to the "All
+            Products" tab.
+          </p>
         </div>
-        <!--PRODUCTS CONTENT-->
-        <div id="id-products-content" class="products-content" style="display: none;">
-            <!--Creation product item-->
-            <div id="id-create-product" class="products-card">
-                <ion-icon name="color-wand-outline"></ion-icon>
-                <h2>Create new product</h2>
-                <p>
-                    Here you can create a product for your website. Some of the vehicle models are already saved, 
-                    so you do not have to manually fill in all the characteristics. After creating the product, go to the 
-                    "All Products" tab.
-                </p>
+        <div class="products-card">
+          <ion-icon name="bandage-outline"></ion-icon>
+          <h2>Edit product</h2>
+          <p>
+            Here you can edit the content of your products. Attention, only
+            those products that are not yet listed on the site are edited.
+          </p>
+        </div>
+        <div class="products-card">
+          <ion-icon name="document-text-outline"></ion-icon>
+          <h2>Display and manage all products</h2>
+          <p>
+            All your products will be displayed here. After adding products, you
+            can display it on the site, or leave the best time. If the product
+            is no longer needed, the delete function is available.
+          </p>
+        </div>
+      </div>
+      <!--Product creation content.-->
+      <div id="id-create-product-content" style="display: none">
+        <h1>HAALKS:LAKS:LAK:SLKA:SK:A</h1>
+      </div>
+      <!--ORDERS CONTENT-->
+      <div id="id-orders-content" class="orders-content" style="display: none">
+        <h1>Orders</h1>
+      </div>
+      <!--ACTIVITY CONTENT-->
+      <div
+        id="id-activity-content"
+        class="activity-content"
+        style="display: none"
+      >
+        <h1>Activity</h1>
+      </div>
+      <!--REVIEWS CONTENT-->
+      <div
+        id="id-reviews-content"
+        class="reviews-content"
+        style="display: none"
+      >
+        <h1>Reviews</h1>
+      </div>
+      <!--ACCOUNTING CONTENT-->
+      <div
+        id="id-accounting-content"
+        class="accounting-content"
+        style="display: none"
+      >
+        <h1>Accounting</h1>
+      </div>
+      <!--SETTINGS CONTENT-->
+      <div
+        id="id-settings-content"
+        class="settings-content"
+        style="display: none"
+      >
+        <div class="settings-content">
+          <h1>Settings</h1>
+          <div>
+            <label for="language-select">Select Language:</label>
+            <select id="language-select">
+              <option value="en">English</option>
+              <option value="ru">Русский</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!--EXIT CONTENT-->
+      <div id="id-exit-content" style="display: none">
+        <div class="exit-content">
+          <div class="confirmation-card">
+            <ion-icon name="exit-outline" class="exit-icon"></ion-icon>
+            <h2>Exit confirmation</h2>
+            <p>Are you sure you want to leave the admin panel?</p>
+            <div class="button-container">
+              <button id="id-cancel-exit" class="cancel-button">Cancel</button>
+              <button id="id-exit-exit" class="exit-button">Go out</button>
             </div>
-            <div class="products-card">
-                <ion-icon name="bandage-outline"></ion-icon>
-                <h2>Edit product</h2>
-                <p>
-                    Here you can edit the content of your products. Attention, only those products that are not yet 
-                    listed on the site are edited.
-                </p>
-            </div>
-            <div class="products-card">
-                <ion-icon name="document-text-outline"></ion-icon>
-                <h2>Display and manage all products</h2>
-                <p>
-                    All your products will be displayed here. After adding products, 
-                    you can display it on the site, or leave the best time. If the product is no longer needed, 
-                    the delete function is available.
-                </p>
-            </div>
+          </div>
         </div>
-        <!--Product creation content.-->
-        <div id="id-create-product-content" style="display: none;">
-            <h1>HAALKS:LAKS:LAK:SLKA:SK:A</h1>
-        </div>
-        <!--ORDERS CONTENT-->
-        <div id="id-orders-content" class="orders-content" style="display: none;">
-            <h1>Orders</h1>
-        </div>
-        <!--ACTIVITY CONTENT-->
-        <div id="id-activity-content" class="activity-content" style="display: none;">
-            <h1>Activity</h1>
-        </div>
-        <!--REVIEWS CONTENT-->
-        <div id="id-reviews-content" class="reviews-content" style="display: none;">
-            <h1>Reviews</h1>
-        </div>
-        <!--ACCOUNTING CONTENT-->
-        <div id="id-accounting-content" class="accounting-content" style="display: none;">
-            <h1>Accounting</h1>
-        </div>
-        <!--SETTINGS CONTENT-->
-        <div id="id-settings-content" class="settings-content" style="display: none;">
-            <h1>Settings</h1>
-            <div>
-                <label for="language-select">Select Language:</label>
-                <select id="language-select">
-                  <option value="en">English</option>
-                  <option value="ru">Русский</option>
-                </select>
-            </div>
-        </div>
-        <!--EXIT CONTENT-->
-        <div id="id-exit-content" style="display: none;">
-            <div class="exit-content">
-                <div class="confirmation-card">
-                    <ion-icon name="exit-outline" class="exit-icon"></ion-icon>
-                    <h2>Exit confirmation</h2>
-                    <p>Are you sure you want to leave the admin panel?</p>
-                    <div class="button-container">
-                        <button id="id-cancel-exit" class="cancel-button">Cancel</button>
-                        <button id="id-exit-exit"class="exit-button">Go out</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-</body>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script type="module" src="../js/AdminMenu.js"></script>
+  </body>
+  <script
+    type="module"
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+  ></script>
+  <script type="module" src="../js/AdminMenu.js"></script>
 </html>
