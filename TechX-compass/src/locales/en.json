@@ -1,6 +1,6 @@
 {
-  "product_management" : {
-    "label" : "Product Management",
+  "product_management": {
+    "label": "Product Management",
     "create_new_product": "Create new product",
     "create_new_product_desc": "Here you can create a product for your website. Some of the vehicle models are already saved, so you do not have to manually fill in all the characteristics. After creating the product, go to the \"All Products\" tab.",
     "edit_product": "Edit product",
@@ -12,8 +12,11 @@
   "activity": "Activity",
   "user_reviews": "User reviews",
   "sales_accounting": "Sales accounting",
-  "settings": "Settings",
-  "language_select_label": "Select Language:",
+  "settings": {
+    "label": "Settings",
+    "language_select_label": "Select Language:",
+    "theme_button": "Change theme"
+  },
   "exit": {
     "label": "Exit",
     "confirmation_title": "Exit confirmation",
