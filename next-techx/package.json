@@ -48,5 +48,6 @@
     "lib": "lib"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "keywords": []
 }

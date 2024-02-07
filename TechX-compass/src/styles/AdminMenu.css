@@ -210,6 +210,7 @@ body {
   background-color: var(--text-color); /* #333 */
 }
 
+
 /*---------------------
   Sector vertical menu 
   styles.
@@ -378,7 +379,8 @@ body {
 }
 
 /*---------------------
-  Product sector styles.
+  Products menu sector 
+  styles.
 -----------------------*/
 .products-content {
   display: flex;
@@ -430,7 +432,190 @@ body {
   transform: scale(0.95) rotateZ(1.7deg);
 }
 
-/*  Create product sector */
+/*Create product sector.*/
+.create-product-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-creation-navigation-card {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  margin-top: 10px;
+  gap: 30px;
+  background-color: rgb(255, 255, 255);
+  padding: 10px 25px;
+  border-radius: 50px;
+}
+  
+.product-creation-navigation-card-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  background-color: rgb(252, 252, 252);
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.product-creation-navigation-card-tab:hover {
+  background-color: rgb(223, 223, 223);
+}
+  
+.product-creation-navigation-card-tab ion-icon {
+  color: #000000;
+  font-size: 50px;
+}
+
+/*Product card for add product.*/
+.card-content-product-data {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 50px;
+  background: rgb(255, 255, 255);
+}
+
+.line-card-content-product-data {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.title-card-content-product-data {
+  font-weight: bold;
+  font-size: 35px;
+}
+
+/*Step button in the product operations menu.*/
+.button-step-in-product-operations-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(0, 0, 0);
+}
+
+.arrow-back-circle-outline {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-back-circle-outline > ion-icon {
+  color: #ffffff;
+  font-size: 30px;
+}
+
+.arrow-back-circle-outline-text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+
+.button-step-in-product-operations-menu:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: .3s;
+}
+
+.button-step-in-product-operations-menu:hover .arrow-back-circle-outline {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
+}
+
+.button-step-in-product-operations-menu:hover .arrow-back-circle-outline-text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
+}
+
+.button-step-in-product-operations-menu:active {
+  transform: translate(2px ,2px);
+}
+
+/*Input for add product.*/
+.input-data {
+  margin: 30px;
+  background: none;
+  border: none solid #000;
+  outline: none;
+  max-width: 190px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 9999px;
+  color: #000000;
+}
+
+/*Button for add product.*/
+.button-add-product {
+  margin: 10px;
+  padding: 1em 2em;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #000000;
+  transition: all 1000ms;
+  font-size: 15px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #000000;
+}
+
+.button-add-product:hover {
+  color: #ffffff;
+  transform: scale(1.1);
+  outline: 2px solid #000000;
+  box-shadow: 4px 5px 17px -4px #000000;
+}
+
+.button-add-product::before {
+  content: "";
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #000000;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+.button-add-product:hover::before {
+  width: 250%;
+}
+
 
 /*---------------------
   Orders sector styles.
@@ -438,11 +623,13 @@ body {
 .orders-content {
 }
 
+
 /*---------------------
   Activity sector styles.
 -----------------------*/
 .activity-content {
 }
+
 
 /*---------------------
   Reviews sector styles.
@@ -450,17 +637,20 @@ body {
 .reviews-content {
 }
 
+
 /*---------------------
   Accounting sector styles.
 -----------------------*/
 .accounting-content {
 }
 
+
 /*---------------------
   Settings sector styles.
 -----------------------*/
 .settings-content {
 }
+
 
 /*---------------------
   Exit sector styles.
@@ -514,8 +704,7 @@ body {
   width: 100%;
 }
 
-.exit-button,
-.cancel-button {
+.exit-button, .cancel-button {
   display: flex;
   flex: 1;
   justify-content: center;

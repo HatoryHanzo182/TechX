@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.1.1"
+  },
+  "type": "module",
+  "scripts": {
+    "server": "node index.js"
+  }
+}
