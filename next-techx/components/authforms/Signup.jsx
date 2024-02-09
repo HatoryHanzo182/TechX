@@ -1,6 +1,10 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 import Link from "next/link";
 import { shopName } from "@/lib/constants";
@@ -60,7 +64,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex flex-wrap w-full text-slate-800 mt-16">
+    <div className="flex flex-wrap w-full  mt-16">
       <div
         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         aria-hidden="true"
@@ -73,7 +77,7 @@ const Signup = () => {
           }}
         />
       </div>
-      <div className="hidden sm:flex sm:w-full  lg:w-1/2 h-screen justify-center   text-white text-center  w-1/1">
+      <div className="hidden sm:flex sm:w-full  lg:w-1/2 h-screen justify-center   text-black dark:text-white text-center  w-1/1">
         {/* Content for the left side, visible only on small and large screens */}
         <div className="mx-auto my-10 py-16 px-8 xl:w-[50rem] mt-44">
           <span className="rounded-full bg-white px-3 py-1 font-medium text-blue-600 ">
@@ -88,7 +92,7 @@ const Signup = () => {
           </p>
           <a
             href="#"
-            className="font-semibold tracking-wide text-white underline underline-offset-4"
+            className="font-semibold tracking-wide  underline underline-offset-4"
           >
             Learn More
           </a>
@@ -100,29 +104,41 @@ const Signup = () => {
             {shopName}
           </a> */}
         </div>
-        <div className="my-2 mx-auto flex flex-col justify-center px-6 pt-8 sm:px-8 md:justify-start md:px-12 lg:w-3/4">
-          <p className="text-center sm:text-left text-3xl text-white font-bold">
+        <div className="my-2 mx-auto flex flex-col justify-center px-6 pt-8 sm:px-8 md:justify-start md:px-12 lg:w-3/4 text-black dark:text-white">
+          <p className="text-center sm:text-left text-3xl  font-bold">
             Create your free account
           </p>
           <p className="mt-6 text-center sm:text-left text-gray-500 font-medium">
             Already using wobble?
             <Link
               href="/signin"
-              className="ml-1 whitespace-nowrap font-semibold text-white"
+              className="ml-1 whitespace-nowrap font-semibold text-gray-400  underline "
             >
               Login here
             </Link>
           </p>
-          <button className="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white bg-white ">
+          <Button
+            variant="outline"
+            className="text-black dark:text-white mt-6 "
+          >
+            <svg role="img" viewBox="0 0 24 24" className="mr-2 h-4 w-4">
+              <path
+                fill="currentColor"
+                d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
+              ></path>
+            </svg>
+            Google
+          </Button>
+          {/* <button className="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none text-white ring-offset-2 transition   bg-black ">
             <img
               className="mr-2 h-5"
               src="https://img.icons8.com/color/344/google-logo.png"
               alt="logo"
             />
-            Get started with Google
-          </button>
+            Google
+          </button> */}
           <div className="relative mt-8 flex h-px place-items-center bg-gray-200">
-            <div className="absolute left-1/2 h-6 -translate-x-1/2 bg-black px-4 text-center text-sm text-gray-500">
+            <div className="absolute left-1/2 h-6 -translate-x-1/2 bg-white dark:bg-black px-4 text-center text-sm text-gray-500">
               Or use email instead
             </div>
           </div>
@@ -132,7 +148,7 @@ const Signup = () => {
           >
             {/* Input fields and Sign Up button */}
             <div className="flex flex-col pt-4">
-              <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
+              <div className="relative flex overflow-hidden rounded-md border-2 transition text-white">
                 <input
                   type="text"
                   id="login-name"
@@ -140,6 +156,7 @@ const Signup = () => {
                   className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
                   placeholder="Name"
                 />
+                {/* <Input type="name" placeholder="Name" /> */}
               </div>
             </div>
             <div className="flex flex-col pt-4">
@@ -151,10 +168,11 @@ const Signup = () => {
                   className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
                   placeholder="Email"
                 />
+                {/* <Input type="email" placeholder="Email" /> */}
               </div>
             </div>
             <div className="mb-4 flex flex-col pt-4">
-              <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
+              <div className="elative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
                 <input
                   type="password"
                   id="login-password"
@@ -162,24 +180,34 @@ const Signup = () => {
                   className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
                   placeholder="Password (minimum 8 characters)"
                 />
+                {/* <Input type="password" placeholder="Password" /> */}
               </div>
             </div>
-            <div className="block">
-              <input
-                className="mr-2 h-5 w-5 mt-[3px] rounded border border-gray-300 bg-contain bg-no-repeat align-top shadow focus:shadow"
-                type="checkbox"
-                id="remember-me"
-              />
-              <label className="inline-block text-gray-500" for="remember-me">
-                I agree to the{" "}
-                <a className="underline" href="#">
-                  Terms and Conditions
-                </a>
-              </label>
+            {/* <div className="flex flex-row">
+              <div className="dark:text-white text-black">
+                <Checkbox id="terms" className="mt-1 mr-2" />
+                <label>I agree to the terms and privacy policy</label>
+              </div>
+            </div> */}
+
+            <div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="terms" />
+                <Label htmlFor="terms">
+                  I agree to the terms and privacy policy
+                </Label>
+              </div>
             </div>
-            <button className="mt-6 w-full sm:w-auto rounded-lg bg-blue-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-blue-500 ring-offset-2 transition hover:bg-blue-700 focus:ring-2">
+
+            <Button
+              variant="outline"
+              className="text-black dark:text-white mt-6 "
+            >
               Sign Up
-            </button>
+            </Button>
+            {/* <button className="mt-6 w-full sm:w-auto rounded-lg bg-blue-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-blue-500 ring-offset-2 transition hover:bg-blue-700 focus:ring-2">
+              Sign Up
+            </button> */}
           </form>
         </div>
       </div>

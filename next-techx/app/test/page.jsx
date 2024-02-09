@@ -1,4 +1,5 @@
 "use client";
+import Catalog from "@/components/buttons/Catalog";
 import Nav from "@/components/Nav";
 import ProductSelection from "@/components/product/ProductMenu";
 
@@ -8,7 +9,7 @@ import React from "react";
 const page = () => {
   return (
     <main>
-      <ProductSelection />
+      <Catalog />
     </main>
   );
 };

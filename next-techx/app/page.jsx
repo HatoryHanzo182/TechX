@@ -5,10 +5,9 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 
 import MainPage from "@/components/MainPage";
 
-import ProductCards from "@/components/product/ProductCards";
 import Nav from "@/components/Nav";
 import ProductCatalog from "@/components/product/ProductCatalog";
-import Test from "@/components/Test";
+import { ProductCarousel } from "@/components/ProductCarousel";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -19,7 +18,7 @@ export default async function Home() {
 
       <MainPage />
 
-      <div className=" ml-16 flex  flex-wrap justify-start items-center">
+      <div className=" m-4 flex flex-wrap  p-2 justify-center  items-center ">
         <ProductCatalog
           image="https://img.jabko.ua/image/cache/home_cats/image%20154full.png.webp"
           title="Iphone"
@@ -68,6 +67,10 @@ export default async function Home() {
           image="https://img.jabko.ua/image/cache/-main-new/image14full.png.webp"
           title="Google Pixel"
         />
+      </div>
+
+      <div className="mt-20">
+        <ProductCarousel />
       </div>
       {/* <div className="mt-[200px] flex flex-row justify-start flex-wrap">
         <ProductCards

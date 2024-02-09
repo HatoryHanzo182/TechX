@@ -1,11 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { Dialog } from "@headlessui/react";
-import {
-  Bars3Icon,
-  XMarkIcon,
-  ShoppingCartIcon,
-} from "@heroicons/react/24/outline";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import { IoCartOutline } from "react-icons/io5";
 
@@ -19,7 +17,7 @@ const navigation = [
 ];
 
 export default function Nav() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +43,7 @@ export default function Nav() {
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                 alt=""
               /> */}
-                  <h1 className="text-white font-bold text-2xl animate-pulse">
+                  <h1 className="text-black dark:text-white  font-bold text-2xl animate-pulse">
                     techX
                   </h1>
                 </div>
@@ -61,7 +59,7 @@ export default function Nav() {
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
-            <div className="hidden lg:flex lg:gap-x-12 ">
+            {/* <div className="hidden lg:flex lg:gap-x-12 ">
               {navigation.map((item) => (
                 <a
                   key={item.name}
@@ -71,32 +69,24 @@ export default function Nav() {
                   {item.name}
                 </a>
               ))}
-            </div>
+            </div> */}
             {loggedIn ? (
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                <a>
-                  <IoCartOutline className="h-6 w-6 mr-2" aria-hidden="true" />
-                </a>
+                <div className="mt-2 mr-3">
+                  <Link href="/cart">
+                    <IoCartOutline className="h-6 w-6 " aria-hidden="true" />
+                  </Link>
+                </div>
                 <div className="relative inline-block text-left">
                   <button
                     onClick={toggleDropdown}
                     className="flex text-sm  rounded-full md:me-0  "
                   >
                     <span className="sr-only">Open user menu</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-7 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                      />
-                    </svg>
+                    <Avatar>
+                      <AvatarImage src="https://github.com/" />
+                      <AvatarFallback>AL</AvatarFallback>
+                    </Avatar>
                   </button>
 
                   {isOpen && (
@@ -199,7 +189,11 @@ export default function Nav() {
                   {loggedIn ? (
                     <div className="py-6 flex flex-1 lg:justify-end">
                       <Link href="/profile">
-                        <div className="text-sm font-semibold leading-6 border rounded-xl p-3 dark:text-white text-black mr-3 dark:hover:bg-gray-900"></div>
+                        {/* <div className="text-sm font-semibold leading-6 border rounded-xl p-3 dark:text-white text-black mr-3 dark:hover:bg-gray-900"></div> */}
+                        <Avatar>
+                          <AvatarImage src="https://github.com/" />
+                          <AvatarFallback>CN</AvatarFallback>
+                        </Avatar>
                       </Link>
                     </div>
                   ) : (

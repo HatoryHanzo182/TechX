@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-import { MdAddCircleOutline } from "react-icons/md";
+
 
 const ProductCards = (props) => {
   return (
@@ -22,15 +22,16 @@ const ProductCards = (props) => {
         </a>
         <div className="flex items-center mt-2.5 mb-5"></div>
         <div className="flex items-center justify-between">
-          <span className="lg:text-3xl max-sm:text-lg font-bold text-white">
+          <span className="lg:text-xl max-sm:text-lg font-bold text-white">
             {props.price} $
           </span>
           <button
             id="buy_button"
             type="button"
-            className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 max-sm:px-2.5 max-md:px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 max-sm:px-2.5 max-md:px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-            <MdAddCircleOutline size={20} />
+            {/* <MdAddCircleOutline size={20} /> */}
+            More
           </button>
         </div>
       </div>
