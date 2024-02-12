@@ -146,7 +146,7 @@ function AddPhone()  // <--- Add Phone.
   const series = document.getElementById("id-input-phone-data-Series").value;
   const screen_diagonal = document.getElementById("id-input-phone-data-Screen_diagonal").value;
 
-  fetch('http://localhost:3000/AddPhone', 
+  fetch('http://localhost:3001/AddPhone', 
   {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

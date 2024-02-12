@@ -2,14 +2,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-
+import bcrypt from "bcryptjs";
 import Link from "next/link";
-import { shopName } from "@/lib/constants";
 
-const Signup = () => {
+const Signup = () => 
+{
   const [name, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,50 +16,53 @@ const Signup = () => {
 
   const router = useRouter();
 
-  const handleSumbit = async (e) => {
+  const handleSumbit = async (e) => 
+  {
     e.preventDefault();
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password) 
+    {
       setError("All fields are necessary.");
       return;
     }
 
-    try {
-      const resUserExists = await fetch("api/userExists", {
+    try 
+    {
+      const ResUserExists = await fetch("http://localhost:3001/CheckUserExists", 
+      {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
       });
-      const { user } = await resUserExists.json();
 
-      if (user) {
-        setError("User already exists");
+      const { existing_user } = await ResUserExists.json();
+  
+      if (existing_user) 
+      {
+        console.log("User exists")
         return;
       }
+      else
+      {
+        const res = await fetch('http://localhost:3001/NewUser', 
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({name, email, password: await bcrypt.hash(password, 10)})
+        });
 
-      const res = await fetch("api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
-      });
-      if (res.ok) {
-        const form = e.target;
-        form.reset();
-        router.push("/signin");
-      } else {
-        console.log("user registration failed.");
+        if (res.ok) 
+        {
+          const form = e.target;
+          
+          form.reset();
+          router.push("/signin");
+        } 
+        else 
+          console.log("user registration failed.");
       }
-    } catch (error) {
-      console.log("Error during registration: ", error);
-    }
+    } 
+    catch (error) { console.log("Error during registration: ", error); }
   };
 
   return (
@@ -214,4 +216,5 @@ const Signup = () => {
     </div>
   );
 };
+
 export default Signup;

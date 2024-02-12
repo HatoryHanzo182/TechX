@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import express from 'express';
 import { _techx_data_connection_string } from './connect.js';
 import { PhoneModel } from './Models/Phone.js';
+import { UserModel } from './Models/User.js';
 
 //
 //  ████████╗███████╗ █████╗ ██╗  ██╗██╗  ██╗  
@@ -27,7 +28,7 @@ const app = express();
 app.use(express.json());
 app.use((req, res, next) =>  // Middleware for handling CORS. 
 {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -36,10 +37,55 @@ app.use((req, res, next) =>  // Middleware for handling CORS.
 });
 
 const DB_URL = _techx_data_connection_string;
-const PORT =  3000;
+const PORT =  3001;
+
+// + + + + + + + + + + + + + + + + + + + TECHX + + + + + + + + + + + + + + + + + + +
+// REQUESTS TO SEND THIS DATA.
+//=============================================================================================
+        // Push new user data.
+app.post('/NewUser', async (req, res) => 
+{
+    try 
+    {
+      const { name, email, password } = req.body;
+      const new_user = new UserModel({ name, email, password });
+
+      await new_user.save();
+  
+      res.status(200).json({ message: 'User added successfully' });
+    } 
+    catch (error) 
+    {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+        // Let's check if the user exists.
+app.post('/CheckUserExists', async (req, res) => 
+{
+  try 
+  {
+    const { email } = req.body;
+    const existing_user = await UserModel.findOne({ email });
+
+    if(existing_user)
+      res.status(200).json({ existing_user: true });
+    else
+      res.status(200).json({ existing_user: false });
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+//=============================================================================================
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
 
 // + + + + + + + + + + + + + + + + + + + COMPASS + + + + + + + + + + + + + + + + + + +
-// REQUESTS TO SEND THESE PRODUCTS.
+// REQUESTS TO SEND THIS DATA.
 //=============================================================================================
         // Push product data.
 app.post('/AddPhone', async (req, res) => 
