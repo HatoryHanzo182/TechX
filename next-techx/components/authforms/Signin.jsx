@@ -1,20 +1,81 @@
 "use client";
 import { useState } from "react";
-
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { shopName } from "@/lib/constants";
-
 import { Button } from "@/components/ui/button";
+import jwt from 'jsonwebtoken';
 
-const Signin = () => {
-  const [name, setUsername] = useState("");
+const Signin = () => 
+{
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSumbit = async (e) => {
-    // Existing logic...
+  const handleSumbit = async (e) => 
+  {
+    e.preventDefault();
+
+    if (!email || !password) 
+    {
+      setError("All fields are necessary.");
+      return;
+    }
+
+    try
+    {
+      const ResUserExists = await fetch("http://localhost:3001/CheckUserExists",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const { existing_user } = await ResUserExists.json();
+
+      if (existing_user) 
+      {
+        const ResProofPass = await fetch("http://localhost:3001/ProofPass", 
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const { success } = await ResProofPass.json();
+
+        if(success)
+        {
+          try
+          {
+            const reply_token = await fetch("http://localhost:3001/GenerateToken", 
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email })
+            });
+
+            const { token } = await reply_token.json();
+
+            sessionStorage.setItem('token', token);
+          }
+          catch (error) 
+          {
+            console.error('Error during signing the token:', error);
+          }
+        }
+        else
+        {
+          console.log("SIGN IN: false");
+          return;
+        }
+      } 
+      else
+      {
+        console.log("User not found");
+        return;
+      }
+    }
+    catch (error) { console.log("Error during registration: ", error); }
   };
 
   return (

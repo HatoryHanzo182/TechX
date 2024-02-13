@@ -3,6 +3,9 @@ import express from 'express';
 import { _techx_data_connection_string } from './connect.js';
 import { PhoneModel } from './Models/Phone.js';
 import { UserModel } from './Models/User.js';
+import bcrypt from "bcryptjs";
+import crypto from "crypto";
+import jwt from 'jsonwebtoken';
 
 //
 //  ████████╗███████╗ █████╗ ██╗  ██╗██╗  ██╗  
@@ -24,6 +27,7 @@ import { UserModel } from './Models/User.js';
 //
 
 const app = express();
+const _token_secret_key = crypto.randomBytes(32).toString('base64');
 
 app.use(express.json());
 app.use((req, res, next) =>  // Middleware for handling CORS. 
@@ -73,6 +77,76 @@ app.post('/CheckUserExists', async (req, res) =>
       res.status(200).json({ existing_user: true });
     else
       res.status(200).json({ existing_user: false });
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+        // Prompt to verify user password.
+app.post('/ProofPass', async (req, res) => 
+{
+  try 
+  {
+    const { email, password } = req.body;
+
+    const existing_user = await UserModel.findOne({ email });
+
+    if (existing_user) 
+    {
+      const is_password_correct = await bcrypt.compare(password, existing_user.password);
+
+      if (is_password_correct) 
+        res.status(200).json({ success: true });
+      else
+        res.status(200).json({ success: false });
+    } 
+    else 
+      res.status(200).json({ success: false });
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+        // Generate and issue a token.
+app.post('/GenerateToken', async (req, res) => 
+{
+  try 
+  {
+    const { email } = req.body;
+    const token = jwt.sign({ user: email }, _token_secret_key, { expiresIn: '1h' });
+
+    res.status(200).json({ token });
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+        // Checking the validity of the token.
+app.post('/CheckToken', async (req, res) => 
+{
+  try 
+  {
+    const { token } = req.body;
+
+    jwt.verify(token, _token_secret_key, (err, decoded) => 
+    {
+      if (err) 
+      {
+        console.error(err);
+        res.status(401).json({ success: false });
+      } 
+      else 
+        res.status(200).json({ success: true });
+    });
   } 
   catch (error) 
   {

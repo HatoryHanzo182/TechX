@@ -8,7 +8,8 @@ import bcrypt from "bcryptjs";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 
-const Signup = () => {
+const Signup = () => 
+{
   const [name, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,50 +17,53 @@ const Signup = () => {
 
   const router = useRouter();
 
-  const handleSumbit = async (e) => {
+  const handleSumbit = async (e) => 
+  {
     e.preventDefault();
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password) 
+    {
       setError("All fields are necessary.");
       return;
     }
 
-    try {
-      const ResUserExists = await fetch(
-        "http://localhost:3001/CheckUserExists",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email }),
-        }
-      );
+    try 
+    {
+      const ResUserExists = await fetch("http://localhost:3001/CheckUserExists",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
 
       const { existing_user } = await ResUserExists.json();
 
-      if (existing_user) {
+      if (existing_user) 
+      {
         console.log("User exists");
         return;
-      } else {
-        const res = await fetch("http://localhost:3001/NewUser", {
+      } 
+      else 
+      {
+        const res = await fetch("http://localhost:3001/NewUser", 
+        {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name,
-            email,
-            password: await bcrypt.hash(password, 10),
-          }),
+          body: JSON.stringify({ name, email, password: await bcrypt.hash(password, 10) }),
         });
 
-        if (res.ok) {
+        if (res.ok) 
+        {
           const form = e.target;
 
           form.reset();
           router.push("/signin");
-        } else console.log("user registration failed.");
+        } 
+        else 
+          console.log("user registration failed.");
       }
-    } catch (error) {
-      console.log("Error during registration: ", error);
-    }
+    } 
+    catch (error) { console.log("Error during registration: ", error); }
   };
 
   return (
