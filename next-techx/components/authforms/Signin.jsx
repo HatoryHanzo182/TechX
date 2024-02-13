@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { shopName } from "@/lib/constants";
 
@@ -59,6 +60,7 @@ const Signin = () => {
             Get started with Google
           </button> */}
           <Button
+            onClick={() => signIn("google")}
             variant="outline"
             className="text-black dark:text-white mt-6 "
           >

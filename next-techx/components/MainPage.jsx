@@ -1,5 +1,6 @@
 import React from "react";
 import Catalog from "./buttons/Catalog";
+import TypingAnimation from "./buttons/TypingAnimation";
 
 const MainPage = () => {
   return (
@@ -30,7 +31,7 @@ const MainPage = () => {
           </div> */}
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-300 sm:text-6xl">
-              Discover Tech Innovation
+              <TypingAnimation />
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
               Dive into the world of Apple with our extensive selection of
