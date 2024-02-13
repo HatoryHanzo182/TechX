@@ -789,7 +789,8 @@ body {
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s;
-
+}
+=======
 #theme-toggle {
   opacity: 0;
   position: absolute;

@@ -107,10 +107,55 @@
           </p>
         </div>
       </div>
+
+
+      
       <!--Product creation content.-->
-      <div id="id-create-product-content" style="display: none">
-        <h1>HAALKS:LAKS:LAK:SLKA:SK:A</h1>
+      <div id="id-products-content" class="products-content" style="display: none">
+        <!--Creation product item-->
+        <div id="id-create-product" class="products-card">
+          <ion-icon name="color-wand-outline"></ion-icon>
+          <h2>Display and manage all products</h2>
+        </div>
       </div>
+      <!--Product creation content.-->
+      <div id="id-create-product-content" class="create-product-content" style="display: none">
+        <!--Menu products.-->
+        <div class="product-creation-navigation-card">
+          <a id="id-create-product-content-phone" class="product-creation-navigation-card-tab">
+            <ion-icon name="phone-portrait-outline"></ion-icon>
+          </a>
+          <a href="#" class="product-creation-navigation-card-tab">
+            <ion-icon name="laptop-outline"></ion-icon>
+          </a>
+          <a href="#" class="product-creation-navigation-card-tab">
+            <ion-icon name="tv-outline"></ion-icon>
+          </a>
+        </div>
+        <!--Content phone data.-->
+        <div id="id-content-phone-data">
+          <div class="card-content-product-data">
+            <div class="line-card-content-product-data">
+              <button class="button-step-in-product-operations-menu">
+                <div class="arrow-back-circle-outline"><ion-icon name="arrow-back-circle-outline"></ion-icon></div>
+                <div class="arrow-back-circle-outline-text">Back menu</div>
+              </button>
+              <p class="title-card-content-product-data">Add Phone</p>
+            </div>
+            <div class="line-card-content-product-data">
+              <input id="id-input-phone-data-Company" class="input-data" name="text" type="text" placeholder="Company">
+              <input id="id-input-phone-data-Series" class="input-data" name="text" type="text" placeholder="Series">
+              <input id="id-input-phone-data-Screen_diagonal" class="input-data" name="text" type="text" placeholder="Screen diagonal">
+            </div>
+            <div class="line-card-content-product-data">
+              <button id="id-button-add-phone" class="button-add-product">Add Phone</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
       <!--ORDERS CONTENT-->
       <div id="id-orders-content" class="orders-content" style="display: none">
         <h1>Orders</h1>
