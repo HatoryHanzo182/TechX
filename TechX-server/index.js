@@ -55,7 +55,7 @@ app.use(
 );
 
 const DB_URL = process.env.MONGODB_URI;
-const PORT = 3001;
+const PORT = process.env.PORT;
 
 // + + + + + + + + + + + + + + + + + + + TECHX + + + + + + + + + + + + + + + + + + +
 // REQUESTS TO SEND THIS DATA.
