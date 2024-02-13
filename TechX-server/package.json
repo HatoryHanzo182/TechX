@@ -9,5 +9,12 @@
   "type": "module",
   "scripts": {
     "server": "node index.js"
-  }
+  },
+  "name": "techx-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
