@@ -90,7 +90,7 @@ export default function Nav() {
                   </button>
 
                   {isOpen && (
-                    <div className="z-10 absolute right-0 mt-2  divide-y  rounded-lg shadow w-44 bg-[#1d1d1d] dark:divide-[#1d1d1d]">
+                    <div className="z-10 absolute right-0 mt-2  divide-y  rounded-lg shadow w-44 bg-[#1d1d1d] dark:divide-[#2f2f2f]">
                       <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
                         <div>Bonnie Green</div>
                         <div className="font-medium truncate">
@@ -103,7 +103,7 @@ export default function Nav() {
                       >
                         <li>
                           <Link href="/profile">
-                            <div className="block px-4 py-2  hover:bg-gray-600 ">
+                            <div className="block px-4 py-2  hover:bg-[#2b2b2b] ">
                               Profile
                             </div>
                           </Link>
@@ -128,7 +128,7 @@ export default function Nav() {
                       <div className="py-2">
                         <a
                           href="#"
-                          className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-600"
+                          className="block px-4 py-2 text-sm text-red-600 hover:bg-[#2b2b2b]"
                         >
                           Sign out
                         </a>
