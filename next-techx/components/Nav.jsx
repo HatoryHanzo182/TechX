@@ -21,6 +21,13 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
+import { PullOutOfSession } from "./logicians/PullOutOfSession";
+import { signOut } from "next-auth/react";
+import { useAuth } from "@/app/providers";
+
+import { ReloadIcon } from "@radix-ui/react-icons";
+
+import { Button } from "@/components/ui/button";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -30,10 +37,12 @@ const navigation = [
 ];
 
 export default function Nav() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  // const [loggedIn, setLoggedIn] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const { user, isLoggedIn } = useAuth();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -58,6 +67,35 @@ export default function Nav() {
       document.body.style.paddingRight = "";
     }
   }, [menuOpen]);
+
+  // if (isAuthInitializing) {
+  //   return (
+  //     <Button className="absolute ">
+  //       <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+  //       Loading....
+  //     </Button>
+  //   );
+  // }
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const user_data = await PullOutOfSession();
+
+  //     if (user_data) {
+  //       //  <<----- Получили пользователя.
+  //       console.log(user_data.name, user_data.email);
+  //       setName(user_data.name);
+  //       setEmail(user_data.email);
+  //       setLoggedIn(true);
+  //     } //  <<----- не прошел валилацию.
+  //     else {
+  //       console.log("FALSE SESSION");
+  //       setLoggedIn(false);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   return (
     <main>
@@ -103,7 +141,7 @@ export default function Nav() {
                 </a>
               ))}
             </div> */}
-            {loggedIn ? (
+            {isLoggedIn ? (
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                 <div className="mt-2 mr-3 flex flex-row ">
                   <Link href="/search" onClick={handleLinkClick}>
@@ -117,9 +155,21 @@ export default function Nav() {
                     <CommandList>
                       <CommandEmpty>No results found.</CommandEmpty>
                       <CommandGroup heading="Suggestions" className="">
-                        <CommandItem>Calendar</CommandItem>
-                        <CommandItem>Search Emoji</CommandItem>
-                        <CommandItem>Calculator</CommandItem>
+                        <CommandItem>
+                          <Link className="w-full" href="/">
+                            Home
+                          </Link>
+                        </CommandItem>
+                        <CommandItem>
+                          <Link className="w-full" href="/profile">
+                            Profile
+                          </Link>
+                        </CommandItem>
+                        <CommandItem>
+                          <Link className="w-full" href="/">
+                            TEST
+                          </Link>
+                        </CommandItem>
                       </CommandGroup>
                     </CommandList>
                   </CommandDialog>
@@ -135,17 +185,17 @@ export default function Nav() {
                     <span className="sr-only">Open user menu</span>
                     <Avatar>
                       <AvatarImage src="https://github.com/" />
-                      <AvatarFallback>AL</AvatarFallback>
+                      <AvatarFallback className="uppercase">
+                        {user.name.substring(0, 2)}
+                      </AvatarFallback>
                     </Avatar>
                   </button>
 
                   {isOpen && (
                     <div className="z-10 absolute right-0 mt-2  divide-y  rounded-lg shadow w-44 bg-[#1d1d1d] dark:divide-[#2f2f2f]">
                       <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                        <div>Bonnie Green</div>
-                        <div className="font-medium truncate">
-                          name@gmail.com
-                        </div>
+                        <div>{user.name}</div>
+                        <div className="font-medium truncate">{user.email}</div>
                       </div>
                       <ul
                         className="py-2 text-sm text-gray-700 dark:text-gray-200"
@@ -236,7 +286,7 @@ export default function Nav() {
                       </a>
                     ))}
                   </div>
-                  {loggedIn ? (
+                  {isLoggedIn ? (
                     <div className="py-6 flex flex-1 lg:justify-end">
                       <Link href="/profile">
                         {/* <div className="text-sm font-semibold leading-6 border rounded-xl p-3 dark:text-white text-black mr-3 dark:hover:bg-gray-900"></div> */}

@@ -1,8 +1,5 @@
 import * as React from "react";
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-
 import MainPage from "@/components/MainPage";
 
 import Nav from "@/components/Nav";
@@ -10,8 +7,6 @@ import ProductCatalog from "@/components/product/ProductCatalog";
 import { ProductCarousel } from "@/components/ProductCarousel";
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
-
   return (
     <>
       <Nav />

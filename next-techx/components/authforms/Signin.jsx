@@ -3,28 +3,25 @@ import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Router } from "next/router";
+
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useRouter } from "next/navigation";
 
-const Signin = () => 
-{
+const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const router = Router;
+  const router = useRouter();
 
   const [showAlert, setShowAlert] = useState(false);
 
-  useEffect(() => 
-  {
+  useEffect(() => {
     let timer;
-    
-    if (showAlert) 
-    {
-      timer = setTimeout(() => 
-      {
+
+    if (showAlert) {
+      timer = setTimeout(() => {
         setShowAlert(false); // Скрывает Alert через 2 секунды
       }, 4000); // 2000 мс = 2 секунды
     }
@@ -32,93 +29,92 @@ const Signin = () =>
     return () => clearTimeout(timer); // Очистка таймера
   }, [showAlert]);
 
-  const handleSumbit = async (e) => 
-  {
+  const handleSumbit = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) 
-    {
+    if (!email || !password) {
       setError("All fields are necessary.");
       setShowAlert(true);
       return;
     }
 
-    try 
-    {
-      const ResUserExists = await fetch("http://localhost:3001/CheckUserExists",   // <<----- Проверяет есть ли пользователь в базе.
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      const { existing_user } = await ResUserExists.json();
-
-      if (existing_user)    // <<----- Если есть, проверим пароль.
-      {
-        const ResProofPass = await fetch("http://localhost:3001/ProofPass",   //  <<------ Проверяем пароль пользователя.
+    try {
+      const ResUserExists = await fetch(
+        "http://localhost:3001/CheckUserExists", // <<----- Проверяет есть ли пользователь в базе.
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
-        });
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      const { existing_user } = await ResUserExists.json();
+
+      if (existing_user) {
+        // <<----- Если есть, проверим пароль.
+        const ResProofPass = await fetch(
+          "http://localhost:3001/ProofPass", //  <<------ Проверяем пароль пользователя.
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          }
+        );
 
         const { success } = await ResProofPass.json();
 
-        if (success)    // <<---- Если пользователь подтвердил пароль.
-        {
-          try 
-          {
-            const reply_token = await fetch("http://localhost:3001/GenerateToken",   //   <<------ Создадим токен.
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ email }),
-            });
+        if (success) {
+          try {
+            const reply_token = await fetch(
+              "http://localhost:3001/GenerateToken", //   <<------ Создадим токен.
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+              }
+            );
 
             const { token } = await reply_token.json();
 
             localStorage.setItem("token", token);
-            
-            const CreateSessionResponse = await fetch("http://localhost:3001/CreateSession",   // <<----- Создадим пользователю сессию.
-            {
-              method: "POST",
-              headers: {"Content-Type": "application/json", Authorization: `Bearer ${token}` },
-              body: JSON.stringify({ email }),
-            });
+
+            const CreateSessionResponse = await fetch(
+              "http://localhost:3001/CreateSession", // <<----- Создадим пользователю сессию.
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ email }),
+              }
+            );
 
             const create_session_data = await CreateSessionResponse.json();
 
-            if(create_session_data)   // <---- Сессия создана.
-            {
+            if (create_session_data) {
+              // <---- Сессия создана.
               //  выкинуть пользователя
-              // router.push("/profile");
-              console.log("Sessia is complite")
+              router.push("/");
+              console.log("Sessia is complite");
+            } //    <<<----- Ошибка при создании сесси.
+            else {
             }
-            else    //    <<<----- Ошибка при создании сесси.
-            {
-
-            }
-          } 
-          catch (error) 
-          {
+          } catch (error) {
             setShowAlert(true);
             console.error("Error during signing the token:", error);
           }
-        } 
-        else 
-        {
+        } else {
           console.log("SIGN IN: false");
           return;
         }
-      } 
-      else 
-      {
+      } else {
         console.log("User not found");
         return;
       }
-    } 
-    catch (error) { console.log("Error during registration: ", error); }
+    } catch (error) {
+      console.log("Error during registration: ", error);
+    }
   };
 
   return (
