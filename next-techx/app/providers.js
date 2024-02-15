@@ -1,5 +1,5 @@
 "use client";
-import { PullOutOfSession } from "@/components/logicians/PullOutOfSession";
+import { PullOutOfSession } from "@/lib/session";
 import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext(null);

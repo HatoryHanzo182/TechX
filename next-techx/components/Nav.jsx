@@ -21,7 +21,7 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
-import { PullOutOfSession } from "./logicians/PullOutOfSession";
+import { PullOutOfSession } from "../lib/session";
 import { signOut } from "next-auth/react";
 import { useAuth } from "@/app/providers";
 

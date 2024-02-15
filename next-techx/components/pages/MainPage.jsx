@@ -1,6 +1,6 @@
 import React from "react";
-import Catalog from "./buttons/Catalog";
-import TypingAnimation from "./buttons/TypingAnimation";
+import Catalog from "../buttons/Catalog";
+import TypingAnimation from "../buttons/TypingAnimation";
 
 const MainPage = () => {
   return (

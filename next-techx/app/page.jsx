@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import MainPage from "@/components/MainPage";
+import MainPage from "@/components/pages/MainPage";
 
 import Nav from "@/components/Nav";
 import ProductCatalog from "@/components/product/ProductCatalog";

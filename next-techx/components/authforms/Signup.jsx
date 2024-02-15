@@ -9,12 +9,11 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { PullOutOfSession } from "../logicians/PullOutOfSession";
+import { PullOutOfSession } from "../../lib/session";
 import { set } from "mongoose";
 import SquaresAnimation from "../SquaresAnimation";
 
-const Signup = () => 
-{
+const Signup = () => {
   const [name, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,20 +22,18 @@ const Signup = () =>
 
   const router = useRouter();
 
-  const handleSumbit = async (e) => 
-  {
+  const handleSumbit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !password) 
-    {
+    if (!name || !email || !password) {
       setError("All fields are necessary.");
       setShowAlert(true);
       return;
     }
 
-    try 
-    {
-      const ResUserExists = await fetch("http://localhost:3001/CheckUserExists",
+    try {
+      const ResUserExists = await fetch(
+        "http://localhost:3001/CheckUserExists",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -46,32 +43,33 @@ const Signup = () =>
 
       const { existing_user } = await ResUserExists.json();
 
-      if (existing_user) 
-      {
-        console.log("User exists");  //  <<---- Пользователь уже существует.
+      if (existing_user) {
+        console.log("User exists"); //  <<---- Пользователь уже существует.
         return;
-      } 
-      else 
-      {
-        const res = await fetch("http://localhost:3001/NewUser",    //  <<---- Добавим пользователя.
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({name, email, password: await bcrypt.hash(password, 10) }),
-        });
+      } else {
+        const res = await fetch(
+          "http://localhost:3001/NewUser", //  <<---- Добавим пользователя.
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name,
+              email,
+              password: await bcrypt.hash(password, 10),
+            }),
+          }
+        );
 
-        if (res.ok) 
-        {
+        if (res.ok) {
           const form = e.target;
 
           form.reset();
           router.push("/signin");
-        } 
-        else 
-          console.log("user registration failed.");
+        } else console.log("user registration failed.");
       }
-    } 
-    catch (error) { console.log("Error during registration: ", error); }
+    } catch (error) {
+      console.log("Error during registration: ", error);
+    }
   };
 
   return (
