@@ -7,67 +7,69 @@ import { Label } from "@/components/ui/label";
 import bcrypt from "bcryptjs";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { set } from "mongoose";
+import SquaresAnimation from "../SquaresAnimation";
 
-const Signup = () => 
-{
+const Signup = () => {
   const [name, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   const router = useRouter();
 
-  const handleSumbit = async (e) => 
-  {
+  const handleSumbit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !password) 
-    {
+    if (!name || !email || !password) {
       setError("All fields are necessary.");
+      setShowAlert(true);
       return;
     }
 
-    try 
-    {
-      const ResUserExists = await fetch("http://localhost:3001/CheckUserExists",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      const { existing_user } = await ResUserExists.json();
-
-      if (existing_user) 
-      {
-        console.log("User exists");
-        return;
-      } 
-      else 
-      {
-        const res = await fetch("http://localhost:3001/NewUser", 
+    try {
+      const ResUserExists = await fetch(
+        "http://localhost:3001/CheckUserExists",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, password: await bcrypt.hash(password, 10) }),
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      const { existing_user } = await ResUserExists.json();
+
+      if (existing_user) {
+        console.log("User exists");
+        return;
+      } else {
+        const res = await fetch("http://localhost:3001/NewUser", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email,
+            password: await bcrypt.hash(password, 10),
+          }),
         });
 
-        if (res.ok) 
-        {
+        if (res.ok) {
           const form = e.target;
 
           form.reset();
           router.push("/signin");
-        } 
-        else 
-          console.log("user registration failed.");
+        } else console.log("user registration failed.");
       }
-    } 
-    catch (error) { console.log("Error during registration: ", error); }
+    } catch (error) {
+      console.log("Error during registration: ", error);
+    }
   };
 
   return (
-    <div className="flex flex-wrap w-full  mt-16">
+    <div className="flex flex-wrap w-full">
       <div
         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         aria-hidden="true"
@@ -80,8 +82,18 @@ const Signup = () =>
           }}
         />
       </div>
+      <div className="absolute right-0 top-32 mr-4 mt-4 w-[250px]">
+        {showAlert && error && (
+          <Alert>
+            <ExclamationTriangleIcon className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+      </div>
       <div className="hidden sm:flex sm:w-full  lg:w-1/2 h-screen justify-center   text-black dark:text-white text-center  w-1/1">
         {/* Content for the left side, visible only on small and large screens */}
+
         <div className="mx-auto my-10 py-16 px-8 xl:w-[50rem] mt-44">
           <span className="rounded-full bg-white px-3 py-1 font-medium text-blue-600 ">
             New Feature
@@ -107,7 +119,7 @@ const Signup = () =>
             {shopName}
           </a> */}
         </div>
-        <div className="my-2 mx-auto flex flex-col justify-center px-6 pt-8 sm:px-8 md:justify-start md:px-12 lg:w-3/4 text-black dark:text-white">
+        <div className="my-2 mx-auto mt-16 flex flex-col justify-center px-6 pt-8 sm:px-8 md:justify-start md:px-12 lg:w-3/4 text-black dark:text-white">
           <p className="text-center sm:text-left text-3xl  font-bold">
             Create your free account
           </p>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -8,6 +8,19 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { IoCartOutline } from "react-icons/io5";
 
 import Link from "next/link";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -17,7 +30,7 @@ const navigation = [
 ];
 
 export default function Nav() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +38,26 @@ export default function Nav() {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Функция для обработки клика
+  const handleLinkClick = (e) => {
+    e.preventDefault(); // Предотвратите стандартное поведение ссылки
+    setMenuOpen(true); // Откройте CommandMenu
+  };
+
+  useEffect(() => {
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    }
+  }, [menuOpen]);
 
   return (
     <main>
@@ -72,7 +105,24 @@ export default function Nav() {
             </div> */}
             {loggedIn ? (
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                <div className="mt-2 mr-3">
+                <div className="mt-2 mr-3 flex flex-row ">
+                  <Link href="/search" onClick={handleLinkClick}>
+                    <MagnifyingGlassIcon
+                      className="h-6 w-6 mr-2"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                  <CommandDialog open={menuOpen} onOpenChange={setMenuOpen}>
+                    <CommandInput placeholder="Search..." />
+                    <CommandList>
+                      <CommandEmpty>No results found.</CommandEmpty>
+                      <CommandGroup heading="Suggestions" className="">
+                        <CommandItem>Calendar</CommandItem>
+                        <CommandItem>Search Emoji</CommandItem>
+                        <CommandItem>Calculator</CommandItem>
+                      </CommandGroup>
+                    </CommandList>
+                  </CommandDialog>
                   <Link href="/cart">
                     <IoCartOutline className="h-6 w-6 " aria-hidden="true" />
                   </Link>

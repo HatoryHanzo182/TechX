@@ -1,85 +1,98 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
+import { Router } from "next/router";
 
-const Signin = () => 
-{
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+
+const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSumbit = async (e) => 
-  {
+  const router = Router;
+
+  const [showAlert, setShowAlert] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    if (showAlert) {
+      timer = setTimeout(() => {
+        setShowAlert(false); // Скрывает Alert через 2 секунды
+      }, 4000); // 2000 мс = 2 секунды
+    }
+    return () => clearTimeout(timer); // Очистка таймера
+  }, [showAlert]);
+
+  const handleSumbit = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) 
-    {
+    if (!email || !password) {
       setError("All fields are necessary.");
+      setShowAlert(true);
       return;
     }
 
-    try
-    {
-      const ResUserExists = await fetch("http://localhost:3001/CheckUserExists",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      const { existing_user } = await ResUserExists.json();
-
-      if (existing_user) 
-      {
-        const ResProofPass = await fetch("http://localhost:3001/ProofPass", 
+    try {
+      const ResUserExists = await fetch(
+        "http://localhost:3001/CheckUserExists",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      const { existing_user } = await ResUserExists.json();
+
+      if (existing_user) {
+        const ResProofPass = await fetch("http://localhost:3001/ProofPass", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
         });
 
         const { success } = await ResProofPass.json();
 
-        if(success)
-        {
-          try
-          {
-            const reply_token = await fetch("http://localhost:3001/GenerateToken", 
-            {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email })
-            });
+        if (success) {
+          try {
+            const reply_token = await fetch(
+              "http://localhost:3001/GenerateToken",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+              }
+            );
 
             const { token } = await reply_token.json();
 
-            sessionStorage.setItem('token', token);
+            sessionStorage.setItem("token", token);
+
+            router.push("/");
+          } catch (error) {
+            setShowAlert(true);
+            console.error("Error during signing the token:", error);
           }
-          catch (error) 
-          {
-            console.error('Error during signing the token:', error);
-          }
-        }
-        else
-        {
+        } else {
           console.log("SIGN IN: false");
           return;
         }
-      } 
-      else
-      {
+      } else {
         console.log("User not found");
         return;
       }
+    } catch (error) {
+      console.log("Error during registration: ", error);
     }
-    catch (error) { console.log("Error during registration: ", error); }
   };
 
   return (
-    <div className="flex  justify-center text-slate-800 mt-20">
+    <div className="flex  justify-center text-slate-800 ">
       <div
         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         aria-hidden="true"
@@ -92,6 +105,15 @@ const Signin = () =>
           }}
         />
       </div>
+      <div className="absolute right-0 top-32 mr-4 mt-4 w-[250px]">
+        {showAlert && error && (
+          <Alert>
+            <ExclamationTriangleIcon className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+      </div>
 
       <div className="flex w-full lg:w-1/2 flex-col">
         <div className="flex justify-center pt-6 text-justify ">
@@ -99,7 +121,7 @@ const Signin = () =>
             {shopName}
           </a> */}
         </div>
-        <div className="my-2 mx-auto flex flex-col justify-center px-6 pt-8  md:justify-start  lg:w-3/4">
+        <div className="my-2 mx-auto flex flex-col justify-center px-6 pt-8  md:justify-start  lg:w-3/4 mt-20">
           <p className="text-center sm:text-left text-3xl text-white font-bold">
             Sign in to your account
           </p>

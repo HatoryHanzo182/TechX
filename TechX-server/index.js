@@ -39,10 +39,7 @@ app.use(
     res,
     next // Middleware for handling CORS.
   ) => {
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      "https://techx-srvr.vercel.app"
-    );
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     res.setHeader(
       "Access-Control-Allow-Methods",
       "GET, POST, OPTIONS, PUT, DELETE"
