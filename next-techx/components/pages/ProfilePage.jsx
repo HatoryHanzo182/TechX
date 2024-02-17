@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -22,8 +23,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useAuth } from "@/app/providers";
 
 export function ProfilePage() {
+  const { user } = useAuth();
+
   return (
     <main>
       <div className="pt-10"></div>
@@ -57,16 +61,16 @@ export function ProfilePage() {
                   id="name"
                   disabled
                   className="cursor-pointer w-1/2"
-                  defaultValue="Name"
+                  defaultValue={user ? user.name : ""}
                 />
               </div>
               <div className="space-y-1">
                 <Label htmlFor="email">Email</Label>
                 <Input
-                  id="username"
+                  id="email"
                   disabled
                   className="cursor-pointer w-1/2"
-                  defaultValue="peduarte@gmail.com"
+                  defaultValue={user ? user.email : ""}
                 />
               </div>
             </CardContent>
@@ -96,14 +100,15 @@ export function ProfilePage() {
                       />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="username" className="text-right">
-                        Username
+                      <Label htmlFor="email" className="text-right">
+                        Email
                       </Label>
                       <Input
                         id="username"
-                        value="@peduarte"
+                        value="peduarte@gmail.com"
                         className="col-span-3"
                       />
+                      у
                     </div>
                   </div>
                   <DialogFooter>
