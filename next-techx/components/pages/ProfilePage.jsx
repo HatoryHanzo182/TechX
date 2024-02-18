@@ -108,7 +108,6 @@ export function ProfilePage() {
                         value="peduarte@gmail.com"
                         className="col-span-3"
                       />
-                      у
                     </div>
                   </div>
                   <DialogFooter>

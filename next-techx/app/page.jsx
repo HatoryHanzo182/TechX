@@ -2,6 +2,8 @@ import * as React from "react";
 
 import MainPage from "@/components/pages/MainPage";
 
+
+
 import Nav from "@/components/Nav";
 import ProductCatalog from "@/components/product/ProductCatalog";
 import { ProductCarousel } from "@/components/ProductCarousel";
@@ -9,59 +11,51 @@ import { ProductCarousel } from "@/components/ProductCarousel";
 export default async function Home() {
   return (
     <>
+
       <Nav />
 
       <MainPage />
 
-      <div className=" m-4 flex flex-wrap  p-2 justify-center  items-center ">
-        <ProductCatalog
-          image="https://img.jabko.ua/image/cache/home_cats/image%20154full.png.webp"
-          title="Iphone"
-        />
-        <ProductCatalog
-          image="https://img.jabko.ua/image/cache/cataloge-2/main-page-2/pods-2full.png.webp"
-          title="AirPods"
-        />
-        <ProductCatalog
-          image="https://img.jabko.ua/image/cache/home_cats/image%20155full.png.webp"
-          title="Apple Watch"
-        />
-        <ProductCatalog
-          image="https://img.jabko.ua/image/cache/home_cats/macbook-air-spacegray-gallery1-2full.jpg.webp"
-          title="Macbook"
-        />
-        <ProductCatalog
-          image="https://img.jabko.ua/image/cache/home_cats/ipad-pcfull.jpg.webp"
-          title="Ipad"
-        />
-        <ProductCatalog
-          image="https://img.jabko.ua/image/cache/cataloge-2/main-page-2/PDP-Gallery-3-AW-Full%20Product%20Cofull.jpg.webp"
-          title="Dyson"
-        />
-        <ProductCatalog
-          image="https://img.jabko.ua/image/cache/cataloge-2/main-page-2/2020-07-31%2010.30.31%201-1397x1397full.jpg.webp"
-          title="PlayStation"
-        />
-        <ProductCatalog
-          image="https://img.jabko.ua/image/cache/-main-new/image8full.png.webp"
-          title="Телевизоры"
-        />
-        <ProductCatalog
-          image="https://img.jabko.ua/image/cache/-main-new/image13full.png.webp"
-          title="Samsung Galaxy"
-        />
-        <ProductCatalog
-          image="https://img.jabko.ua/image/cache/-main-new/image9full.png.webp"
-          title="VR гарнитура"
-        />
-        <ProductCatalog
-          image="https://img.jabko.ua/image/cache/-main-new/image30full.png.webp"
-          title="Игровые приставки"
-        />
-        <ProductCatalog
-          image="https://img.jabko.ua/image/cache/-main-new/image14full.png.webp"
-          title="Google Pixel"
-        />
+      <div className=" mt-8 ">
+        <div className="flex flex-wrap   justify-center  items-center">
+          <ProductCatalog
+            image="https://img.jabko.ua/image/cache/home_cats/image%20154full.png.webp"
+            title="Iphone"
+          />
+          <ProductCatalog
+            image="https://img.jabko.ua/image/cache/cataloge-2/main-page-2/pods-2full.png.webp"
+            title="AirPods"
+          />
+          <ProductCatalog
+            image="https://img.jabko.ua/image/cache/home_cats/image%20155full.png.webp"
+            title="Apple Watch"
+          />
+          <ProductCatalog
+            image="https://img.jabko.ua/image/cache/home_cats/macbook-air-spacegray-gallery1-2full.jpg.webp"
+            title="Macbook"
+          />
+        </div>
+        <div className=" flex flex-wrap   justify-center  items-center">
+          <ProductCatalog
+            image="https://img.jabko.ua/image/cache/home_cats/ipad-pcfull.jpg.webp"
+            title="Ipad"
+          />
+
+          <ProductCatalog
+            image="https://img.jabko.ua/image/cache/cataloge-2/main-page-2/2020-07-31%2010.30.31%201-1397x1397full.jpg.webp"
+            title="PlayStation"
+          />
+
+          <ProductCatalog
+            image="https://img.jabko.ua/image/cache/-main-new/image13full.png.webp"
+            title="Samsung Galaxy"
+          />
+
+          <ProductCatalog
+            image="https://img.jabko.ua/image/cache/-main-new/image14full.png.webp"
+            title="Google Pixel"
+          />
+        </div>
       </div>
 
       <div className="mt-20">

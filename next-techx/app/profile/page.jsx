@@ -9,7 +9,7 @@ const page = () => {
         <Nav />
       </section>
 
-      <section >
+      <section>
         <ProfilePage />
       </section>
 
