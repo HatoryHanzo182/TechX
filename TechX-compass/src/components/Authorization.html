@@ -34,11 +34,19 @@
         </p>
       </div>
     </div>
-    <!--Password input field.-->
-    <input id="id-admin-password" class="input-password" name="text" type="password" placeholder="Password">
+    <div class='password-container'>
+        <!--Password input field.-->
+        <input id="id-admin-password" class="input-password" name="text" type="password" placeholder="Password">
+        <ion-icon name="eye" id="toggle-password-visibility"></ion-icon>
+    </div>
     <!--Confirm button.-->
     <button id="id-button-confirm" class="button-сonfirm">Confirm</button>
+    <!-- Button "Back to Menu" -->
+    <button id="id-button-back" class="button-back">Back to Menu</button>
   </div>
 </body>
 <script src="../js/Authorization.js"></script>
+<script src="../js/passwordVisability.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </html>

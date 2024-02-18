@@ -51,8 +51,11 @@ function BreakErrorMessage()
 }
 /*========================================*/
 
+function backToMainMenu()
+{
+    window.history.back();
+}
 
 /*========== Event Handler Sector. ==========*/
 document.getElementById("id-button-confirm").onclick = Validator;
 document.getElementById("id-close-error-message").onclick = BreakErrorMessage;
-/*========================================*/
