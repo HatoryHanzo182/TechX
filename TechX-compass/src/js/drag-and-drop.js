@@ -20,6 +20,8 @@ dropArea.addEventListener('drop', (event) => {
   const files = event.dataTransfer.files;
 
   for (let i = 0; i < files.length; i++) {
+      if (!files[i].type.startsWith('image/')) continue;
+
       const child = document.createElement('li')
       const rmIcon = document.createElement('ion-icon')
       const div = document.createElement('div')
