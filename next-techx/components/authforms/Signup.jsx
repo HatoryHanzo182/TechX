@@ -52,24 +52,20 @@ const Signup = () => {
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              name,
-              email,
-              password: await bcrypt.hash(password, 10),
-            }),
+            body: JSON.stringify({ name, email, password: await bcrypt.hash(password, 10) }),
           }
         );
 
-        if (res.ok) {
+        if (res.ok) 
+        {
           const form = e.target;
 
           form.reset();
           router.push("/signin");
         } else console.log("user registration failed.");
       }
-    } catch (error) {
-      console.log("Error during registration: ", error);
-    }
+    } 
+    catch (error) { console.log("Error during registration: ", error); }
   };
 
   return (

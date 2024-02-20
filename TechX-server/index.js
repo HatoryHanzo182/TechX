@@ -210,6 +210,30 @@ app.post("/PullOutOfSession", async (req, res) =>
     res.status(500).json({});
   }
 });
+
+        // Getting session data.
+app.post("/RemoveFromSession", async (req, res) => 
+{
+  try 
+  {
+    const token = req.token;
+    const session = await SessionModel.findOne({ token });
+    
+    if (session) 
+    {
+      await session.deleteOne();
+
+      res.status(200).json({ message: "The session was over" });
+    } 
+    else 
+      res.status(404).json({ message: "Session not found" });
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
 //=============================================================================================
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 

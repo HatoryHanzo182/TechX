@@ -23,7 +23,10 @@ export const PullOutOfSession = async () =>
     
         const { user_data } = await PullData.json();
 
-        return user_data;
+        console.log(user_data);
+
+        if(user_data != null)
+          return user_data;
     }
     else    // <<---- Подпись токена не подтверждена.
     {

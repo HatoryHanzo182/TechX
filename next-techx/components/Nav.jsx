@@ -68,6 +68,37 @@ export default function Nav() {
     }
   }, [menuOpen]);
 
+  const handleSignOut = async (e) => 
+  {
+    e.preventDefault();
+
+    try 
+    {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch("http://localhost:3001/RemoveFromSession", 
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) 
+      {
+        console.log(data.message);
+        
+        localStorage.removeItem("token");
+        window.location.reload();
+      } 
+      else 
+      {
+        console.error(data.message);
+      }
+    } 
+    catch (error) { console.error("Error:", error); }
+  };
+
   // if (isAuthInitializing) {
   //   return (
   //     <Button className="absolute ">
@@ -226,10 +257,7 @@ export default function Nav() {
                         </li> */}
                       </ul>
                       <div className="py-2">
-                        <a
-                          href="#"
-                          className="block px-4 py-2 text-sm text-red-600 hover:bg-[#2b2b2b]"
-                        >
+                        <a href="#" className="block px-4 py-2 text-sm text-red-600 hover:bg-[#2b2b2b]" onClick={handleSignOut}>
                           Sign out
                         </a>
                       </div>
