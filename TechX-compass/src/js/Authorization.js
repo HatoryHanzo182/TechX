@@ -49,7 +49,6 @@ function BreakErrorMessage()
     
     error_message.style.display = "none";
 }
-/*========================================*/
 
 function backToMainMenu()
 {

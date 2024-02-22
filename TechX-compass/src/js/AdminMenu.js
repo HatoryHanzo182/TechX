@@ -184,7 +184,14 @@ function ClickCancelAccount()
   list_item[user_position_index_menu].classList.add("active");
 }
 
+function backToMainMenu()
+{
+  create_products_content.style.display = "none";
+  products_content.style.display = "flex";
+}
+
 document.getElementById("language-select").addEventListener("change", function () { changeLanguage(this.value, list_item); });
 document.getElementById("id-exit-exit").addEventListener("click", ClickExitAccount);
 document.getElementById("id-cancel-exit").addEventListener("click", ClickCancelAccount);
+document.getElementById("id-back-to-product-menu").addEventListener("click", backToMainMenu);
 /*========================================*/
