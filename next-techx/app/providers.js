@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const minLoadingTime = 50; // Минимальное время отображения загрузочного индикатора (2 секунды)
+  const minLoadingTime = 5; // Минимальное время отображения загрузочного индикатора (2 секунды)
 
   useEffect(() => {
     const startTime = Date.now(); // Записываем время начала загрузки

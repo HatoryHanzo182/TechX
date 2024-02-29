@@ -78,7 +78,8 @@ const Signin = () => {
 
             localStorage.setItem("token", token);
 
-            const CreateSessionResponse = await fetch("http://localhost:3001/CreateSession", // <<----- Создадим пользователю сессию.
+            const CreateSessionResponse = await fetch(
+              "http://localhost:3001/CreateSession", // <<----- Создадим пользователю сессию.
               {
                 method: "POST",
                 headers: {
@@ -96,12 +97,10 @@ const Signin = () => {
               router.push("/");
               console.log("Sessia is complite");
             } //    <<<----- Ошибка при создании сесси.
-            else 
-            {
+            else {
               console.log("Sessia is not complite");
             }
-          } 
-          catch (error) {
+          } catch (error) {
             setShowAlert(true);
             console.error("Error during signing the token:", error);
           }

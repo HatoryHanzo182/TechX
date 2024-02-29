@@ -68,35 +68,33 @@ export default function Nav() {
     }
   }, [menuOpen]);
 
-  const handleSignOut = async (e) => 
-  {
+  const handleSignOut = async (e) => {
     e.preventDefault();
 
-    try 
-    {
+    try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:3001/RemoveFromSession", 
-      {
+      const response = await fetch("http://localhost:3001/RemoveFromSession", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
-  
+
       const data = await response.json();
-  
-      if (response.ok) 
-      {
+
+      if (response.ok) {
         console.log(data.message);
-        
+
         localStorage.removeItem("token");
         window.location.reload();
-      } 
-      else 
-      {
+      } else {
         console.error(data.message);
       }
-    } 
-    catch (error) { console.error("Error:", error); }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   // if (isAuthInitializing) {
@@ -257,7 +255,11 @@ export default function Nav() {
                         </li> */}
                       </ul>
                       <div className="py-2">
-                        <a href="#" className="block px-4 py-2 text-sm text-red-600 hover:bg-[#2b2b2b]" onClick={handleSignOut}>
+                        <a
+                          href="#"
+                          className="block px-4 py-2 text-sm text-red-600 hover:bg-[#2b2b2b]"
+                          onClick={handleSignOut}
+                        >
                           Sign out
                         </a>
                       </div>
@@ -267,17 +269,96 @@ export default function Nav() {
               </div>
             ) : (
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                <Link href="/signin">
-                  <div className="text-sm font-semibold leading-6 border rounded-lg p-2 dark:text-white text-black mr-3 dark:hover:bg-gray-900">
-                    Sign in <span aria-hidden="true">&rarr;</span>
-                  </div>
-                </Link>
-                <Link href="/signup">
-                  <div className="text-sm font-semibold leading-6 border rounded-lg p-2 dark:text-white text-black  dark:hover:bg-gray-900">
-                    Sign up <span aria-hidden="true">&uarr;</span>
-                  </div>
-                </Link>
+                <div className="mt-2 mr-3 flex flex-row ">
+                  <Link href="/search" onClick={handleLinkClick}>
+                    <MagnifyingGlassIcon
+                      className="h-6 w-6 mr-2"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                  <CommandDialog open={menuOpen} onOpenChange={setMenuOpen}>
+                    <CommandInput placeholder="Search..." />
+                    <CommandList>
+                      <CommandEmpty>No results found.</CommandEmpty>
+                      <CommandGroup heading="Suggestions" className="">
+                        <CommandItem>
+                          <Link className="w-full" href="/">
+                            Home
+                          </Link>
+                        </CommandItem>
+                        <CommandItem>
+                          <Link className="w-full" href="/profile">
+                            Profile
+                          </Link>
+                        </CommandItem>
+                        <CommandItem>
+                          <Link className="w-full" href="/">
+                            TEST
+                          </Link>
+                        </CommandItem>
+                      </CommandGroup>
+                    </CommandList>
+                  </CommandDialog>
+                  <Link href="/cart">
+                    <IoCartOutline className="h-6 w-6 " aria-hidden="true" />
+                  </Link>
+                </div>
+                <div className="relative inline-block text-left">
+                  <button
+                    onClick={toggleDropdown}
+                    className="flex text-sm  rounded-full md:me-0  "
+                  >
+                    <span className="sr-only">Open user menu</span>
+                    <Avatar>
+                      <AvatarFallback className="uppercase">
+                        {/* {user.name.substring(0, 2)} */}
+                      </AvatarFallback>
+                    </Avatar>
+                  </button>
+
+                  {isOpen && (
+                    <div className="z-10 absolute right-0 mt-2  divide-y  rounded-lg shadow w-44 bg-[#1d1d1d] dark:divide-[#2f2f2f]">
+                      {/* <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                        <div className="font-medium truncate"></div>
+                      </div> */}
+                      <ul
+                        className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                        aria-labelledby="dropdownUserAvatarButton"
+                      >
+                        <li>
+                          <Link href="/signin">
+                            <div className="block px-4 py-2  hover:bg-[#2b2b2b] ">
+                              Sign in <span>&rarr;</span>
+                            </div>
+                          </Link>
+                        </li>
+                      </ul>
+                      <div className="py-2">
+                        <a
+                          href="/signup"
+                          className="block px-4 py-2 text-sm  hover:bg-[#2b2b2b]"
+                          onClick={handleSignOut}
+                        >
+                          Sign up <span>&uarr;</span>
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
+
+              // <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+              //   <Link href="/signin">
+              //     <div className="text-sm font-semibold leading-6 border rounded-lg p-2 dark:text-white text-black mr-3 dark:hover:bg-gray-900">
+              //       Sign in <span aria-hidden="true">&rarr;</span>
+              //     </div>
+              //   </Link>
+              //   <Link href="/signup">
+              //     <div className="text-sm font-semibold leading-6 border rounded-lg p-2 dark:text-white text-black  dark:hover:bg-gray-900">
+              //       Sign up <span aria-hidden="true">&uarr;</span>
+              //     </div>
+              //   </Link>
+              // </div>
             )}
           </nav>
           <Dialog
