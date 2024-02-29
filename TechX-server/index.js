@@ -5,9 +5,9 @@ import { PhoneModel } from "./Models/Phone.js";
 import { UserModel } from "./Models/User.js";
 import { SessionModel } from "./Models/Session.js"
 import bcrypt from "bcryptjs";
-import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import config from './config.js';
 
 //
 //  ████████╗███████╗ █████╗ ██╗  ██╗██╗  ██╗
@@ -30,7 +30,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
-const _token_secret_key = crypto.randomBytes(32).toString("base64");
+const _token_secret_key = config.token_secret_key;
 
 app.use(express.json());
 app.use((req, res, next) =>  // Middleware for handling CORS.

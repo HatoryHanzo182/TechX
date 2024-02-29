@@ -92,15 +92,17 @@ const Signin = () => {
 
             const create_session_data = await CreateSessionResponse.json();
 
-            if (create_session_data) {
+            if (create_session_data) 
+            {
               // <---- Сессия создана.
-              router.push("/");
+              window.location.href = "/";
               console.log("Sessia is complite");
             } //    <<<----- Ошибка при создании сесси.
             else {
               console.log("Sessia is not complite");
             }
-          } catch (error) {
+          } 
+          catch (error) {
             setShowAlert(true);
             console.error("Error during signing the token:", error);
           }
