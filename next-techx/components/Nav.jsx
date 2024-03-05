@@ -29,6 +29,8 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 
 import { Button } from "@/components/ui/button";
 
+import DropMenu  from "./buttons/Dropdown.jsx";
+
 const navigation = [
   { name: "Product", href: "#" },
   { name: "Features", href: "#" },
@@ -39,8 +41,10 @@ const navigation = [
 export default function Nav() {
   // const [loggedIn, setLoggedIn] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  
   const [isOpen, setIsOpen] = useState(false);
+  
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { user, isLoggedIn } = useAuth();
 
@@ -134,7 +138,7 @@ export default function Nav() {
             className="flex items-center justify-between p-6 lg:px-8"
             aria-label="Global"
           >
-            <div className="flex lg:flex-1">
+            <div className="flex items-center lg:flex-1 space-x-4">
               <Link href="/">
                 <div className="-m-1.5 p-1.5">
                   <span className="sr-only">Your Company</span>
@@ -148,6 +152,7 @@ export default function Nav() {
                   </h1>
                 </div>
               </Link>
+              <DropMenu/>
             </div>
             <div className="flex lg:hidden">
               <button
