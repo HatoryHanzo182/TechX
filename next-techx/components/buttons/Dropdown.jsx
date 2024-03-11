@@ -20,6 +20,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+import { MixIcon } from "@radix-ui/react-icons";
+
 // * Example Data
 
 const categories = [
@@ -110,7 +112,10 @@ const DropMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">Catalog</Button>
+        <Button variant="outline">
+          <MixIcon className="mr-1" height={20} />
+          Catalog
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40 ml-40">
         {categories.map((category, index) => (

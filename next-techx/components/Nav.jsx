@@ -208,8 +208,9 @@ export default function Nav() {
                       </CommandGroup>
                     </CommandList>
                   </CommandDialog>
-                  <Link href="/cart">
-                    <IoCartOutline className="h-6 w-6 " aria-hidden="true" />
+                  <Link href="">
+                    {/* <IoCartOutline className="h-6 w-6 " aria-hidden="true" /> */}
+                    <Cart />
                   </Link>
                 </div>
                 <div className="relative inline-block text-left">
@@ -305,7 +306,7 @@ export default function Nav() {
                       </CommandGroup>
                     </CommandList>
                   </CommandDialog>
-                  <Link href="">
+                  <Link>
                     {/* <IoCartOutline className="h-6 w-6 " aria-hidden="true" /> */}
                     <Cart />
                   </Link>
