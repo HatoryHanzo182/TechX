@@ -29,7 +29,8 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 
 import { Button } from "@/components/ui/button";
 
-import DropMenu  from "./buttons/Dropdown.jsx";
+import DropMenu from "./buttons/Dropdown.jsx";
+import Cart from "./buttons/Сart";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -41,9 +42,9 @@ const navigation = [
 export default function Nav() {
   // const [loggedIn, setLoggedIn] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
+
   const [isOpen, setIsOpen] = useState(false);
-  
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { user, isLoggedIn } = useAuth();
@@ -152,7 +153,7 @@ export default function Nav() {
                   </h1>
                 </div>
               </Link>
-              <DropMenu/>
+              <DropMenu />
             </div>
             <div className="flex lg:hidden">
               <button
@@ -304,8 +305,9 @@ export default function Nav() {
                       </CommandGroup>
                     </CommandList>
                   </CommandDialog>
-                  <Link href="/cart">
-                    <IoCartOutline className="h-6 w-6 " aria-hidden="true" />
+                  <Link href="">
+                    {/* <IoCartOutline className="h-6 w-6 " aria-hidden="true" /> */}
+                    <Cart />
                   </Link>
                 </div>
                 <div className="relative inline-block text-left">

@@ -1,10 +1,5 @@
-import React from 'react';
-import {
-  Smartphone,
-  Apple,
-  Laptop,
-  Gamepad2
-} from "lucide-react";
+import React from "react";
+import { Smartphone, Apple, Laptop, Gamepad2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -23,7 +18,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
+} from "@/components/ui/accordion";
 
 // * Example Data
 
@@ -32,32 +27,32 @@ const categories = [
     icon: Smartphone,
     label: "SmartPhones",
     items: [
-      { 
-        icon: Apple, 
-        label: "Apple", 
-        href: "/smartphones/apple" ,
+      {
+        icon: Apple,
+        label: "Apple",
+        href: "/smartphones/apple",
         products: [
           { name: "iPhone 12", href: "/smartphones/apple/iphone-12" },
           { name: "iPhone 11", href: "/smartphones/apple/iphone-11" },
-        ]
+        ],
       },
-      { 
-        icon: Smartphone, 
-        label: "Samsung", 
+      {
+        icon: Smartphone,
+        label: "Samsung",
         href: "/smartphones/samsung",
         products: [
           { name: "iPhone 12", href: "/smartphones/apple/iphone-12" },
           { name: "iPhone 11", href: "/smartphones/apple/iphone-11" },
-        ] 
+        ],
       },
-      { 
-        icon: Smartphone, 
-        label: "Google", 
-        href: "/smartphones/google" , 
+      {
+        icon: Smartphone,
+        label: "Google",
+        href: "/smartphones/google",
         products: [
           { name: "iPhone 12", href: "/smartphones/apple/iphone-12" },
           { name: "iPhone 11", href: "/smartphones/apple/iphone-11" },
-        ]  
+        ],
       },
     ],
   },
@@ -65,32 +60,32 @@ const categories = [
     icon: Laptop,
     label: "Laptops",
     items: [
-      { 
-        icon: Apple, 
-        label: "Apple", 
+      {
+        icon: Apple,
+        label: "Apple",
         href: "/laptop/apple",
         products: [
           { name: "iPhone 12", href: "/smartphones/apple/iphone-12" },
           { name: "iPhone 11", href: "/smartphones/apple/iphone-11" },
-        ] 
+        ],
       },
-      { 
+      {
         icon: Laptop,
-        label: "Samsung", 
-        href: "/laptop/samsung" ,
+        label: "Samsung",
+        href: "/laptop/samsung",
         products: [
           { name: "iPhone 12", href: "/smartphones/apple/iphone-12" },
           { name: "iPhone 11", href: "/smartphones/apple/iphone-11" },
-        ] 
+        ],
       },
-      { 
-        icon: Laptop, 
-        label: "Google", 
-        href: "/laptop/google" ,
+      {
+        icon: Laptop,
+        label: "Google",
+        href: "/laptop/google",
         products: [
           { name: "iPhone 12", href: "/smartphones/apple/iphone-12" },
           { name: "iPhone 11", href: "/smartphones/apple/iphone-11" },
-        ] 
+        ],
       },
     ],
   },
@@ -98,14 +93,14 @@ const categories = [
     icon: Gamepad2,
     label: "Consoles",
     items: [
-      { 
-        icon: Gamepad2, 
-        label: "Sony", 
-        href: "/console/google" ,
+      {
+        icon: Gamepad2,
+        label: "Sony",
+        href: "/console/google",
         products: [
           { name: "iPhone 12", href: "/smartphones/apple/iphone-12" },
           { name: "iPhone 11", href: "/smartphones/apple/iphone-11" },
-        ] 
+        ],
       },
     ],
   },
@@ -122,14 +117,14 @@ const DropMenu = () => {
           <DropdownMenuGroup key={index}>
             <DropdownMenuSub>
               <DropdownMenuSubTrigger>
-                <category.icon className="mr-2 h-4 w-4"/>
+                <category.icon className="mr-2 h-4 w-4" />
                 <span>{category.label}</span>
               </DropdownMenuSubTrigger>
               <DropdownMenuPortal>
                 <DropdownMenuSubContent>
                   {category.items.map((item, itemIndex) => (
                     <DropdownMenuItem key={itemIndex}>
-                      <item.icon className="mr-2 h-4 w-4"/>
+                      <item.icon className="mr-2 h-4 w-4" />
                       <span>{item.label}</span>
                     </DropdownMenuItem>
                   ))}
