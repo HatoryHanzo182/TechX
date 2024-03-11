@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/carousel";
 import ProductCards from "./product/ProductCards";
 
-export function ProductCarousel() {
+export function ProductCarousel() 
+{
   return (
     <Carousel
       opts={{

@@ -49,7 +49,8 @@ export default function Nav() {
 
   const { user, isLoggedIn } = useAuth();
 
-  const toggleDropdown = () => {
+  const toggleDropdown = () => 
+  {
     setIsOpen(!isOpen);
   };
 
@@ -73,34 +74,42 @@ export default function Nav() {
     }
   }, [menuOpen]);
 
-  const handleSignOut = async (e) => {
+  const handleSignOut = async (e) => 
+  {
     e.preventDefault();
 
-    try {
+    try 
+    {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:3001/RemoveFromSession", {
+      const response = await fetch("http://localhost:3001/RemoveFromSession", 
+      {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: {"Content-Type": "application/json", Authorization: `Bearer ${token}` }
       });
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok) 
+      {
         console.log(data.message);
-
         localStorage.removeItem("token");
         window.location.reload();
-      } else {
+      } 
+      else 
         console.error(data.message);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    } 
+    catch (error) { console.error("Error:", error); }
   };
+
+  const OpenCart = () =>
+  {
+    const Iphone = {img: "IMGING.png", model: "iphone", price: 100.00}
+    const ArrayCoast = [Iphone, Iphone, Iphone, Iphone];
+
+    console.log(ArrayCoast);
+    localStorage.setItem("Cart", JSON.stringify(ArrayCoast));
+  }
 
   // if (isAuthInitializing) {
   //   return (
@@ -208,7 +217,7 @@ export default function Nav() {
                       </CommandGroup>
                     </CommandList>
                   </CommandDialog>
-                  <Link href="">
+                  <Link href="" onClick={OpenCart}>
                     {/* <IoCartOutline className="h-6 w-6 " aria-hidden="true" /> */}
                     <Cart />
                   </Link>
@@ -306,7 +315,7 @@ export default function Nav() {
                       </CommandGroup>
                     </CommandList>
                   </CommandDialog>
-                  <Link href="">
+                  <Link href="" onClick={OpenCart}>
                     {/* <IoCartOutline className="h-6 w-6 " aria-hidden="true" /> */}
                     <Cart />
                   </Link>
