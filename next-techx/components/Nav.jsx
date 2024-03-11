@@ -306,7 +306,7 @@ export default function Nav() {
                       </CommandGroup>
                     </CommandList>
                   </CommandDialog>
-                  <Link>
+                  <Link href="">
                     {/* <IoCartOutline className="h-6 w-6 " aria-hidden="true" /> */}
                     <Cart />
                   </Link>
