@@ -2,59 +2,70 @@ import * as React from "react";
 
 import MainPage from "@/components/pages/MainPage";
 
-
-
 import Nav from "@/components/Nav";
 import ProductCatalog from "@/components/product/ProductCatalog";
 import { ProductCarousel } from "@/components/ProductCarousel";
+import Link from "next/link";
 
 export default async function Home() {
   return (
     <>
-
       <Nav />
 
       <MainPage />
 
       <div className=" mt-8 ">
         <div className="flex flex-wrap   justify-center  items-center">
-          <ProductCatalog
-            image="https://img.jabko.ua/image/cache/home_cats/image%20154full.png.webp"
-            title="Iphone"
-          />
-          <ProductCatalog
-            image="https://img.jabko.ua/image/cache/cataloge-2/main-page-2/pods-2full.png.webp"
-            title="AirPods"
-          />
-          <ProductCatalog
-            image="https://img.jabko.ua/image/cache/home_cats/image%20155full.png.webp"
-            title="Apple Watch"
-          />
-          <ProductCatalog
-            image="https://img.jabko.ua/image/cache/home_cats/macbook-air-spacegray-gallery1-2full.jpg.webp"
-            title="Macbook"
-          />
+          <Link href="/test">
+            <ProductCatalog
+              image="https://img.jabko.ua/image/cache/home_cats/image%20154full.png.webp"
+              title="Iphone"
+            />
+          </Link>
+          <Link href="/test">
+            <ProductCatalog
+              image="https://img.jabko.ua/image/cache/cataloge-2/main-page-2/pods-2full.png.webp"
+              title="AirPods"
+            />
+          </Link>
+          <Link href="/test">
+            <ProductCatalog
+              image="https://img.jabko.ua/image/cache/home_cats/image%20155full.png.webp"
+              title="Apple Watch"
+            />
+          </Link>
+          <Link href="/test">
+            <ProductCatalog
+              image="https://img.jabko.ua/image/cache/home_cats/macbook-air-spacegray-gallery1-2full.jpg.webp"
+              title="Macbook"
+            />
+          </Link>
         </div>
         <div className=" flex flex-wrap   justify-center  items-center">
-          <ProductCatalog
-            image="https://img.jabko.ua/image/cache/home_cats/ipad-pcfull.jpg.webp"
-            title="Ipad"
-          />
-
-          <ProductCatalog
-            image="https://img.jabko.ua/image/cache/cataloge-2/main-page-2/2020-07-31%2010.30.31%201-1397x1397full.jpg.webp"
-            title="PlayStation"
-          />
-
-          <ProductCatalog
-            image="https://img.jabko.ua/image/cache/-main-new/image13full.png.webp"
-            title="Samsung Galaxy"
-          />
-
-          <ProductCatalog
-            image="https://img.jabko.ua/image/cache/-main-new/image14full.png.webp"
-            title="Google Pixel"
-          />
+          <Link href="/test">
+            <ProductCatalog
+              image="https://img.jabko.ua/image/cache/home_cats/ipad-pcfull.jpg.webp"
+              title="Ipad"
+            />
+          </Link>
+          <Link href="/test">
+            <ProductCatalog
+              image="https://img.jabko.ua/image/cache/cataloge-2/main-page-2/2020-07-31%2010.30.31%201-1397x1397full.jpg.webp"
+              title="PlayStation"
+            />
+          </Link>
+          <Link href="/test">
+            <ProductCatalog
+              image="https://img.jabko.ua/image/cache/-main-new/image13full.png.webp"
+              title="Samsung Galaxy"
+            />
+          </Link>
+          <Link href="/test">
+            <ProductCatalog
+              image="https://img.jabko.ua/image/cache/-main-new/image14full.png.webp"
+              title="Google Pixel"
+            />
+          </Link>
         </div>
       </div>
 
