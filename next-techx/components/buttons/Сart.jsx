@@ -1,49 +1,55 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { IoCartOutline } from "react-icons/io5";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useState } from 'react';
+import { useState } from "react";
+import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 
-const Cart = () => 
-{
-  const [stored_array, SetStoredArray] = useState(JSON.parse(localStorage.getItem('Cart')) || []);
+const Cart = () => {
+  const [stored_array, SetStoredArray] = useState(
+    JSON.parse(localStorage.getItem("Cart")) || []
+  );
 
-  const RemoveFromCart = (index) => 
-  {
+  const RemoveFromCart = (index) => {
     const updated_сart = [...stored_array];
 
     updated_сart.splice(index, 1);
 
     localStorage.setItem("Cart", JSON.stringify(updated_сart));
-    
-    SetStoredArray(updated_сart);
-  }
 
-  const CountTotal = () =>
-  {
+    SetStoredArray(updated_сart);
+  };
+
+  const CountTotal = () => {
     let total = 0;
 
-    for(const i_price of stored_array)
-      total += parseFloat(i_price.price);
+    for (const i_price of stored_array) total += parseFloat(i_price.price);
 
-      return total;
-  }
+    return total;
+  };
 
-  const GoCheckout = () =>
-  {
+  const GoCheckout = () => {
     window.location.href = "/сheckout";
-  }
+  };
 
-  const ClearAllFromCart = (e) =>
-  {
+  const ClearAllFromCart = (e) => {
     e.stopPropagation();
-    localStorage.removeItem('Cart');
-    
+    localStorage.removeItem("Cart");
+
     stored_array.length = 0;
 
     SetStoredArray([]);
-  }
+  };
 
   return (
     <Sheet>
@@ -54,36 +60,65 @@ const Cart = () =>
       <SheetContent>
         <SheetHeader>
           <SheetTitle>Your cart</SheetTitle>
-          <SheetDescription>Check the list of products before placing an order.</SheetDescription>
+          <SheetDescription>
+            Check the list of products before placing an order.
+          </SheetDescription>
         </SheetHeader>
         {stored_array.length > 0 ? (
           <>
-            <ScrollArea className="h-72 w-48 rounded-md border">
+            <ScrollArea className="h-96 w-full ">
               {stored_array.map((item, index) => (
-                <div key={index} className="grid grid-cols-4 items-center gap-4">
-                  <div><img src={`/${item.img}`} alt="img" /></div>
+                <div
+                  key={index}
+                  className="grid grid-cols-4 items-center gap-4 mt-3"
+                >
+                  <div>
+                    <img src={`/${item.img}`} alt="img" className="w-10" />
+                  </div>
                   <div>{item.model}</div>
                   <div>{item.price}$</div>
                   <div>
-                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => RemoveFromCart(index)}>
-                      <path d="M5.5 1C5.22386 1 5 1.22386 5 1.5C5 1.77614 5.22386 2 5.5 2H9.5C9.77614 2 10 1.77614 10 1.5C10 1.22386 9.77614 1 9.5 1H5.5ZM3 3.5C3 3.22386 3.22386 3 3.5 3H5H10H11.5C11.7761 3 12 3.22386 12 3.5C12 3.77614 11.7761 4 11.5 4H11V12C11 12.5523 10.5523 13 10 13H5C4.44772 13 4 12.5523 4 12V4L3.5 4C3.22386 4 3 3.77614 3 3.5ZM5 4H10V12H5V4Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 15 15"
+                      color="red"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      onClick={() => RemoveFromCart(index)}
+                    >
+                      <path
+                        d="M5.5 1C5.22386 1 5 1.22386 5 1.5C5 1.77614 5.22386 2 5.5 2H9.5C9.77614 2 10 1.77614 10 1.5C10 1.22386 9.77614 1 9.5 1H5.5ZM3 3.5C3 3.22386 3.22386 3 3.5 3H5H10H11.5C11.7761 3 12 3.22386 12 3.5C12 3.77614 11.7761 4 11.5 4H11V12C11 12.5523 10.5523 13 10 13H5C4.44772 13 4 12.5523 4 12V4L3.5 4C3.22386 4 3 3.77614 3 3.5ZM5 4H10V12H5V4Z"
+                        fill="currentColor"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                      ></path>
                     </svg>
                   </div>
                 </div>
-            
               ))}
             </ScrollArea>
-            <Label>Total: {CountTotal()}$</Label>
+            <Label className="text-lg">Total : {CountTotal()}$</Label>
             <SheetFooter>
-              <SheetClose asChild><Button type="button" onClick={GoCheckout}>Checkout</Button></SheetClose>
-              <SheetClose><Button type="button" onClick={ClearAllFromCart}>Clear all</Button></SheetClose>
+              <SheetClose asChild>
+                <Button type="button" onClick={GoCheckout}>
+                  <CheckIcon color="green" />
+                </Button>
+              </SheetClose>
+              <SheetClose>
+                <Button type="button" onClick={ClearAllFromCart}>
+                  <Cross2Icon color="red" />
+                </Button>
+              </SheetClose>
             </SheetFooter>
           </>
         ) : (
           <div>
             <Label>Your cart is empty.</Label>
             <SheetFooter>
-              <SheetClose asChild><Button type="button">Close</Button></SheetClose>
+              <SheetClose asChild>
+                <Button type="button">Close</Button>
+              </SheetClose>
             </SheetFooter>
           </div>
         )}

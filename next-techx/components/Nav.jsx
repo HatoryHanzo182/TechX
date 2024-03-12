@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-import { IoCartOutline } from "react-icons/io5";
+// import { IoCartOutline } from "react-icons/io5";
 
 import Link from "next/link";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
@@ -21,13 +21,13 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
-import { PullOutOfSession } from "../lib/session";
-import { signOut } from "next-auth/react";
+// import { PullOutOfSession } from "../lib/session";
+// import { signOut } from "next-auth/react";
 import { useAuth } from "@/app/providers";
 
-import { ReloadIcon } from "@radix-ui/react-icons";
+// import { ReloadIcon } from "@radix-ui/react-icons";
 
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 
 import DropMenu from "./buttons/Dropdown.jsx";
 import Cart from "./buttons/Сart";
@@ -45,12 +45,11 @@ export default function Nav() {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { user, isLoggedIn } = useAuth();
 
-  const toggleDropdown = () => 
-  {
+  const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
@@ -74,42 +73,39 @@ export default function Nav() {
     }
   }, [menuOpen]);
 
-  const handleSignOut = async (e) => 
-  {
+  const handleSignOut = async (e) => {
     e.preventDefault();
 
-    try 
-    {
+    try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:3001/RemoveFromSession", 
-      {
+      const response = await fetch("http://localhost:3001/RemoveFromSession", {
         method: "POST",
-        headers: {"Content-Type": "application/json", Authorization: `Bearer ${token}` }
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       const data = await response.json();
 
-      if (response.ok) 
-      {
+      if (response.ok) {
         console.log(data.message);
         localStorage.removeItem("token");
         window.location.reload();
-      } 
-      else 
-        console.error(data.message);
-    } 
-    catch (error) { console.error("Error:", error); }
+      } else console.error(data.message);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
-  const OpenCart = () =>
-  {
-    const Iphone = {img: "IMGING.png", model: "iphone", price: 100.00}
+  const OpenCart = () => {
+    const Iphone = { img: "IMGING.png", model: "iphone", price: 100.0 };
     const ArrayCoast = [Iphone, Iphone, Iphone, Iphone];
 
     console.log(ArrayCoast);
     localStorage.setItem("Cart", JSON.stringify(ArrayCoast));
-  }
+  };
 
   // if (isAuthInitializing) {
   //   return (
@@ -285,8 +281,12 @@ export default function Nav() {
               </div>
             ) : (
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                <div className="mt-2 mr-3 flex flex-row ">
-                  <Link href="/search" onClick={handleLinkClick}>
+                <div className="mt-2 mr-4 flex flex-row ">
+                  <Link
+                    href="/search"
+                    className="h-6 w-6"
+                    onClick={handleLinkClick}
+                  >
                     <MagnifyingGlassIcon
                       className="h-6 w-6 mr-2"
                       aria-hidden="true"
@@ -315,7 +315,7 @@ export default function Nav() {
                       </CommandGroup>
                     </CommandList>
                   </CommandDialog>
-                  <Link href="" onClick={OpenCart}>
+                  <Link href="" className="w-6 h-6" onClick={OpenCart}>
                     {/* <IoCartOutline className="h-6 w-6 " aria-hidden="true" /> */}
                     <Cart />
                   </Link>
