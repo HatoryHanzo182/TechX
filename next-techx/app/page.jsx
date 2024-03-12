@@ -16,25 +16,25 @@ export default async function Home() {
 
       <div className=" mt-8 ">
         <div className="flex flex-wrap   justify-center  items-center">
-          <Link href="/test">
+          <Link href="/product">
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/home_cats/image%20154full.png.webp"
               title="Iphone"
             />
           </Link>
-          <Link href="/test">
+          <Link href="/product">
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/cataloge-2/main-page-2/pods-2full.png.webp"
               title="AirPods"
             />
           </Link>
-          <Link href="/test">
+          <Link href="/product">
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/home_cats/image%20155full.png.webp"
               title="Apple Watch"
             />
           </Link>
-          <Link href="/test">
+          <Link href="/product">
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/home_cats/macbook-air-spacegray-gallery1-2full.jpg.webp"
               title="Macbook"
@@ -42,25 +42,25 @@ export default async function Home() {
           </Link>
         </div>
         <div className=" flex flex-wrap   justify-center  items-center">
-          <Link href="/test">
+          <Link href="/product">
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/home_cats/ipad-pcfull.jpg.webp"
               title="Ipad"
             />
           </Link>
-          <Link href="/test">
+          <Link href="/product">
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/cataloge-2/main-page-2/2020-07-31%2010.30.31%201-1397x1397full.jpg.webp"
               title="PlayStation"
             />
           </Link>
-          <Link href="/test">
+          <Link href="/product">
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/-main-new/image13full.png.webp"
               title="Samsung Galaxy"
             />
           </Link>
-          <Link href="/test">
+          <Link href="/product">
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/-main-new/image14full.png.webp"
               title="Google Pixel"
