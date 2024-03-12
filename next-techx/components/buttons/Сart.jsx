@@ -15,10 +15,9 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 
-const Cart = () => {
-  const [stored_array, SetStoredArray] = useState(
-    JSON.parse(localStorage.getItem("Cart")) || []
-  );
+const Cart = () => 
+{
+  const [stored_array, SetStoredArray] = useState(JSON.parse(localStorage.getItem("Cart")) || []);
 
   const RemoveFromCart = (index) => {
     const updated_сart = [...stored_array];

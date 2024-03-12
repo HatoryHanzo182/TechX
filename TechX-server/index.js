@@ -1,13 +1,17 @@
 import mongoose, { connect } from "mongoose";
 import express from "express";
 import { _techx_data_connection_string } from './connect.js';
-import { PhoneModel } from "./Models/Phone.js";
+import { IPhoneModel } from "./Models/IPhone.js";
 import { UserModel } from "./Models/User.js";
 import { SessionModel } from "./Models/Session.js"
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import config from './config.js';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
 
 //
 //  ████████╗███████╗ █████╗ ██╗  ██╗██╗  ██╗
@@ -31,6 +35,8 @@ import config from './config.js';
 dotenv.config();
 const app = express();
 const _token_secret_key = config.token_secret_key;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 app.use(express.json());
 app.use((req, res, next) =>  // Middleware for handling CORS.
@@ -56,6 +62,23 @@ const PORT = 3001  // process.env.PORT;
 // + + + + + + + + + + + + + + + + + + + TECHX + + + + + + + + + + + + + + + + + + +
 // REQUESTS TO SEND THIS DATA.
 //=============================================================================================
+        // Let's check if the user exists.
+app.post("/CheckUserExists", async (req, res) => 
+{
+  try 
+  {
+    const { email } = req.body;
+    const existing_user = await UserModel.findOne({ email });
+
+    if (existing_user) 
+      res.status(200).json({ existing_user: true });
+    else 
+      res.status(200).json({ existing_user: false });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
 
         // Push new user data.
 app.post("/NewUser", async (req, res) => 
@@ -71,24 +94,6 @@ app.post("/NewUser", async (req, res) =>
   } 
   catch (error) 
   {
-    console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-});
-
-        // Let's check if the user exists.
-app.post("/CheckUserExists", async (req, res) => 
-{
-  try 
-  {
-    const { email } = req.body;
-    const existing_user = await UserModel.findOne({ email });
-
-    if (existing_user) 
-      res.status(200).json({ existing_user: true });
-    else 
-      res.status(200).json({ existing_user: false });
-  } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
@@ -234,28 +239,79 @@ app.post("/RemoveFromSession", async (req, res) =>
     res.status(500).json({});
   }
 });
+
+        // Retrieving an image from the server.
+app.get('/GetImage/:ImageName', (req, res) => 
+{
+  const image_name = decodeURIComponent(req.params.ImageName);
+  const image_path = join(__dirname, 'Images', image_name);
+
+  if (fs.existsSync(image_path)) 
+  {
+      const image_stream = fs.createReadStream(image_path);
+      
+      image_stream.pipe(res);
+  } 
+  else 
+      res.status(404).send('Image not found');
+});
+
+        // Getting Iphone data for carusel.
+app.post("/GettingIphoneDataForCarusel", async (req, res) => 
+{
+  try 
+  {
+    const iphones = await IPhoneModel.find();
+    const formatted_data = iphones.map(phone => 
+    {
+      return { images: phone.images[0], model: phone.model, price: phone.price };
+    });
+
+    res.status(200).json(formatted_data);
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
 //=============================================================================================
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+
+
+
+
 
 // + + + + + + + + + + + + + + + + + + + COMPASS + + + + + + + + + + + + + + + + + + +
 // REQUESTS TO SEND THIS DATA.
 //=============================================================================================
 // Push product data.
-app.post("/AddPhone", async (req, res) => {
-  try {
+app.post("/AddIPhone", async (req, res) => 
+{
+  try 
+  {
     const { company, series, screen_diagonal } = req.body;
-    const new_phone = new PhoneModel({ company, series, screen_diagonal });
+    const new_phone = new IPhoneModel({ company, series, screen_diagonal });
 
     await new_phone.save();
 
-    res.status(200).json({ message: "Phone added successfully" });
-  } catch (error) {
+    res.status(200).json({ message: "IPhone added successfully" });
+  } 
+  catch (error) 
+  {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
 //=============================================================================================
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+
+
+
+
+
 
 const start = async () => 
 {

@@ -2,104 +2,93 @@
 import React, { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-
 // import { IoCartOutline } from "react-icons/io5";
-
 import Link from "next/link";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-
-import {
-  Command,
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
-} from "@/components/ui/command";
+import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from "@/components/ui/command";
 // import { PullOutOfSession } from "../lib/session";
 // import { signOut } from "next-auth/react";
 import { useAuth } from "@/app/providers";
-
 // import { ReloadIcon } from "@radix-ui/react-icons";
-
 // import { Button } from "@/components/ui/button";
-
 import DropMenu from "./buttons/Dropdown.jsx";
 import Cart from "./buttons/Сart";
 
-const navigation = [
+const navigation = 
+[
   { name: "Product", href: "#" },
   { name: "Features", href: "#" },
   { name: "Marketplace", href: "#" },
   { name: "Company", href: "#" },
 ];
 
-export default function Nav() {
+export default function Nav() 
+{
   // const [loggedIn, setLoggedIn] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const [isOpen, setIsOpen] = useState(false);
-
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const { user, isLoggedIn } = useAuth();
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleDropdown = () => { setIsOpen(!isOpen); };
 
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Функция для обработки клика
-  const handleLinkClick = (e) => {
+  const handleLinkClick = (e) => 
+  {
     e.preventDefault(); // Предотвратите стандартное поведение ссылки
+    
     setMenuOpen(true); // Откройте CommandMenu
   };
 
-  useEffect(() => {
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-    if (menuOpen) {
+  useEffect(() => 
+  {
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    
+    if (menuOpen) 
+    {
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
-    } else {
+    } 
+    else 
+    {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
     }
   }, [menuOpen]);
 
-  const handleSignOut = async (e) => {
+  const handleSignOut = async (e) => 
+  {
     e.preventDefault();
 
-    try {
+    try 
+    {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:3001/RemoveFromSession", {
+      const response = await fetch("http://localhost:3001/RemoveFromSession", 
+      {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       });
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok) 
+      {
         console.log(data.message);
         localStorage.removeItem("token");
         window.location.reload();
-      } else console.error(data.message);
-    } catch (error) {
-      console.error("Error:", error);
-    }
+      } 
+      else 
+        console.error(data.message);
+    } 
+    catch (error) { console.error("Error:", error); }
   };
 
-  const OpenCart = () => {
+  const OpenCart = () => 
+  {
     const Iphone = { img: "IMGING.png", model: "iphone", price: 100.0 };
     const ArrayCoast = [Iphone, Iphone, Iphone, Iphone];
 
