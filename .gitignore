@@ -3,6 +3,7 @@
 # dependencies
 TechX-compass/node_modules/
 /node_modules
+
 /.pnp
 .pnp.js
 
@@ -37,3 +38,4 @@ next-env.d.ts
 .env
 
 node_modules/
+TechX-server/config.json
