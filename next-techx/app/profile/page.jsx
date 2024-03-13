@@ -2,17 +2,17 @@ import Nav from "@/components/Nav";
 import ProfilePage from "@/components/pages/ProfilePage";
 import React from "react";
 
+
+
 const page = () => {
   return (
     <main>
       <section>
         <Nav />
       </section>
-
       <section>
         <ProfilePage />
       </section>
-
       {/* <div className=" h-screen flex items-center justify-center">
         <div className="w-[300px] h-[300px] bg-[#1d1d1d] p-8 rounded-lg shadow-md flex flex-col items-center justify-center">
 
