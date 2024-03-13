@@ -1,17 +1,45 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RadioGroup } from "@headlessui/react";
 
-const ProductDetails = () => {
-  const [selectedImage, setSelectedImage] = useState(
-    "https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp"
-  );
+const ProductDetails = () => 
+{
+  const [selectedImage, setSelectedImage] = useState("https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp");
+  let [capacity, setCapacity] = useState("128");
+  const [product_data, SetProductData] = useState();
 
-  const handleImageClick = (imageUrl) => {
+  useEffect(() =>
+  {
+    const ToGetData = async (id) => 
+    {
+      try 
+      {
+        const formatted_data = await fetch(`http://localhost:3001/ExtractIphoneData/${id}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+  
+        if (formatted_data.ok) 
+        {
+          const data = await formatted_data.json();
+          
+          SetProductData(data);
+        }
+      } 
+      catch (error) { console.error("Error fetching data:", error); }
+    }
+
+    const params = new URLSearchParams(window.location.search);
+
+    ToGetData(params.get("id"));
+  }, []);
+
+  const handleImageClick = (imageUrl) => 
+  {
     setSelectedImage(imageUrl);
   };
-
-  let [capacity, setCapacity] = useState("128");
 
   return (
     <main>
@@ -46,10 +74,9 @@ const ProductDetails = () => {
                       viewBox="0 0 16 16"
                     ></svg>
                   </a>
-
                   <img
                     className="object-cover w-full max-sm:w-auto lg:h-1/2"
-                    src={selectedImage}
+                    src={`http://localhost:3001/GetImage/${product_data?.images[0]}` || "Loading..."}
                     alt=""
                   />
                   <a
@@ -67,75 +94,22 @@ const ProductDetails = () => {
                   </a>
                 </div>
                 <div className="flex-wrap hidden -mx-2 md:flex">
-                  <div className="w-1/2 p-2 sm:w-1/4">
-                    <a
-                      className="block border border-transparent hover:border-blue-400"
-                      href="#"
-                      onClick={() =>
-                        handleImageClick(
-                          "https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp"
-                        )
-                      }
-                    >
-                      <img
-                        className="object-cover w-full lg:h-32"
-                        src="https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <div className="w-1/2 p-2 sm:w-1/4">
-                    <a
-                      className="block border border-transparent hover:border-blue-400"
-                      href="#"
-                      onClick={() =>
-                        handleImageClick(
-                          "https://img.jabko.ua/image/cache/catalog/products/2022/09/081515/iphone-14-pro-finish-select-2022%20(9)-1397x1397.jpg.webp"
-                        )
-                      }
-                    >
-                      <img
-                        className="object-cover w-full lg:h-32"
-                        src="https://img.jabko.ua/image/cache/catalog/products/2022/09/081515/iphone-14-pro-finish-select-2022%20(9)-1397x1397.jpg.webp"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-
-                  <div className="w-1/2 p-2 sm:w-1/4">
-                    <a
-                      className="block border border-transparent hover:border-blue-400"
-                      href="#"
-                      onClick={() =>
-                        handleImageClick(
-                          "https://img.jabko.ua/image/cache/catalog/products/2022/09/081515/iphone-14-pro-finish-select-2022%20(8)-1397x1397.jpg.webp"
-                        )
-                      }
-                    >
-                      <img
-                        className="object-cover w-full lg:h-32"
-                        src="https://img.jabko.ua/image/cache/catalog/products/2022/09/081515/iphone-14-pro-finish-select-2022%20(8)-1397x1397.jpg.webp"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <div className="w-1/2 p-2 sm:w-1/4">
-                    <a
-                      className="block border border-transparent hover:border-blue-400"
-                      href="#"
-                      onClick={() =>
-                        handleImageClick(
-                          "https://img.jabko.ua/image/cache/catalog/products/2023/07/181746/14_Pro_Pro_Max%20(3)-1397x1397.jpg.webp"
-                        )
-                      }
-                    >
-                      <img
-                        className="object-cover w-full lg:h-32"
-                        src=" https://img.jabko.ua/image/cache/catalog/products/2023/07/181746/14_Pro_Pro_Max%20(3)-1397x1397.jpg.webp"
-                        alt=""
-                      />
-                    </a>
-                  </div>
+                  {product_data?.images.map((image, index) => 
+                  (
+                    <div key={index} className="w-1/2 p-2 sm:w-1/4">
+                      <a
+                        className="block border border-transparent hover:border-blue-400"
+                        href="#"
+                        onClick={() => handleImageClick(image)}
+                      >
+                        <img
+                          className="object-cover w-full lg:h-32"
+                          src={`http://localhost:3001/GetImage/${image}`}
+                          alt={`Product Image ${index + 1}`}
+                        />
+                      </a>
+                    </div>
+                  ))}
                 </div>
                 <div className="px-6 pb-6 mt-6 border-t border-gray-300 dark:border-gray-400 ">
                   <div className="flex items-center justify-center mt-6">
@@ -173,7 +147,7 @@ const ProductDetails = () => {
                     New
                   </span>
                   <h2 className="max-w-xl mt-2 mb-4 text-5xl font-bold md:text-6xl font-heading dark:text-gray-300">
-                    Iphone 14 Pro Max
+                    {product_data?.model || "Loading..."}
                   </h2>
                   <p className="max-w-md mb-4 text-gray-500 dark:text-gray-400">
                     Get $100-$500 off when you trade in an one plus 6 or newer.
@@ -195,7 +169,7 @@ const ProductDetails = () => {
                         <div>
                           <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-emerald-400"></div>
                           <p className="text-xs text-center text-gray-700 dark:text-gray-400">
-                            Pearl Green
+                            {product_data?.color || "Loading..."}
                           </p>
                         </div>
                       </button>
@@ -254,6 +228,7 @@ const ProductDetails = () => {
                   </a>
                   <RadioGroup value={capacity} onChange={setCapacity}>
                     <div className="grid grid-cols-2 gap-4 pb-4 mt-2 mb-4 border-b-2 lg:grid-cols-3 dark:border-gray-600">
+                      {/*{product_data?.memory || "Loading..."}*/}
                       {["128", "256", "512", "1"].map((size) => (
                         <div key={size}>
                           <button

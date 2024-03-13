@@ -1,11 +1,8 @@
 import * as React from "react";
-
 import MainPage from "@/components/pages/MainPage";
-
 import Nav from "@/components/Nav";
 import ProductCatalog from "@/components/product/ProductCatalog";
 import { ProductCarousel } from "@/components/ProductCarousel";
-
 import Link from "next/link";
 import ProductCards from "@/components/product/ProductCards";
 
@@ -13,9 +10,7 @@ export default async function Home() {
   return (
     <>
       <Nav />
-
       <MainPage />
-
       {/* <div className=" mt-8 ">
         <div className="flex flex-wrap   justify-center  items-center">
           <Link href="/product">
@@ -72,7 +67,7 @@ export default async function Home() {
       </div> */}
       <div className="mt-8 flex justify-center">
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-3 md:gap-4 lg:gap-6 mx-auto max-w-4xl">
-          <Link href="/product">
+          <Link href={{ pathname: "/product", query: { type: "iPhone" } }}>
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/home_cats/image%20154full.png.webp"
               title="Iphone"

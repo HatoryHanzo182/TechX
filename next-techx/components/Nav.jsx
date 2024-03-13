@@ -69,7 +69,8 @@ export default function Nav() {
   const handleSignOut = async (e) => {
     e.preventDefault();
 
-    try {
+    try 
+    {
       const token = localStorage.getItem("token");
 
       const response = await fetch("http://localhost:3001/RemoveFromSession", {

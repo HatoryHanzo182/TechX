@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 
 const IPhoneSchema = new mongoose.Schema(
 {
-  _id: String,
+  _id: mongoose.Schema.Types.ObjectId,
   category: String,
   brand: String,
   model: String,

@@ -275,6 +275,46 @@ app.post("/GettingIphoneDataForCarusel", async (req, res) =>
     res.status(500).json({});
   }
 });
+
+        // Getting Iphone data for list product.
+app.post("/GetDataForListProduct/Iphone", async (req, res) => 
+{
+  try 
+  {
+    const iphones = await IPhoneModel.find();
+    const formatted_data = iphones.map(phone => 
+    {
+      return { id: phone.id, images: phone.images[0], model: phone.model, memory: phone.memory, color: phone.color, price: phone.price };
+    });
+
+    res.status(200).json(formatted_data);
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
+        // Getting Iphone data for list product.
+app.post("/ExtractIphoneData/:id", async (req, res) => 
+{
+  try 
+  {
+    const iphone_id = req.params.id;
+    const iphone_data = await IPhoneModel.findById(iphone_id);
+    
+    if (iphone_data) 
+      res.status(200).json(iphone_data);
+    else
+      res.status(404).json({ message: "iPhone not found" });
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
 //=============================================================================================
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 

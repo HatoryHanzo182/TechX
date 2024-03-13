@@ -178,7 +178,8 @@ export function ProductCarousel() {
           }
         );
 
-        if (formatted_data.ok) SetIphone(await formatted_data.json());
+        if (formatted_data.ok) 
+          SetIphone(await formatted_data.json());
       } catch (error) {
         console.error("Error fetching data:", error);
       }
