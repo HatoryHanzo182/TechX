@@ -38,4 +38,5 @@ next-env.d.ts
 .env
 
 node_modules/
-TechX-server/config.json
+
+TechX-server/config.json/
