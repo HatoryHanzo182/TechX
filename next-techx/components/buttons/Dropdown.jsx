@@ -12,8 +12,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
+} from "@/components/ui/dropdown-menu"; import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -136,15 +135,15 @@ const categories = [
 ];
 
 const DropMenu = () => {
- return (
+  return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className='hidden md:inline-flex'>
+        <Button variant="outline" className='hidden lg:flex'>
           <MixIcon className="mr-1" height={20} />
           Catalog
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40">
+      <DropdownMenuContent className="w-full">
         {categories.map((category, index) => (
           <DropdownMenuGroup key={index}>
             <DropdownMenuSub>
@@ -153,30 +152,27 @@ const DropMenu = () => {
                 {category.label}
               </DropdownMenuSubTrigger>
               <DropdownMenuPortal>
-                <DropdownMenuSubContent className="ml-2" >
-                   { /* <Accordion type="single" collapsible className={`w-full ${
-                    category.items.length > 3 ? "inline-grid grid-cols-2 gap-4" : ""
-                    }`}> */}
-                  <Accordion type="single" collapsible className="w-full">
-                    {category.items.map((item, itemIndex) => (
-                      <AccordionItem key={itemIndex} value={`item-${itemIndex}`}>
-                        <AccordionTrigger>
-                          <div className="flex items-center">
-                            <item.icon className="mr-2 h-4 w-4" /> 
+                <DropdownMenuSubContent className={`ml-2 ${category.items.length < 3 ? 'flex justify-center items-center' : 'grid grid-cols-3 gap-4'} gap-4`}>
+                  {category.items.map((item, itemIndex) => (
+                    <div key={itemIndex} className={`p-1 ${category.items.length < 3 ? 'flex-1' : ''}`}>
+                      <div className="flex flex-col items-center">
+                        <DropdownMenuItem as="div" className="w-full text-center">
+                          <div className="flex items-center justify-center">
+                            <item.icon className="mr-2 h-4 w-4" />
                             {item.label}
                           </div>
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          {item.products.map((product, productIndex) => (
-                            <div key={productIndex} className="flex items-center">
-                              <item.icon className="mr-2 h-4 w-4" /> 
-                              <a href={product.href}>{product.name}</a>
-                            </div>
-                          ))}
-                        </AccordionContent>
-                      </AccordionItem>
-                    ))}
-                  </Accordion>
+                          <DropdownMenuSeparator />
+                        </DropdownMenuItem>
+                        {item.products.map((product, productIndex) => (
+                          <div className="flex">
+                            <a key={productIndex} href={product.href} className="py-1 text-sm text-slate-500 hover:text-white">
+                              {product.name}
+                            </a>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </DropdownMenuSubContent>
               </DropdownMenuPortal>
             </DropdownMenuSub>
