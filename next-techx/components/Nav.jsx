@@ -69,8 +69,7 @@ export default function Nav() {
   const handleSignOut = async (e) => {
     e.preventDefault();
 
-    try 
-    {
+    try {
       const token = localStorage.getItem("token");
 
       const response = await fetch("http://localhost:3001/RemoveFromSession", {
@@ -101,35 +100,6 @@ export default function Nav() {
     localStorage.setItem("Cart", JSON.stringify(ArrayCoast));
   };
 
-  // if (isAuthInitializing) {
-  //   return (
-  //     <Button className="absolute ">
-  //       <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-  //       Loading....
-  //     </Button>
-  //   );
-  // }
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const user_data = await PullOutOfSession();
-
-  //     if (user_data) {
-  //       //  <<----- Получили пользователя.
-  //       console.log(user_data.name, user_data.email);
-  //       setName(user_data.name);
-  //       setEmail(user_data.email);
-  //       setLoggedIn(true);
-  //     } //  <<----- не прошел валилацию.
-  //     else {
-  //       console.log("FALSE SESSION");
-  //       setLoggedIn(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   return (
     <main>
       <div className="dark:bg-black bg-white">
@@ -142,11 +112,7 @@ export default function Nav() {
               <Link href="/">
                 <div className="-m-1.5 p-1.5">
                   <span className="sr-only">Your Company</span>
-                  {/* <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              /> */}
+
                   <h1 className="text-black dark:text-white  font-bold text-2xl animate-pulse">
                     techX
                   </h1>
@@ -164,17 +130,7 @@ export default function Nav() {
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
-            {/* <div className="hidden lg:flex lg:gap-x-12 ">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-sm font-semibold leading-6 dark:text-white text-black hover:text-gray-500 "
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div> */}
+
             {isLoggedIn ? (
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                 <div className="mt-2 mr-3 flex flex-row ">
@@ -208,7 +164,6 @@ export default function Nav() {
                     </CommandList>
                   </CommandDialog>
                   <Link href="" onClick={OpenCart}>
-                    {/* <IoCartOutline className="h-6 w-6 " aria-hidden="true" /> */}
                     <Cart />
                   </Link>
                 </div>
@@ -243,22 +198,6 @@ export default function Nav() {
                             </div>
                           </Link>
                         </li>
-                        {/* <li>
-                          <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          >
-                            Settings
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          >
-                            Earnings
-                          </a>
-                        </li> */}
                       </ul>
                       <div className="py-2">
                         <a
@@ -310,7 +249,6 @@ export default function Nav() {
                     </CommandList>
                   </CommandDialog>
                   <Link href="" className="w-6 h-6 ml-2" onClick={OpenCart}>
-                    {/* <IoCartOutline className="h-6 w-6 " aria-hidden="true" /> */}
                     <Cart />
                   </Link>
                 </div>
@@ -327,9 +265,6 @@ export default function Nav() {
 
                   {isOpen && (
                     <div className="z-10 absolute right-0 mt-2  divide-y  rounded-lg shadow w-44 bg-[#1d1d1d] dark:divide-[#2f2f2f]">
-                      {/* <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                        <div className="font-medium truncate"></div>
-                      </div> */}
                       <ul
                         className="py-2 text-sm text-gray-700 dark:text-gray-200"
                         aria-labelledby="dropdownUserAvatarButton"
@@ -355,19 +290,6 @@ export default function Nav() {
                   )}
                 </div>
               </div>
-
-              // <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-              //   <Link href="/signin">
-              //     <div className="text-sm font-semibold leading-6 border rounded-lg p-2 dark:text-white text-black mr-3 dark:hover:bg-gray-900">
-              //       Sign in <span aria-hidden="true">&rarr;</span>
-              //     </div>
-              //   </Link>
-              //   <Link href="/signup">
-              //     <div className="text-sm font-semibold leading-6 border rounded-lg p-2 dark:text-white text-black  dark:hover:bg-gray-900">
-              //       Sign up <span aria-hidden="true">&uarr;</span>
-              //     </div>
-              //   </Link>
-              // </div>
             )}
           </nav>
           <Dialog

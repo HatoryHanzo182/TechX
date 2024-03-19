@@ -1,43 +1,47 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { RadioGroup } from "@headlessui/react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
-const ProductDetails = () => 
-{
-  const [selectedImage, setSelectedImage] = useState("https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp");
+const ProductDetails = () => {
+  const [selectedImage, setSelectedImage] = useState(
+    "https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp"
+  );
   let [capacity, setCapacity] = useState("128");
   const [product_data, SetProductData] = useState();
 
-  useEffect(() =>
-  {
-    const ToGetData = async (id) => 
-    {
-      try 
-      {
-        const formatted_data = await fetch(`http://localhost:3001/ExtractIphoneData/${id}`,
+  useEffect(() => {
+    const ToGetData = async (id) => {
+      try {
+        const formatted_data = await fetch(
+          `http://localhost:3001/ExtractIphoneData/${id}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
           }
         );
-  
-        if (formatted_data.ok) 
-        {
+
+        if (formatted_data.ok) {
           const data = await formatted_data.json();
-          
+
           SetProductData(data);
         }
-      } 
-      catch (error) { console.error("Error fetching data:", error); }
-    }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
     const params = new URLSearchParams(window.location.search);
 
     ToGetData(params.get("id"));
   }, []);
 
-  const handleImageClick = (imageUrl) => 
-  {
+  const handleImageClick = (imageUrl) => {
     setSelectedImage(imageUrl);
   };
 
@@ -56,7 +60,13 @@ const ProductDetails = () =>
             }}
           />
         </div> */}
+
         <div className="max-w-5xl px-4 mx-auto">
+          <div className=" flex flex-row gap-4 mb-2 font-bold">
+            <p className="hover:text-gray-500 ">Характеристики</p>
+            <p className="hover:text-gray-500 ">Характеристики</p>
+            <p className="hover:text-gray-500 ">Характеристики</p>
+          </div>
           <div className="flex flex-wrap mb-24 -mx-4">
             <div className="w-full px-4 mb-8 md:w-1/2 md:mb-0">
               <div className="sticky top-0 z-50 overflow-hidden ">
@@ -76,7 +86,10 @@ const ProductDetails = () =>
                   </a>
                   <img
                     className="object-cover w-full max-sm:w-auto lg:h-1/2"
-                    src={`http://localhost:3001/GetImage/${product_data?.images[0]}` || "Loading..."}
+                    src={
+                      `http://localhost:3001/GetImage/${product_data?.images[0]}` ||
+                      "Loading..."
+                    }
                     alt=""
                   />
                   <a
@@ -94,8 +107,7 @@ const ProductDetails = () =>
                   </a>
                 </div>
                 <div className="flex-wrap hidden -mx-2 md:flex">
-                  {product_data?.images.map((image, index) => 
-                  (
+                  {product_data?.images.map((image, index) => (
                     <div key={index} className="w-1/2 p-2 sm:w-1/4">
                       <a
                         className="block border border-transparent hover:border-blue-400"
@@ -252,64 +264,6 @@ const ProductDetails = () =>
                       ))}
                     </div>
                   </RadioGroup>
-
-                  {/* <RadioGroup value={capacity} onChange={setCapacity}>
-                    <div className="grid grid-cols-2 gap-4 pb-4 mt-2 mb-4 border-b-2 border-gray-300 lg:grid-cols-3 dark:border-gray-600">
-                      <RadioGroup.Option value="128">
-                        {({ checked }) => (
-                          <div>
-                            <button className="flex items-center justify-center w-full h-full py-4 border-2 border-gray-300 dark:hover:border-blue-400  dark:border-gray-600 hover:border-blue-400">
-                              {checked ? "" : ""}
-                              <div>
-                                <div className="mb-2 font-semibold dark:text-gray-400">
-                                  128 <span className="text-xs">GB</span>
-                                </div>
-                                <p className="px-2 text-xs font-medium text-center text-gray-700 dark:text-gray-400">
-                                  From $99 0r $41.62/mo. for 24 mo.
-                                </p>
-                              </div>
-                            </button>
-                          </div>
-                        )}
-                      </RadioGroup.Option>
-                      <div>
-                        <button className="flex items-center justify-center w-full h-full py-4 border-2 border-gray-300 dark:hover:border-blue-400 dark:border-gray-600 hover:border-blue-400">
-                          <div>
-                            <div className="mb-2 font-semibold dark:text-gray-400">
-                              256 <span className="text-xs">GB</span>
-                            </div>
-                            <p className="px-2 text-xs font-medium text-center text-gray-700 dark:text-gray-400">
-                              From $99 0r $41.62/mo. for 24 mo.
-                            </p>
-                          </div>
-                        </button>
-                      </div>
-                      <div>
-                        <button className="flex items-center justify-center w-full h-full py-4 border-2 border-gray-300 dark:hover:border-blue-400 dark:border-gray-600 hover:border-blue-400">
-                          <div>
-                            <div className="mb-2 font-semibold dark:text-gray-400">
-                              512 <span className="text-xs">GB</span>
-                            </div>
-                            <p className="px-2 text-xs font-medium text-center text-gray-700 dark:text-gray-400">
-                              From $99 0r $41.62/mo. for 24 mo.
-                            </p>
-                          </div>
-                        </button>
-                      </div>
-                      <div>
-                        <button className="flex items-center justify-center w-full h-full py-4 border-2 border-gray-300 dark:hover:border-blue-400 dark:border-gray-600 hover:border-blue-400">
-                          <div>
-                            <div className="mb-2 font-semibold dark:text-gray-400">
-                              1 <span className="text-xs">GB</span>
-                            </div>
-                            <p className="px-2 text-xs font-medium text-center text-gray-700 dark:text-gray-400">
-                              From $99 0r $41.62/mo. for 24 mo.
-                            </p>
-                          </div>
-                        </button>
-                      </div>
-                    </div>
-                  </RadioGroup> */}
                 </div>
                 <div className="mt-6">
                   <p className="mb-4 text-lg font-semibold dark:text-gray-400">
@@ -425,6 +379,24 @@ const ProductDetails = () =>
               </div>
             </div>
           </div>
+        </div>
+      </section>
+      <section className="">
+        <div className="mx-20 py-10 rounded-lg bg-[#1d1d1d]">
+          Основные преимущества
+        </div>
+
+        <div className=" flex mx-20">
+          <Accordion type="single" collapsible className="w-full mx-20">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="h-8 w-8">
+                Is it accessible?
+              </AccordionTrigger>
+              <AccordionContent>
+                Yes. It adheres to the WAI-ARIA design pattern.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </section>
     </main>

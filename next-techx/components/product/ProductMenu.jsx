@@ -36,50 +36,6 @@ function ProductSelection() {
 
   const [products, SetIProducts] = useState([]);
 
-  // Sample list of products
-  // const products = [
-  //   {
-  //     id: 1,
-  //     name: "Apple iPhone 15 Pro Max",
-  //     memory: "256GB",
-  //     color: "Blue Titanium",
-  //     originalPrice: 59876,
-  //     discountedPrice: 55699,
-  //   },
-  //   {
-  //     id: 1,
-  //     name: "Apple iPhone 15 Pro Max",
-  //     memory: "256GB",
-  //     color: "Blue Titanium",
-  //     originalPrice: 59876,
-  //     discountedPrice: 55699,
-  //   },
-  //   {
-  //     id: 1,
-  //     name: "Apple iPhone 15 Pro Max",
-  //     memory: "256GB",
-  //     color: "Blue Titanium",
-  //     originalPrice: 59876,
-  //     discountedPrice: 55699,
-  //   },
-  //   {
-  //     id: 1,
-  //     name: "Apple iPhone 15 Pro Max",
-  //     memory: "256GB",
-  //     color: "Blue Titanium",
-  //     originalPrice: 59876,
-  //     discountedPrice: 55699,
-  //   },
-  //   {
-  //     id: 1,
-  //     name: "Apple iPhone 15 Pro Max",
-  //     memory: "256GB",
-  //     color: "Blue Titanium",
-  //     originalPrice: 59876,
-  //     discountedPrice: 55699,
-  //   }
-  // ];
-
   useEffect(() => {
     const ToGetDataIphone = async () => {
       try {
