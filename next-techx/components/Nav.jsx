@@ -66,7 +66,8 @@ export default function Nav() {
     }
   }, [menuOpen]);
 
-  const handleSignOut = async (e) => {
+  const handleSignOut = async (e) => 
+  {
     e.preventDefault();
 
     try {
@@ -283,7 +284,7 @@ export default function Nav() {
                         <a
                           href="/signup"
                           className="block px-4 py-2 text-sm  hover:bg-[#2b2b2b]"
-                          onClick={handleSignOut}
+                          // onClick={handleSignOut}
                         >
                           Sign up <span>&uarr;</span>
                         </a>
