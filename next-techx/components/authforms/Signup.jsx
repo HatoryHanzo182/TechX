@@ -13,108 +13,126 @@ import { PullOutOfSession } from "../../lib/session";
 import { set } from "mongoose";
 // import SquaresAnimation from "../SquaresAnimation";
 
-const Signup = () => 
-{
+const Signup = () => {
   const [name, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [conf_u, SetConfU] = useState();
-  const [is_modal_confirm_mail_open, SetisModalConfirmMailOpen] = useState(false);
+  const [is_modal_confirm_mail_open, SetisModalConfirmMailOpen] =
+    useState(false);
   const input_confirm_refs = [useRef(), useRef(), useRef(), useRef()];
   const router = useRouter();
 
-  const handleSumbit = async (e) => 
-  {
+  const handleSumbit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !password) 
-    {
+    if (!name || !email || !password) {
       setError("All fields are necessary.");
       setShowAlert(true);
       return;
     }
 
-    try 
-    {
-      const ResUserExists = await fetch("http://localhost:3001/CheckUserExists",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email })
-      });
-
-      const { existing_user } = await ResUserExists.json();
-
-      if (existing_user) 
-      {
-        console.log("User exists"); //  <<---- Пользователь уже существует.
-        return;
-      } 
-      else 
-      {
-        SetisModalConfirmMailOpen(true);
-        
-        const SendConf = await fetch("http://localhost:3001/SendConfirmationCodeEmail", //  <<---- Отправляем код подтверждения.
+    try {
+      const ResUserExists = await fetch(
+        "http://localhost:3001/CheckUserExists",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email })
-        });
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      const { existing_user } = await ResUserExists.json();
+
+      if (existing_user) {
+        console.log("User exists"); //  <<---- Пользователь уже существует.
+        return;
+      } else {
+        SetisModalConfirmMailOpen(true);
+
+        const SendConf = await fetch(
+          "http://localhost:3001/SendConfirmationCodeEmail", //  <<---- Отправляем код подтверждения.
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email }),
+          }
+        );
 
         const { conf } = await SendConf.json();
-        
+
         SetConfU(conf);
       }
-    } 
-    catch (error) { console.log("Error during registration: ", error); }
+    } catch (error) {
+      console.log("Error during registration: ", error);
+    }
   };
 
-  const handleInputChange = (index, e) => 
-  {
+  const handleInputChange = (index, e) => {
     const input = e.target;
-    
-    if (input.value.length === 1) 
-    {
+
+    if (input.value.length === 1) {
       if (index < input_confirm_refs.length - 1)
         input_confirm_refs[index + 1].current.focus();
     }
   };
 
-  const handleClearClick = () => 
-  {
-    input_confirm_refs.forEach((ref) => { ref.current.value = ''; });
+  const handleClearClick = () => {
+    input_confirm_refs.forEach((ref) => {
+      ref.current.value = "";
+    });
     input_confirm_refs[0].current.focus();
   };
 
-  const handleVerifyClick = async () =>
-  {
-    const code = input_confirm_refs.map(ref => ref.current.value).join('');
+  const handleVerifyClick = async () => {
+    const code = input_confirm_refs.map((ref) => ref.current.value).join("");
 
-    if(conf_u === code)
-    {
-      const res = await fetch("http://localhost:3001/NewUser", //  <<---- Добавим пользователя.
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password: await bcrypt.hash(password, 10) }),
-      });
-      
-      if (res.ok) 
-        window.location.href = "/signin";
-      else 
-        console.log("user registration failed.");
+    if (conf_u === code) {
+      const res = await fetch(
+        "http://localhost:3001/NewUser", //  <<---- Добавим пользователя.
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email,
+            password: await bcrypt.hash(password, 10),
+          }),
+        }
+      );
+
+      if (res.ok) window.location.href = "/signin";
+      else
+        <div className="absolute right-0 top-32 mr-4 mt-4 w-[250px]">
+          {showAlert && error && (
+            <Alert>
+              <ExclamationTriangleIcon className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>User registation failed</AlertDescription>
+            </Alert>
+          )}
+        </div>;
+    } else {
+      <div className="absolute right-0 top-32 mr-4 mt-4 w-[250px]">
+        {showAlert && error && (
+          <Alert>
+            <ExclamationTriangleIcon className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>Unknown token</AlertDescription>
+          </Alert>
+        )}
+      </div>;
     }
-    else
-    {
-      // Выведите кто то тут сообщение о том что код неверный.
-    }
-  }
+  };
 
   return (
     <div className="flex flex-wrap w-full">
-      <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+      <div
+        className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+        aria-hidden="true"
+      >
         <div
           className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           style={{
@@ -256,7 +274,13 @@ const Signup = () =>
               </div>
             </div>
 
-            <Button variant="outline" className="text-black dark:text-white mt-6 "> Sign Up </Button>
+            <Button
+              variant="outline"
+              className="text-black dark:text-white mt-6 "
+            >
+              {" "}
+              Sign Up{" "}
+            </Button>
             {/* <button className="mt-6 w-full sm:w-auto rounded-lg bg-blue-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-blue-500 ring-offset-2 transition hover:bg-blue-700 focus:ring-2">
               Sign Up
             </button> */}
@@ -265,8 +289,9 @@ const Signup = () =>
       </div>
       {/* Модальное окно */}
       {is_modal_confirm_mail_open && (
-         <><style>
-          {`
+        <>
+          <style>
+            {`
             .modal-wrapper {
               position: fixed;
               top: 0;
@@ -422,26 +447,63 @@ const Signup = () =>
             color: var(--white);
           }
          `}
-        </style>
-        <div className="modal-wrapper">
-          <form className="form">
-            <span className="close" onClick={() => SetisModalConfirmMailOpen(false)}>X</span>
-            <div className="info">
-              <span className="title">Email Сonfirmation</span>
-              <p className="description">We have sent you an email with a cheat code, please enter the verification code. If there is still no letter, check your mail for errors.</p>
-            </div>
-            <div className="input-fields">
-              <input ref={input_confirm_refs[0]} maxLength="1" type="tel" placeholder="" onChange={(e) => handleInputChange(0, e)}/>
-              <input ref={input_confirm_refs[1]} maxLength="1" type="tel" placeholder="" onChange={(e) => handleInputChange(1, e)}/>
-              <input ref={input_confirm_refs[2]} maxLength="1" type="tel" placeholder="" onChange={(e) => handleInputChange(2, e)}/>
-              <input ref={input_confirm_refs[3]} maxLength="1" type="tel" placeholder="" onChange={(e) => handleInputChange(3, e)}/>
-            </div>
-            <div className="action-btns">
-              <a href="#" className="verify" onClick={ handleVerifyClick }>Verify</a>
-              <a className="clear" onClick={ handleClearClick }>Clear</a>
-            </div>
-          </form>
-        </div>
+          </style>
+          <div className="modal-wrapper">
+            <form className="form">
+              <span
+                className="close"
+                onClick={() => SetisModalConfirmMailOpen(false)}
+              >
+                X
+              </span>
+              <div className="info">
+                <span className="title">Email Сonfirmation</span>
+                <p className="description">
+                  We have sent you an email with a cheat code, please enter the
+                  verification code. If there is still no letter, check your
+                  mail for errors.
+                </p>
+              </div>
+              <div className="input-fields">
+                <input
+                  ref={input_confirm_refs[0]}
+                  maxLength="1"
+                  type="tel"
+                  placeholder=""
+                  onChange={(e) => handleInputChange(0, e)}
+                />
+                <input
+                  ref={input_confirm_refs[1]}
+                  maxLength="1"
+                  type="tel"
+                  placeholder=""
+                  onChange={(e) => handleInputChange(1, e)}
+                />
+                <input
+                  ref={input_confirm_refs[2]}
+                  maxLength="1"
+                  type="tel"
+                  placeholder=""
+                  onChange={(e) => handleInputChange(2, e)}
+                />
+                <input
+                  ref={input_confirm_refs[3]}
+                  maxLength="1"
+                  type="tel"
+                  placeholder=""
+                  onChange={(e) => handleInputChange(3, e)}
+                />
+              </div>
+              <div className="action-btns">
+                <a href="#" className="verify" onClick={handleVerifyClick}>
+                  Verify
+                </a>
+                <a className="clear" onClick={handleClearClick}>
+                  Clear
+                </a>
+              </div>
+            </form>
+          </div>
         </>
       )}
     </div>
