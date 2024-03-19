@@ -10,14 +10,24 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { IoCartOutline } from "react-icons/io5";
+
+import { AiOutlineShoppingCart } from "react-icons/ai";
+
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
+import {
+  LucideShoppingCart,
+  ShoppingBagIcon,
+  ShoppingBasket,
+  ShoppingCart,
+} from "lucide-react";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 
-const Cart = () => 
-{
-  const [stored_array, SetStoredArray] = useState(JSON.parse(localStorage.getItem("Cart")) || []);
+const Cart = () => {
+  const [stored_array, SetStoredArray] = useState(
+    JSON.parse(localStorage.getItem("Cart")) || []
+  );
 
   const RemoveFromCart = (index) => {
     const updated_сart = [...stored_array];
@@ -54,7 +64,8 @@ const Cart = () =>
     <Sheet>
       <SheetTrigger asChild>
         {/* <Button variant="outline">Open</Button> */}
-        <IoCartOutline className="h-6 w-6 " aria-hidden="true" />
+
+        <ShoppingCart className="h-6 w-6" aria-hidden="true" />
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>

@@ -145,9 +145,7 @@ const Signin = () => {
 
       <div className="flex w-full lg:w-1/2 flex-col">
         <div className="flex justify-center pt-6 text-justify ">
-          {/* <a href="#" class="text-2xl  font-bold text-white   animate-pulse">
-            {shopName}
-          </a> */}
+        
         </div>
         <div className="my-2 mx-auto flex flex-col justify-center px-6 pt-8  md:justify-start  lg:w-3/4 mt-20">
           <p className="text-center sm:text-left text-3xl text-white font-bold">
@@ -184,9 +182,7 @@ const Signin = () => {
             Google
           </Button>
           <div className="relative mt-8 flex h-px place-items-center bg-gray-200">
-            {/* <div class="absolute left-1/2 h-6 -translate-x-1/2 bg-black px-4 text-center text-sm text-gray-500">
-              Or use email instead
-            </div> */}
+           
           </div>
           <form
             className="flex flex-col items-stretch pt-3 md:pt-8"

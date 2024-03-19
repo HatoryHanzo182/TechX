@@ -14,7 +14,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* Индикатор загрузки будет отображаться при смене маршрутов */}
       <body>
         <AuthProvider>{children}</AuthProvider>
       </body>

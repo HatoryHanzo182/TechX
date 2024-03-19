@@ -173,11 +173,7 @@ const Signup = () => {
         </div>
       </div>
       <div className="flex w-full lg:w-1/2 flex-col">
-        <div className="flex justify-center pt-6 sm:justify-center sm:pl-12">
-          {/* <a href="#" class="text-2xl font-bold text-white animate-pulse">
-            {shopName}
-          </a> */}
-        </div>
+        <div className="flex justify-center pt-6 sm:justify-center sm:pl-12"></div>
         <div className="my-2 mx-auto mt-16 flex flex-col justify-center px-6 pt-8 sm:px-8 md:justify-start md:px-12 lg:w-3/4 text-black dark:text-white">
           <p className="text-center sm:text-left text-3xl  font-bold">
             Create your free account
