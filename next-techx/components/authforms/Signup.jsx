@@ -11,7 +11,7 @@ import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { PullOutOfSession } from "../../lib/session";
 import { set } from "mongoose";
-import SquaresAnimation from "../SquaresAnimation";
+// import SquaresAnimation from "../SquaresAnimation";
 
 const Signup = () => 
 {
@@ -20,17 +20,14 @@ const Signup = () =>
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showAlert, setShowAlert] = useState(false);
-  const [is_modal_confirm_mail_open, SetisModalConfirmMailOpen] = useState(true);
+  const [conf_u, SetConfU] = useState();
+  const [is_modal_confirm_mail_open, SetisModalConfirmMailOpen] = useState(false);
   const input_confirm_refs = [useRef(), useRef(), useRef(), useRef()];
-
   const router = useRouter();
 
   const handleSumbit = async (e) => 
   {
     e.preventDefault();
-
-    SetisModalConfirmMailOpen(true);
-
 
     if (!name || !email || !password) 
     {
@@ -45,7 +42,7 @@ const Signup = () =>
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email })
       });
 
       const { existing_user } = await ResUserExists.json();
@@ -54,28 +51,24 @@ const Signup = () =>
       {
         console.log("User exists"); //  <<---- Пользователь уже существует.
         return;
-      } else {
-        const res = await fetch(
-          "http://localhost:3001/NewUser", //  <<---- Добавим пользователя.
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, password: await bcrypt.hash(password, 10) }),
-          }
-        );
+      } 
+      else 
+      {
+        SetisModalConfirmMailOpen(true);
+        
+        const SendConf = await fetch("http://localhost:3001/SendConfirmationCodeEmail", //  <<---- Отправляем код подтверждения.
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email })
+        });
 
-        if (res.ok) {
-          const form = e.target;
-
-          form.reset();
-          router.push("/signin");
-        } 
-        else 
-          console.log("user registration failed.");
+        const { conf } = await SendConf.json();
+        
+        SetConfU(conf);
       }
-    } catch (error) {
-      console.log("Error during registration: ", error);
-    }
+    } 
+    catch (error) { console.log("Error during registration: ", error); }
   };
 
   const handleInputChange = (index, e) => 
@@ -91,13 +84,33 @@ const Signup = () =>
 
   const handleClearClick = () => 
   {
-    input_confirm_refs.forEach((ref) => 
-    {
-      ref.current.value = '';
-    });
-
+    input_confirm_refs.forEach((ref) => { ref.current.value = ''; });
     input_confirm_refs[0].current.focus();
   };
+
+  const handleVerifyClick = async () =>
+  {
+    const code = input_confirm_refs.map(ref => ref.current.value).join('');
+
+    if(conf_u === code)
+    {
+      const res = await fetch("http://localhost:3001/NewUser", //  <<---- Добавим пользователя.
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password: await bcrypt.hash(password, 10) }),
+      });
+      
+      if (res.ok) 
+        window.location.href = "/signin";
+      else 
+        console.log("user registration failed.");
+    }
+    else
+    {
+      // Выведите кто то тут сообщение о том что код неверный.
+    }
+  }
 
   return (
     <div className="flex flex-wrap w-full">
@@ -424,7 +437,7 @@ const Signup = () =>
               <input ref={input_confirm_refs[3]} maxLength="1" type="tel" placeholder="" onChange={(e) => handleInputChange(3, e)}/>
             </div>
             <div className="action-btns">
-              <a href="#" className="verify">Verify</a>
+              <a href="#" className="verify" onClick={ handleVerifyClick }>Verify</a>
               <a className="clear" onClick={ handleClearClick }>Clear</a>
             </div>
           </form>

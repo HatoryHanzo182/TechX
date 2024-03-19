@@ -9,47 +9,65 @@ const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
-const _postcard_path = path.join(
-  __dirname,
-  "../Content/html/GmailVerefication.html"
-);
+const _postcard_path = path.join(__dirname, "../Content/html/GmailVerefication.html");
+let _user_gmail;
+let _code;
 
-async function ReadHTMLFile() {
-  try {
+async function ReadHTMLFile() 
+{
+  try 
+  {
     const html = await fs.readFile(_postcard_path, "utf-8");
+    
     return html;
-  } catch (error) {
+  } 
+  catch (error) 
+  {
     console.error("Error reading HTML file:", error);
     throw error;
   }
 }
 
-async function SendMail(postcard_content) {
-  try {
-    const transporter = nodemailer.createTransport({
+async function SendMail(postcard_content) 
+{
+  try 
+  {
+    const transporter = nodemailer.createTransport(
+    {
       service: "gmail",
       auth: { user: process.env.GMAIL, pass: process.env.PASSWORD_GMAIL },
     });
 
-    const mail_options = {
+    const mail_options = 
+    {
       from: process.env.GMAIL,
-      to: "nice140@icloud.com",
+      to: _user_gmail,
       subject: "Confirm your email on TechX",
       html: postcard_content,
     };
 
-    const info = await transporter.sendMail(mail_options);
-  } catch (error) {
-    console.error("Error sending email:", error);
-  }
+    await transporter.sendMail(mail_options);
+  } 
+  catch (error) { console.error("Error sending email:", error); }
 }
 
-(async () => {
-  try {
-    const postcard = await ReadHTMLFile();
+function SEND_CODE_VERIFICATION(user_gmail, code)
+{
+  _user_gmail = user_gmail;
+  _code = code;
 
-    await SendMail(postcard);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-})();
+  (async () => 
+  {
+    try 
+    {
+      let postcard = await ReadHTMLFile();
+
+      postcard = postcard.replace('<p>XXXX</p>', `<p>${_code}</p>`);
+
+      await SendMail(postcard);
+    } 
+    catch (error) { console.error("Error:", error); }
+  })();
+}
+
+export default SEND_CODE_VERIFICATION;
