@@ -120,16 +120,18 @@ export default function Nav() {
               </Link>
               <DropMenu />
             </div>
-            <div className="flex lg:hidden">
-              <button
-                type="button"
-                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 dark:text-white text-black"
-                onClick={() => setMobileMenuOpen(true)}
-              >
-                <span className="sr-only">Open main menu</span>
-                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-              </button>
-            </div>
+            {!mobileMenuOpen && (
+              <div className="flex lg:hidden">
+                <button
+                  type="button"
+                  className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 dark:text-white text-black"
+                  onClick={() => setMobileMenuOpen(true)}
+                >
+                  <span className="sr-only">Open main menu</span>
+                  <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                </button>
+              </div>
+            )}
 
             {isLoggedIn ? (
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -304,14 +306,16 @@ export default function Nav() {
                 <a href="#" className="-m-1.5 p-1.5">
                   <h1 className="text-white font-bold text-2xl">techX</h1>
                 </a>
-                <button
-                  type="button"
-                  className="-m-2.5 rounded-md p-2.5 dark:text-white text-black"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span className="sr-only">Close menu</span>
-                  <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                {mobileMenuOpen && (
+                  <button
+                    type="button"
+                    className="-m-2.5 rounded-md p-2.5 dark:text-white text-black"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="sr-only">Close menu</span>
+                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
+                )}
               </div>
               <div className="mt-6 flow-root">
                 <div className="-my-6  divide-y divide-gray-500/10">
