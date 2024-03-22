@@ -228,7 +228,7 @@ export default function Nav() {
                     />
                   </Link>
                   <CommandDialog open={menuOpen} onOpenChange={setMenuOpen}>
-                    <CommandInput placeholder="Search..." />
+                    <CommandInput placeholder="Search..."  />
                     <CommandList>
                       <CommandEmpty>No results found.</CommandEmpty>
                       <CommandGroup heading="Suggestions" className="">

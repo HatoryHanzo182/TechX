@@ -61,12 +61,16 @@ const ProductDetails = () => {
           />
         </div> */}
 
+        <div
+          className=" flex flex-row px-4 gap-6
+        mb-1 font-bold ml-10"
+        >
+          <p className="hover:text-gray-600 ">Details</p>
+          <p className="hover:text-gray-600 ">Characteristics</p>
+          <p className="hover:text-gray-600 ">Reviews(20)</p>
+        </div>
+
         <div className="max-w-5xl px-4 mx-auto">
-          <div className=" flex flex-row gap-4 mb-2 font-bold">
-            <p className="hover:text-gray-500 ">Характеристики</p>
-            <p className="hover:text-gray-500 ">Характеристики</p>
-            <p className="hover:text-gray-500 ">Характеристики</p>
-          </div>
           <div className="flex flex-wrap mb-24 -mx-4">
             <div className="w-full px-4 mb-8 md:w-1/2 md:mb-0">
               <div className="sticky top-0 z-50 overflow-hidden ">
@@ -381,22 +385,85 @@ const ProductDetails = () => {
           </div>
         </div>
       </section>
-      <section className="">
-        <div className="mx-20 py-10 rounded-lg bg-[#1d1d1d]">
-          Основные преимущества
-        </div>
 
-        <div className=" flex mx-20">
-          <Accordion type="single" collapsible className="w-full mx-20">
-            <AccordionItem value="item-1">
-              <AccordionTrigger className="h-8 w-8">
-                Is it accessible?
-              </AccordionTrigger>
-              <AccordionContent>
-                Yes. It adheres to the WAI-ARIA design pattern.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+      <section className="">
+        <div className="mx-20 rounded-lg ">
+          <div class="bg-black rounded-lg">
+            <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+              <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                Основные характеристики
+              </h2>
+
+              <ul class="mt-6 space-y-6">
+                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                  <svg
+                    class="h-5 w-5 mr-4 text-indigo-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2-2 2-4-4"
+                    />
+                  </svg>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-medium text-gray-900">Бренд</h3>
+                    <p class="mt-2 text-base text-gray-500">Apple</p>
+                  </div>
+                </li>
+                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                  <svg
+                    class="h-5 w-5 mr-4 text-indigo-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2z"
+                    />
+                  </svg>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-medium text-white">Модель</h3>
+                    <p class="mt-2 text-base text-gray-500">AirPods 2</p>
+                  </div>
+                </li>
+                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                  <svg
+                    class="h-5 w-5 mr-4 text-indigo-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 6V4m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm0 14V18m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4z"
+                    />
+                  </svg>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-medium text-gray-900">Гарантия</h3>
+                    <p class="mt-2 text-base text-gray-500">
+                      Официальная гарантия от производителя 12 месяцев. Гарантия
+                      Yabko 31 день с возможностью продления.
+                    </p>
+                  </div>
+                </li>
+                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                  <svg class="h-5 w-5 mr-4 text-indigo" />
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
     </main>
