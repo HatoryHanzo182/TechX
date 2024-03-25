@@ -15,6 +15,8 @@ const ProductDetails = () => {
   let [capacity, setCapacity] = useState("128");
   const [product_data, SetProductData] = useState();
 
+  const totalStars = 5;
+
   useEffect(() => {
     const ToGetData = async (id) => {
       try {
@@ -394,7 +396,7 @@ const ProductDetails = () => {
                 Основные характеристики
               </h2>
 
-              <ul class="mt-6 space-y-6">
+              <ul class="mt-6 space-y-6 ">
                 <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
                   <svg
                     class="h-5 w-5 mr-4 text-indigo-500"
@@ -411,8 +413,8 @@ const ProductDetails = () => {
                     />
                   </svg>
                   <div class="flex-1">
-                    <h3 class="text-lg font-medium text-gray-900">Бренд</h3>
-                    <p class="mt-2 text-base text-gray-500">Apple</p>
+                    <h3 class="text-lg font-medium text-white">Бренд</h3>
+                    <p class="mt-2 text-base text-gray-300">Apple</p>
                   </div>
                 </li>
                 <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
@@ -432,12 +434,14 @@ const ProductDetails = () => {
                   </svg>
                   <div class="flex-1">
                     <h3 class="text-lg font-medium text-white">Модель</h3>
-                    <p class="mt-2 text-base text-gray-500">AirPods 2</p>
+                    <p class="mt-2 text-base text-gray-300">
+                      {product_data?.model}
+                    </p>
                   </div>
                 </li>
                 <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
                   <svg
-                    class="h-5 w-5 mr-4 text-indigo-500"
+                    class="h-5 w-5 mr-4 text-gray-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -451,18 +455,137 @@ const ProductDetails = () => {
                     />
                   </svg>
                   <div class="flex-1">
-                    <h3 class="text-lg font-medium text-gray-900">Гарантия</h3>
-                    <p class="mt-2 text-base text-gray-500">
+                    <h3 class="text-lg font-medium text-white">Гарантия</h3>
+                    <p class="mt-2 text-base text-gray-300">
                       Официальная гарантия от производителя 12 месяцев. Гарантия
                       Yabko 31 день с возможностью продления.
                     </p>
                   </div>
                 </li>
-                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                {/* <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
                   <svg class="h-5 w-5 mr-4 text-indigo" />
-                </li>
+                </li> */}
               </ul>
             </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            Write Review
+          </h2>
+          <form className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+            <input
+              type="text"
+              placeholder="Name"
+              className="block w-full px-4 py-3 rounded-lg shadow-sm  sm:text-sm bg-[#1d1d1d]"
+            />
+            <p className="px-4 py-3">
+              Оценка:{" "}
+              <span className="flex flex-row">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-yellow-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-yellow-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-yellow-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-yellow-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-yellow-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
+                </svg>
+              </span>
+            </p>
+            <input
+              type="text"
+              placeholder="Review"
+              className="block w-full px-4 py-3 rounded-lg shadow-sm  sm:text-sm bg-[#1d1d1d]"
+            />
+            <button className="border border-white w-24 rounded-lg">
+              Send
+            </button>
+          </form>
+        </div>
+
+        <div className="bg-[#1d1d1d] rounded-lg shadow-sm items-center max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-lg font-bold">Alex</h1>
+
+          <div class="flex py-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
+            </svg>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
+            </svg>
+          </div>
+          <hr class="my-4 border-gray-300" />
+          <div>
+            <p>Good phone ! I like it!!</p>
           </div>
         </div>
       </section>
