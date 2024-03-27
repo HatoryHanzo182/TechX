@@ -177,7 +177,7 @@ export default function Nav()
                           (
                             <Link key={result._id} href={{ pathname: "/product-detail", query: { id: `${result._id}` } }} onClick={() => {setMenuOpen(false);}}>
                               <CommandItem>
-                                <img src={`http://localhost:3001/GetImage/${result.images}`} alt="SerchImage" />
+                                <img width="50" height="50" src={`http://localhost:3001/GetImage/${result.images}`} alt="SerchImage" />
                                 {result.model} / {result.price}$
                               </CommandItem>
                             </Link>
