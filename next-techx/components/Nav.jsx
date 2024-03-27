@@ -103,7 +103,6 @@ export default function Nav()
     localStorage.setItem("Cart", JSON.stringify(ArrayCoast));
   };
 
-  
   const handleChangeSerch = (e) => 
   {
     const query = e.target.value.trim();
@@ -236,28 +235,29 @@ export default function Nav()
                       aria-hidden="true"
                     />
                   </Link>
-                  <CommandDialog open={menuOpen} onOpenChange={setMenuOpen}>
-                    <CommandInput placeholder="Search..." />
-                    <CommandList>
-                      <CommandEmpty>No results found.</CommandEmpty>
-                      <CommandGroup heading="Suggestions" className="">
-                        <CommandItem>
-                          <Link className="w-full" href="/">
-                            Home
-                          </Link>
-                        </CommandItem>
-                        <CommandItem>
-                          <Link className="w-full" href="/profile">
-                            Profile
-                          </Link>
-                        </CommandItem>
-                        <CommandItem>
-                          <Link className="w-full" href="/">
-                            TEST
-                          </Link>
-                        </CommandItem>
-                      </CommandGroup>
-                    </CommandList>
+                  {/*Search window.*/}
+                  <CommandDialog open={menuOpen} onOpenChange={ setMenuOpen }>
+                      {/*Product entry field.*/}
+                      <input placeholder="Search..." onChange={ handleChangeSerch } />
+                      {/*Search result output.*/}
+                      {search_results && search_results.length > 0 ? 
+                      (
+                        <CommandGroup heading="Search Results">
+                        { 
+                          search_results.map((result) => 
+                          (
+                            <Link key={result._id} href={{ pathname: "/product-detail", query: { id: `${result._id}` } }} onClick={() => {setMenuOpen(false);}}>
+                              <CommandItem>
+                                <img width="50" height="50" src={`http://localhost:3001/GetImage/${result.images}`} alt="SerchImage" />
+                                {result.model} / {result.price}$
+                              </CommandItem>
+                            </Link>
+                          ))}
+                        </CommandGroup>
+                      ) : 
+                      ( 
+                        <CommandEmpty>No results found.</CommandEmpty>
+                      )}
                   </CommandDialog>
                   <Link href="#" className="w-6 h-6 ml-2" onClick={OpenCart}>
                     <Cart />

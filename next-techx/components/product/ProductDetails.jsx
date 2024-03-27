@@ -16,43 +16,38 @@ const ProductDetails = () =>
 
   const totalStars = 5;
 
-  let params = new URLSearchParams(window.location.search);
-
   useEffect(() => 
   {
-    params = new URLSearchParams(window.location.search);
-    
-    ToGetData(params.get("id"));  // <- Get data after page rendering.
-  }, []);
+    const ToGetData = async (id) =>  // <- Method for retrieving data from a database by ID.
+    {
+      try 
+      {
+        const formatted_data = await fetch(`http://localhost:3001/ExtractIphoneData/${id}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+  
+        if (formatted_data.ok) 
+        {
+          const data = await formatted_data.json();
+  
+          SetProductData(data);
+        }
+      } catch (error) { console.error("Error fetching data:", error);}
+    };
+
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("id")) 
+      ToGetData(params.get("id"));  // <- Get data after page rendering.
+  }, [new URLSearchParams(window.location.search)]);
 
   const handleImageClick = (imageUrl) => 
   {
     setSelectedImage(imageUrl);
   };
-
-  const ToGetData = async (id) =>  // <- Method for retrieving data from a database by ID.
-  {
-    try 
-    {
-      const formatted_data = await fetch(`http://localhost:3001/ExtractIphoneData/${id}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-
-      if (formatted_data.ok) 
-      {
-        const data = await formatted_data.json();
-
-        SetProductData(data);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  ToGetData(params.get("id")); // <- Get data while on the same page (without rendering) of the page.
 
   return (
     <main>
@@ -397,80 +392,80 @@ const ProductDetails = () =>
 
       <section className="">
         <div className="mx-20 rounded-lg ">
-          <div class="bg-black rounded-lg">
-            <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-              <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+          <div className="bg-black rounded-lg">
+            <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+              <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                 Основные характеристики
               </h2>
 
-              <ul class="mt-6 space-y-6 ">
-                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+              <ul className="mt-6 space-y-6 ">
+                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
                   <svg
-                    class="h-5 w-5 mr-4 text-indigo-500"
+                    className="h-5 w-5 mr-4 text-indigo-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      // stroke-linecap="round"
+                      // stroke-linejoin="round"
+                      //stroke-width="2"
                       d="M9 12l2 2 4-4m6 2-2 2-4-4"
                     />
                   </svg>
-                  <div class="flex-1">
-                    <h3 class="text-lg font-medium text-white">Бренд</h3>
-                    <p class="mt-2 text-base text-gray-300">Apple</p>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">Бренд</h3>
+                    <p className="mt-2 text-base text-gray-300">Apple</p>
                   </div>
                 </li>
-                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
                   <svg
-                    class="h-5 w-5 mr-4 text-indigo-500"
+                    className="h-5 w-5 mr-4 text-indigo-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      //stroke-linecap="round"
+                      //stroke-linejoin="round"
+                      //stroke-width="2"
                       d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2z"
                     />
                   </svg>
-                  <div class="flex-1">
-                    <h3 class="text-lg font-medium text-white">Модель</h3>
-                    <p class="mt-2 text-base text-gray-300">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">Модель</h3>
+                    <p className="mt-2 text-base text-gray-300">
                       {product_data?.model}
                     </p>
                   </div>
                 </li>
-                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
                   <svg
-                    class="h-5 w-5 mr-4 text-gray-400"
+                    className="h-5 w-5 mr-4 text-gray-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      //stroke-linecap="round"
+                      //stroke-linejoin="round"
+                      //stroke-width="2"
                       d="M12 6V4m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm0 14V18m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4z"
                     />
                   </svg>
-                  <div class="flex-1">
-                    <h3 class="text-lg font-medium text-white">Гарантия</h3>
-                    <p class="mt-2 text-base text-gray-300">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">Гарантия</h3>
+                    <p className="mt-2 text-base text-gray-300">
                       Официальная гарантия от производителя 12 месяцев. Гарантия
                       Yabko 31 день с возможностью продления.
                     </p>
                   </div>
                 </li>
-                {/* <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
-                  <svg class="h-5 w-5 mr-4 text-indigo" />
+                {/* <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                  <svg className="h-5 w-5 mr-4 text-indigo" />
                 </li> */}
               </ul>
             </div>
@@ -493,7 +488,7 @@ const ProductDetails = () =>
               <span className="flex flex-row">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-yellow-500"
+                  className="h-6 w-6 text-yellow-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -501,7 +496,7 @@ const ProductDetails = () =>
                 </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-yellow-500"
+                  className="h-6 w-6 text-yellow-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -509,7 +504,7 @@ const ProductDetails = () =>
                 </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-yellow-500"
+                  className="h-6 w-6 text-yellow-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -517,7 +512,7 @@ const ProductDetails = () =>
                 </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-yellow-500"
+                  className="h-6 w-6 text-yellow-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -525,7 +520,7 @@ const ProductDetails = () =>
                 </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-yellow-500"
+                  className="h-6 w-6 text-yellow-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -547,10 +542,10 @@ const ProductDetails = () =>
         <div className="bg-[#1d1d1d] rounded-lg shadow-sm items-center max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
           <h1 className="text-lg font-bold">Alex</h1>
 
-          <div class="flex py-2">
+          <div className="flex py-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-yellow-500"
+              className="h-6 w-6 text-yellow-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -558,7 +553,7 @@ const ProductDetails = () =>
             </svg>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-yellow-500"
+              className="h-6 w-6 text-yellow-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -566,7 +561,7 @@ const ProductDetails = () =>
             </svg>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-yellow-500"
+              className="h-6 w-6 text-yellow-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -574,7 +569,7 @@ const ProductDetails = () =>
             </svg>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-yellow-500"
+              className="h-6 w-6 text-yellow-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -583,14 +578,14 @@ const ProductDetails = () =>
 
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-yellow-500"
+              className="h-6 w-6 text-yellow-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
             </svg>
           </div>
-          <hr class="my-4 border-gray-300" />
+          <hr className="my-4 border-gray-300" />
           <div>
             <p>Good phone ! I like it!!</p>
           </div>

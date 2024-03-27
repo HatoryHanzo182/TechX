@@ -200,8 +200,8 @@ function ProductSelection() {
         {/* Products Section on Right */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ml-10 gap-4 ">
           {products.map((product) => (
-            <Link href={{ pathname: "/product-detail", query: { id: `${product.id}` } }} >
-              <div key={product.id} className="bg-[#1d1d1d] p-4 rounded-lg">
+            <Link key={product.id} href={{ pathname: "/product-detail", query: { id: `${product.id}` } }}>
+              <div className="bg-[#1d1d1d] p-4 rounded-lg">
                 <img
                   src={`http://localhost:3001/GetImage/${product.images}`}
                   alt={`${product.model} ${product.memory} (${product.color})`}
