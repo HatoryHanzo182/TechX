@@ -67,7 +67,7 @@ export default async function Home() {
       </div> */}
       <div className="mt-8 flex justify-center">
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-3 md:gap-4 lg:gap-6 mx-auto max-w-4xl">
-          <Link href={{ pathname: "/product", query: { type: "iPhone" } }}>
+          <Link href={{ pathname: "/product", query: { type: "Iphone" } }}>
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/home_cats/image%20154full.png.webp"
               title="Iphone"

@@ -22,73 +22,61 @@ function ProductSelection() {
   const [memoryFilter, setMemoryFilter] = useState([]);
   const [colorFilter, setColorFilter] = useState([]);
   const [versionFilter, setVersionFilter] = useState([]);
-  const [producttype, setProductType] = useState("");
 
   // Filter options
   const memoryOptions = ["256GB", "512GB", "1TB"];
-  const colorOptions = [
-    "Black Titanium",
-    "Blue Titanium",
-    "Natural Titanium",
-    "White Titanium",
-  ];
+  const colorOptions = ["Black Titanium", "Blue Titanium", "Natural Titanium", "White Titanium"];
   const versionOptions = ["Global", "e-Sim"];
 
-  const [products, SetIProducts] = useState([]);
+  const [products, SetProducts] = useState([]);
 
-  useEffect(() => {
-    const ToGetDataIphone = async () => {
-      try {
-        const formatted_data = await fetch(
-          "http://localhost:3001/GetDataForListProduct/Iphone",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+  useEffect(() => 
+  {
+    const ToGetDataIphone = async () => 
+    {
+      try 
+      {
+        const formatted_data = await fetch("http://localhost:3001/GetDataForListProduct/Iphone",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
 
-        if (formatted_data.ok) SetIProducts(await formatted_data.json());
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+        if (formatted_data.ok) 
+          SetProducts(await formatted_data.json());
+      } 
+      catch (error) { console.error("Error fetching data:", error); }
     };
 
     const params = new URLSearchParams(window.location.search);
     const product_type = params.get("type");
 
-    if (product_type !== null) {
-      switch (product_type) {
-        case "iPhone":
-          setProductType("iPhone");
+    if (product_type !== null) 
+    {
+      switch (product_type) 
+      {
+        case "Iphone":
           ToGetDataIphone();
           break;
       }
-    } else window.location.href = "/404";
+    } 
+    else 
+      window.location.href = "/404";
   }, []);
 
   // Handlers for checkbox changes
-  const handleCheckboxChange = (filterType, value) => {
-    switch (filterType) {
+  const handleCheckboxChange = (filterType, value) => 
+  {
+    switch (filterType) 
+    {
       case "memory":
-        setMemoryFilter((prev) =>
-          prev.includes(value)
-            ? prev.filter((item) => item !== value)
-            : [...prev, value]
-        );
+        setMemoryFilter((prev) => prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]);
         break;
       case "color":
-        setColorFilter((prev) =>
-          prev.includes(value)
-            ? prev.filter((item) => item !== value)
-            : [...prev, value]
-        );
+        setColorFilter((prev) => prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]);
         break;
       case "version":
-        setVersionFilter((prev) =>
-          prev.includes(value)
-            ? prev.filter((item) => item !== value)
-            : [...prev, value]
-        );
+        setVersionFilter((prev) => prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]);
         break;
       default:
         break;
@@ -212,12 +200,7 @@ function ProductSelection() {
         {/* Products Section on Right */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ml-10 gap-4 ">
           {products.map((product) => (
-            <Link
-              href={{
-                pathname: "/product-detail",
-                query: { id: `${product.id}` },
-              }}
-            >
+            <Link href={{ pathname: "/product-detail", query: { id: `${product.id}` } }} >
               <div key={product.id} className="bg-[#1d1d1d] p-4 rounded-lg">
                 <img
                   src={`http://localhost:3001/GetImage/${product.images}`}

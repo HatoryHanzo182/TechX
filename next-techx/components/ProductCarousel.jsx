@@ -27,7 +27,7 @@ export function ProductCarousel() {
           "http://localhost:3001/GettingIphoneDataForCarusel",
           {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" }
           }
         );
 

@@ -77,7 +77,9 @@ app.post("/CheckUserExists", async (req, res) =>
       res.status(200).json({ existing_user: true });
     else 
       res.status(200).json({ existing_user: false });
-  } catch (error) {
+  } 
+  catch (error) 
+  {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
@@ -221,7 +223,7 @@ app.post("/PullOutOfSession", async (req, res) =>
   
       if (user) 
       {
-        const user_data = {name: user.name, email: user.email };
+        const user_data = {name: user.name, email: user.email, avatar: user.avatar };
 
         res.status(200).json({ user_data });
       } 
@@ -254,6 +256,39 @@ app.post("/RemoveFromSession", async (req, res) =>
     } 
     else 
       res.status(404).json({ message: "Session not found" });
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
+        //Search products on the site.
+app.post("/SearchForProducts", async (req, res) => 
+{
+  try 
+  {
+    const { query } = req.body;
+    const iphones = await IPhoneModel.find(
+    {
+      $or: 
+      [
+        { brand: { $regex: query, $options: "i" } },
+        { category: { $regex: query, $options: "i" } },
+        { model: { $regex: query, $options: "i" } }
+      ]
+    }).select("images model price");
+    const formatted_data_iphones = iphones.map(phone => 
+    {
+      return { _id: phone.id, images: phone.images[0], model: phone.model, price: phone.price };
+    });
+
+    // Поиск в MacBookModel (подобным образом).
+
+    const all_products = [...formatted_data_iphones /*, ...macbooks*/];  // Объединение результатов из обеих коллекций.
+
+    res.status(200).json(all_products);
   } 
   catch (error) 
   {
@@ -324,12 +359,16 @@ app.post("/ExtractIphoneData/:id", async (req, res) =>
   try 
   {
     const iphone_id = req.params.id;
-    const iphone_data = await IPhoneModel.findById(iphone_id);
     
-    if (iphone_data) 
-      res.status(200).json(iphone_data);
-    else
-      res.status(404).json({ message: "iPhone not found" });
+    if(iphone_id !== "null")
+    {
+      const iphone_data = await IPhoneModel.findById(iphone_id);
+      
+      if (iphone_data) 
+        res.status(200).json(iphone_data);
+      else
+        res.status(404).json({ message: "iPhone not found" });
+    }
   } 
   catch (error) 
   {

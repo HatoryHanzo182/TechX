@@ -8,44 +8,51 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const ProductDetails = () => {
-  const [selectedImage, setSelectedImage] = useState(
-    "https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp"
-  );
+const ProductDetails = () => 
+{
+  const [selectedImage, setSelectedImage] = useState("https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp");
   let [capacity, setCapacity] = useState("128");
   const [product_data, SetProductData] = useState();
 
   const totalStars = 5;
 
-  useEffect(() => {
-    const ToGetData = async (id) => {
-      try {
-        const formatted_data = await fetch(
-          `http://localhost:3001/ExtractIphoneData/${id}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+  let params = new URLSearchParams(window.location.search);
 
-        if (formatted_data.ok) {
-          const data = await formatted_data.json();
-
-          SetProductData(data);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    const params = new URLSearchParams(window.location.search);
-
-    ToGetData(params.get("id"));
+  useEffect(() => 
+  {
+    params = new URLSearchParams(window.location.search);
+    
+    ToGetData(params.get("id"));  // <- Get data after page rendering.
   }, []);
 
-  const handleImageClick = (imageUrl) => {
+  const handleImageClick = (imageUrl) => 
+  {
     setSelectedImage(imageUrl);
   };
+
+  const ToGetData = async (id) =>  // <- Method for retrieving data from a database by ID.
+  {
+    try 
+    {
+      const formatted_data = await fetch(`http://localhost:3001/ExtractIphoneData/${id}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (formatted_data.ok) 
+      {
+        const data = await formatted_data.json();
+
+        SetProductData(data);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  ToGetData(params.get("id")); // <- Get data while on the same page (without rendering) of the page.
 
   return (
     <main>
