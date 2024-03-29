@@ -6,7 +6,17 @@ import { Bars3Icon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
 // import { IoCartOutline } from "react-icons/io5";
 import Link from "next/link";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from "@/components/ui/command";
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command";
 // import { PullOutOfSession } from "../lib/session";
 // import { signOut } from "next-auth/react";
 import { useAuth } from "@/app/providers";
@@ -15,17 +25,17 @@ import { useAuth } from "@/app/providers";
 import DropMenu from "./buttons/Dropdown.jsx";
 import Cart from "./buttons/Сart";
 import { User2Icon, UserCircle } from "lucide-react";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { Input } from "./ui/input.jsx";
 
-const navigation = 
-[
+const navigation = [
   { name: "Product", href: "#" },
   { name: "Features", href: "#" },
   { name: "Marketplace", href: "#" },
   { name: "Company", href: "#" },
 ];
 
-export default function Nav() 
-{
+export default function Nav() {
   // const [loggedIn, setLoggedIn] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -33,69 +43,61 @@ export default function Nav()
   const { user, isLoggedIn } = useAuth();
   const [search_results, SetSearchResults] = useState([]);
 
-  const toggleDropdown = () => 
-  {
+  const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Функция для обработки клика
-  const handleLinkClick = (e) => 
-  {
+  const handleLinkClick = (e) => {
     e.preventDefault(); // Предотвратите стандартное поведение ссылки
 
     setMenuOpen(true); // Откройте CommandMenu
   };
 
-  useEffect(() => 
-  {
+  useEffect(() => {
     search_results.length = 0;
 
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
 
-    if (menuOpen) 
-    {
+    if (menuOpen) {
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
-    } 
-    else 
-    {
+    } else {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
     }
   }, [menuOpen]);
 
-  const handleSignOut = async (e) => 
-  {
+  const handleSignOut = async (e) => {
     e.preventDefault();
 
-    try 
-    {
+    try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:3001/RemoveFromSession", 
-      {
+      const response = await fetch("http://localhost:3001/RemoveFromSession", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       const data = await response.json();
 
-      if (response.ok) 
-      {
+      if (response.ok) {
         console.log(data.message);
         localStorage.removeItem("token");
         window.location.reload();
-      } 
-      else 
-        console.error(data.message);
-    } 
-    catch (error) { console.error("Error:", error); }
+      } else console.error(data.message);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
-  const OpenCart = () => 
-  {
+  const OpenCart = () => {
     const Iphone = { img: "IMGING.png", model: "iphone", price: 100.0 };
     const ArrayCoast = [Iphone, Iphone, Iphone, Iphone];
 
@@ -103,118 +105,159 @@ export default function Nav()
     localStorage.setItem("Cart", JSON.stringify(ArrayCoast));
   };
 
-  const handleChangeSerch = (e) => 
-  {
+  const handleChangeSerch = (e) => {
     const query = e.target.value.trim();
 
-    if(query === "")
-      return;
-    else
-      Search(query);
+    if (query === "") return;
+    else Search(query);
   };
 
-  const Search = async (q) => 
-  {
-    search_results.length = 0
+  const Search = async (q) => {
+    search_results.length = 0;
 
-    try 
-    {
-      const response = await fetch(`http://localhost:3001/SearchForProducts`,
-      {
+    try {
+      const response = await fetch(`http://localhost:3001/SearchForProducts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: q})
+        body: JSON.stringify({ query: q }),
       });
 
       const data = await response.json();
 
       SetSearchResults(data);
-    } 
-    catch (error) { console.error("Error searching:", error); }
+    } catch (error) {
+      console.error("Error searching:", error);
+    }
   };
 
   return (
     <main>
       <div className="dark:bg-black bg-white">
         <header className="absolute inset-x-0 top-0 z-50">
-          <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+          <nav
+            className="flex items-center justify-between p-6 lg:px-8"
+            aria-label="Global"
+          >
             <div className="flex items-center lg:flex-1 space-x-4">
               <Link href="/">
                 <div className="-m-1.5 p-1.5">
                   <span className="sr-only">Your Company</span>
-                  <h1 className="text-black dark:text-white  font-bold text-2xl animate-pulse">techX</h1>
+                  <h1 className="text-black dark:text-white  font-bold text-2xl animate-pulse">
+                    techX
+                  </h1>
                 </div>
               </Link>
               <DropMenu />
             </div>
-            {!mobileMenuOpen && 
-            (
+            {!mobileMenuOpen && (
               <div className="flex lg:hidden">
-                <button type="button" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 dark:text-white text-black" onClick={() => setMobileMenuOpen(true)}>
+                <button
+                  type="button"
+                  className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 dark:text-white text-black"
+                  onClick={() => setMobileMenuOpen(true)}
+                >
                   <span className="sr-only">Open main menu</span>
                   <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
             )}
-            {isLoggedIn ? 
-            (
+            {isLoggedIn ? (
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                 <div className="mt-2 mr-3 flex flex-row ">
                   <Link href="/search" onClick={handleLinkClick}>
-                    <MagnifyingGlassIcon className="h-6 w-6 mr-2" aria-hidden="true" />
+                    <MagnifyingGlassIcon
+                      className="h-6 w-6 mr-2"
+                      aria-hidden="true"
+                    />
                   </Link>
                   {/*Search window.*/}
-                  <CommandDialog open={menuOpen} onOpenChange={ setMenuOpen }>
-                      {/*Product entry field.*/}
-                      <input placeholder="Search..." onChange={ handleChangeSerch } />
-                      {/*Search result output.*/}
-                      {search_results && search_results.length > 0 ? 
-                      (
+                  <CommandDialog open={menuOpen} onOpenChange={setMenuOpen}>
+                    {/* Product entry field. */}
+                    {/* <input
+                      className=" bg-black text-white px-2 "
+                      placeholder="Search..."
+                      onChange={handleChangeSerch}
+                    /> */}
+
+                    <Input
+                      placeholder="Search..."
+                      onChange={handleChangeSerch}
+                    />
+
+                    {/* Search result output. */}
+                    <ScrollArea className="max-h-96">
+                      {search_results && search_results.length > 0 ? (
                         <CommandGroup heading="Search Results">
-                        { 
-                          search_results.map((result) => 
-                          (
-                            <Link key={result._id} href={{ pathname: "/product-detail", query: { id: `${result._id}` } }} onClick={() => {setMenuOpen(false);}}>
-                              <CommandItem>
-                                <img width="50" height="50" src={`http://localhost:3001/GetImage/${result.images}`} alt="SerchImage" />
+                          {search_results.map((result) => (
+                            <Link
+                              key={result._id}
+                              href={{
+                                pathname: "/product-detail",
+                                query: { id: `${result._id}` },
+                              }}
+                              onClick={() => {
+                                setMenuOpen(false);
+                              }}
+                            >
+                              <CommandItem className="h-2">
+                                <img
+                                  width="50"
+                                  height="50"
+                                  src={`http://localhost:3001/GetImage/${result.images}`}
+                                  alt="Search Image"
+                                />
                                 {result.model} / {result.price}$
                               </CommandItem>
                             </Link>
                           ))}
                         </CommandGroup>
-                      ) : 
-                      ( 
+                      ) : (
                         <CommandEmpty>No results found.</CommandEmpty>
                       )}
+                    </ScrollArea>
                   </CommandDialog>
+
                   <Link href="#" onClick={OpenCart}>
                     <Cart />
                   </Link>
                 </div>
                 <div className="relative inline-block text-left">
-                  <button onClick={toggleDropdown} className="flex text-sm  rounded-full md:me-0  ">
+                  <button
+                    onClick={toggleDropdown}
+                    className="flex text-sm  rounded-full md:me-0  "
+                  >
                     <span className="sr-only">Open user menu</span>
                     <Avatar>
                       <AvatarImage src="https://github.com/" />
-                      <AvatarFallback className="uppercase">{user.name.substring(0, 2)}</AvatarFallback>
+                      <AvatarFallback className="uppercase">
+                        {user.name.substring(0, 2)}
+                      </AvatarFallback>
                     </Avatar>
                   </button>
-                  {isOpen && 
-                  (
+                  {isOpen && (
                     <div className="z-10 absolute right-0 mt-2  divide-y  rounded-lg shadow w-44 bg-[#1d1d1d] dark:divide-[#2f2f2f]">
                       <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
                         <div>{user.name}</div>
                         <div className="font-medium truncate">{user.email}</div>
                       </div>
-                      <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
+                      <ul
+                        className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                        aria-labelledby="dropdownUserAvatarButton"
+                      >
                         <li>
                           <Link href="/profile">
-                            <div className="block px-4 py-2  hover:bg-[#2b2b2b] ">Profile</div>
+                            <div className="block px-4 py-2  hover:bg-[#2b2b2b] ">
+                              Profile
+                            </div>
                           </Link>
                         </li>
                       </ul>
                       <div className="py-2">
-                        <a href="#" className="block px-4 py-2 text-sm text-red-600 hover:bg-[#2b2b2b]" onClick={handleSignOut}>
+                        <a
+                          href="#"
+                          className="block px-4 py-2 text-sm text-red-600 hover:bg-[#2b2b2b]"
+                          onClick={handleSignOut}
+                        >
                           Sign out
                         </a>
                       </div>
@@ -236,28 +279,46 @@ export default function Nav()
                     />
                   </Link>
                   {/*Search window.*/}
-                  <CommandDialog open={menuOpen} onOpenChange={ setMenuOpen }>
-                      {/*Product entry field.*/}
-                      <input placeholder="Search..." onChange={ handleChangeSerch } />
-                      {/*Search result output.*/}
-                      {search_results && search_results.length > 0 ? 
-                      (
-                        <CommandGroup heading="Search Results">
-                        { 
-                          search_results.map((result) => 
-                          (
-                            <Link key={result._id} href={{ pathname: "/product-detail", query: { id: `${result._id}` } }} onClick={() => {setMenuOpen(false);}}>
-                              <CommandItem>
-                                <img width="50" height="50" src={`http://localhost:3001/GetImage/${result.images}`} alt="SerchImage" />
-                                {result.model} / {result.price}$
-                              </CommandItem>
-                            </Link>
-                          ))}
-                        </CommandGroup>
-                      ) : 
-                      ( 
-                        <CommandEmpty>No results found.</CommandEmpty>
-                      )}
+                  <CommandDialog open={menuOpen} onOpenChange={setMenuOpen}>
+                    {/*Product entry field.*/}
+                    {/* <input
+                      className="border bg-black text-white px-2 rounded-lg"
+                      placeholder="Search..."
+                      onChange={handleChangeSerch}
+                    /> */}
+                    <Input
+                      placeholder="Search..."
+                      onChange={handleChangeSerch}
+                    />
+                    {/*Search result output.*/}
+                    {search_results && search_results.length > 0 ? (
+                      <CommandGroup className="py-2" heading="Search Results">
+                        {search_results.map((result) => (
+                          <Link
+                            key={result._id}
+                            href={{
+                              pathname: "/product-detail",
+                              query: { id: `${result._id}` },
+                            }}
+                            onClick={() => {
+                              setMenuOpen(false);
+                            }}
+                          >
+                            <CommandItem className="mt-2">
+                              <img
+                                width="50"
+                                height="50"
+                                src={`http://localhost:3001/GetImage/${result.images}`}
+                                alt="SerchImage"
+                              />
+                              {result.model} / {result.price}$
+                            </CommandItem>
+                          </Link>
+                        ))}
+                      </CommandGroup>
+                    ) : (
+                      <CommandEmpty>No results found.</CommandEmpty>
+                    )}
                   </CommandDialog>
                   <Link href="#" className="w-6 h-6 ml-2" onClick={OpenCart}>
                     <Cart />
@@ -266,7 +327,8 @@ export default function Nav()
                 <div className="relative inline-block text-left">
                   <button
                     onClick={toggleDropdown}
-                    className="flex text-sm  rounded-full md:me-0  ">
+                    className="flex text-sm  rounded-full md:me-0  "
+                  >
                     <span className="sr-only">Open user menu</span>
                     <Avatar className="w-6 h-6 mt-2">
                       <AvatarFallback className="uppercase"></AvatarFallback>

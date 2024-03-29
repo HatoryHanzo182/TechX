@@ -8,44 +8,76 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const ProductDetails = () => 
-{
-  const [selectedImage, setSelectedImage] = useState("https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp");
+import { motion } from "framer-motion";
+
+const ProductDetails = () => {
+  const [selectedImage, setSelectedImage] = useState(
+    "https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp"
+  );
   let [capacity, setCapacity] = useState("128");
   const [product_data, SetProductData] = useState();
 
   const totalStars = 5;
 
-  useEffect(() => 
-  {
-    const ToGetData = async (id) =>  // <- Method for retrieving data from a database by ID.
-    {
-      try 
-      {
-        const formatted_data = await fetch(`http://localhost:3001/ExtractIphoneData/${id}`,
+  useEffect(() => {
+    const handleScroll = (event) => {
+      event.preventDefault();
+      const targetId = event.target.getAttribute("href").slice(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop,
+          behavior: "smooth",
+        });
+      }
+    };
+
+    const scrollLinks = document.querySelectorAll('a[href^="#"]');
+    scrollLinks.forEach((link) => {
+      link.addEventListener("click", handleScroll);
+    });
+
+    return () => {
+      scrollLinks.forEach((link) => {
+        link.removeEventListener("click", handleScroll);
+      });
+    };
+  }, []);
+
+  // Пример анимации элемента с использованием Framer Motion
+  const variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
+  useEffect(() => {
+    const ToGetData = async (id) => {
+      try {
+        const formatted_data = await fetch(
+          `http://localhost:3001/ExtractIphoneData/${id}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
           }
         );
-  
-        if (formatted_data.ok) 
-        {
+
+        if (formatted_data.ok) {
           const data = await formatted_data.json();
-  
+
           SetProductData(data);
         }
-      } catch (error) { console.error("Error fetching data:", error);}
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
     const params = new URLSearchParams(window.location.search);
 
-    if (params.get("id")) 
-      ToGetData(params.get("id"));  // <- Get data after page rendering.
-  }, [new URLSearchParams(window.location.search)]);
+    ToGetData(params.get("id"));
+  }, []);
 
-  const handleImageClick = (imageUrl) => 
-  {
+  const handleImageClick = (imageUrl) => {
     setSelectedImage(imageUrl);
   };
 
@@ -66,12 +98,16 @@ const ProductDetails = () =>
         </div> */}
 
         <div
-          className=" flex flex-row px-4 gap-6
+          className=" flex flex-row px-6 py-4 gap-6
         mb-1 font-bold ml-10"
         >
-          <p className="hover:text-gray-600 ">Details</p>
-          <p className="hover:text-gray-600 ">Characteristics</p>
-          <p className="hover:text-gray-600 ">Reviews(20)</p>
+          <a className="hover:text-gray-400 cursor-pointer " href="#details">
+            Details
+          </a>
+          <a className="hover:text-gray-400 cursor-pointer ">Characteristics</a>
+          <a className="hover:text-gray-400 cursor-pointer" href="#reviews">
+            Reviews(20)
+          </a>
         </div>
 
         <div className="max-w-5xl px-4 mx-auto">
@@ -163,9 +199,7 @@ const ProductDetails = () =>
             <div className="w-full px-4 md:w-1/2">
               <div className="lg:pl-20">
                 <div className="mb-6 ">
-                  <span className="text-red-500 dark:text-red-200 animate-pulse">
-                    New
-                  </span>
+                  <span className="text-red-500  animate-pulse">New</span>
                   <h2 className="max-w-xl mt-2 mb-4 text-5xl font-bold md:text-6xl font-heading dark:text-gray-300">
                     {product_data?.model || "Loading..."}
                   </h2>
@@ -391,81 +425,89 @@ const ProductDetails = () =>
       </section>
 
       <section className="">
+        <motion.div
+          id="details"
+          className="mt-24"
+          initial="hidden"
+          animate="visible"
+          variants={variants}
+          transition={{ duration: 0.5 }}
+        />
         <div className="mx-20 rounded-lg ">
-          <div className="bg-black rounded-lg">
-            <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-              <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+          <div class="bg-black rounded-lg">
+            <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+              <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                 Основные характеристики
               </h2>
 
-              <ul className="mt-6 space-y-6 ">
-                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+              <ul class="mt-6 space-y-6 ">
+                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
                   <svg
-                    className="h-5 w-5 mr-4 text-indigo-500"
+                    class="h-5 w-5 mr-4 text-indigo-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      // stroke-linecap="round"
-                      // stroke-linejoin="round"
-                      //stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
                       d="M9 12l2 2 4-4m6 2-2 2-4-4"
                     />
                   </svg>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-medium text-white">Бренд</h3>
-                    <p className="mt-2 text-base text-gray-300">Apple</p>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-medium text-white">Бренд</h3>
+                    <p class="mt-2 text-base text-gray-300">Apple</p>
                   </div>
                 </li>
-                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
                   <svg
-                    className="h-5 w-5 mr-4 text-indigo-500"
+                    class="h-5 w-5 mr-4 text-indigo-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      //stroke-linecap="round"
-                      //stroke-linejoin="round"
-                      //stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
                       d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2z"
                     />
                   </svg>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-medium text-white">Модель</h3>
-                    <p className="mt-2 text-base text-gray-300">
+                  <div class="flex-1">
+                    <h3 class="text-lg font-medium text-white">Модель</h3>
+                    <p class="mt-2 text-base text-gray-300">
                       {product_data?.model}
                     </p>
                   </div>
                 </li>
-                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
                   <svg
-                    className="h-5 w-5 mr-4 text-gray-400"
+                    class="h-5 w-5 mr-4 text-gray-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      //stroke-linecap="round"
-                      //stroke-linejoin="round"
-                      //stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
                       d="M12 6V4m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm0 14V18m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4z"
                     />
                   </svg>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-medium text-white">Гарантия</h3>
-                    <p className="mt-2 text-base text-gray-300">
+                  <div class="flex-1">
+                    <h3 class="text-lg font-medium text-white">Гарантия</h3>
+                    <p class="mt-2 text-base text-gray-300">
                       Официальная гарантия от производителя 12 месяцев. Гарантия
                       Yabko 31 день с возможностью продления.
                     </p>
                   </div>
                 </li>
-                {/* <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
-                  <svg className="h-5 w-5 mr-4 text-indigo" />
+                {/* <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                  <svg class="h-5 w-5 mr-4 text-indigo" />
                 </li> */}
               </ul>
             </div>
@@ -473,6 +515,14 @@ const ProductDetails = () =>
         </div>
       </section>
       <section>
+        <motion.div
+          id="reviews"
+          className="mt-24"
+          initial="hidden"
+          animate="visible"
+          variants={variants}
+          transition={{ duration: 0.5 }}
+        />
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
             Write Review
@@ -488,7 +538,7 @@ const ProductDetails = () =>
               <span className="flex flex-row">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-yellow-500"
+                  class="h-6 w-6 text-yellow-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -496,7 +546,7 @@ const ProductDetails = () =>
                 </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-yellow-500"
+                  class="h-6 w-6 text-yellow-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -504,7 +554,7 @@ const ProductDetails = () =>
                 </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-yellow-500"
+                  class="h-6 w-6 text-yellow-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -512,7 +562,7 @@ const ProductDetails = () =>
                 </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-yellow-500"
+                  class="h-6 w-6 text-yellow-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -520,7 +570,7 @@ const ProductDetails = () =>
                 </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-yellow-500"
+                  class="h-6 w-6 text-yellow-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -542,10 +592,10 @@ const ProductDetails = () =>
         <div className="bg-[#1d1d1d] rounded-lg shadow-sm items-center max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
           <h1 className="text-lg font-bold">Alex</h1>
 
-          <div className="flex py-2">
+          <div class="flex py-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-yellow-500"
+              class="h-6 w-6 text-yellow-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -553,7 +603,7 @@ const ProductDetails = () =>
             </svg>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-yellow-500"
+              class="h-6 w-6 text-yellow-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -561,7 +611,7 @@ const ProductDetails = () =>
             </svg>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-yellow-500"
+              class="h-6 w-6 text-yellow-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -569,7 +619,7 @@ const ProductDetails = () =>
             </svg>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-yellow-500"
+              class="h-6 w-6 text-yellow-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -578,14 +628,14 @@ const ProductDetails = () =>
 
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-yellow-500"
+              class="h-6 w-6 text-yellow-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
             </svg>
           </div>
-          <hr className="my-4 border-gray-300" />
+          <hr class="my-4 border-gray-300" />
           <div>
             <p>Good phone ! I like it!!</p>
           </div>
