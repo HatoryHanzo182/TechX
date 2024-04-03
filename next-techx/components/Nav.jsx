@@ -279,7 +279,11 @@ export default function Nav() {
                     />
                   </Link>
                   {/*Search window.*/}
-                  <CommandDialog open={menuOpen} onOpenChange={setMenuOpen}>
+                  <CommandDialog
+                    className="h-1/2"
+                    open={menuOpen}
+                    onOpenChange={setMenuOpen}
+                  >
                     {/*Product entry field.*/}
                     {/* <input
                       className="border bg-black text-white px-2 rounded-lg"
@@ -292,7 +296,7 @@ export default function Nav() {
                     />
                     {/*Search result output.*/}
                     {search_results && search_results.length > 0 ? (
-                      <CommandGroup className="py-2" heading="Search Results">
+                      <CommandGroup heading="Search Results">
                         {search_results.map((result) => (
                           <Link
                             key={result._id}
@@ -304,7 +308,7 @@ export default function Nav() {
                               setMenuOpen(false);
                             }}
                           >
-                            <CommandItem className="mt-2">
+                            <CommandItem className="">
                               <img
                                 width="50"
                                 height="50"

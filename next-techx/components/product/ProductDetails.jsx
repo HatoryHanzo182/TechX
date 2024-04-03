@@ -77,8 +77,8 @@ const ProductDetails = () => {
     ToGetData(params.get("id"));
   }, []);
 
-  const handleImageClick = (imageUrl) => {
-    setSelectedImage(imageUrl);
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
   };
 
   return (
@@ -167,7 +167,7 @@ const ProductDetails = () => {
                     </div>
                   ))}
                 </div>
-                <div className="px-6 pb-6 mt-6 border-t border-gray-300 dark:border-gray-400 ">
+                {/* <div className="px-6 pb-6 mt-6 border-t border-gray-300 dark:border-gray-400 ">
                   <div className="flex items-center justify-center mt-6">
                     <span className="mr-3">
                       <svg
@@ -193,7 +193,7 @@ const ProductDetails = () => {
                       </a>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="w-full px-4 md:w-1/2">
@@ -583,7 +583,7 @@ const ProductDetails = () => {
               placeholder="Review"
               className="block w-full px-4 py-3 rounded-lg shadow-sm  sm:text-sm bg-[#1d1d1d]"
             />
-            <button className="border border-white w-24 rounded-lg">
+            <button className="border border-white w-24 rounded-lg hover:bg-gray-950">
               Send
             </button>
           </form>
