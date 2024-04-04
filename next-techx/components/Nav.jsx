@@ -26,6 +26,7 @@ import DropMenu from "./buttons/Dropdown.jsx";
 import Cart from "./buttons/Сart";
 import { User2Icon, UserCircle } from "lucide-react";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { Separator } from "@radix-ui/react-separator";
 import { Input } from "./ui/input.jsx";
 
 const navigation = [
@@ -185,36 +186,28 @@ export default function Nav() {
                     />
 
                     {/* Search result output. */}
-                    <ScrollArea className="max-h-96">
                       {search_results && search_results.length > 0 ? (
-                        <CommandGroup heading="Search Results">
-                          {search_results.map((result) => (
-                            <Link
-                              key={result._id}
-                              href={{
-                                pathname: "/product-detail",
-                                query: { id: `${result._id}` },
-                              }}
-                              onClick={() => {
-                                setMenuOpen(false);
-                              }}
-                            >
-                              <CommandItem className="h-2">
-                                <img
-                                  width="50"
-                                  height="50"
-                                  src={`http://localhost:3001/GetImage/${result.images}`}
-                                  alt="Search Image"
-                                />
+                      <CommandGroup heading="Search Results">
+                      <ScrollArea className="h-72 rounded-md overflow-y-auto">
+                      <div className="p-4">
+                        {search_results.map((result) => 
+                        (
+                          <React.Fragment key={result._id}>
+                            <Link href={{ pathname: "/product-detail", query: { id: `${result._id}` }}} onClick={() => { setMenuOpen(false); }}>
+                              <CommandItem className="">
+                                <img width="50" height="50" src={`http://localhost:3001/GetImage/${result.images}`} alt="SearchImage"/>
                                 {result.model} / {result.price}$
                               </CommandItem>
                             </Link>
-                          ))}
-                        </CommandGroup>
+                            <Separator className="my-2"/>
+                          </React.Fragment>
+                        ))}
+                      </div>
+                      </ScrollArea>
+                    </CommandGroup>
                       ) : (
                         <CommandEmpty>No results found.</CommandEmpty>
                       )}
-                    </ScrollArea>
                   </CommandDialog>
 
                   <Link href="#" onClick={OpenCart}>
@@ -279,48 +272,38 @@ export default function Nav() {
                     />
                   </Link>
                   {/*Search window.*/}
-                  <CommandDialog
-                    className="h-1/2"
-                    open={menuOpen}
-                    onOpenChange={setMenuOpen}
-                  >
+                  <CommandDialog className="h-1/2" open={menuOpen} onOpenChange={setMenuOpen}>
                     {/*Product entry field.*/}
                     {/* <input
                       className="border bg-black text-white px-2 rounded-lg"
                       placeholder="Search..."
                       onChange={handleChangeSerch}
                     /> */}
-                    <Input
-                      placeholder="Search..."
-                      onChange={handleChangeSerch}
-                    />
+                    <Input placeholder="Search..." onChange={handleChangeSerch}/>
                     {/*Search result output.*/}
-                    {search_results && search_results.length > 0 ? (
+                    {search_results && search_results.length > 0 ? 
+                    (
                       <CommandGroup heading="Search Results">
-                        {search_results.map((result) => (
-                          <Link
-                            key={result._id}
-                            href={{
-                              pathname: "/product-detail",
-                              query: { id: `${result._id}` },
-                            }}
-                            onClick={() => {
-                              setMenuOpen(false);
-                            }}
-                          >
-                            <CommandItem className="">
-                              <img
-                                width="50"
-                                height="50"
-                                src={`http://localhost:3001/GetImage/${result.images}`}
-                                alt="SerchImage"
-                              />
-                              {result.model} / {result.price}$
-                            </CommandItem>
-                          </Link>
-                        ))}
+                        <ScrollArea className="h-72 rounded-md overflow-y-auto">
+                        <div className="p-4">
+                          {search_results.map((result) => 
+                          (
+                            <React.Fragment key={result._id}>
+                              <Link href={{ pathname: "/product-detail", query: { id: `${result._id}` }}} onClick={() => { setMenuOpen(false); }}>
+                                <CommandItem className="">
+                                  <img width="50" height="50" src={`http://localhost:3001/GetImage/${result.images}`} alt="SearchImage"/>
+                                  {result.model} / {result.price}$
+                                </CommandItem>
+                              </Link>
+                              <Separator className="my-2"/>
+                            </React.Fragment>
+                          ))}
+                        </div>
+                        </ScrollArea>
                       </CommandGroup>
-                    ) : (
+                    ) 
+                    : 
+                    (
                       <CommandEmpty>No results found.</CommandEmpty>
                     )}
                   </CommandDialog>
