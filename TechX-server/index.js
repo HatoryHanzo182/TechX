@@ -385,15 +385,17 @@ app.post("/SendProductReview", async (req, res) =>
   {
     const { product_id, review_owner_id, user_name, user_review, grade } = req.body;
     let found_user_id = null;
+    let found_user_name = null;
     
     if(user_name == null)
     {
       const user_id = await UserModel.findOne({ email: review_owner_id });
       
-      found_user_id = user_id._id;
+      found_user_id = user_id.id;
+      found_user_name = user_id.name
     }
 
-    const new_review = new ProductReviewModel({ product_id, review_owner_id: found_user_id || review_owner_id, review_owner_name: user_name, review: user_review, grade });
+    const new_review = new ProductReviewModel({ product_id, review_owner_id: found_user_id || review_owner_id, review_owner_name: user_name || found_user_name, review: user_review, grade });
 
     await new_review.save();
 

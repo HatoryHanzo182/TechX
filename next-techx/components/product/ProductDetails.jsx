@@ -11,9 +11,7 @@ import { motion } from "framer-motion";
 import { PullOutOfSession } from "@/lib/session";
 
 const ProductDetails = () => {
-  const [selectedImage, setSelectedImage] = useState(
-    "https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp"
-  );
+  const [selectedImage, setSelectedImage] = useState("https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp");
   let [capacity, setCapacity] = useState("128");
   const [show_logged_content, SetShowLoggedContent] = useState(false);
   const [product_data, SetProductData] = useState();
@@ -73,23 +71,22 @@ const ProductDetails = () => {
       }
     };
 
-    const GetProductReviews = async () => {
-      try {
-        const id_product = new URLSearchParams(window.location.search).get(
-          "id"
-        );
+    const GetProductReviews = async () => 
+    {
+      try 
+      {
+        const id_product = new URLSearchParams(window.location.search).get("id");
 
-        const rew = await fetch(
-          `http://localhost:3001/GetProductReview/${id_product}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+        const rew = await fetch(`http://localhost:3001/GetProductReview/${id_product}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
 
         const data = await rew.json();
 
-        if (rew.ok) SetAllReviews(data);
+        if (rew.ok) 
+          SetAllReviews(data);
       } catch (error) {
         console.error("Error fetching product reviews:", error);
       }
@@ -147,9 +144,8 @@ const ProductDetails = () => {
       } else {
         ///   < выведите сообщение о том что произошла хуйня и отзыв не отправлен.
       }
-    } else {
-      console.log("пользователь под аккаунтом");
-
+    } 
+    else {
       if (!user_review.trim()) {
         //    выведете тут сообщение о том что имя или поля не должны быть пустыми.
         return;
@@ -176,12 +172,15 @@ const ProductDetails = () => {
 
       const answer = await ServerReview.json();
 
-      if (answer) {
+      if (answer) 
+      {
         ///   < выведите модальное окно о том что отзыв отправлен.
         SetUserName("");
         SetUserReview("");
         SetGrade(0);
-      } else {
+      } 
+      else 
+      {
         ///   < выведите сообщение о том что произошла хуйня и отзыв не отправлен.
       }
     }
@@ -711,8 +710,7 @@ const ProductDetails = () => {
             </button>
           </form>
         </div>
-        {all_reviews.length > 0
-          ? all_reviews.map((review, index) => (
+        {all_reviews.length > 0 ? all_reviews.map((review, index) => (
               <div className="bg-[#1d1d1d] rounded-lg shadow-sm items-center max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
                 <h1 className="text-lg font-bold">
                   {review.review_owner_name}
