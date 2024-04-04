@@ -9,9 +9,12 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import SEND_CODE_VERIFICATION from './Configs/config_gmail.js'
-import { IPhoneModel } from "./Models/IPhone.js";
 import { UserModel } from "./Models/User.js";
 import { SessionModel } from "./Models/Session.js"
+import { IPhoneModel } from "./Models/IPhone.js";
+import { AirPodsModel } from "./Models/AirPods.js";
+import { AppleWatchModel } from "./Models/AppleWatch.js";
+import { MacbookModel } from "./Models/Macbook.js";
 import { ProductReviewModel } from "./Models/ProductReview.js";
 
 
@@ -354,21 +357,111 @@ app.post("/GetDataForListProduct/Iphone", async (req, res) =>
   }
 });
 
-        // Getting Iphone data for product-detail.
-app.post("/ExtractIphoneData/:id", async (req, res) => 
+        // Getting AirPods data for list product.
+app.post("/GetDataForListProduct/AirPods", async (req, res) => 
 {
   try 
   {
-    const iphone_id = req.params.id;
-    
-    if(iphone_id !== "null")
+    const airpods = await AirPodsModel.find();
+
+    const formatted_data = airpods.map(airpod => 
     {
-      const iphone_data = await IPhoneModel.findById(iphone_id);
+      return { id: airpod.id, images: airpod.images[0], model: airpod.model, color: airpod.color, price: airpod.price };
+    });
+
+    res.status(200).json(formatted_data);
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
+        // Getting AppleWatch data for list product.
+app.post("/GetDataForListProduct/AppleWatch", async (req, res) => 
+{
+  try 
+  {
+    const applewatchs = await AppleWatchModel.find();
+
+    const formatted_data = applewatchs.map(applewatch => 
+    {
+      return { id: applewatch.id, images: applewatch.images[0], model: applewatch.model, color: applewatch.color[0], price: applewatch.price };
+    });
+
+    res.status(200).json(formatted_data);
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
+        // Getting Macbook data for list product.
+app.post("/GetDataForListProduct/Macbook", async (req, res) => 
+{
+  try 
+  {
+    const macbooks = await MacbookModel.find();
+
+    const formatted_data = macbooks.map(macbook => 
+    {
+      return { id: macbook.id, images: macbook.images[0], model: macbook.model, color: macbook.color, price: macbook.price };
+    });
+
+    res.status(200).json(formatted_data);
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
+        // Getting Product data for product-detail.
+app.post("/ExtractData/:id", async (req, res) => 
+{
+  try 
+  {
+    const _id = req.params.id;
+    
+    if(_id !== "null")
+    {
+      const iphone_data = await IPhoneModel.findById(_id);
       
       if (iphone_data) 
+      {
         res.status(200).json(iphone_data);
+        return;
+      }
+
+      const airpod_data = await AirPodsModel.findById(_id);
+
+      if (airpod_data) 
+      {
+        res.status(200).json(airpod_data);
+        return;
+      }
+
+      const applewatch_data = await AppleWatchModel.findById(_id);
+
+      if (applewatch_data) 
+      {
+        res.status(200).json(applewatch_data);
+        return;
+      }
+
+      const macbook_data = await MacbookModel.findById(_id);
+
+      if (macbook_data) 
+      {
+        res.status(200).json(macbook_data);
+        return;
+      }
       else
-        res.status(404).json({ message: "iPhone not found" });
+        res.status(404).json({ message: "Product not found" });
     }
   } 
   catch (error) 
@@ -421,8 +514,6 @@ app.post("/GetProductReview/:id", async (req, res) =>
       
       if (review_data && review_data.length > 0)
         res.status(200).json(review_data);
-      else
-        res.status(404).json({ message: "Reviews not found" });
     } 
     else
       res.status(400).json({ message: "Invalid product ID" });

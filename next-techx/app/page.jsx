@@ -73,19 +73,19 @@ export default async function Home() {
               title="Iphone"
             />
           </Link>
-          <Link href="/product">
+          <Link href={{ pathname: "/product", query: { type: "AirPods" } }}>
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/cataloge-2/main-page-2/pods-2full.png.webp"
               title="AirPods"
             />
           </Link>
-          <Link href="/product">
+          <Link href={{ pathname: "/product", query: { type: "AppleWatch" } }}>
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/home_cats/image%20155full.png.webp"
               title="Apple Watch"
             />
           </Link>
-          <Link href="/product">
+          <Link href={{ pathname: "/product", query: { type: "Macbook" } }}>
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/home_cats/macbook-air-spacegray-gallery1-2full.jpg.webp"
               title="Macbook"

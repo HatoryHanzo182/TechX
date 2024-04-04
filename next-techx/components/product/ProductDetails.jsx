@@ -18,7 +18,7 @@ const ProductDetails = () => {
   const [all_reviews, SetAllReviews] = useState([]);
   const [user_name, SetUserName] = useState("");
   const [user_review, SetUserReview] = useState("");
-  const [grade, SetGrade] = useState(1);
+  const [grade, SetGrade] = useState(0);
 
   useEffect(() => {
     const handleScroll = (event) => {
@@ -50,25 +50,27 @@ const ProductDetails = () => {
     visible: { opacity: 1 },
   };
 
-  useEffect(() => {
-    const ToGetData = async (id) => {
-      try {
-        const formatted_data = await fetch(
-          `http://localhost:3001/ExtractIphoneData/${id}`,
+  useEffect(() => 
+  {
+    const ToGetData = async (id) => 
+    {
+      try 
+      {
+        const formatted_data = await fetch(`http://localhost:3001/ExtractData/${id}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
           }
         );
 
-        if (formatted_data.ok) {
+        if (formatted_data.ok) 
+        {
           const data = await formatted_data.json();
 
           SetProductData(data);
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } 
+      catch (error) { console.error("Error fetching data:", error); }
     };
 
     const GetProductReviews = async () => 

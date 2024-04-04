@@ -1,23 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Link from "next/link";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator, BreadcrumbPage, BreadcrumbLink } from "../ui/breadcrumb";
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-  BreadcrumbLink,
-} from "../ui/breadcrumb";
-
-function ProductSelection() {
+function ProductSelection() 
+{
   // State for the filters
   const [memoryFilter, setMemoryFilter] = useState([]);
   const [colorFilter, setColorFilter] = useState([]);
@@ -32,11 +20,13 @@ function ProductSelection() {
 
   useEffect(() => 
   {
-    const ToGetDataIphone = async () => 
+    const ToGetData = async (type_p) => 
     {
+      SetProducts([]);
+
       try 
       {
-        const formatted_data = await fetch("http://localhost:3001/GetDataForListProduct/Iphone",
+        const formatted_data = await fetch(`http://localhost:3001/GetDataForListProduct/${type_p}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -56,7 +46,16 @@ function ProductSelection() {
       switch (product_type) 
       {
         case "Iphone":
-          ToGetDataIphone();
+          ToGetData("Iphone");
+          break;
+        case "AirPods":
+          ToGetData("AirPods");
+          break;
+        case "AppleWatch":
+          ToGetData("AppleWatch");
+          break;
+        case "Macbook":
+          ToGetData("Macbook");
           break;
       }
     } 
@@ -97,17 +96,8 @@ function ProductSelection() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div
-        className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-        aria-hidden="true"
-      >
-        <div
-          className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-          style={{
-            clipPath:
-              "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-          }}
-        />
+      <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+        <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style={{ clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" }}/>
       </div>
       <div className="container mx-auto  flex">
         {/* Filters Section on Left */}
@@ -121,16 +111,10 @@ function ProductSelection() {
                 <div className="mb-4">
                   {/* <div className="mb-2">Объем памяти</div> */}
                   <div className="space-y-2 text-lg">
-                    {memoryOptions.map((memory) => (
+                    {memoryOptions.map((memory) => 
+                    (
                       <label key={memory} className="flex items-center">
-                        <input
-                          type="checkbox"
-                          className="form-checkbox h-5 w-5 text-gray-600"
-                          onChange={() =>
-                            handleCheckboxChange("memory", memory)
-                          }
-                          checked={memoryFilter.includes(memory)}
-                        />
+                        <input type="checkbox" className="form-checkbox h-5 w-5 text-gray-600" onChange={() => handleCheckboxChange("memory", memory) } checked={memoryFilter.includes(memory)}/>
                         <span className="ml-2">{memory}</span>
                       </label>
                     ))}
@@ -146,14 +130,10 @@ function ProductSelection() {
                 <div className="mb-4">
                   {/* <div className="mb-2">КОЛІР ПРИСТРОЮ</div> */}
                   <div className="space-y-2 text-lg">
-                    {colorOptions.map((color) => (
+                    {colorOptions.map((color) => 
+                    (
                       <label key={color} className="flex items-center">
-                        <input
-                          type="checkbox"
-                          className="form-checkbox h-5 w-5 text-gray-600"
-                          onChange={() => handleCheckboxChange("color", color)}
-                          checked={colorFilter.includes(color)}
-                        />
+                        <input type="checkbox" className="form-checkbox h-5 w-5 text-gray-600" onChange={() => handleCheckboxChange("color", color)} checked={colorFilter.includes(color)}/>
                         <span className="ml-2">{color}</span>
                       </label>
                     ))}
@@ -169,19 +149,10 @@ function ProductSelection() {
                 <div className="mb-4">
                   {/* <div className="mb-2">ВЕРСІЯ</div> */}
                   <div className="space-y-2">
-                    {versionOptions.map((version) => (
-                      <label
-                        key={version}
-                        className="flex items-center text-lg"
-                      >
-                        <input
-                          type="checkbox"
-                          className="form-checkbox h-5 w-5 text-gray-600 "
-                          onChange={() =>
-                            handleCheckboxChange("version", version)
-                          }
-                          checked={versionFilter.includes(version)}
-                        />
+                    {versionOptions.map((version) => 
+                    (
+                      <label key={version} className="flex items-center text-lg">
+                        <input type="checkbox" className="form-checkbox h-5 w-5 text-gray-600 " onChange={() => handleCheckboxChange("version", version)} checked={versionFilter.includes(version)}/>
                         <span className="ml-2">{version}</span>
                       </label>
                     ))}
@@ -199,14 +170,11 @@ function ProductSelection() {
 
         {/* Products Section on Right */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ml-10 gap-4 ">
-          {products.map((product) => (
+          {products.map((product) => 
+          (
             <Link key={product.id} href={{ pathname: "/product-detail", query: { id: `${product.id}` } }}>
               <div className="bg-[#1d1d1d] p-4 rounded-lg">
-                <img
-                  src={`http://localhost:3001/GetImage/${product.images}`}
-                  alt={`${product.model} ${product.memory} (${product.color})`}
-                  className="mb-3"
-                />
+                <img src={`http://localhost:3001/GetImage/${product.images}`} alt={`${product.model}`} className="mb-3"/>
                 <div className="font-bold">{product.model}</div>
                 <div className="text-gray-300">
                   {" "}
