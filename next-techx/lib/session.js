@@ -29,9 +29,7 @@ export const PullOutOfSession = async () =>
           return user_data;
     }
     else    // <<---- Подпись токена не подтверждена.
-    {
         localStorage.clear("token");
-    }
 
     return false;
 }

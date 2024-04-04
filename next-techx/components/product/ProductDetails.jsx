@@ -1,168 +1,210 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { RadioGroup } from "@headlessui/react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
+import { PullOutOfSession } from "@/lib/session";
 
-const ProductDetails = () => {
-  const [selectedImage, setSelectedImage] = useState(
-    "https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp"
-  );
+const ProductDetails = () => 
+{
+  const [selectedImage, setSelectedImage] = useState("https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp");
   let [capacity, setCapacity] = useState("128");
+  const [show_logged_content, SetShowLoggedContent] = useState(false);
   const [product_data, SetProductData] = useState();
-
-  const totalStars = 5;
-
-  useEffect(() => {
-    const handleScroll = (event) => {
+  const [all_reviews, SetAllReviews] = useState([]);
+  const [user_name, SetUserName] = useState("");
+  const [user_review, SetUserReview] = useState("");
+  const [grade, SetGrade] = useState(1);
+  
+  useEffect(() => 
+  {
+    const handleScroll = (event) => 
+    {
       event.preventDefault();
+      
       const targetId = event.target.getAttribute("href").slice(1);
       const targetElement = document.getElementById(targetId);
 
-      if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop,
-          behavior: "smooth",
-        });
-      }
+      if (targetElement) 
+        window.scrollTo({ top: targetElement.offsetTop, behavior: "smooth" });
     };
 
     const scrollLinks = document.querySelectorAll('a[href^="#"]');
-    scrollLinks.forEach((link) => {
-      link.addEventListener("click", handleScroll);
-    });
+    
+    scrollLinks.forEach((link) => { link.addEventListener("click", handleScroll); });
 
-    return () => {
-      scrollLinks.forEach((link) => {
-        link.removeEventListener("click", handleScroll);
-      });
+    return () => 
+    {
+      scrollLinks.forEach((link) => { link.removeEventListener("click", handleScroll); });
     };
   }, []);
 
   // Пример анимации элемента с использованием Framer Motion
-  const variants = {
+  const variants = 
+  {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
   };
 
-  useEffect(() => {
-    const ToGetData = async (id) => {
-      try {
-        const formatted_data = await fetch(
-          `http://localhost:3001/ExtractIphoneData/${id}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+  useEffect(() => 
+  {
+    const ToGetData = async (id) => 
+    {
+      try 
+      {
+        const formatted_data = await fetch(`http://localhost:3001/ExtractIphoneData/${id}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
 
-        if (formatted_data.ok) {
+        if (formatted_data.ok) 
+        {
           const data = await formatted_data.json();
 
           SetProductData(data);
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } 
+      catch (error) { console.error("Error fetching data:", error); }
     };
 
+    const GetProductReviews = async () => 
+    {
+      try 
+      {
+        const id_product = new URLSearchParams(window.location.search).get('id');
+
+        const rew = await fetch(`http://localhost:3001/GetProductReview/${id_product}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        const data = await rew.json();
+
+        if (rew.ok) 
+          SetAllReviews(data);
+      } 
+      catch (error) { console.error("Error fetching product reviews:", error); }
+    };
+    
     const params = new URLSearchParams(window.location.search);
 
-    ToGetData(params.get("id"));
-  }, []);
+    if(localStorage.getItem("token") !== null)
+      SetShowLoggedContent(true);
 
-  const handleImageClick = (image) => {
-    setSelectedImage(image);
-  };
+    ToGetData(params.get("id"));
+    GetProductReviews();
+
+  }, [window.location.search]);
+
+  const handleImageClick = (image) => { setSelectedImage(image); };
+
+  const handleRatingChange = (event) => { SetGrade(Number(event.target.value)); };
+
+  const handleSendReview = async (e) =>
+  {
+    e.preventDefault();
+
+    if(!show_logged_content)
+    {
+      if(!user_name.trim() || !user_review.trim())
+      {
+        //    выведете тут сообщение о том что имя или поля не должны быть пустыми.
+        return;
+      }
+
+      const product_id = new URLSearchParams(window.location.search).get("id");
+
+      const ServerReview = await fetch("http://localhost:3001/SendProductReview",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ product_id, review_owner_id: null, user_name, user_review, grade }),
+      });
+
+      const answer = await ServerReview.json();
+
+      if(answer)
+      {
+        ///   < выведите модальное окно о том что отзыв отправлен.
+        SetUserName("");
+        SetUserReview("");
+        SetGrade(0);
+      }
+      else
+      {
+        ///   < выведите сообщение о том что произошла хуйня и отзыв не отправлен.
+      }
+    }
+    else
+    {
+      console.log("пользователь под аккаунтом");
+
+      if(!user_review.trim())
+      {
+        //    выведете тут сообщение о том что имя или поля не должны быть пустыми.
+        return;
+      }
+
+      const l_user_data = await PullOutOfSession();
+
+      const product_id = new URLSearchParams(window.location.search).get("id");
+
+      const ServerReview = await fetch("http://localhost:3001/SendProductReview",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ product_id, review_owner_id: l_user_data.email, user_name: null, user_review, grade }),
+      });
+
+      const answer = await ServerReview.json();
+
+      if(answer)
+      {
+        ///   < выведите модальное окно о том что отзыв отправлен.
+        SetUserName("");
+        SetUserReview("");
+        SetGrade(0);
+      }
+      else
+      {
+        ///   < выведите сообщение о том что произошла хуйня и отзыв не отправлен.
+      }
+    }
+  }
 
   return (
     <main>
       <section className="py-20 font-poppins  mt-5 ">
-        {/* <div
-          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-          aria-hidden="true"
-        >
-          <div
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-            style={{
-              clipPath:
-                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-            }}
-          />
-        </div> */}
-
-        <div
-          className=" flex flex-row px-6 py-4 gap-6
-        mb-1 font-bold ml-10"
-        >
-          <a className="hover:text-gray-400 cursor-pointer " href="#details">
-            Details
-          </a>
+        {/* <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+              <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+                style={{ clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",}}/>
+            </div> */}
+        <div className=" flex flex-row px-6 py-4 gap-6 mb-1 font-bold ml-10">
+          <a className="hover:text-gray-400 cursor-pointer " href="#details">Details</a>
           <a className="hover:text-gray-400 cursor-pointer ">Characteristics</a>
-          <a className="hover:text-gray-400 cursor-pointer" href="#reviews">
-            Reviews(20)
-          </a>
+          <a className="hover:text-gray-400 cursor-pointer" href="#reviews">Reviews({all_reviews.length})</a>
         </div>
-
         <div className="max-w-5xl px-4 mx-auto">
           <div className="flex flex-wrap mb-24 -mx-4">
             <div className="w-full px-4 mb-8 md:w-1/2 md:mb-0">
               <div className="sticky top-0 z-50 overflow-hidden ">
                 <div className="relative mb-6 lg:mb-10 ">
-                  <a
-                    className="absolute left-0 transform lg:ml-2 top-1/2 translate-1/2 "
-                    href="#"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      className="w-5 h-5 text-blue-500 bi bi-chevron-left dark:text-blue-200"
-                      viewBox="0 0 16 16"
-                    ></svg>
+                  <a className="absolute left-0 transform lg:ml-2 top-1/2 translate-1/2 " href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="w-5 h-5 text-blue-500 bi bi-chevron-left dark:text-blue-200" viewBox="0 0 16 16"></svg>
                   </a>
-                  <img
-                    className="object-cover w-full max-sm:w-auto lg:h-1/2"
-                    src={
-                      `http://localhost:3001/GetImage/${product_data?.images[0]}` ||
-                      "Loading..."
-                    }
-                    alt=""
-                  />
-                  <a
-                    className="absolute right-0 transform lg:mr-2 top-1/2 translate-1/2"
-                    href="#"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      className="w-5 h-5 text-blue-500 bi bi-chevron-right dark:text-blue-200"
-                      viewBox="0 0 16 16"
-                    ></svg>
+                  <img className="object-cover w-full max-sm:w-auto lg:h-1/2" src={ `http://localhost:3001/GetImage/${product_data?.images[0]}` || "Loading..." } alt="" />
+                  <a className="absolute right-0 transform lg:mr-2 top-1/2 translate-1/2" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="w-5 h-5 text-blue-500 bi bi-chevron-right dark:text-blue-200" viewBox="0 0 16 16" ></svg>
                   </a>
                 </div>
                 <div className="flex-wrap hidden -mx-2 md:flex">
-                  {product_data?.images.map((image, index) => (
+                  {product_data?.images.map((image, index) => 
+                  (
                     <div key={index} className="w-1/2 p-2 sm:w-1/4">
-                      <a
-                        className="block border border-transparent hover:border-blue-400"
-                        href="#"
-                        onClick={() => handleImageClick(image)}
-                      >
-                        <img
-                          className="object-cover w-full lg:h-32"
-                          src={`http://localhost:3001/GetImage/${image}`}
-                          alt={`Product Image ${index + 1}`}
-                        />
+                      <a className="block border border-transparent hover:border-blue-400" href="#" onClick={() => handleImageClick(image)}>
+                        <img className="object-cover w-full lg:h-32" src={`http://localhost:3001/GetImage/${image}`} alt={`Product Image ${index + 1}`}/>
                       </a>
                     </div>
                   ))}
@@ -206,10 +248,7 @@ const ProductDetails = () => {
                   <p className="max-w-md mb-4 text-gray-500 dark:text-gray-400">
                     Get $100-$500 off when you trade in an one plus 6 or newer.
                   </p>
-                  <a
-                    href="#"
-                    className="text-blue-500 hover:underline dark:text-gray-400"
-                  >
+                  <a href="#" className="text-blue-500 hover:underline dark:text-gray-400">
                     See how trade-in works
                   </a>
                 </div>
@@ -274,25 +313,16 @@ const ProductDetails = () => {
                   <p className="mb-2 text-lg font-semibold dark:text-gray-400">
                     Choose your Capacity
                   </p>
-                  <a
-                    href="#"
-                    className="text-blue-500 hover:underline dark:text-gray-400"
-                  >
+                  <a href="#" className="text-blue-500 hover:underline dark:text-gray-400">
                     How much capacity is right for you?
                   </a>
-                  <RadioGroup value={capacity} onChange={setCapacity}>
+                  <RadioGroup value={capacity} onChange={ setCapacity }>
                     <div className="grid grid-cols-2 gap-4 pb-4 mt-2 mb-4 border-b-2 lg:grid-cols-3 dark:border-gray-600">
                       {/*{product_data?.memory || "Loading..."}*/}
-                      {["128", "256", "512", "1"].map((size) => (
+                      {["128", "256", "512", "1"].map((size) => 
+                      (
                         <div key={size}>
-                          <button
-                            className={`flex items-center justify-center w-full h-full py-4 border-2 ${
-                              capacity === size
-                                ? "border-blue-400"
-                                : "border-gray-300"
-                            } dark:border-gray-600 hover:border-blue-400`}
-                            onClick={() => setCapacity(size)}
-                          >
+                          <button className={`flex items-center justify-center w-full h-full py-4 border-2 ${ capacity === size ? "border-blue-400" : "border-gray-300" } dark:border-gray-600 hover:border-blue-400`} onClick={() => setCapacity(size)}>
                             <div>
                               <div className="mb-2 font-semibold dark:text-gray-400">
                                 {size} GB
@@ -434,16 +464,16 @@ const ProductDetails = () => {
           transition={{ duration: 0.5 }}
         />
         <div className="mx-20 rounded-lg ">
-          <div class="bg-black rounded-lg">
-            <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-              <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+          <div className="bg-black rounded-lg">
+            <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+              <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                 Основные характеристики
               </h2>
 
-              <ul class="mt-6 space-y-6 ">
-                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+              <ul className="mt-6 space-y-6 ">
+                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
                   <svg
-                    class="h-5 w-5 mr-4 text-indigo-500"
+                    className="h-5 w-5 mr-4 text-indigo-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -456,14 +486,14 @@ const ProductDetails = () => {
                       d="M9 12l2 2 4-4m6 2-2 2-4-4"
                     />
                   </svg>
-                  <div class="flex-1">
-                    <h3 class="text-lg font-medium text-white">Бренд</h3>
-                    <p class="mt-2 text-base text-gray-300">Apple</p>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">Бренд</h3>
+                    <p className="mt-2 text-base text-gray-300">Apple</p>
                   </div>
                 </li>
-                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
                   <svg
-                    class="h-5 w-5 mr-4 text-indigo-500"
+                    className="h-5 w-5 mr-4 text-indigo-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -476,16 +506,16 @@ const ProductDetails = () => {
                       d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2z"
                     />
                   </svg>
-                  <div class="flex-1">
-                    <h3 class="text-lg font-medium text-white">Модель</h3>
-                    <p class="mt-2 text-base text-gray-300">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">Модель</h3>
+                    <p className="mt-2 text-base text-gray-300">
                       {product_data?.model}
                     </p>
                   </div>
                 </li>
-                <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
                   <svg
-                    class="h-5 w-5 mr-4 text-gray-400"
+                    className="h-5 w-5 mr-4 text-gray-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -498,148 +528,119 @@ const ProductDetails = () => {
                       d="M12 6V4m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm0 14V18m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4z"
                     />
                   </svg>
-                  <div class="flex-1">
-                    <h3 class="text-lg font-medium text-white">Гарантия</h3>
-                    <p class="mt-2 text-base text-gray-300">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">Гарантия</h3>
+                    <p className="mt-2 text-base text-gray-300">
                       Официальная гарантия от производителя 12 месяцев. Гарантия
                       Yabko 31 день с возможностью продления.
                     </p>
                   </div>
                 </li>
-                {/* <li class="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
-                  <svg class="h-5 w-5 mr-4 text-indigo" />
+                {/* <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+                  <svg className="h-5 w-5 mr-4 text-indigo" />
                 </li> */}
               </ul>
             </div>
           </div>
         </div>
       </section>
+
+      {/*Reviews section.*/}
       <section>
-        <motion.div
-          id="reviews"
-          className="mt-24"
-          initial="hidden"
-          animate="visible"
-          variants={variants}
-          transition={{ duration: 0.5 }}
-        />
+        <motion.div id="reviews" className="mt-24" initial="hidden" animate="visible" variants={variants} transition={{ duration: 0.5 }}/>
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
             Write Review
           </h2>
           <form className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
-            <input
-              type="text"
-              placeholder="Name"
-              className="block w-full px-4 py-3 rounded-lg shadow-sm  sm:text-sm bg-[#1d1d1d]"
-            />
-            <p className="px-4 py-3">
-              Оценка:{" "}
+
+            { !show_logged_content ? (<input type="text" placeholder="Name" className="block w-full px-4 py-3 rounded-lg shadow-sm  sm:text-sm bg-[#1d1d1d]"  value={user_name} onChange={(e) => SetUserName(e.target.value)}/>) : null }
+            <p className="px-4 py-3"> Grade{" "}
               <span className="flex flex-row">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-yellow-500"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-yellow-500"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-yellow-500"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-yellow-500"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-yellow-500"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-                </svg>
+                <>
+                  <style>
+                  {`
+                    .rating {
+                      display: inline-block;
+                      opacity: 1;
+                    }
+                    
+                    .rating input {
+                      display: none;
+                      opacity: 1;
+                    }
+                    
+                    .rating label {
+                      float: right;
+                      cursor: pointer;
+                      color: #ccc;
+                      transition: color 0.3s, transform 0.3s, box-shadow 0.3s;
+                    }
+                    
+                    .rating label:before {
+                      content: '\\2605';
+                      font-size: 30px;
+                      transition: color 0.3s;
+                    }
+                    
+                    .rating input:checked ~ label,
+                    .rating label:hover,
+                    .rating label:hover ~ label {
+                      color: #ffc300;
+                      transform: scale(1.2);
+                      transition: color 0.3s, transform 0.3s, box-shadow 0.3s;
+                      animation: bounce 0.5s ease-in-out alternate;
+                    }
+                    
+                    @keyframes bounce {
+                      to {
+                        transform: scale(1.3);
+                      }
+                    }
+                  `}
+                  </style>
+                  <div className="rating">
+                    {[5, 4, 3, 2, 1].map((value) => 
+                    (
+                      <React.Fragment key={value}>
+                        <input type="radio" id={`star${value}`} name="reviewRating" value={value} checked={grade === value} onChange={handleRatingChange} />
+                        <label htmlFor={`star${value}`}></label>
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </>
               </span>
             </p>
-            <input
-              type="text"
-              placeholder="Review"
-              className="block w-full px-4 py-3 rounded-lg shadow-sm  sm:text-sm bg-[#1d1d1d]"
-            />
-            <button className="border border-white w-24 rounded-lg hover:bg-gray-950">
+            <input type="text" placeholder="Review" className="block w-full px-4 py-3 rounded-lg shadow-sm  sm:text-sm bg-[#1d1d1d]" value={user_review} onChange={(e) => SetUserReview(e.target.value)}/>
+            <button className="border border-white w-24 rounded-lg hover:bg-gray-950" onClick={ (e) => (handleSendReview(e)) }>
               Send
             </button>
           </form>
         </div>
-
-        <div className="bg-[#1d1d1d] rounded-lg shadow-sm items-center max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-lg font-bold">Alex</h1>
-
-          <div class="flex py-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-yellow-500"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-yellow-500"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-yellow-500"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-yellow-500"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-            </svg>
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-yellow-500"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
-            </svg>
+        {all_reviews.length > 0 ?
+        (
+          all_reviews.map((review, index) => (
+          <div className="bg-[#1d1d1d] rounded-lg shadow-sm items-center max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
+            <h1 className="text-lg font-bold">{review.review_owner_name}</h1>
+            <div className="flex py-2">
+              {[...Array(review.grade)].map((_, i) => 
+              (
+                <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
+                </svg>
+              ))}
+            </div>  
+            <hr className="my-4 border-gray-300" />
+            <div>
+              <p>{review.review}</p>
+            </div>
           </div>
-          <hr class="my-4 border-gray-300" />
-          <div>
-            <p>Good phone ! I like it!!</p>
-          </div>
-        </div>
+          ))
+        ) : 
+        (
+          null
+        )}
+
       </section>
     </main>
   );

@@ -12,6 +12,7 @@ import SEND_CODE_VERIFICATION from './Configs/config_gmail.js'
 import { IPhoneModel } from "./Models/IPhone.js";
 import { UserModel } from "./Models/User.js";
 import { SessionModel } from "./Models/Session.js"
+import { ProductReviewModel } from "./Models/ProductReview.js";
 
 
 
@@ -223,7 +224,7 @@ app.post("/PullOutOfSession", async (req, res) =>
   
       if (user) 
       {
-        const user_data = {name: user.name, email: user.email, avatar: user.avatar };
+        const user_data = {name: user.name, email: user.email };
 
         res.status(200).json({ user_data });
       } 
@@ -353,7 +354,7 @@ app.post("/GetDataForListProduct/Iphone", async (req, res) =>
   }
 });
 
-        // Getting Iphone data for list product.
+        // Getting Iphone data for product-detail.
 app.post("/ExtractIphoneData/:id", async (req, res) => 
 {
   try 
@@ -369,6 +370,60 @@ app.post("/ExtractIphoneData/:id", async (req, res) =>
       else
         res.status(404).json({ message: "iPhone not found" });
     }
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
+        // Request for product review.
+app.post("/SendProductReview", async (req, res) => 
+{
+  try 
+  {
+    const { product_id, review_owner_id, user_name, user_review, grade } = req.body;
+    let found_user_id = null;
+    
+    if(user_name == null)
+    {
+      const user_id = await UserModel.findOne({ email: review_owner_id });
+      
+      found_user_id = user_id._id;
+    }
+
+    const new_review = new ProductReviewModel({ product_id, review_owner_id: found_user_id || review_owner_id, review_owner_name: user_name, review: user_review, grade });
+
+    await new_review.save();
+
+    res.status(200).json({ success: true });
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
+        // Get a review of the product ID.
+app.post("/GetProductReview/:id", async (req, res) => 
+{
+  try 
+  {
+    const prod_id = req.params.id;
+    
+    if (prod_id !== "null") 
+    {
+      const review_data = await ProductReviewModel.find({ product_id: prod_id });
+      
+      if (review_data && review_data.length > 0)
+        res.status(200).json(review_data);
+      else
+        res.status(404).json({ message: "Reviews not found" });
+    } 
+    else
+      res.status(400).json({ message: "Invalid product ID" });
   } 
   catch (error) 
   {

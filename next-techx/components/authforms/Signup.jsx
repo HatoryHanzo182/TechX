@@ -20,8 +20,7 @@ const Signup = () => {
   const [error, setError] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [conf_u, SetConfU] = useState();
-  const [is_modal_confirm_mail_open, SetisModalConfirmMailOpen] =
-    useState(false);
+  const [is_modal_confirm_mail_open, SetisModalConfirmMailOpen] = useState(false);
   const input_confirm_refs = [useRef(), useRef(), useRef(), useRef()];
   const router = useRouter();
 
@@ -35,8 +34,7 @@ const Signup = () => {
     }
 
     try {
-      const ResUserExists = await fetch(
-        "http://localhost:3001/CheckUserExists",
+      const ResUserExists = await fetch("http://localhost:3001/CheckUserExists",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

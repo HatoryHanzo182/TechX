@@ -29,6 +29,7 @@
     "cmdk": "^0.2.1",
     "embla-carousel-autoplay": "^8.0.0-rc22",
     "embla-carousel-react": "^8.0.0-rc22",
+    "framer-motion": "^11.0.24",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.330.0",
     "mongoose": "^8.1.1",
