@@ -53,9 +53,9 @@ const page = () => {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M9 5 5 1 1 5"
               />
             </svg>
@@ -72,7 +72,7 @@ const page = () => {
               on top of Tailwind CSS including buttons, dropdowns, modals,
               navbars, and more.
             </p>
-            <p className="text-gray-500 dark:text-gray-400">
+            <div className="text-gray-500 dark:text-gray-400">
               Check out this guide to learn how to{" "}
               <a
                 href="/docs/getting-started/introduction/"
@@ -82,7 +82,7 @@ const page = () => {
               </a>{" "}
               and start developing websites even faster with components on top
               of Tailwind CSS.
-            </p>
+            </div>
           </div>
         </div>
         <h2 id="accordion-collapse-heading-2">

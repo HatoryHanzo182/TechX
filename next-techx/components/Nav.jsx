@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bars3Icon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
 // import { IoCartOutline } from "react-icons/io5";
 import Link from "next/link";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { MagnifyingGlassIcon, PersonIcon } from "@radix-ui/react-icons";
 import {
   Command,
   CommandDialog,
@@ -163,7 +163,7 @@ export default function Nav() {
             )}
             {isLoggedIn ? (
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                <div className="mt-2 mr-3 flex flex-row ">
+                <div className="mt-2 mr-2 flex flex-row ">
                   <Link href="/search" onClick={handleLinkClick}>
                     <MagnifyingGlassIcon
                       className="h-6 w-6 mr-2"
@@ -267,7 +267,7 @@ export default function Nav() {
               </div>
             ) : (
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                <div className="mt-2 mr-4 flex flex-row ">
+                <div className="mt-2 mr-2 flex flex-row ">
                   <Link
                     href="/search"
                     className="h-6 w-6"
@@ -334,8 +334,8 @@ export default function Nav() {
                     className="flex text-sm  rounded-full md:me-0  "
                   >
                     <span className="sr-only">Open user menu</span>
-                    <Avatar className="w-6 h-6 mt-2">
-                      <AvatarFallback className="uppercase"></AvatarFallback>
+                    <Avatar className="w-5 h-6 mt-2">
+                      <PersonIcon className="h-6 w-5" aria-hidden="true" />
                     </Avatar>
                   </button>
 

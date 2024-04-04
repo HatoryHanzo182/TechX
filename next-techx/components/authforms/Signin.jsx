@@ -144,23 +144,22 @@ const Signin = () => {
       </div>
 
       <div className="flex w-full lg:w-1/2 flex-col">
-        <div className="flex justify-center pt-6 text-justify ">
-        
-        </div>
+        <div className="flex justify-center pt-6 text-justify "></div>
         <div className="my-2 mx-auto flex flex-col justify-center px-6 pt-8  md:justify-start  lg:w-3/4 mt-20">
           <p className="text-center sm:text-left text-3xl text-white font-bold">
             Sign in to your account
           </p>
-          <p className="mt-6 text-center sm:text-left text-gray-500 font-medium">
-            No account?{" "}
-            <Link
-              href="/signup"
-              className="ml-1 whitespace-nowrap font-semibold text-white underline"
-            >
-              Sign up here
-            </Link>
-          </p>
-          {/* <button className="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white bg-white ">
+        </div>
+        <div className="mt-6 text-center sm:text-left text-gray-500 font-medium">
+          No account?{" "}
+          <Link
+            href="/signup"
+            className="ml-1 whitespace-nowrap font-semibold text-white underline"
+          >
+            Sign up here
+          </Link>
+        </div>
+        {/* <button className="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white bg-white ">
             <img
               className="mr-2 h-5"
               src="https://img.icons8.com/color/344/google-logo.png"
@@ -168,60 +167,58 @@ const Signin = () => {
             />
             Get started with Google
           </button> */}
+        <Button
+          onClick={() => signIn("google")}
+          variant="outline"
+          className="text-black dark:text-white mt-6 "
+        >
+          <svg
+            role="img"
+            viewBox="0 0 24 24"
+            className="mr-2 h-4 w-4"
+            fill="currentColor"
+            d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
+          ></svg>
+          Google
+        </Button>
+        <div className="relative mt-8 flex h-px place-items-center bg-gray-200"></div>
+        <form
+          className="flex flex-col items-stretch pt-3 md:pt-8"
+          onSubmit={handleSumbit}
+        >
+          <div className="flex flex-col pt-4">
+            <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
+              <input
+                type="email"
+                id="login-email"
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                placeholder="Email"
+              />
+            </div>
+          </div>
+          <div className="mb-4 flex flex-col pt-4">
+            <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
+              <input
+                type="password"
+                id="login-password"
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                placeholder="Password"
+              />
+            </div>
+          </div>
+
           <Button
-            onClick={() => signIn("google")}
             variant="outline"
             className="text-black dark:text-white mt-6 "
           >
-            <svg role="img" viewBox="0 0 24 24" className="mr-2 h-4 w-4">
-              <path
-                fill="currentColor"
-                d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
-              ></path>
-            </svg>
-            Google
+            Sign In
           </Button>
-          <div className="relative mt-8 flex h-px place-items-center bg-gray-200">
-           
-          </div>
-          <form
-            className="flex flex-col items-stretch pt-3 md:pt-8"
-            onSubmit={handleSumbit}
-          >
-            <div className="flex flex-col pt-4">
-              <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
-                <input
-                  type="email"
-                  id="login-email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-                  placeholder="Email"
-                />
-              </div>
-            </div>
-            <div className="mb-4 flex flex-col pt-4">
-              <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
-                <input
-                  type="password"
-                  id="login-password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-                  placeholder="Password"
-                />
-              </div>
-            </div>
-
-            <Button
-              variant="outline"
-              className="text-black dark:text-white mt-6 "
-            >
-              Sign In
-            </Button>
-            {/* <button className="mt-6 w-full sm:w-auto rounded-lg bg-blue-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-blue-500 ring-offset-2 transition hover:bg-blue-700 focus:ring-2">
+          {/* <button className="mt-6 w-full sm:w-auto rounded-lg bg-blue-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-blue-500 ring-offset-2 transition hover:bg-blue-700 focus:ring-2">
               Sign in
             </button> */}
-          </form>
-        </div>
+        </form>
       </div>
     </div>
   );

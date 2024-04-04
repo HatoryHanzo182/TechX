@@ -65,7 +65,7 @@ const Cart = () => {
       <SheetTrigger asChild>
         {/* <Button variant="outline">Open</Button> */}
 
-        <ShoppingCart className="h-6 w-6" aria-hidden="true" />
+        <ShoppingCart className="h-6 w-5" aria-hidden="true" />
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
