@@ -408,7 +408,7 @@ app.post("/GetDataForListProduct/Macbook", async (req, res) =>
 
     const formatted_data = macbooks.map(macbook => 
     {
-      return { id: macbook.id, images: macbook.images[0], model: macbook.model, color: macbook.color, price: macbook.price };
+      return { id: macbook.id, images: macbook.images[0], model: macbook.model, memory: macbook.memory, color: macbook.color, price: macbook.price };
     });
 
     res.status(200).json(formatted_data);

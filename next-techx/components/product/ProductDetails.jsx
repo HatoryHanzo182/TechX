@@ -110,11 +110,14 @@ const ProductDetails = () => {
     SetGrade(Number(event.target.value));
   };
 
-  const handleSendReview = async (e) => {
+  const handleSendReview = async (e) => 
+  {
     e.preventDefault();
 
-    if (!show_logged_content) {
-      if (!user_name.trim() || !user_review.trim()) {
+    if (!show_logged_content) 
+    {
+      if (!user_name.trim() || !user_review.trim()) 
+      {
         //    выведете тут сообщение о том что имя или поля не должны быть пустыми.
         return;
       }
@@ -147,7 +150,8 @@ const ProductDetails = () => {
         ///   < выведите сообщение о том что произошла хуйня и отзыв не отправлен.
       }
     } 
-    else {
+    else 
+    {
       if (!user_review.trim()) {
         //    выведете тут сообщение о том что имя или поля не должны быть пустыми.
         return;
