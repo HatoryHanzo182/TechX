@@ -186,28 +186,40 @@ export default function Nav() {
                     />
 
                     {/* Search result output. */}
-                      {search_results && search_results.length > 0 ? (
-                      <CommandGroup heading="Search Results">
-                      <ScrollArea className="h-72 rounded-md overflow-y-auto">
-                      <div className="p-4">
-                        {search_results.map((result) => 
-                        (
-                          <React.Fragment key={result._id}>
-                            <Link href={{ pathname: "/product-detail", query: { id: `${result._id}` }}} onClick={() => { setMenuOpen(false); }}>
-                              <CommandItem className="">
-                                <img width="50" height="50" src={`http://localhost:3001/GetImage/${result.images}`} alt="SearchImage"/>
-                                {result.model} / {result.price}$
-                              </CommandItem>
-                            </Link>
-                            <Separator className="my-2"/>
-                          </React.Fragment>
-                        ))}
-                      </div>
-                      </ScrollArea>
-                    </CommandGroup>
-                      ) : (
-                        <CommandEmpty>No results found.</CommandEmpty>
-                      )}
+                    {search_results && search_results.length > 0 ? (
+                      <CommandGroup>
+                        <ScrollArea className="h-72 rounded-md overflow-y-auto">
+                          <div className="p-4">
+                            {search_results.map((result) => (
+                              <React.Fragment key={result._id}>
+                                <Link
+                                  href={{
+                                    pathname: "/product-detail",
+                                    query: { id: `${result._id}` },
+                                  }}
+                                  onClick={() => {
+                                    setMenuOpen(false);
+                                  }}
+                                >
+                                  <CommandItem className="">
+                                    <img
+                                      width="50"
+                                      height="50"
+                                      src={`http://localhost:3001/GetImage/${result.images}`}
+                                      alt="SearchImage"
+                                    />
+                                    {result.model} / {result.price}$
+                                  </CommandItem>
+                                </Link>
+                                <Separator className="my-2" />
+                              </React.Fragment>
+                            ))}
+                          </div>
+                        </ScrollArea>
+                      </CommandGroup>
+                    ) : (
+                      <CommandEmpty>No results found.</CommandEmpty>
+                    )}
                   </CommandDialog>
 
                   <Link href="#" onClick={OpenCart}>
@@ -272,38 +284,55 @@ export default function Nav() {
                     />
                   </Link>
                   {/*Search window.*/}
-                  <CommandDialog className="h-1/2" open={menuOpen} onOpenChange={setMenuOpen}>
+                  <CommandDialog
+                    className="h-1/2"
+                    open={menuOpen}
+                    onOpenChange={setMenuOpen}
+                  >
                     {/*Product entry field.*/}
                     {/* <input
                       className="border bg-black text-white px-2 rounded-lg"
                       placeholder="Search..."
                       onChange={handleChangeSerch}
                     /> */}
-                    <Input placeholder="Search..." onChange={handleChangeSerch}/>
+                    <Input
+                      placeholder="Search..."
+                      onChange={handleChangeSerch}
+                    />
                     {/*Search result output.*/}
-                    {search_results && search_results.length > 0 ? 
-                    (
-                      <CommandGroup heading="Search Results">
+                    {search_results && search_results.length > 0 ? (
+                      <CommandGroup>
                         <ScrollArea className="h-72 rounded-md overflow-y-auto">
-                        <div className="p-4">
-                          {search_results.map((result) => 
-                          (
-                            <React.Fragment key={result._id}>
-                              <Link href={{ pathname: "/product-detail", query: { id: `${result._id}` }}} onClick={() => { setMenuOpen(false); }}>
-                                <CommandItem className="">
-                                  <img width="50" height="50" src={`http://localhost:3001/GetImage/${result.images}`} alt="SearchImage"/>
-                                  {result.model} / {result.price}$
-                                </CommandItem>
-                              </Link>
-                              <Separator className="my-2"/>
-                            </React.Fragment>
-                          ))}
-                        </div>
+                          <div className="p-4 ">
+                            {search_results.map((result) => (
+                              <React.Fragment key={result._id}>
+                                <Link
+                                  href={{
+                                    pathname: "/product-detail",
+                                    query: { id: `${result._id}` },
+                                  }}
+                                  onClick={() => {
+                                    setMenuOpen(false);
+                                  }}
+                                >
+                                  <CommandItem className="">
+                                    <img
+                                      width="50"
+                                      height="50"
+                                      src={`http://localhost:3001/GetImage/${result.images}`}
+                                      alt="SearchImage"
+                                      className="mr-2"
+                                    />
+                                    {result.model} : {result.price}$
+                                  </CommandItem>
+                                </Link>
+                                <Separator className="my-2" />
+                              </React.Fragment>
+                            ))}
+                          </div>
                         </ScrollArea>
                       </CommandGroup>
-                    ) 
-                    : 
-                    (
+                    ) : (
                       <CommandEmpty>No results found.</CommandEmpty>
                     )}
                   </CommandDialog>

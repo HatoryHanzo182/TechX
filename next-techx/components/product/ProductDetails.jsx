@@ -10,8 +10,13 @@ import {
 import { motion } from "framer-motion";
 import { PullOutOfSession } from "@/lib/session";
 
+import { get } from "mongoose";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+
 const ProductDetails = () => {
-  const [selectedImage, setSelectedImage] = useState("https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp");
+  const [selectedImage, setSelectedImage] = useState(
+    "https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp"
+  );
   let [capacity, setCapacity] = useState("128");
   const [show_logged_content, SetShowLoggedContent] = useState(false);
   const [product_data, SetProductData] = useState();
@@ -19,6 +24,11 @@ const ProductDetails = () => {
   const [user_name, SetUserName] = useState("");
   const [user_review, SetUserReview] = useState("");
   const [grade, SetGrade] = useState(0);
+
+  const [liked, setLiked] = useState(false);
+
+  // Функция для переключения состояния лайка
+  const toggleLike = () => setLiked(!liked);
 
   useEffect(() => {
     const handleScroll = (event) => {
@@ -50,45 +60,44 @@ const ProductDetails = () => {
     visible: { opacity: 1 },
   };
 
-  useEffect(() => 
-  {
-    const ToGetData = async (id) => 
-    {
-      try 
-      {
-        const formatted_data = await fetch(`http://localhost:3001/ExtractData/${id}`,
+  useEffect(() => {
+    const ToGetData = async (id) => {
+      try {
+        const formatted_data = await fetch(
+          `http://localhost:3001/ExtractData/${id}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
           }
         );
 
-        if (formatted_data.ok) 
-        {
+        if (formatted_data.ok) {
           const data = await formatted_data.json();
 
           SetProductData(data);
         }
-      } 
-      catch (error) { console.error("Error fetching data:", error); }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
-    const GetProductReviews = async () => 
-    {
-      try 
-      {
-        const id_product = new URLSearchParams(window.location.search).get("id");
+    const GetProductReviews = async () => {
+      try {
+        const id_product = new URLSearchParams(window.location.search).get(
+          "id"
+        );
 
-        const rew = await fetch(`http://localhost:3001/GetProductReview/${id_product}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        });
+        const rew = await fetch(
+          `http://localhost:3001/GetProductReview/${id_product}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
 
         const data = await rew.json();
 
-        if (rew.ok) 
-          SetAllReviews(data);
+        if (rew.ok) SetAllReviews(data);
       } catch (error) {
         console.error("Error fetching product reviews:", error);
       }
@@ -110,14 +119,11 @@ const ProductDetails = () => {
     SetGrade(Number(event.target.value));
   };
 
-  const handleSendReview = async (e) => 
-  {
+  const handleSendReview = async (e) => {
     e.preventDefault();
 
-    if (!show_logged_content) 
-    {
-      if (!user_name.trim() || !user_review.trim()) 
-      {
+    if (!show_logged_content) {
+      if (!user_name.trim() || !user_review.trim()) {
         //    выведете тут сообщение о том что имя или поля не должны быть пустыми.
         return;
       }
@@ -149,9 +155,7 @@ const ProductDetails = () => {
       } else {
         ///   < выведите сообщение о том что произошла хуйня и отзыв не отправлен.
       }
-    } 
-    else 
-    {
+    } else {
       if (!user_review.trim()) {
         //    выведете тут сообщение о том что имя или поля не должны быть пустыми.
         return;
@@ -178,15 +182,12 @@ const ProductDetails = () => {
 
       const answer = await ServerReview.json();
 
-      if (answer) 
-      {
+      if (answer) {
         ///   < выведите модальное окно о том что отзыв отправлен.
         SetUserName("");
         SetUserReview("");
         SetGrade(0);
-      } 
-      else 
-      {
+      } else {
         ///   < выведите сообщение о том что произошла хуйня и отзыв не отправлен.
       }
     }
@@ -372,19 +373,14 @@ const ProductDetails = () => {
                   <p className="mb-2 text-lg font-semibold dark:text-gray-400">
                     Choose your Capacity
                   </p>
-                  <a
-                    href="#"
-                    className="text-blue-500 hover:underline dark:text-gray-400"
-                  >
-                    How much capacity is right for you?
-                  </a>
+
                   <RadioGroup value={capacity} onChange={setCapacity}>
                     <div className="grid grid-cols-2 gap-4 pb-4 mt-2 mb-4 border-b-2 lg:grid-cols-3 dark:border-gray-600">
                       {/*{product_data?.memory || "Loading..."}*/}
                       {["128", "256", "512", "1"].map((size) => (
-                        <div key={size}>
+                        <div key={size} className="">
                           <button
-                            className={`flex items-center justify-center w-full h-full py-4 border-2 ${
+                            className={`flex items-center justify-center w-full h-full  py-4 border-2 ${
                               capacity === size
                                 ? "border-blue-400"
                                 : "border-gray-300"
@@ -395,9 +391,9 @@ const ProductDetails = () => {
                               <div className="mb-2 font-semibold dark:text-gray-400">
                                 {size} GB
                               </div>
-                              <p className="px-2 text-xs font-medium text-center text-gray-700 dark:text-gray-400">
+                              {/* <p className="px-2 text-xs font-medium text-center text-gray-700 dark:text-gray-400">
                                 From $99 or $41.62/mo. for 24 mo.
-                              </p>
+                              </p> */}
                             </div>
                           </button>
                         </div>
@@ -405,7 +401,7 @@ const ProductDetails = () => {
                     </div>
                   </RadioGroup>
                 </div>
-                <div className="mt-6">
+                {/* <div className="mt-6">
                   <p className="mb-4 text-lg font-semibold dark:text-gray-400">
                     Choose a payment option
                   </p>
@@ -429,7 +425,7 @@ const ProductDetails = () => {
                       </button>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="mt-6 ">
                   <div className="flex flex-wrap items-center">
                     <span className="mr-2">
@@ -453,12 +449,6 @@ const ProductDetails = () => {
                     <p className="mb-2 text-sm dark:text-gray-400">
                       Free Shipping
                     </p>
-                    <a
-                      className="mb-2 text-sm text-blue-400 dark:text-blue-200"
-                      href="#"
-                    >
-                      Get delivery dates
-                    </a>
                   </div>
                 </div>
                 <div className="mt-6 ">
@@ -503,17 +493,12 @@ const ProductDetails = () => {
                       Add this item to a list and easily come back to it later{" "}
                     </p>
                   </div>
-                  <span className="ml-6">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      className="w-6 h-6 text-blue-500 cursor-pointer hover:text-blue-600 dark:hover:text-blue-300 bi bi-bookmark dark:text-gray-400"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"></path>
-                    </svg>
+                  <span className="ml-6" onClick={toggleLike}>
+                    {liked ? (
+                      <AiFillHeart size="22" />
+                    ) : (
+                      <AiOutlineHeart size="22" />
+                    )}
                   </span>
                 </div>
               </div>
@@ -716,7 +701,8 @@ const ProductDetails = () => {
             </button>
           </form>
         </div>
-        {all_reviews.length > 0 ? all_reviews.map((review, index) => (
+        {all_reviews.length > 0
+          ? all_reviews.map((review, index) => (
               <div className="bg-[#1d1d1d] rounded-lg shadow-sm items-center max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
                 <h1 className="text-lg font-bold">
                   {review.review_owner_name}

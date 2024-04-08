@@ -75,13 +75,13 @@ export function ProfilePage() {
               <CardDescription>Your information</CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
-              <div>
+              {/* <div>
                 <img
                   src="https://placekitten.com/200/200"
                   alt="Profile"
                   className="w-32 h-32 rounded-full hover:bg-black"
                 />
-              </div>
+              </div> */}
               <div className="space-y-1">
                 <Label htmlFor="name">Name</Label>
                 <Input
@@ -98,6 +98,24 @@ export function ProfilePage() {
                   disabled
                   className="cursor-pointer w-1/2"
                   defaultValue={user ? user.email : ""}
+                />
+              </div>
+              <div className="space-y-1">
+                <Label htmlFor="number">Phone Number</Label>
+                <Input
+                  id="number"
+                  disabled
+                  className="cursor-default w-1/2"
+                  defaultValue={user ? user.number : ""}
+                />
+              </div>
+              <div className="space-y-1">
+                <Label htmlFor="address">Address</Label>
+                <Input
+                  id="address"
+                  disabled
+                  className="cursor-pointer w-1/2"
+                  defaultValue={user ? user.address : ""}
                 />
               </div>
             </CardContent>
@@ -169,8 +187,27 @@ export function ProfilePage() {
             </CardFooter>
           </Card>
         </TabsContent>
-        <TabsContent value="orders"></TabsContent>
-        <TabsContent value="settings"></TabsContent>
+        <TabsContent value="orders">
+          <Card>
+            <CardHeader>
+              <CardTitle>Orders</CardTitle>
+              {/* <CardDescription>Your order history</CardDescription> */}
+            </CardHeader>
+            <CardContent>
+              <p className=" text-gray-500 text-center  text-lg">
+                You haven't placed any orders yet.
+              </p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="settings">
+          <Card>
+            <CardHeader>
+              <CardTitle>Settings</CardTitle>
+              <CardDescription>Customize your experience</CardDescription>
+            </CardHeader>
+          </Card>
+        </TabsContent>
       </Tabs>
     </main>
   );
