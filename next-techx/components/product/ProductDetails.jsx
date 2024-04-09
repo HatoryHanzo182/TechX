@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 import { PullOutOfSession } from "@/lib/session";
-
 import { get } from "mongoose";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
@@ -23,14 +22,37 @@ const ProductDetails = () =>
   const [user_name, SetUserName] = useState("");
   const [user_review, SetUserReview] = useState("");
   const [grade, SetGrade] = useState(0);
-
   const [liked, setLiked] = useState(false);
 
   // Функция для переключения состояния лайка
-  const toggleLike = () => setLiked(!liked);
+  const toggleLike = async () => 
+  {
+    setLiked(!liked);
+    
+    const id_product = new URLSearchParams(window.location.search).get("id");
 
-  useEffect(() => {
-    const handleScroll = (event) => {
+    if(!liked)
+    {
+      const formatted_data = await fetch(`http://localhost:3001/AddFavoriteProduct/${id_product}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
+    }
+    else
+    {
+      const formatted_data = await fetch(`http://localhost:3001/DeleteFavoriteProduct/${id_product}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
+    }
+  }
+
+  useEffect(() => 
+  {
+    const handleScroll = (event) => 
+    {
       event.preventDefault();
 
       const targetId = event.target.getAttribute("href").slice(1);
@@ -42,33 +64,38 @@ const ProductDetails = () =>
 
     const scrollLinks = document.querySelectorAll('a[href^="#"]');
 
-    scrollLinks.forEach((link) => {
+    scrollLinks.forEach((link) => 
+    {
       link.addEventListener("click", handleScroll);
     });
 
-    return () => {
-      scrollLinks.forEach((link) => {
+    return () => 
+    {
+      scrollLinks.forEach((link) => 
+      {
         link.removeEventListener("click", handleScroll);
       });
     };
   }, []);
 
   // Пример анимации элемента с использованием Framer Motion
-  const variants = {
+  const variants = 
+  {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
   };
 
-  useEffect(() => {
-    const ToGetData = async (id) => {
-      try {
-        const formatted_data = await fetch(
-          `http://localhost:3001/ExtractData/${id}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+  useEffect(() => 
+  {
+    const ToGetData = async (id) => 
+    {
+      try 
+      {
+        const formatted_data = await fetch(`http://localhost:3001/ExtractData/${id}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
 
         if (formatted_data.ok) 
         {
@@ -77,120 +104,129 @@ const ProductDetails = () =>
           SetProductData(data);
           setSelectedImage(data.images[0]);
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } 
+      catch (error) { console.error("Error fetching data:", error); }
     };
 
-    const GetProductReviews = async () => {
-      try {
-        const id_product = new URLSearchParams(window.location.search).get(
-          "id"
-        );
+    const GetProductReviews = async () => 
+    {
+      try 
+      {
+        const id_product = new URLSearchParams(window.location.search).get("id");
 
-        const rew = await fetch(
-          `http://localhost:3001/GetProductReview/${id_product}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+        const rew = await fetch(`http://localhost:3001/GetProductReview/${id_product}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
 
         const data = await rew.json();
 
-        if (rew.ok) SetAllReviews(data);
-      } catch (error) {
-        console.error("Error fetching product reviews:", error);
-      }
+        if (rew.ok) 
+          SetAllReviews(data);
+      } 
+      catch (error) { console.error("Error fetching product reviews:", error); }
+    };
+
+    const FindFavorite = async () => 
+    {
+      try 
+      {
+        const l_user_data = await PullOutOfSession();  
+        const p = new URLSearchParams(window.location.search);
+
+        l_user_data.favourites.forEach((favourite) => 
+        {
+          if(p.get("id") === favourite.toString())
+            setLiked(true);
+        });
+      } 
+      catch { }
     };
 
     const params = new URLSearchParams(window.location.search);
 
-    if (localStorage.getItem("token") !== null) SetShowLoggedContent(true);
+    if (localStorage.getItem("token") !== null) 
+      SetShowLoggedContent(true);
 
     ToGetData(params.get("id"));
     GetProductReviews();
+    FindFavorite();
   }, [window.location.search]);
 
   const handleImageClick = (image) => 
   {
-    console.log(image);
     setSelectedImage(image);
   };
 
-  const handleRatingChange = (event) => {
+  const handleRatingChange = (event) => 
+  {
     SetGrade(Number(event.target.value));
   };
 
-  const handleSendReview = async (e) => {
+  const handleSendReview = async (e) => 
+  {
     e.preventDefault();
 
-    if (!show_logged_content) {
-      if (!user_name.trim() || !user_review.trim()) {
+    if (!show_logged_content) 
+    {
+      if (!user_name.trim() || !user_review.trim()) 
+      {
         //    выведете тут сообщение о том что имя или поля не должны быть пустыми.
         return;
       }
 
       const product_id = new URLSearchParams(window.location.search).get("id");
 
-      const ServerReview = await fetch(
-        "http://localhost:3001/SendProductReview",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            product_id,
-            review_owner_id: null,
-            user_name,
-            user_review,
-            grade,
-          }),
-        }
-      );
+      const ServerReview = await fetch("http://localhost:3001/SendProductReview",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ product_id, review_owner_id: null, user_name, user_review, grade })
+      });
 
       const answer = await ServerReview.json();
 
-      if (answer) {
+      if (answer) 
+      {
         ///   < выведите модальное окно о том что отзыв отправлен.
         SetUserName("");
         SetUserReview("");
         SetGrade(0);
-      } else {
+      } 
+      else 
+      {
         ///   < выведите сообщение о том что произошла хуйня и отзыв не отправлен.
       }
-    } else {
-      if (!user_review.trim()) {
+    } 
+    else 
+    {
+      if (!user_review.trim()) 
+      {
         //    выведете тут сообщение о том что имя или поля не должны быть пустыми.
         return;
       }
 
       const l_user_data = await PullOutOfSession();
-
       const product_id = new URLSearchParams(window.location.search).get("id");
 
-      const ServerReview = await fetch(
-        "http://localhost:3001/SendProductReview",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            product_id,
-            review_owner_id: l_user_data.email,
-            user_name: null,
-            user_review,
-            grade,
-          }),
-        }
-      );
+      const ServerReview = await fetch("http://localhost:3001/SendProductReview",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ product_id, review_owner_id: l_user_data.email, user_name: null, user_review, grade })
+      });
 
       const answer = await ServerReview.json();
 
-      if (answer) {
+      if (answer) 
+      {
         ///   < выведите модальное окно о том что отзыв отправлен.
-        SetUserName("");
         SetUserReview("");
         SetGrade(0);
-      } else {
+      } 
+      else 
+      {
         ///   < выведите сообщение о том что произошла хуйня и отзыв не отправлен.
       }
     }
@@ -496,13 +532,12 @@ const ProductDetails = () =>
                       Add this item to a list and easily come back to it later{" "}
                     </p>
                   </div>
-                  <span className="ml-6" onClick={toggleLike}>
-                    {liked ? (
-                      <AiFillHeart size="22" />
-                    ) : (
-                      <AiOutlineHeart size="22" />
-                    )}
-                  </span>
+                  { !show_logged_content ? (null) : 
+                  (
+                    <span className="ml-6" onClick={toggleLike}>
+                      {liked ? (<AiFillHeart size="22" />) : (<AiOutlineHeart size="22" />)}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

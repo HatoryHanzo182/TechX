@@ -114,7 +114,7 @@ app.post("/NewUser", async (req, res) =>
   try 
   {
     const { name, email, password } = req.body;
-    const new_user = new UserModel({ name, email, password });
+    const new_user = new UserModel({ name, email, password, phone_number: "null", delivery_address: "null", favourites: [] });
 
     await new_user.save();
 
@@ -227,7 +227,7 @@ app.post("/PullOutOfSession", async (req, res) =>
   
       if (user) 
       {
-        const user_data = {name: user.name, email: user.email };
+        const user_data = { name: user.name, email: user.email, phone_number: user.phone_number, delivery_address: user.delivery_address, favourites: user.favourites };
 
         res.status(200).json({ user_data });
       } 
@@ -283,6 +283,7 @@ app.post("/SearchForProducts", async (req, res) =>
         { model: { $regex: query, $options: "i" } }
       ]
     }).select("images model price");
+
     const formatted_data_iphones = iphones.map(phone => 
     {
       return { _id: phone.id, images: phone.images[0], model: phone.model, price: phone.price };
@@ -517,6 +518,58 @@ app.post("/GetProductReview/:id", async (req, res) =>
     } 
     else
       res.status(400).json({ message: "Invalid product ID" });
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
+        // Add favorite product.
+app.post("/AddFavoriteProduct/:id", async (req, res) => 
+{
+  try 
+  {
+    const token = req.token;
+    const session = await SessionModel.findOne({ token });
+    const product_object_id = new mongoose.Types.ObjectId(req.params.id);
+    
+    if (session) 
+    {
+      const user = await UserModel.findOne({ _id: session.user_id });
+      
+      user.favourites.push(product_object_id);
+      await user.save();
+    }
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
+        // Delete favorite product.
+app.post("/DeleteFavoriteProduct/:id", async (req, res) => 
+{
+  try 
+  {
+    const token = req.token;
+    const session = await SessionModel.findOne({ token });
+    const product_object_id = new mongoose.Types.ObjectId(req.params.id);
+    
+    if (session) 
+    {
+      const user = await UserModel.findOne({ _id: session.user_id });
+
+      const index_f = user.favourites.indexOf(product_object_id);
+      if (index_f === -1)
+        return res.status(400).json({ message: "Product not found in favourites" });
+  
+      user.favourites.splice(index_f, 1);
+      await user.save();
+    }
   } 
   catch (error) 
   {
