@@ -13,13 +13,12 @@ import { PullOutOfSession } from "@/lib/session";
 import { get } from "mongoose";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
-const ProductDetails = () => {
-  const [selectedImage, setSelectedImage] = useState(
-    "https://img.jabko.ua/image/cache/catalog/products/2022/09/072253/photo_2022-09-07_22-53-30-1397x1397.jpg.webp"
-  );
+const ProductDetails = () => 
+{
   let [capacity, setCapacity] = useState("128");
   const [show_logged_content, SetShowLoggedContent] = useState(false);
   const [product_data, SetProductData] = useState();
+  const [selectedImage, setSelectedImage] = useState();
   const [all_reviews, SetAllReviews] = useState([]);
   const [user_name, SetUserName] = useState("");
   const [user_review, SetUserReview] = useState("");
@@ -71,10 +70,12 @@ const ProductDetails = () => {
           }
         );
 
-        if (formatted_data.ok) {
+        if (formatted_data.ok) 
+        {
           const data = await formatted_data.json();
 
           SetProductData(data);
+          setSelectedImage(data.images[0]);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -111,7 +112,9 @@ const ProductDetails = () => {
     GetProductReviews();
   }, [window.location.search]);
 
-  const handleImageClick = (image) => {
+  const handleImageClick = (image) => 
+  {
+    console.log(image);
     setSelectedImage(image);
   };
 
@@ -230,7 +233,7 @@ const ProductDetails = () => {
                   <img
                     className="object-cover w-full max-sm:w-auto lg:h-1/2"
                     src={
-                      `http://localhost:3001/GetImage/${product_data?.images[0]}` ||
+                      `http://localhost:3001/GetImage/${selectedImage}` ||
                       "Loading..."
                     }
                     alt=""
