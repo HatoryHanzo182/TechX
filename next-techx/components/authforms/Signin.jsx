@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useRouter } from "next/navigation";
+import { set } from "mongoose";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
@@ -101,17 +102,20 @@ const Signin = () => {
             else {
               console.log("Sessia is not complite");
             }
-          } 
-          catch (error) {
+          } catch (error) {
             setShowAlert(true);
             console.error("Error during signing the token:", error);
           }
         } else {
-          console.log("SIGN IN: false");
+          setShowAlert(true);
+          setError("Password is incorrect");
+          console.error("SIGN IN: false", error);
           return;
         }
       } else {
-        console.log("User not found");
+        setShowAlert(true);
+        setError("User not found");
+        console.error("User not found");
         return;
       }
     } catch (error) {

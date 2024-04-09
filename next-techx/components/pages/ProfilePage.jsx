@@ -64,7 +64,7 @@ export function ProfilePage() {
       >
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="account">Account</TabsTrigger>
-          <TabsTrigger value="password">Password</TabsTrigger>
+          <TabsTrigger value="password">Favourites</TabsTrigger>
           <TabsTrigger value="orders">Orders</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
@@ -166,13 +166,13 @@ export function ProfilePage() {
         <TabsContent value="password">
           <Card>
             <CardHeader>
-              <CardTitle>Password</CardTitle>
+              <CardTitle>Favourites</CardTitle>
               <CardDescription>
-                Change your password here. After saving, you'll be logged out.
+                Manage your favourite products here
               </CardDescription>
             </CardHeader>
 
-            <CardContent className="space-y-2">
+            {/* <CardContent className="space-y-2">
               <div className="space-y-1">
                 <Label htmlFor="current">Current password</Label>
                 <Input id="current" type="password" className="w-1/2" />
@@ -184,7 +184,7 @@ export function ProfilePage() {
             </CardContent>
             <CardFooter>
               <Button>Save password</Button>
-            </CardFooter>
+            </CardFooter> */}
           </Card>
         </TabsContent>
         <TabsContent value="orders">

@@ -47,7 +47,9 @@ const Signup = () => {
       const { existing_user } = await ResUserExists.json();
 
       if (existing_user) {
-        console.log("User exists"); //  <<---- Пользователь уже существует.
+        showAlert(true);  
+        setError("User exists");
+        console.error("User exists",error); //  <<---- Пользователь уже существует.
         return;
       } else {
         SetisModalConfirmMailOpen(true);
