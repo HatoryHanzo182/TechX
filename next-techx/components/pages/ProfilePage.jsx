@@ -1,5 +1,5 @@
 "use client";
-import { React, useState } from "react";
+import React from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -39,13 +39,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/app/providers";
-import { OrdersTable } from "../OrdersTable";
-import { Pencil1Icon, Pencil2Icon } from "@radix-ui/react-icons";
-import { Pencil } from "lucide-react";
 
-export function ProfilePage() {
+export function ProfilePage() 
+{
   const { user } = useAuth();
-  const [openDialog1, setOpenDialog1] = useState(false);
+
   return (
     <main>
       <div className="pt-10 mt-20"></div>
@@ -233,7 +231,28 @@ export function ProfilePage() {
             <CardHeader>
               <CardTitle>Favourites</CardTitle>
               <CardDescription>
-                Manage your favourite products here
+              <>
+                {user_favorite.length > 0 ? 
+                (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ml-10 gap-4">
+                    {user_favorite.map((u_f) => 
+                    (
+                      <div className="bg-[#1d1d1d] p-4 rounded-lg">
+                          <Link key={u_f.id} href={{ pathname: "/product-detail", query: { id: u_f.id } }}>
+                          <img src={`http://localhost:3001/GetImage/${u_f.images}`} alt={u_f.model} className="mb-3" />
+                          <div className="font-bold">{u_f.model}</div>
+                          <div className="flex justify-between items-center mt-3">
+                            <div className="text-red-500">{u_f.price} $</div>
+                          </div>
+                        </Link>
+                        <span className="ml-6" onClick={() => ToggleLike(u_f.id)}>
+                          {liked[u_f.id] ? <AiFillHeart size="22" /> : <AiOutlineHeart size="22" />}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ) : <p className="text-gray-500 text-center text-lg">Manage your favourite products here</p> }
+              </>
               </CardDescription>
             </CardHeader>
 

@@ -550,6 +550,53 @@ app.post("/AddFavoriteProduct/:id", async (req, res) =>
   }
 });
 
+        // Get favorite product.
+app.post("/GetFavoriteProduct/:id", async (req, res) => 
+{
+  try 
+  {
+    const product_object_id = new mongoose.Types.ObjectId(req.params.id);
+    const iphone_data = await IPhoneModel.findById(product_object_id);
+
+    if(iphone_data)
+    {
+      res.status(200).json({ id: iphone_data.id, images: iphone_data.images[0], model: iphone_data.model, price: iphone_data.price });
+      return;
+    }
+
+    const airpod_data = await AirPodsModel.findById(product_object_id);
+
+    if(airpod_data)
+    {
+      res.status(200).json({ id: airpod_data.id, images: airpod_data.images[0], model: airpod_data.model, price: airpod_data.price });
+      return;
+    }
+
+    const applewatch_data = await AppleWatchModel.findById(product_object_id);
+
+    if(applewatch_data)
+    {
+      res.status(200).json({ id: applewatch_data.id, images: applewatch_data.images[0], model: applewatch_data.model, price: airpod_data.price });
+      return;
+    }
+
+    const macbook_data = await MacbookModel.findById(product_object_id);
+
+    if(macbook_data)
+    {
+      res.status(200).json({ id: macbook_data.id, images: macbook_data.images[0], model: macbook_data.model, price: macbook_data.price });
+      return;
+    }
+    else
+      res.status(404).json({ message: "Product not found" });
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
         // Delete favorite product.
 app.post("/DeleteFavoriteProduct/:id", async (req, res) => 
 {
