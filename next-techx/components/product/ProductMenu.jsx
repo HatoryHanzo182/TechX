@@ -104,7 +104,7 @@ function ProductSelection() {
   };
 
   return (
-    <div className=" text-white font-sans mt-32 mb-4">
+    <div className="pt-20 text-white font-sans  mb-4">
       <Breadcrumb className="px-10 py-2">
         <BreadcrumbList>
           <BreadcrumbItem>
