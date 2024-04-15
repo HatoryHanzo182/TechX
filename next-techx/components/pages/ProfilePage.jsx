@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { React, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -39,10 +39,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/app/providers";
+import { OrdersTable } from "../OrdersTable";
+import { Pencil1Icon, Pencil2Icon } from "@radix-ui/react-icons";
+import { Pencil } from "lucide-react";
 
 export function ProfilePage() {
   const { user } = useAuth();
-
+  const [openDialog1, setOpenDialog1] = useState(false);
   return (
     <main>
       <div className="pt-10 mt-20"></div>
@@ -82,14 +85,19 @@ export function ProfilePage() {
                   className="w-32 h-32 rounded-full hover:bg-black"
                 />
               </div> */}
+
+              {/* Diagog 1 */}
               <div className="space-y-1">
                 <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  disabled
-                  className="cursor-pointer w-1/2"
-                  defaultValue={user ? user.name : ""}
-                />
+                <div className="flex flex-row">
+                  <Input
+                    id="name"
+                    disabled
+                    className="cursor-pointer w-1/2"
+                    defaultValue={user ? user.name : ""}
+                  />
+                  <Pencil className="m-2 h-4 w-4 dark:text-gray-400 " />
+                </div>
               </div>
               <div className="space-y-1">
                 <Label htmlFor="email">Email</Label>
@@ -100,23 +108,80 @@ export function ProfilePage() {
                   defaultValue={user ? user.email : ""}
                 />
               </div>
+
+              {/* Dialog 2 */}
               <div className="space-y-1">
                 <Label htmlFor="number">Phone Number</Label>
-                <Input
-                  id="number"
-                  disabled
-                  className="cursor-default w-1/2"
-                  defaultValue={user ? user.number : ""}
-                />
+                <div className="flex flex-row">
+                  <Input
+                    id="number"
+                    disabled
+                    className="cursor-default w-1/2"
+                    defaultValue={user ? user.number : ""}
+                  />
+                  <Pencil className="m-2 h-4 w-4 dark:text-gray-400 " />
+                </div>
               </div>
+
+              {/* Dialog 3 */}
               <div className="space-y-1">
                 <Label htmlFor="address">Address</Label>
-                <Input
-                  id="address"
-                  disabled
-                  className="cursor-pointer w-1/2"
-                  defaultValue={user ? user.address : ""}
-                />
+                <div className="flex flex-row">
+                  <Input
+                    id="address"
+                    disabled
+                    className="cursor-pointer w-1/2"
+                    defaultValue={user ? user.address : ""}
+                  />
+                  <Dialog className="p-2">
+                    <DialogTrigger asChild>
+                      <button>
+                        <Pencil className="m-2 h-4 w-4 dark:text-gray-400 " />
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                      <DialogHeader>
+                        <DialogTitle>Edit Address</DialogTitle>
+                        <DialogDescription></DialogDescription>
+                      </DialogHeader>
+                      <div className="grid gap-4 py-4">
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label htmlFor="name" className="text-right">
+                            Address
+                          </Label>
+                          <Input id="address" className="col-span-3" />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label htmlFor="name" className="text-right">
+                            Apartment
+                          </Label>
+                          <Input id="apartment" className="col-span-3" />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label htmlFor="name" className="text-right">
+                            City
+                          </Label>
+                          <Input id="city" className="col-span-3" />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label htmlFor="name" className="text-right">
+                            Country
+                          </Label>
+                          <Input id="country" className="col-span-3" />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label htmlFor="name" className="text-right">
+                            ZIP code
+                          </Label>
+                          <Input id="zip" className="col-span-3" />
+                        </div>
+                      </div>
+                      <DialogFooter>
+                        <Button type="submit">Save changes</Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                </div>
               </div>
             </CardContent>
 
@@ -194,9 +259,11 @@ export function ProfilePage() {
               {/* <CardDescription>Your order history</CardDescription> */}
             </CardHeader>
             <CardContent>
-              <p className=" text-gray-500 text-center  text-lg">
+              {/* <p className=" text-gray-500 text-center  text-lg">
                 You haven't placed any orders yet.
-              </p>
+              </p> */}
+
+              <OrdersTable />
             </CardContent>
           </Card>
         </TabsContent>

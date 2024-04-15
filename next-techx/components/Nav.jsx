@@ -233,7 +233,7 @@ export default function Nav() {
                     className="flex text-sm  rounded-full md:me-0  "
                   >
                     <span className="sr-only">Open user menu</span>
-                    <Avatar>
+                    <Avatar className="p-1">
                       <AvatarImage src="https://github.com/" />
                       <AvatarFallback className="uppercase">
                         {user.name.substring(0, 2)}
