@@ -47,7 +47,8 @@ function ProductSelection() {
     const ToGetData = async (type_p) => {
       SetProducts([]);
 
-      try {
+      try 
+      {
         const formatted_data = await fetch(
           `http://localhost:3001/GetDataForListProduct/${type_p}`,
           {
@@ -56,7 +57,8 @@ function ProductSelection() {
           }
         );
 
-        if (formatted_data.ok) SetProducts(await formatted_data.json());
+        if (formatted_data.ok) 
+          SetProducts(await formatted_data.json());
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -65,8 +67,10 @@ function ProductSelection() {
     const params = new URLSearchParams(window.location.search);
     const product_type = params.get("type");
 
-    if (product_type !== null) {
-      switch (product_type) {
+    if (product_type !== null) 
+    {
+      switch (product_type) 
+      {
         case "Iphone":
           ToGetData("Iphone");
           break;
@@ -78,6 +82,12 @@ function ProductSelection() {
           break;
         case "Macbook":
           ToGetData("Macbook");
+          break;
+        case "Ipad":
+          ToGetData("Ipad");
+          break;
+        case "Console":
+          ToGetData("Console");
           break;
       }
     } else window.location.href = "/404";

@@ -15,6 +15,8 @@ import { IPhoneModel } from "./Models/IPhone.js";
 import { AirPodsModel } from "./Models/AirPods.js";
 import { AppleWatchModel } from "./Models/AppleWatch.js";
 import { MacbookModel } from "./Models/Macbook.js";
+import { IpadModel } from "./Models/IpadModel.js";
+import { ConsoleModel } from "./Models/ConsoleModel.js";
 import { ProductReviewModel } from "./Models/ProductReview.js";
 
 
@@ -284,14 +286,87 @@ app.post("/SearchForProducts", async (req, res) =>
       ]
     }).select("images model price");
 
-    const formatted_data_iphones = iphones.map(phone => 
+    const formatted_data_iphones = iphones.map(i => 
     {
-      return { _id: phone.id, images: phone.images[0], model: phone.model, price: phone.price };
+      return { _id: i.id, images: i.images[0], model: i.model, price: i.price };
     });
 
-    // Поиск в MacBookModel (подобным образом).
+    const airpods = await AirPodsModel.find(
+    {
+      $or: 
+      [
+        { brand: { $regex: query, $options: "i" } },
+        { category: { $regex: query, $options: "i" } },
+        { model: { $regex: query, $options: "i" } }
+      ]
+    }).select("images model price");
 
-    const all_products = [...formatted_data_iphones /*, ...macbooks*/];  // Объединение результатов из обеих коллекций.
+    const formatted_data_airpods = airpods.map(i => 
+    {
+      return { _id: i.id, images: i.images[0], model: i.model, price: i.price };
+    });
+
+    const applewatchs = await AppleWatchModel.find(
+    {
+      $or: 
+      [
+        { brand: { $regex: query, $options: "i" } },
+        { category: { $regex: query, $options: "i" } },
+        { model: { $regex: query, $options: "i" } }
+      ]
+    }).select("images model price");
+  
+    const formatted_data_applewatchs = applewatchs.map(i => 
+    {
+      return { _id: i.id, images: i.images[0], model: i.model, price: i.price };
+    });
+
+    const macbooks = await MacbookModel.find(
+    {
+      $or: 
+      [
+        { brand: { $regex: query, $options: "i" } },
+        { category: { $regex: query, $options: "i" } },
+        { model: { $regex: query, $options: "i" } }
+      ]
+    }).select("images model price");
+  
+    const formatted_data_macbooks = macbooks.map(i => 
+    {
+      return { _id: i.id, images: i.images[0], model: i.model, price: i.price };
+    });
+
+    const ipads = await IpadModel.find(
+    {
+      $or: 
+      [
+        { brand: { $regex: query, $options: "i" } },
+        { category: { $regex: query, $options: "i" } },
+        { model: { $regex: query, $options: "i" } }
+      ]
+    }).select("images model price");
+  
+    const formatted_data_ipads = ipads.map(i => 
+    {
+      return { _id: i.id, images: i.images[0], model: i.model, price: i.price };
+    });
+
+    const consoles = await ConsoleModel.find(
+    {
+      $or: 
+      [
+        { brand: { $regex: query, $options: "i" } },
+        { category: { $regex: query, $options: "i" } },
+        { model: { $regex: query, $options: "i" } }
+      ]
+    }).select("images model price");
+  
+    const formatted_data_consoles = consoles.map(i => 
+    {
+      return { _id: i.id, images: i.images[0], model: i.model, price: i.price };
+    });
+
+    const all_products = [...formatted_data_iphones , ...formatted_data_airpods, ...formatted_data_applewatchs, ...formatted_data_macbooks, ...formatted_data_ipads, ...formatted_data_consoles]; 
 
     res.status(200).json(all_products);
   } 
@@ -421,6 +496,48 @@ app.post("/GetDataForListProduct/Macbook", async (req, res) =>
   }
 });
 
+        // Getting Ipad data for list product.
+app.post("/GetDataForListProduct/Ipad", async (req, res) => 
+{
+  try 
+  {
+    const ipads = await IpadModel.find();
+
+    const formatted_data = ipads.map(ipad => 
+    {
+      return { id: ipad.id, images: ipad.images[0], model: ipad.model, memory: ipad.memory[0], color: ipad.color[0], price: ipad.price };
+    });
+
+    res.status(200).json(formatted_data);
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
+        // Getting Console data for list product.
+app.post("/GetDataForListProduct/Console", async (req, res) => 
+{
+  try 
+  {
+    const consoles = await ConsoleModel.find();
+
+    const formatted_data = consoles.map(console => 
+    {
+      return { id: console.id, images: console.images[0], model: console.model, memory: console.memory, color: console.color[0], price: console.price };
+    });
+
+    res.status(200).json(formatted_data);
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
         // Getting Product data for product-detail.
 app.post("/ExtractData/:id", async (req, res) => 
 {
@@ -459,6 +576,22 @@ app.post("/ExtractData/:id", async (req, res) =>
       if (macbook_data) 
       {
         res.status(200).json(macbook_data);
+        return;
+      }
+
+      const ipad_data = await IpadModel.findById(_id);
+
+      if (ipad_data) 
+      {
+        res.status(200).json(ipad_data);
+        return;
+      }
+
+      const console_data = await ConsoleModel.findById(_id);
+
+      if (console_data) 
+      {
+        res.status(200).json(console_data);
         return;
       }
       else
@@ -585,6 +718,22 @@ app.post("/GetFavoriteProduct/:id", async (req, res) =>
     if(macbook_data)
     {
       res.status(200).json({ id: macbook_data.id, images: macbook_data.images[0], model: macbook_data.model, price: macbook_data.price });
+      return;
+    }
+
+    const ipad_data = await IpadModel.findById(product_object_id);
+
+    if(ipad_data)
+    {
+      res.status(200).json({ id: ipad_data.id, images: ipad_data.images[0], model: ipad_data.model, price: ipad_data.price });
+      return;
+    }
+
+    const console_data = await ConsoleModel.findById(product_object_id);
+
+    if(console_data)
+    {
+      res.status(200).json({ id: console_data.id, images: console_data.images[0], model: console_data.model, price: console_data.price });
       return;
     }
     else

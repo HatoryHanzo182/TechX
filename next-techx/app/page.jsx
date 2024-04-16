@@ -92,13 +92,13 @@ export default async function Home() {
             />
           </Link>
 
-          <Link href="/product">
+          <Link href={{ pathname: "/product", query: { type: "Ipad" } }}>
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/home_cats/ipad-pcfull.jpg.webp"
               title="Ipad"
             />
           </Link>
-          <Link href="/product">
+          <Link href={{ pathname: "/product", query: { type: "Console" } }}>
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/cataloge-2/main-page-2/2020-07-31%2010.30.31%201-1397x1397full.jpg.webp"
               title="PlayStation"
