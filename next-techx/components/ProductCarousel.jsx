@@ -92,6 +92,7 @@ export function ProductCarousel() {
                 <ProductCards
                   key={phoneIndex}
                   image={`http://localhost:3001/GetImage/${phone.images}`}
+                  color={phone.color}
                   title={phone.model}
                   price={phone.price}
                 />

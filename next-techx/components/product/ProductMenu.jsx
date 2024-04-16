@@ -29,6 +29,15 @@ function ProductSelection() {
     "Blue Titanium",
     "Natural Titanium",
     "White Titanium",
+    "Blue",
+    "Alpine Green",
+    "Midnight",
+    "Green",
+    "Pink",
+    "Deep Purple",
+    "Starlight",
+    "Gold",
+    
   ];
   const versionOptions = ["Global", "e-Sim"];
 
@@ -266,7 +275,7 @@ function ProductSelection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ml-10 gap-4 ">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 ml-10 gap-4 ">
           {products.map((product) => (
             <Link
               key={product.id}

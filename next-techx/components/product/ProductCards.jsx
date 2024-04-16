@@ -3,7 +3,7 @@ import React from "react";
 
 const ProductCards = (props) => {
   return (
-    <div className="m-4 md:m-2 w-[180px] md:w-[150px] h-[280px] md:h-[180px] lg:w-[200px] lg:h-[320px] border rounded-lg shadow bg-[#1d1d1d] border-[#1d1d1d] flex flex-col">
+    <div className="m-4 md:m-2 w-[160px] md:w-[100px] h-[280px] md:h-[160px] lg:w-[200px] lg:h-[320px] border rounded-lg shadow bg-[#1d1d1d] border-[#1d1d1d] flex flex-col">
       <div className="h-1/2 w-full flex justify-center items-center p-2">
         <img
           className="h-full w-full p-2 object-contain"
@@ -15,8 +15,8 @@ const ProductCards = (props) => {
         <h5 className="text-sm md:text-xs lg:text-base font-semibold tracking-tight text-white overflow-hidden">
           {props.title}
         </h5>
-        <p className="text-sm text-gray-500">Black Titanium</p>
-        <p className="text-sm text-gray-600">256 GB</p>
+        <p className="text-sm text-gray-500">{props.color}</p>
+        <p className="text-sm text-gray-600">{props.memory}</p>
         <hr className="border-t-[0.1px] border-gray-300 my-1"></hr>
         <div className="flex justify-between items-center">
           <span className="text-sm md:text-xs lg:text-base font-bold text-white">
