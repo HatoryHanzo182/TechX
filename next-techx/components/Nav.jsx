@@ -23,6 +23,7 @@ import { useAuth } from "@/app/providers";
 // import { ReloadIcon } from "@radix-ui/react-icons";
 // import { Button } from "@/components/ui/button";
 import DropMenu from "./buttons/Dropdown.jsx";
+import MobileMenu from "./buttons/BurgerMenu.jsx";
 import Cart from "./buttons/Сart";
 import { User2Icon, UserCircle } from "lucide-react";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
@@ -380,69 +381,70 @@ export default function Nav() {
               </div>
             )}
           </nav>
-          <Dialog
-            as="div"
-            className="lg:hidden"
-            open={mobileMenuOpen}
-            onClose={setMobileMenuOpen}
-          >
-            <div className="fixed inset-0 z-50" />
-            <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto dark:bg-black bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-              <div className="flex items-center justify-between">
-                <a href="#" className="-m-1.5 p-1.5">
-                  <h1 className="text-white font-bold text-2xl">techX</h1>
-                </a>
-                {mobileMenuOpen && (
-                  <button
-                    type="button"
-                    className="-m-2.5 rounded-md p-2.5 dark:text-white text-black"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="sr-only">Close menu</span>
-                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                )}
+<Dialog
+  as="div"
+  className="lg:hidden"
+  open={mobileMenuOpen}
+  onClose={setMobileMenuOpen}
+>
+  <div className="fixed inset-0 bg-black z-50 overflow-hidden" />
+  <Dialog.Panel className="fixed inset-0 z-50 overflow-y-auto dark:bg-black bg-white">
+    <div className="flex items-center justify-between p-6">
+      <a href="#" className="-m-1.5 p-1.5">
+        <h1 className="text-white font-bold text-2xl">techX</h1>
+      </a>
+      {mobileMenuOpen && (
+        <button
+          type="button"
+          className="-m-2.5 rounded-md p-2.5 dark:text-white text-black"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <span className="sr-only">Close menu</span>
+          <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+        </button>
+      )}
+    </div>
+    <div className="p-6">
+      <MobileMenu />
+      <div className="divide-y divide-gray-500/10">
+        <div className="space-y-2 py-6">
+          {navigation.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 dark:text-white text-black"
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+        {isLoggedIn ? (
+          <div className="py-6 flex flex-1 lg:justify-end">
+            <Link href="/profile">
+              <Avatar>
+                <AvatarImage src="https://github.com/" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </Link>
+          </div>
+        ) : (
+          <div className="py-6">
+            <Link href="/signin">
+              <div className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 dark:text-white text-black">
+                Log in
               </div>
-              <div className="mt-6 flow-root">
-                <div className="-my-6  divide-y divide-gray-500/10">
-                  <div className="space-y-2 py-6">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 dark:text-white text-black"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div>
-                  {isLoggedIn ? (
-                    <div className="py-6 flex flex-1 lg:justify-end">
-                      <Link href="/profile">
-                        {/* <div className="text-sm font-semibold leading-6 border rounded-xl p-3 dark:text-white text-black mr-3 dark:hover:bg-gray-900"></div> */}
-                        <Avatar>
-                          <AvatarImage src="https://github.com/" />
-                          <AvatarFallback>CN</AvatarFallback>
-                        </Avatar>
-                      </Link>
-                    </div>
-                  ) : (
-                    <div className="py-6">
-                      <Link href="/signin">
-                        <div className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 dark:text-white text-black"></div>
-                        Log in
-                      </Link>
-                      <Link href="/signup">
-                        <div className="-mx-3 block cursor-pointer rounded-lg px-3 py-2.5 text-base font-semibold leading-7 dark:text-white text-black">
-                          Sign up
-                        </div>
-                      </Link>
-                    </div>
-                  )}
-                </div>
+            </Link>
+            <Link href="/signup">
+              <div className="-mx-3 block cursor-pointer rounded-lg px-3 py-2.5 text-base font-semibold leading-7 dark:text-white text-black">
+                Sign up
               </div>
-            </Dialog.Panel>
-          </Dialog>
+            </Link>
+          </div>
+        )}
+      </div>
+    </div>
+  </Dialog.Panel>
+</Dialog>
         </header>
       </div>
     </main>
