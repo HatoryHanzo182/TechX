@@ -92,6 +92,7 @@ export default function Nav() {
       if (response.ok) {
         console.log(data.message);
         localStorage.removeItem("token");
+        localStorage.removeItem("Cart");
         window.location.reload();
       } else console.error(data.message);
     } catch (error) {
@@ -99,15 +100,17 @@ export default function Nav() {
     }
   };
 
-  const OpenCart = () => {
-    const Iphone = { img: "IMGING.png", model: "iphone", price: 100.0 };
-    const ArrayCoast = [Iphone, Iphone, Iphone, Iphone];
+  const OpenCart = () => 
+  {
+    // const Iphone = { img: "IMGING.png", model: "iphone", price: 100.0 };
+    // const ArrayCoast = [Iphone, Iphone, Iphone, Iphone];
 
-    console.log(ArrayCoast);
-    localStorage.setItem("Cart", JSON.stringify(ArrayCoast));
+    // console.log(ArrayCoast);
+    // localStorage.setItem("Cart", JSON.stringify(ArrayCoast));
   };
 
-  const handleChangeSerch = (e) => {
+  const handleChangeSerch = (e) => 
+  {
     const query = e.target.value.trim();
 
     if (query === "") return;

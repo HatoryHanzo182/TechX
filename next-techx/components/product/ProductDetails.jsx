@@ -12,7 +12,7 @@ import { PullOutOfSession } from "@/lib/session";
 import { get } from "mongoose";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Button } from "../ui/button";  
 
 const ProductDetails = () => {
   let [capacity, setCapacity] = useState("128");
@@ -56,27 +56,26 @@ const ProductDetails = () => {
     }
   };
 
-  useEffect(() => {
-    const handleScroll = (event) => {
+  useEffect(() => 
+  {
+    const handleScroll = (event) => 
+    {
       event.preventDefault();
 
       const targetId = event.target.getAttribute("href").slice(1);
       const targetElement = document.getElementById(targetId);
 
       if (targetElement)
-        window.scrollTo({ top: targetElement.offsetTop, behavior: "smooth" });
+       window.scrollTo({ top: targetElement.offsetTop, behavior: "smooth" });
     };
 
     const scrollLinks = document.querySelectorAll('a[href^="#"]');
 
-    scrollLinks.forEach((link) => {
-      link.addEventListener("click", handleScroll);
-    });
+    scrollLinks.forEach((link) => { link.addEventListener("click", handleScroll); });
 
-    return () => {
-      scrollLinks.forEach((link) => {
-        link.removeEventListener("click", handleScroll);
-      });
+    return () => 
+    {
+      scrollLinks.forEach((link) => { link.removeEventListener("click", handleScroll); });
     };
   }, []);
 
@@ -157,6 +156,17 @@ const ProductDetails = () => {
   const handleRatingChange = (event) => {
     SetGrade(Number(event.target.value));
   };
+
+  const handleAddToCart = async () => 
+  {
+    const p_in_cart = { img: product_data.images[0], model: product_data.model, price: product_data.price };
+    const array_coast = JSON.parse(localStorage.getItem("Cart")) || [];
+
+    array_coast.push(p_in_cart);
+    localStorage.setItem("Cart", JSON.stringify(array_coast));    
+
+    //    выведете сообщение пользователю о том что товар добавлен в корзину или анимацию, что бы было понятно что добавлено в корзину.
+  }
 
   const handleSendReview = async (e) => {
     e.preventDefault();
@@ -516,8 +526,14 @@ const ProductDetails = () => {
                   </div>
                 </div>
                 <div className="mt-6 ">
-                  <button className="w-full px-4 py-2 font-bold text-white bg-black border lg:w-96 hover:bg-blue-800">
-                    Continue
+                  <button className="w-full flex items-center justify-between px-4 py-2 font-bold text-white bg-black border lg:w-96 hover:bg-blue-800" onClick={() => handleAddToCart()}>
+                    <span>Add to cart</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="ionicon ml-2" viewBox="0 0 512 512" width={20} height={20}>
+                      <circle cx="176" cy="416" r="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+                      <circle cx="400" cy="416" r="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+                      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M48 80h64l48 272h256"/>
+                      <path d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+                    </svg>
                   </button>
                 </div>
                 <div className="flex items-center mt-6 ">
