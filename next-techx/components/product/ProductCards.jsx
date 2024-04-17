@@ -3,7 +3,7 @@ import React from "react";
 
 const ProductCards = (props) => {
   return (
-    <div className="m-4 md:m-2 w-[160px] md:w-[100px] h-[280px] md:h-[160px] lg:w-[200px] lg:h-[320px] border rounded-lg shadow bg-[#1d1d1d] border-[#1d1d1d] flex flex-col">
+    <div className="m-4 md:m-2 w-[160px] md:w-[140px] h-[280px] md:h-[200px] lg:w-[200px] lg:h-[320px] border rounded-lg shadow bg-[#1d1d1d] border-[#1d1d1d] flex flex-col">
       <div className="h-1/2 w-full flex justify-center items-center p-2">
         <img
           className="h-full w-full p-2 object-contain"
