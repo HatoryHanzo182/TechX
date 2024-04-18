@@ -46,7 +46,7 @@ const Cart = () => {
   };
 
   const GoCheckout = () => {
-    window.location.href = "/сheckout";
+    window.location.href = "/checkout";
   };
 
   const ClearAllFromCart = (e) => {
@@ -113,7 +113,7 @@ const Cart = () => {
             <SheetFooter>
               <SheetClose asChild>
                 <Button type="button" onClick={GoCheckout}>
-                  Go сheckout
+                  Checkout
                 </Button>
               </SheetClose>
               <SheetClose>
