@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bars3Icon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
-// import { IoCartOutline } from "react-icons/io5";
+
 import Link from "next/link";
 import { MagnifyingGlassIcon, PersonIcon } from "@radix-ui/react-icons";
 import {
@@ -17,11 +17,9 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
-// import { PullOutOfSession } from "../lib/session";
-// import { signOut } from "next-auth/react";
+
 import { useAuth } from "@/app/providers";
-// import { ReloadIcon } from "@radix-ui/react-icons";
-// import { Button } from "@/components/ui/button";
+
 import DropMenu from "./buttons/Dropdown.jsx";
 import BurgerMenu from "./buttons/BurgerMenu.jsx";
 import Cart from "./buttons/Сart";
@@ -100,17 +98,14 @@ export default function Nav() {
     }
   };
 
-  const OpenCart = () => 
-  {
+  const OpenCart = () => {
     // const Iphone = { img: "IMGING.png", model: "iphone", price: 100.0 };
     // const ArrayCoast = [Iphone, Iphone, Iphone, Iphone];
-
     // console.log(ArrayCoast);
     // localStorage.setItem("Cart", JSON.stringify(ArrayCoast));
   };
 
-  const handleChangeSerch = (e) => 
-  {
+  const handleChangeSerch = (e) => {
     const query = e.target.value.trim();
 
     if (query === "") return;
@@ -226,9 +221,9 @@ export default function Nav() {
                     )}
                   </CommandDialog>
 
-                  <Link href="#" onClick={OpenCart}>
+                  <button onClick={OpenCart}>
                     <Cart />
-                  </Link>
+                  </button>
                 </div>
                 <div className="relative inline-block text-left">
                   <button
@@ -340,9 +335,9 @@ export default function Nav() {
                       <CommandEmpty>No results found.</CommandEmpty>
                     )}
                   </CommandDialog>
-                  <Link href="#" className="w-6 h-6 ml-2" onClick={OpenCart}>
+                  <button className="w-6 h-6 ml-2" onClick={OpenCart}>
                     <Cart />
-                  </Link>
+                  </button>
                 </div>
                 <div className="relative inline-block text-left">
                   <button

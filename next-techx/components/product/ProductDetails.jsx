@@ -11,8 +11,10 @@ import { motion } from "framer-motion";
 import { PullOutOfSession } from "@/lib/session";
 import { get } from "mongoose";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";  
+import { Button } from "../ui/button";
+import { SketchLogoIcon } from "@radix-ui/react-icons";
 
 const ProductDetails = () => {
   let [capacity, setCapacity] = useState("128");
@@ -24,11 +26,29 @@ const ProductDetails = () => {
   const [user_review, SetUserReview] = useState("");
   const [grade, SetGrade] = useState(0);
   const [liked, setLiked] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    let timer;
+
+    if (showAlert) {
+      timer = setTimeout(() => {
+        setShowAlert(false); // Скрывает Alert через 2 секунды
+      }, 4000); // 2000 мс = 2 секунды
+    }
+
+    return () => clearTimeout(timer); // Очистка таймера
+  }, [showAlert]);
 
   // Функция для переключения состояния лайка
   const toggleLike = async () => {
     setLiked(!liked);
 
+    setShowAlert(true);
+    setMessage(
+      liked ? "Product removed from favorites" : "Product added to favorites"
+    );
     const id_product = new URLSearchParams(window.location.search).get("id");
 
     if (!liked) {
@@ -56,26 +76,27 @@ const ProductDetails = () => {
     }
   };
 
-  useEffect(() => 
-  {
-    const handleScroll = (event) => 
-    {
+  useEffect(() => {
+    const handleScroll = (event) => {
       event.preventDefault();
 
       const targetId = event.target.getAttribute("href").slice(1);
       const targetElement = document.getElementById(targetId);
 
       if (targetElement)
-       window.scrollTo({ top: targetElement.offsetTop, behavior: "smooth" });
+        window.scrollTo({ top: targetElement.offsetTop, behavior: "smooth" });
     };
 
     const scrollLinks = document.querySelectorAll('a[href^="#"]');
 
-    scrollLinks.forEach((link) => { link.addEventListener("click", handleScroll); });
+    scrollLinks.forEach((link) => {
+      link.addEventListener("click", handleScroll);
+    });
 
-    return () => 
-    {
-      scrollLinks.forEach((link) => { link.removeEventListener("click", handleScroll); });
+    return () => {
+      scrollLinks.forEach((link) => {
+        link.removeEventListener("click", handleScroll);
+      });
     };
   }, []);
 
@@ -157,16 +178,21 @@ const ProductDetails = () => {
     SetGrade(Number(event.target.value));
   };
 
-  const handleAddToCart = async () => 
-  {
-    const p_in_cart = { img: product_data.images[0], model: product_data.model, price: product_data.price };
+  const handleAddToCart = async () => {
+    const p_in_cart = {
+      img: product_data.images[0],
+      model: product_data.model,
+      price: product_data.price,
+    };
     const array_coast = JSON.parse(localStorage.getItem("Cart")) || [];
 
     array_coast.push(p_in_cart);
-    localStorage.setItem("Cart", JSON.stringify(array_coast));    
+    localStorage.setItem("Cart", JSON.stringify(array_coast));
 
     //    выведете сообщение пользователю о том что товар добавлен в корзину или анимацию, что бы было понятно что добавлено в корзину.
-  }
+    setShowAlert(true);
+    setMessage("Product added to cart");
+  };
 
   const handleSendReview = async (e) => {
     e.preventDefault();
@@ -242,7 +268,16 @@ const ProductDetails = () => {
 
   return (
     <main>
-      <section className="py-20 font-poppins  mt-5 ">
+      <div className="fixed right-0 top-2 mr-4 mt-4 w-[300px]">
+        {showAlert && message && (
+          <Alert>
+            <SketchLogoIcon />
+            <AlertTitle>Some message...</AlertTitle>
+            <AlertDescription>{message}</AlertDescription>
+          </Alert>
+        )}
+      </div>
+      <section className="py-20 font-poppins   ">
         {/* <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
               <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                 style={{ clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",}}/>
@@ -448,31 +483,7 @@ const ProductDetails = () => {
                     </div>
                   </RadioGroup>
                 </div>
-                {/* <div className="mt-6">
-                  <p className="mb-4 text-lg font-semibold dark:text-gray-400">
-                    Choose a payment option
-                  </p>
-                  <div className="grid grid-cols-2 gap-4 pb-4 mt-2 mb-4 border-b-2 border-gray-300 lg:grid-cols-3 dark:border-gray-600">
-                    <div>
-                      <button className="flex items-center justify-center w-full h-full px-2 py-6 border-2 border-gray-300 dark:hover:border-blue-400 dark:border-gray-600 hover:border-blue-400">
-                        <div>
-                          <p className="px-2 text-base font-semibold text-center text-gray-700 dark:text-gray-400">
-                            Pay in full
-                          </p>
-                        </div>
-                      </button>
-                    </div>
-                    <div>
-                      <button className="flex items-center justify-center w-full h-full px-2 py-6 border-2 border-gray-300 dark:hover:border-blue-400 dark:border-gray-600 hover:border-blue-400">
-                        <div>
-                          <p className="px-2 text-base font-semibold text-center text-gray-700 dark:text-gray-400">
-                            Pay monthly
-                          </p>
-                        </div>
-                      </button>
-                    </div>
-                  </div>
-                </div> */}
+
                 <div className="mt-6 ">
                   <div className="flex flex-wrap items-center">
                     <span className="mr-2">
@@ -526,15 +537,56 @@ const ProductDetails = () => {
                   </div>
                 </div>
                 <div className="mt-6 ">
-                  <button className="w-full flex items-center justify-between px-4 py-2 font-bold text-white bg-black border lg:w-96 hover:bg-blue-800" onClick={() => handleAddToCart()}>
+                  <Button
+                    className="w-full flex items-center justify-between px-4 py-2 font-bold text-white bg-black border lg:w-96 hover:bg-blue-800"
+                    onClick={() => handleAddToCart()}
+                  >
                     <span>Add to cart</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="ionicon ml-2" viewBox="0 0 512 512" width={20} height={20}>
-                      <circle cx="176" cy="416" r="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
-                      <circle cx="400" cy="416" r="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
-                      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M48 80h64l48 272h256"/>
-                      <path d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="ionicon ml-2"
+                      viewBox="0 0 512 512"
+                      width={20}
+                      height={20}
+                    >
+                      <circle
+                        cx="176"
+                        cy="416"
+                        r="16"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="32"
+                      />
+                      <circle
+                        cx="400"
+                        cy="416"
+                        r="16"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="32"
+                      />
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="32"
+                        d="M48 80h64l48 272h256"
+                      />
+                      <path
+                        d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="32"
+                      />
                     </svg>
-                  </button>
+                  </Button>
                 </div>
                 <div className="flex items-center mt-6 ">
                   <div>
