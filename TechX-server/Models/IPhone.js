@@ -19,7 +19,8 @@ const IPhoneSchema = new mongoose.Schema(
   os: String,
   camera: String,
   processor: String,
-  images: [String]
+  images: [String],
+  incarousel: Boolean
 }, { collection:  'Iphone' })
 
 const IPhoneModel = mongoose.model('phone', IPhoneSchema);

@@ -16,7 +16,8 @@ const AirPodsSchema = new mongoose.Schema(
   description: String,
   processor: String,
   battery: String,
-  images: [String]
+  images: [String],
+  incarousel: Boolean
 }, { collection:  'AirPods' })
 
 const AirPodsModel = mongoose.model('airpods', AirPodsSchema);

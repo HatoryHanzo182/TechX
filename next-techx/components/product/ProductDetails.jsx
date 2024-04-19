@@ -18,6 +18,7 @@ import { SketchLogoIcon } from "@radix-ui/react-icons";
 
 const ProductDetails = () => {
   let [capacity, setCapacity] = useState("128");
+  let [ID_product_no_repeat, SetIDProductNoRepeat] = useState();
   const [show_logged_content, SetShowLoggedContent] = useState(false);
   const [product_data, SetProductData] = useState();
   const [selectedImage, setSelectedImage] = useState();
@@ -163,12 +164,17 @@ const ProductDetails = () => {
 
     const params = new URLSearchParams(window.location.search);
 
-    if (localStorage.getItem("token") !== null) SetShowLoggedContent(true);
+    if (localStorage.getItem("token") !== null) 
+      SetShowLoggedContent(true);
 
-    ToGetData(params.get("id"));
-    GetProductReviews();
-    FindFavorite();
-  }, [window.location.search]);
+    if(ID_product_no_repeat !== params.get("id"))
+    {
+      SetIDProductNoRepeat(params.get("id"));
+      ToGetData(params.get("id"));
+      GetProductReviews();
+      FindFavorite(); 
+    }
+  }, [new URLSearchParams(window.location.search)]);
 
   const handleImageClick = (image) => {
     setSelectedImage(image);

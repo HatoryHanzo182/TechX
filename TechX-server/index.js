@@ -393,16 +393,54 @@ app.get('/GetImage/:ImageName', (req, res) =>
       res.status(404).send('Image not found');
 });
 
-        // Getting Iphone data for carusel.
-app.post("/GettingIphoneDataForCarusel", async (req, res) => 
+        // Getting data for carusel.
+app.post("/GettingDataForCarusel", async (req, res) => 
 {
   try 
   {
     const iphones = await IPhoneModel.find();
-    const formatted_data = iphones.map(phone => 
+  
+    const formatted_data_iphones = iphones.map(i => 
     {
-      return { images: phone.images[0], model: phone.model, price: phone.price };
+      return { id: i.id, images: i.images[0], model: i.model, price: i.price };
     });
+
+    const airpods = await AirPodsModel.find();
+
+    const formatted_data_airpods = airpods.map(i => 
+    {
+      return { id: i.id, images: i.images[0], model: i.model, price: i.price };
+    });
+
+    const applewatchs = await AppleWatchModel.find();
+  
+    const formatted_data_applewatchs = applewatchs.map(i => 
+    {
+      return { id: i.id, images: i.images[0], model: i.model, price: i.price };
+    });
+
+    const macbooks = await MacbookModel.find();
+  
+    const formatted_data_macbooks = macbooks.map(i => 
+    {
+      return { id: i.id, images: i.images[0], model: i.model, price: i.price };
+    });
+
+    const ipads = await IpadModel.find();
+  
+    const formatted_data_ipads = ipads.map(i => 
+    {
+      return { id: i.id, images: i.images[0], model: i.model, price: i.price };
+    });
+
+    const consoles = await ConsoleModel.find();
+  
+    const formatted_data_consoles = consoles.map(i => 
+    {
+      return { id: i.id, images: i.images[0], model: i.model, price: i.price };
+    });
+
+    const formatted_data = [...formatted_data_iphones , ...formatted_data_airpods, ...formatted_data_applewatchs, ...formatted_data_macbooks, ...formatted_data_ipads, ...formatted_data_consoles]; 
 
     res.status(200).json(formatted_data);
   } 

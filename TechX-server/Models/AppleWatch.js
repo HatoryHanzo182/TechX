@@ -22,7 +22,8 @@ const AppleWatchSchema = new mongoose.Schema(
   RAM: String,
   CPU: String,
   GPU: String,
-  images: [String]
+  images: [String],
+  incarousel: Boolean
 }, { collection:  'Watch' })
 
 const AppleWatchModel = mongoose.model('applewatchs', AppleWatchSchema);

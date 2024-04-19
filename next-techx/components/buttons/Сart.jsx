@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/sheet";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 import {
   LucideShoppingCart,
@@ -22,10 +22,14 @@ import {
 } from "lucide-react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 
-const Cart = () => {
-  const [stored_array, SetStoredArray] = useState(
-    JSON.parse(localStorage.getItem("Cart")) || []
-  );
+const Cart = () => 
+{
+  const [stored_array, SetStoredArray] = useState([]);
+
+  useEffect(() =>
+  {
+    SetStoredArray(JSON.parse(localStorage.getItem("Cart")) || []);
+  }, [localStorage.getItem("Cart")]);
 
   const RemoveFromCart = (index) => {
     const updated_сart = [...stored_array];

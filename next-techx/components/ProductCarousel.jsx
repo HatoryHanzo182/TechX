@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Link from "next/link";
 import ProductCards from "./product/ProductCards";
 import { useState, useEffect } from "react";
 
@@ -17,21 +18,22 @@ import { useState, useEffect } from "react";
 // *************************************************************
 //
 export function ProductCarousel() {
-  const [iphone, SetIphone] = useState([]);
+  const [c_data, SetCData] = useState([]);
   const [carouselSlideWidth, SetCarouselSlideWidth] = useState(4); // Предположим, что по умолчанию отображается 5 элементов
 
   useEffect(() => {
     const ToGetData = async () => {
       try {
         const formatted_data = await fetch(
-          "http://localhost:3001/GettingIphoneDataForCarusel",
+          "http://localhost:3001/GettingDataForCarusel",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
           }
         );
 
-        if (formatted_data.ok) SetIphone(await formatted_data.json());
+        if (formatted_data.ok) 
+        SetCData(await formatted_data.json());
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -62,7 +64,7 @@ export function ProductCarousel() {
   }, []);
 
   const iterations_array = Array.from(
-    { length: Math.ceil(iphone.length / carouselSlideWidth) },
+    { length: Math.ceil(c_data.length / carouselSlideWidth) },
     (_, index) => index
   );
 
@@ -78,25 +80,15 @@ export function ProductCarousel() {
       className="mx-20 max-w-full justify-center"
     >
       <CarouselContent className="-ml-1">
-        {iterations_array.map((iteration) => (
-          <CarouselItem
-            key={iteration}
-            className="flex flex-row justify-center p-2"
-          >
-            {iphone
-              .slice(
-                iteration * carouselSlideWidth,
-                (iteration + 1) * carouselSlideWidth
-              )
-              .map((phone, phoneIndex) => (
-                <ProductCards
-                  key={phoneIndex}
-                  image={`http://localhost:3001/GetImage/${phone.images}`}
-                  title={phone.model}
-                  color={phone.color}
-                  price={phone.price}
-                />
-              ))}
+        { iterations_array.map((iteration) => 
+        (
+          <CarouselItem key={iteration} className="flex flex-row justify-center p-2">
+            { c_data.slice(iteration * carouselSlideWidth, (iteration + 1) * carouselSlideWidth).map((d, Index) => 
+            (
+              <Link key={ d.id } href={{ pathname: "/product-detail", query: { id: `${d.id}` } }}>
+                <ProductCards key={ Index } image={`http://localhost:3001/GetImage/${ d.images }`} title={ d.model } color={ d.color } price={ d.price }/>
+              </Link>
+            ))}
           </CarouselItem>
         ))}
       </CarouselContent>

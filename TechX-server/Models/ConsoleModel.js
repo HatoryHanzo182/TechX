@@ -20,7 +20,8 @@ const ConsoleSchema = new mongoose.Schema(
   RAM: String,
   CPU: String,
   GPU: String,
-  images: [String]
+  images: [String],
+  incarousel: Boolean
 }, { collection:  'Console' })
 
 const ConsoleModel = mongoose.model('console', ConsoleSchema);
