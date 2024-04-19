@@ -1,8 +1,6 @@
-import React, { useState, Fragment } from 'react';
-import { Transition} from '@headlessui/react';
-import { Smartphone, Apple, Laptop, Gamepad2, Camera , ChevronLeft , ChevronRight} from 'lucide-react';
+import React, { useState} from 'react';
+import { Smartphone, Apple, Laptop, Gamepad2, Camera, ChevronLeft, ChevronRight } from 'lucide-react';
 
-// INFO : Example of categories
 const categories = [
   {
     icon: Smartphone,
@@ -57,59 +55,6 @@ const categories = [
           { name: "Galaxy S9", href: "/smartphones/samsung/galaxy-s9" },
         ],
       },
-      {
-        icon: Smartphone,
-        label: "Google",
-        href: "/smartphones/google",
-        products: [
-          { name: "Pixel 5", href: "/smartphones/google/pixel-5" },
-          { name: "Pixel 4a", href: "/smartphones/google/pixel-4a" },
-          { name: "Pixel 4 XL", href: "/smartphones/google/pixel-4-xl" },
-          { name: "Pixel 4", href: "/smartphones/google/pixel-4" },
-          { name: "Pixel 3a XL", href: "/smartphones/google/pixel-3a-xl" },
-          { name: "Pixel 3a", href: "/smartphones/google/pixel-3a" },
-          { name: "Pixel 3 XL", href: "/smartphones/google/pixel-3-xl" },
-          { name: "Pixel 3", href: "/smartphones/google/pixel-3" },
-          { name: "Pixel 2 XL", href: "/smartphones/google/pixel-2-xl" },
-          { name: "Pixel 2", href: "/smartphones/google/pixel-2" },
-        ],
-      },
-      {
-        icon: Smartphone,
-        label: "Google",
-        href: "/smartphones/google",
-        products: [
-          { name: "Pixel 5", href: "/smartphones/google/pixel-5" },
-          { name: "Pixel 4a", href: "/smartphones/google/pixel-4a" },
-          { name: "Pixel 4 XL", href: "/smartphones/google/pixel-4-xl" },
-          { name: "Pixel 4", href: "/smartphones/google/pixel-4" },
-          { name: "Pixel 3a XL", href: "/smartphones/google/pixel-3a-xl" },
-          { name: "Pixel 3a", href: "/smartphones/google/pixel-3a" },
-          { name: "Pixel 3 XL", href: "/smartphones/google/pixel-3-xl" },
-          { name: "Pixel 3", href: "/smartphones/google/pixel-3" },
-          { name: "Pixel 2 XL", href: "/smartphones/google/pixel-2-xl" },
-          { name: "Pixel 2", href: "/smartphones/google/pixel-2" },
-        ],
-      },
-
-      {
-        icon: Smartphone,
-        label: "Google",
-        href: "/smartphones/google",
-        products: [
-          { name: "Pixel 5", href: "/smartphones/google/pixel-5" },
-          { name: "Pixel 4a", href: "/smartphones/google/pixel-4a" },
-          { name: "Pixel 4 XL", href: "/smartphones/google/pixel-4-xl" },
-          { name: "Pixel 4", href: "/smartphones/google/pixel-4" },
-          { name: "Pixel 3a XL", href: "/smartphones/google/pixel-3a-xl" },
-          { name: "Pixel 3a", href: "/smartphones/google/pixel-3a" },
-          { name: "Pixel 3 XL", href: "/smartphones/google/pixel-3-xl" },
-          { name: "Pixel 3", href: "/smartphones/google/pixel-3" },
-          { name: "Pixel 2 XL", href: "/smartphones/google/pixel-2-xl" },
-          { name: "Pixel 2", href: "/smartphones/google/pixel-2" },
-        ],
-      },
-
       {
         icon: Smartphone,
         label: "Google",
@@ -206,81 +151,99 @@ const categories = [
   },
 ];
 
-const MobileMenu = () => {
-  const [activeMenu, setActiveMenu] = useState('main');
-  const [menuHistory, setMenuHistory] = useState(['main']);
-  const [selectedManufacturer, setSelectedManufacturer] = useState(null);
+const CategoryMenu = ({ category, goBack }) => {
+  const [activeBrand, setActiveBrand] = useState(null);
 
-  const handleManufacturerClick = (manufacturer) => {
-    setActiveMenu(manufacturer.label);
-    setMenuHistory(prev => [...prev, manufacturer.label]);
-    setSelectedManufacturer(manufacturer);
-  };
-
-  const handleGoBack = () => {
-    const newHistory = menuHistory.slice(0, menuHistory.length - 1);
-    setMenuHistory(newHistory);
-    setActiveMenu(newHistory[newHistory.length - 1]);
-    if (newHistory.length === 2) {
-      setSelectedManufacturer(null);
-    }
-  };
-
-  const handleCloseMenu = () => {
-    setMobileMenuOpen(false);
+  const handleBrandSelect = (brand) => {
+    setActiveBrand(brand);
   };
 
   return (
-    <div className="fixed inset-0 bg-black z-50 overflow-hidden">
-      {categories.map((category, index) => (
-        <Transition
-          as={Fragment}
-          show={activeMenu === category.label}
-          enter="transition ease-out duration-200"
-          enterFrom="translate-x-full"
-          enterTo="translate-x-0"
-          leave="transition ease-in duration-200"
-          leaveFrom="translate-x-0"
-          leaveTo="translate-x-full"
-          key={category.label}
-        >
-          <div className="space-y-1">
-            {menuHistory.length > 1 && (
-              <button
-                onClick={handleGoBack}
-                className="mb-5 flex items-center text-gray-300"
-              >
-                <ChevronLeft className="h-5 w-5 mr-2" />
-                Назад
-              </button>
-            )}
-            {selectedManufacturer ? (
-              selectedManufacturer.products.map((product, prodIndex) => (
-                <a key={prodIndex} href={product.href} onClick={handleCloseMenu} className="block p-2 hover:bg-gray-700 border-b border-gray-300 flex justify-between">
-                  {product.name}
-                  <ChevronRight className="h-5 w-5" />
-                </a>
-              ))
-            ) : (
-              category.items.map((item, itemIndex) => (
-                <button
-                  key={itemIndex}
-                  onClick={() => handleManufacturerClick(item)}
-                  className="flex items-center justify-between w-full p-2 hover:bg-gray-700 border-b border-gray-300"
-                >
-                  <span className="flex items-center">
-                    <item.icon className="h-6 w-6 mr-2" />
-                    {item.label}
-                  </span>
-                  <ChevronRight className="h-5 w-5" />
-                </button>
-              ))
-            )}
+    <>
+      {!activeBrand ? (
+        <>
+          <div className='flex items-center w-full border-b border-zinc-700'>
+            <button
+              onClick={goBack}
+              className="flex items-center px-4 py-2 w-full"
+            >
+              <ChevronLeft className="h-5 w-5 mr-2" />
+              {category.label}
+            </button>
           </div>
-        </Transition>
-      ))}
+          {category.items.map((item) => (
+            <button
+              key={item.label}
+              onClick={() => handleBrandSelect(item)}
+              className="flex items-center justify-between px-4 py-2 w-full border-b border-zinc-700"
+            >
+              <div className='flex items-center'> 
+                {item.icon && React.createElement(item.icon, { className: "h-5 w-5 mr-2" })}
+                {item.label}
+              </div>
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          ))}
+        </>
+      ) : (
+        <>
+          <button
+            onClick={() => setActiveBrand(null)}
+            className="flex items-center justify-between px-4 py-2 w-full border-b border-zinc-700"
+          >
+            <div className="flex items-center">
+              <ChevronLeft className="h-5 w-5 mr-2" />
+              {activeBrand.label}
+            </div>
+            <a href={activeBrand.href} className="text-gray-400">View all</a>
+          </button>
+          <div className="">
+            {activeBrand.products.map(product => (
+              <a
+                key={product.name}
+                href={product.href}
+                className="flex px-4 py-1 items-center px-4 py-2 w-full border-b border-zinc-700"
+              >
+                {activeBrand.icon && React.createElement(activeBrand.icon, { className: "h-5 w-5 mr-2" }, null)}
+                {product.name}
+              </a>
+            ))}
+          </div>
+        </>
+      )}
+    </>
+  );
+};
+
+const BurgerMenu = () => {
+
+const [activeCategory, setActiveCategory] = useState(null);
+
+  const showCategoryItems = (category) => {
+    setActiveCategory(category);
+  };
+
+  const goBackToCategories = () => {
+    setActiveCategory(null);
+  };
+
+return (
+    <div className="w-full bg-black overflow-y-auto">
+      {!activeCategory ? (
+        categories.map((category) => (
+          <div key={category.label} className="flex justify-between items-center text-white px-4 py-2 border-b border-zinc-700">
+            <button  onClick={() => showCategoryItems(category)} className="flex items-center w-full">
+              {category.icon && React.createElement(category.icon, { className: "h-5 w-5 mr-2" })}
+              {category.label}
+            </button>
+            <ChevronRight className="h-5 w-5" />
+          </div>
+        ))
+      ) : (
+        <CategoryMenu category={activeCategory} goBack={goBackToCategories} />
+      )}
     </div>
   );
 };
 
-export default MobileMenu;
+export default BurgerMenu;

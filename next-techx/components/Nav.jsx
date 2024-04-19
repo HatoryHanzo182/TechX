@@ -23,18 +23,18 @@ import { useAuth } from "@/app/providers";
 // import { ReloadIcon } from "@radix-ui/react-icons";
 // import { Button } from "@/components/ui/button";
 import DropMenu from "./buttons/Dropdown.jsx";
-import MobileMenu from "./buttons/BurgerMenu.jsx";
+import BurgerMenu from "./buttons/BurgerMenu.jsx";
 import Cart from "./buttons/Сart";
-import { User2Icon, UserCircle } from "lucide-react";
+import { User2Icon, UserCircle , ShoppingCart , Building2 , LayoutGrid} from "lucide-react";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Separator } from "@radix-ui/react-separator";
 import { Input } from "./ui/input.jsx";
 
 const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Marketplace", href: "#" },
-  { name: "Company", href: "#" },
+  { name: "Product", href: "#" , icon: LayoutGrid},
+  { name: "Features", href: "#" , icon: LayoutGrid},
+  { name: "Marketplace", href: "#" , icon: LayoutGrid},
+  { name: "Company", href: "#" , icon: Building2},
 ];
 
 export default function Nav() {
@@ -381,70 +381,60 @@ export default function Nav() {
               </div>
             )}
           </nav>
-<Dialog
-  as="div"
-  className="lg:hidden"
-  open={mobileMenuOpen}
-  onClose={setMobileMenuOpen}
->
-  <div className="fixed inset-0 bg-black z-50 overflow-hidden" />
-  <Dialog.Panel className="fixed inset-0 z-50 overflow-y-auto dark:bg-black bg-white">
-    <div className="flex items-center justify-between p-6">
-      <a href="#" className="-m-1.5 p-1.5">
-        <h1 className="text-white font-bold text-2xl">techX</h1>
-      </a>
-      {mobileMenuOpen && (
-        <button
-          type="button"
-          className="-m-2.5 rounded-md p-2.5 dark:text-white text-black"
-          onClick={() => setMobileMenuOpen(false)}
+        <Dialog
+          as="div"
+          className="lg:hidden"
+          open={mobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
         >
-          <span className="sr-only">Close menu</span>
-          <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-        </button>
-      )}
-    </div>
-    <div className="p-6">
-      <MobileMenu />
-      <div className="divide-y divide-gray-500/10">
-        <div className="space-y-2 py-6">
-          {navigation.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 dark:text-white text-black"
-            >
-              {item.name}
-            </a>
-          ))}
-        </div>
-        {isLoggedIn ? (
-          <div className="py-6 flex flex-1 lg:justify-end">
-            <Link href="/profile">
-              <Avatar>
-                <AvatarImage src="https://github.com/" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </Link>
-          </div>
-        ) : (
-          <div className="py-6">
-            <Link href="/signin">
-              <div className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 dark:text-white text-black">
-                Log in
+          <Dialog.Panel className="fixed inset-0 z-50 overflow-y-auto bg-black">
+            <div className="flex items-center justify-between p-6">
+              <a href="#" className="-m-1.5 p-1.5">
+                  <h1 className="text-white font-bold text-2xl">techX</h1>
+              </a> 
+              { /* <ShoppingCart className="fixed top-7 left-24 h-6 w-6 text-zinc-700" /> */}
+              {mobileMenuOpen && (
+                <button
+                  type="button"
+                  className="-m-2.5 rounded-md p-2.5 dark:text-white text-black"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <span className="sr-only">Close menu</span>
+                  <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
+              )}
+            </div>
+              <BurgerMenu />
+            <div className="fixed bottom-0 p-6 w-full border-t border-zinc-700">
+              <div className="divide-y divide-gray-500/10">
+                <div className="flex justify-around items-center">
+                  {navigation.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="flex flex-col items-center text-base font-semibold text-white hover:text-gray-300"
+                    >
+                      {item.icon && React.createElement(item.icon, { className: "h-5 w-5" })}
+                      {item.name}
+                    </a>
+                  ))}
+                  <Link href="/signin" className="flex flex-col items-center space-y-2">
+                    <User2Icon className="h-5 w-5 text-white" />
+                    <div className="rounded-lg text-base font-semibold text-white hover:text-gray-300">
+                      Log in
+                    </div>
+                  </Link>
+                  <Link href="/signup" className="flex flex-col items-center space-y-2">
+                    <UserCircle className="h-5 w-5 text-white" />
+                    <div className="rounded-lg text-base font-semibold text-white hover:text-gray-300">
+                      Sign up
+                    </div>
+                  </Link>
+                </div>
               </div>
-            </Link>
-            <Link href="/signup">
-              <div className="-mx-3 block cursor-pointer rounded-lg px-3 py-2.5 text-base font-semibold leading-7 dark:text-white text-black">
-                Sign up
-              </div>
-            </Link>
-          </div>
-        )}
-      </div>
-    </div>
-  </Dialog.Panel>
-</Dialog>
+            </div>
+          </Dialog.Panel>
+        </Dialog>
         </header>
       </div>
     </main>
