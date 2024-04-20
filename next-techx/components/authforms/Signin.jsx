@@ -171,7 +171,7 @@ const Signin = () => {
             Get started with Google
           </button> */}
           <Button
-            onClick={() => signIn("google")}
+            onClick={() => signIn('google')}
             variant="outline"
             className="text-black dark:text-white mt-6 "
           >
