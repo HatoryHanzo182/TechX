@@ -393,19 +393,10 @@ const ProductDetails = () => {
                   <h2 className="max-w-xl mt-2 mb-4 text-5xl font-bold md:text-6xl font-heading dark:text-gray-300">
                     {product_data?.model || "Loading..."}
                   </h2>
-                  <p className="max-w-md mb-4 text-gray-500 dark:text-gray-400">
-                    Get $100-$500 off when you trade in an one plus 6 or newer.
-                  </p>
-                  <a
-                    href="#"
-                    className="text-blue-500 hover:underline dark:text-gray-400"
-                  >
-                    See how trade-in works
-                  </a>
                 </div>
                 <div className="">
                   <p className="mb-4 text-lg font-semibold dark:text-gray-400">
-                    Choose your finish
+                    Choose your Color
                   </p>
                   <div className="grid grid-cols-2 gap-4 pb-4 border-b-2 border-gray-300 lg:grid-cols-3 dark:border-gray-600">
                     <div>
@@ -598,15 +589,6 @@ const ProductDetails = () => {
                   </Button>
                 </div>
                 <div className="flex items-center mt-6 ">
-                  <div>
-                    <h2 className="mb-2 text-lg font-bold text-gray-700 dark:text-gray-400">
-                      Still deciding?
-                    </h2>
-                    <p className="mb-2 text-sm dark:text-gray-400">
-                      {" "}
-                      Add this item to a list and easily come back to it later{" "}
-                    </p>
-                  </div>
                   {!show_logged_content ? null : (
                     <span className="ml-6" onClick={toggleLike}>
                       {liked ? (
