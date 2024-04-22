@@ -164,15 +164,13 @@ const ProductDetails = () => {
 
     const params = new URLSearchParams(window.location.search);
 
-    if (localStorage.getItem("token") !== null) 
-      SetShowLoggedContent(true);
+    if (localStorage.getItem("token") !== null) SetShowLoggedContent(true);
 
-    if(ID_product_no_repeat !== params.get("id"))
-    {
+    if (ID_product_no_repeat !== params.get("id")) {
       SetIDProductNoRepeat(params.get("id"));
       ToGetData(params.get("id"));
       GetProductReviews();
-      FindFavorite(); 
+      FindFavorite();
     }
   }, [new URLSearchParams(window.location.search)]);
 
@@ -292,7 +290,12 @@ const ProductDetails = () => {
           <a className="hover:text-gray-400 cursor-pointer " href="#details">
             Details
           </a>
-          <a className="hover:text-gray-400 cursor-pointer ">Characteristics</a>
+          <a
+            className="hover:text-gray-400 cursor-pointer"
+            href="#characteristics"
+          >
+            Characteristics
+          </a>
           <a className="hover:text-gray-400 cursor-pointer" href="#reviews">
             Reviews({all_reviews.length})
           </a>
@@ -622,22 +625,168 @@ const ProductDetails = () => {
 
       <section className="">
         <motion.div
-          id="details"
+          id="characteristics"
           className="mt-24"
           initial="hidden"
           animate="visible"
           variants={variants}
           transition={{ duration: 0.5 }}
         />
-        <div className="mx-20 rounded-lg ">
+
+        <div className=" rounded-lg shadow-md p-4 mx-20 bg-[#1d1d1d]">
+          <div className="mt-4">
+            <h4 className="text-white text-lg font-bold mb-2">
+              Основные характеристики
+            </h4>
+
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { title: "Бренд", value: "Apple" },
+                { title: "Модель", value: "iPhone 15 Pro Max" },
+                { title: "Формат SIM-карты", value: "Nano-Sim + eSim" },
+                {
+                  title: "Гарантия",
+                  value: "1 год от производителя + 31 день от Ябко",
+                },
+                { title: "Защита от влаги", value: "IP68" },
+                { title: "Цвет устройства", value: "Natural Titanium" },
+                { title: "Объем памяти", value: "256GB" },
+                { title: "Память", value: "256GB" },
+                { title: "Оперативная память", value: "8GB" },
+                { title: "Диагональ экрана", value: '6.7"' },
+                { title: "Разрешение экрана", value: "2796×1290 пикселей" },
+                { title: "Процессор", value: "Apple A17 Pro" },
+                {
+                  title: "Время автономной работы",
+                  value: "до 29 часов видео",
+                },
+                { title: "Основная камера", value: "48 МП" },
+                { title: "Фронтальная камера", value: "12 Мп" },
+                {
+                  title: "Сенсоры",
+                  value:
+                    "Face ID, LiDAR, барометр, гироскоп, акселерометр, датчик приближения, датчик освещенности",
+                },
+                {
+                  title: "Сети",
+                  value: "Wi-Fi, 5G, GPS, ГЛОНАСС, Galileo, QZSS, BeiDou",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="flex items-center  bg-black rounded-md p-2"
+                >
+                  <h6 className="text-gray-300 font-medium mr-2">
+                    {item.title}:
+                  </h6>
+                  <p className="text-white">{item.value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* <div class="mx-20 rounded-lg bg-[#1d1d1d]">
+          <div class="bg-black rounded-lg">
+            <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+              <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                Основные характеристики
+              </h2>
+            </div>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
+              <li class="bg-[#1d1d1d] rounded-lg shadow-lg p-6 flex items-center">
+                <svg
+                  class="h-5 w-5 mr-4 text-indigo-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 12l2 2 4-4m6 2-2 2-4-4"
+                  ></path>
+                </svg>
+                <div>
+                  <h3 class="text-lg font-medium text-white">Бренд</h3>
+                  <p class="mt-2 text-base text-gray-300">Apple</p>
+                </div>
+              </li>
+              <li class="bg-[#1d1d1d] rounded-lg shadow-lg p-6 flex items-center">
+                <svg
+                  class="h-5 w-5 mr-4 text-indigo-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 12l2 2 4-4m6 2-2 2-4-4"
+                  ></path>
+                </svg>
+                <div>
+                  <h3 class="text-lg font-medium text-white">Бренд</h3>
+                  <p class="mt-2 text-base text-gray-300">Apple</p>
+                </div>
+              </li>
+              <li class="bg-[#1d1d1d] rounded-lg shadow-lg p-6 flex items-center">
+                <svg
+                  class="h-5 w-5 mr-4 text-indigo-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 12l2 2 4-4m6 2-2 2-4-4"
+                  ></path>
+                </svg>
+                <div>
+                  <h3 class="text-lg font-medium text-white">Бренд</h3>
+                  <p class="mt-2 text-base text-gray-300">Apple</p>
+                </div>
+              </li>
+              <li class="bg-[#1d1d1d] rounded-lg shadow-lg p-6 flex items-center">
+                <svg
+                  class="h-5 w-5 mr-4 text-indigo-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 12l2 2 4-4m6 2-2 2-4-4"
+                  ></path>
+                </svg>
+                <div>
+                  <h3 class="text-lg font-medium text-white">Бренд</h3>
+                  <p class="mt-2 text-base text-gray-300">Apple</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div> */}
+
+        {/* <div className="mx-20 rounded-lg bg-[#1d1d1d]">
           <div className="bg-black rounded-lg">
             <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
               <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                 Основные характеристики
               </h2>
 
-              <ul className="mt-6 space-y-6 ">
-                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
+              <ul className="mt-6 space-y-6  ">
+                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex  items-center">
                   <svg
                     className="h-5 w-5 mr-4 text-indigo-500"
                     fill="none"
@@ -681,7 +830,7 @@ const ProductDetails = () => {
                 </li>
                 <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
                   <svg
-                    className="h-5 w-5 mr-4 text-gray-400"
+                    className="h-5 w-5 mr-4 text-indigo-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -698,17 +847,14 @@ const ProductDetails = () => {
                     <h3 className="text-lg font-medium text-white">Гарантия</h3>
                     <p className="mt-2 text-base text-gray-300">
                       Официальная гарантия от производителя 12 месяцев. Гарантия
-                      Yabko 31 день с возможностью продления.
+                      31 день с возможностью продления.
                     </p>
                   </div>
                 </li>
-                {/* <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
-                  <svg className="h-5 w-5 mr-4 text-indigo" />
-                </li> */}
               </ul>
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
 
       {/*Reviews section.*/}
@@ -721,13 +867,13 @@ const ProductDetails = () => {
           variants={variants}
           transition={{ duration: 0.5 }}
         />
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-[#1d1d1d] rounded-lg">
           <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
             Write Review
           </h2>
           <form className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
             {!show_logged_content ? (
-              <input
+              <Input
                 type="text"
                 placeholder="Name"
                 className="block w-full px-4 py-3 rounded-lg shadow-sm  sm:text-sm bg-[#1d1d1d]"
@@ -735,16 +881,12 @@ const ProductDetails = () => {
                 onChange={(e) => SetUserName(e.target.value)}
               />
             ) : null}
-            <Input
-              type="text"
-              placeholder="Review"
-              className="block px-2 py-1 h-1/2 rounded-lg shadow-sm  sm:text-sm bg-[#1d1d1d] mt-8"
-              value={user_review}
-              onChange={(e) => SetUserReview(e.target.value)}
-            />
-            <div className="px-4 py-1">
+
+            <div className="px-3 py-0.5 flex flex-row">
               {" "}
-              Grade{" "}
+              <p className="text-center p-3 py-[0.4] text-lg font-bold">
+                Grade{" "}
+              </p>
               <span className="flex flex-row">
                 <>
                   <style>
@@ -752,6 +894,8 @@ const ProductDetails = () => {
                     .rating {
                       display: inline-block;
                       opacity: 1;
+
+
                     }
                     
                     .rating input {
@@ -806,6 +950,13 @@ const ProductDetails = () => {
                 </>
               </span>
             </div>
+            <Input
+              type="text"
+              placeholder="Review"
+              className="block w-full px-4 py-4 rounded-lg shadow-sm  sm:text-sm bg-[#1d1d1d]"
+              value={user_review}
+              onChange={(e) => SetUserReview(e.target.value)}
+            />
 
             <Button
               className="border border-white w-24 rounded-lg hover:bg-gray-950"
@@ -817,7 +968,7 @@ const ProductDetails = () => {
         </div>
         {all_reviews.length > 0
           ? all_reviews.map((review, index) => (
-              <div className="bg-[#1d1d1d] rounded-lg shadow-sm items-center max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
+              <div className="bg-[#1d1d1d] rounded-lg shadow-sm items-center max-w-7xl mx-auto mt-3 py-5 px-4 sm:px-6 lg:px-8">
                 <h1 className="text-lg font-bold">
                   {review.review_owner_name}
                 </h1>

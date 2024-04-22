@@ -19,10 +19,10 @@ const ProductCards = (props) => {
         <p className="text-sm text-gray-600">{props.memory}</p>
         <hr className="border-t-[0.1px] border-gray-300 my-1"></hr>
         <div className="flex justify-between items-center">
-          <span className="text-sm md:text-xs lg:text-base font-bold text-white">
+          <span className="text-base p-2 md:text-xs lg:text-base font-bold text-white">
             {props.price}$
           </span>
-          <span className="text-sm md:text-xs lg:text-base font-bold text-red-600 line-through">
+          <span className="text-sm p-2 md:text-xs lg:text-base font-bold text-red-600 line-through">
             {props.oldPrice}1200$
           </span>
         </div>

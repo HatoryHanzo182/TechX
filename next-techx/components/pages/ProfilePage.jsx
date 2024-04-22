@@ -105,7 +105,7 @@ export function ProfilePage() {
 
   return (
     <main>
-      <div className="pt-10 mt-20"></div>
+      <div className="pt-20 "></div>
       <Breadcrumb className="px-10 py-2">
         <BreadcrumbList>
           <BreadcrumbItem>
