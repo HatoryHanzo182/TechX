@@ -538,7 +538,7 @@ const ProductDetails = () => {
                 </div>
                 <div className="mt-6 ">
                   <Button
-                    className="w-full flex items-center justify-between px-4 py-2 font-bold text-white bg-black border lg:w-96 hover:bg-blue-800"
+                    className="w-full flex items-center justify-between px-4 py-2 font-bold text-white bg-black border lg:w-96 "
                     onClick={() => handleAddToCart()}
                   >
                     <span>Add to cart</span>
@@ -615,9 +615,9 @@ const ProductDetails = () => {
           transition={{ duration: 0.5 }}
         />
 
-        <div className=" rounded-lg shadow-md p-4 mx-20 bg-[#1d1d1d]">
+        <div className=" rounded-lg  p-4 mx-20 dark:bg-[#1d1d1d]  shadow-lg">
           <div className="mt-4">
-            <h4 className="text-white text-lg font-bold mb-2">
+            <h4 className="dark:text-white text-lg font-bold mb-2">
               Основные характеристики
             </h4>
 
@@ -656,187 +656,17 @@ const ProductDetails = () => {
               ].map((item) => (
                 <div
                   key={item.title}
-                  className="flex items-center  bg-black rounded-md p-2"
+                  className="flex items-center  shadow-lg dark:bg-black rounded-md p-2"
                 >
-                  <h6 className="text-gray-300 font-medium mr-2">
+                  <h6 className="text-black dark:text-white font-medium mr-2">
                     {item.title}:
                   </h6>
-                  <p className="text-white">{item.value}</p>
+                  <p className="text-gray-500">{item.value}</p>
                 </div>
               ))}
             </div>
           </div>
         </div>
-
-        {/* <div class="mx-20 rounded-lg bg-[#1d1d1d]">
-          <div class="bg-black rounded-lg">
-            <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-              <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                Основные характеристики
-              </h2>
-            </div>
-            <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
-              <li class="bg-[#1d1d1d] rounded-lg shadow-lg p-6 flex items-center">
-                <svg
-                  class="h-5 w-5 mr-4 text-indigo-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 12l2 2 4-4m6 2-2 2-4-4"
-                  ></path>
-                </svg>
-                <div>
-                  <h3 class="text-lg font-medium text-white">Бренд</h3>
-                  <p class="mt-2 text-base text-gray-300">Apple</p>
-                </div>
-              </li>
-              <li class="bg-[#1d1d1d] rounded-lg shadow-lg p-6 flex items-center">
-                <svg
-                  class="h-5 w-5 mr-4 text-indigo-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 12l2 2 4-4m6 2-2 2-4-4"
-                  ></path>
-                </svg>
-                <div>
-                  <h3 class="text-lg font-medium text-white">Бренд</h3>
-                  <p class="mt-2 text-base text-gray-300">Apple</p>
-                </div>
-              </li>
-              <li class="bg-[#1d1d1d] rounded-lg shadow-lg p-6 flex items-center">
-                <svg
-                  class="h-5 w-5 mr-4 text-indigo-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 12l2 2 4-4m6 2-2 2-4-4"
-                  ></path>
-                </svg>
-                <div>
-                  <h3 class="text-lg font-medium text-white">Бренд</h3>
-                  <p class="mt-2 text-base text-gray-300">Apple</p>
-                </div>
-              </li>
-              <li class="bg-[#1d1d1d] rounded-lg shadow-lg p-6 flex items-center">
-                <svg
-                  class="h-5 w-5 mr-4 text-indigo-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 12l2 2 4-4m6 2-2 2-4-4"
-                  ></path>
-                </svg>
-                <div>
-                  <h3 class="text-lg font-medium text-white">Бренд</h3>
-                  <p class="mt-2 text-base text-gray-300">Apple</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div> */}
-
-        {/* <div className="mx-20 rounded-lg bg-[#1d1d1d]">
-          <div className="bg-black rounded-lg">
-            <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-              <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                Основные характеристики
-              </h2>
-
-              <ul className="mt-6 space-y-6  ">
-                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex  items-center">
-                  <svg
-                    className="h-5 w-5 mr-4 text-indigo-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 12l2 2 4-4m6 2-2 2-4-4"
-                    />
-                  </svg>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-medium text-white">Бренд</h3>
-                    <p className="mt-2 text-base text-gray-300">Apple</p>
-                  </div>
-                </li>
-                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
-                  <svg
-                    className="h-5 w-5 mr-4 text-indigo-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2z"
-                    />
-                  </svg>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-medium text-white">Модель</h3>
-                    <p className="mt-2 text-base text-gray-300">
-                      {product_data?.model}
-                    </p>
-                  </div>
-                </li>
-                <li className="bg-[#1d1d1d] rounded-lg shadow-sm p-6 flex items-center">
-                  <svg
-                    className="h-5 w-5 mr-4 text-indigo-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 6V4m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm0 14V18m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4z"
-                    />
-                  </svg>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-medium text-white">Гарантия</h3>
-                    <p className="mt-2 text-base text-gray-300">
-                      Официальная гарантия от производителя 12 месяцев. Гарантия
-                      31 день с возможностью продления.
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div> */}
       </section>
 
       {/*Reviews section.*/}
@@ -849,8 +679,8 @@ const ProductDetails = () => {
           variants={variants}
           transition={{ duration: 0.5 }}
         />
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-[#1d1d1d] rounded-lg">
-          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 dark:bg-[#1d1d1d]  shadow-lg rounded-lg">
+          <h2 className="text-3xl font-extrabold tracking-tight dark:text-white sm:text-4xl">
             Write Review
           </h2>
           <form className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
@@ -858,7 +688,7 @@ const ProductDetails = () => {
               <Input
                 type="text"
                 placeholder="Name"
-                className="block w-full px-4 py-3 rounded-lg shadow-sm  sm:text-sm bg-[#1d1d1d]"
+                className="block w-full px-4 py-3 rounded-lg shadow-sm  sm:text-sm bg-white dark:bg-[#1d1d1d]"
                 value={user_name}
                 onChange={(e) => SetUserName(e.target.value)}
               />
@@ -866,7 +696,7 @@ const ProductDetails = () => {
 
             <div className="px-3 py-0.5 flex flex-row">
               {" "}
-              <p className="text-center p-3 py-[0.4] text-lg font-bold">
+              <p className="text-center p-3 py-[0.4] text-lg text-black dark:text-white font-bold">
                 Grade{" "}
               </p>
               <span className="flex flex-row">
@@ -935,13 +765,13 @@ const ProductDetails = () => {
             <Input
               type="text"
               placeholder="Review"
-              className="block w-full px-4 py-4 rounded-lg shadow-sm  sm:text-sm bg-[#1d1d1d]"
+              className="block w-full px-4 py-4 rounded-lg shadow-sm  sm:text-sm "
               value={user_review}
               onChange={(e) => SetUserReview(e.target.value)}
             />
 
             <Button
-              className="border border-white w-24 rounded-lg hover:bg-gray-950"
+              className=" w-24 rounded-lg "
               onClick={(e) => handleSendReview(e)}
             >
               Send
@@ -950,7 +780,7 @@ const ProductDetails = () => {
         </div>
         {all_reviews.length > 0
           ? all_reviews.map((review, index) => (
-              <div className="bg-[#1d1d1d] rounded-lg shadow-sm items-center max-w-7xl mx-auto mt-3 py-5 px-4 sm:px-6 lg:px-8">
+              <div className="dark:bg-[#1d1d1d] shadow-lg rounded-lg  items-center max-w-7xl mx-auto mt-3 py-5 px-4 sm:px-6 lg:px-8">
                 <h1 className="text-lg font-bold">
                   {review.review_owner_name}
                 </h1>

@@ -231,7 +231,7 @@ const DropMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="hidden lg:flex">
+        <Button className="hidden lg:flex">
           <MixIcon className="mr-1" height={20} />
           Catalog
         </Button>
@@ -246,12 +246,18 @@ const DropMenu = () => {
               </DropdownMenuSubTrigger>
               <DropdownMenuPortal>
                 <DropdownMenuSubContent
-                  className={`ml-2 ${category.items.length < 3 ? "flex justify-center" : "grid grid-cols-3 gap-4"} gap-4`}
+                  className={`ml-2 ${
+                    category.items.length < 3
+                      ? "flex justify-center"
+                      : "grid grid-cols-3 gap-4"
+                  } gap-4`}
                 >
                   {category.items.map((item) => (
                     <div
                       key={item.label}
-                      className={`p-1 ${category.items.length < 3 ? "flex-1" : ""}`}
+                      className={`p-1 ${
+                        category.items.length < 3 ? "flex-1" : ""
+                      }`}
                     >
                       <div className="flex flex-col">
                         <DropdownMenuItem
@@ -268,7 +274,7 @@ const DropMenu = () => {
                           <div key={index} className="flex pl-2">
                             <a
                               href={product.href}
-                              className="py-1 text-sm text-slate-500 hover:text-white"
+                              className="py-1 text-sm dark:text-white text-black hover:text-gray-500"
                             >
                               {product.name}
                             </a>

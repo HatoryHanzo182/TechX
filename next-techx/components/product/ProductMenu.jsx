@@ -37,7 +37,6 @@ function ProductSelection() {
     "Deep Purple",
     "Starlight",
     "Gold",
-    
   ];
   const versionOptions = ["Global", "e-Sim"];
 
@@ -47,8 +46,7 @@ function ProductSelection() {
     const ToGetData = async (type_p) => {
       SetProducts([]);
 
-      try 
-      {
+      try {
         const formatted_data = await fetch(
           `http://localhost:3001/GetDataForListProduct/${type_p}`,
           {
@@ -57,8 +55,7 @@ function ProductSelection() {
           }
         );
 
-        if (formatted_data.ok) 
-          SetProducts(await formatted_data.json());
+        if (formatted_data.ok) SetProducts(await formatted_data.json());
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -67,10 +64,8 @@ function ProductSelection() {
     const params = new URLSearchParams(window.location.search);
     const product_type = params.get("type");
 
-    if (product_type !== null) 
-    {
-      switch (product_type) 
-      {
+    if (product_type !== null) {
+      switch (product_type) {
         case "Iphone":
           ToGetData("Iphone");
           break;
@@ -149,90 +144,14 @@ function ProductSelection() {
         />
       </div>
       <div className="container mx-auto  flex">
-        <div className="flex flex-col w-2/3 h-full px-10 pr-4 bg-[#1d1d1d] p-4 rounded-lg ">
-          {/* <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1">
-              <AccordionTrigger className="text-lg font-bold">
-                Memory
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="mb-4">
-
-                  <div className="space-y-2 text-lg">
-                    {memoryOptions.map((memory) => (
-                      <label key={memory} className="flex items-center">
-                        <input
-                          type="checkbox"
-                          className="form-checkbox h-5 w-5 text-gray-600"
-                          onChange={() =>
-                            handleCheckboxChange("memory", memory)
-                          }
-                          checked={memoryFilter.includes(memory)}
-                        />
-                        <span className="ml-2">{memory}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger className="text-lg font-bold">
-                Color
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="mb-4">
-
-                  <div className="space-y-2 text-lg">
-                    {colorOptions.map((color) => (
-                      <label key={color} className="flex items-center">
-                        <input
-                          type="checkbox"
-                          className="form-checkbox h-5 w-5 text-gray-600"
-                          onChange={() => handleCheckboxChange("color", color)}
-                          checked={colorFilter.includes(color)}
-                        />
-                        <span className="ml-2">{color}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-              <AccordionTrigger className="text-lg font-bold">
-                Version
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="mb-4">
-                  <div className="space-y-2">
-                    {versionOptions.map((version) => (
-                      <label
-                        key={version}
-                        className="flex items-center text-lg"
-                      >
-                        <input
-                          type="checkbox"
-                          className="form-checkbox h-5 w-5 text-gray-600 "
-                          onChange={() =>
-                            handleCheckboxChange("version", version)
-                          }
-                          checked={versionFilter.includes(version)}
-                        />
-                        <span className="ml-2">{version}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion> */}
-
+        <div className="flex flex-col w-2/3 h-full px-10 pr-4 dark:bg-[#1d1d1d] shadow-lg border p-4 rounded-lg ">
           <div className="flex flex-col m-4">
             <div className="mb-4">
-              <h1 className="text-2xl font-bold p-2">Memory</h1>
+              <h1 className="text-2xl font-bold dark:text-white text-black p-2">
+                Memory
+              </h1>
               {/* <div className="mb-2">Объем памяти</div> */}
-              <div className="space-y-2 text-base">
+              <div className="space-y-2 text-base text-black dark:text-white">
                 {memoryOptions.map((memory) => (
                   <label key={memory} className="flex items-center">
                     <input
@@ -249,8 +168,10 @@ function ProductSelection() {
             <hr className="border-gray-600 my-4" />
 
             <div className="mb-4">
-              <h1 className="text-2xl font-bold p-2">Color</h1>
-              <div className="space-y-2 text-base text-nowrap">
+              <h1 className="text-2xl font-bold p-2 text-black dark:text-white">
+                Color
+              </h1>
+              <div className="space-y-2 text-base text-nowrap text-black dark:text-white">
                 {colorOptions.map((color) => (
                   <label key={color} className="flex items-center">
                     <input
@@ -267,8 +188,10 @@ function ProductSelection() {
             <hr className="border-gray-600 my-4" />
 
             <div className="mb-4">
-              <h1 className="text-2xl font-bold py-2">Version</h1>
-              <div className="space-y-2">
+              <h1 className="text-2xl font-bold py-2 text-black dark:text-white">
+                Version
+              </h1>
+              <div className="space-y-2 text-black dark:text-white">
                 {versionOptions.map((version) => (
                   <label key={version} className="flex items-center text-base">
                     <input
@@ -294,19 +217,21 @@ function ProductSelection() {
                 query: { id: `${product.id}` },
               }}
             >
-              <div className="bg-[#1d1d1d] p-4 rounded-lg">
+              <div className="dark:bg-[#1d1d1d] p-4 rounded-lg border shadow-lg ">
                 <img
                   src={`http://localhost:3001/GetImage/${product.images}`}
                   alt={`${product.model}`}
                   className="mb-3"
                 />
-                <div className="font-bold">{product.model}</div>
-                <div className="text-gray-300">
+                <div className="font-bold text-black dark:text-white">
+                  {product.model}
+                </div>
+                <div className="text-gray-500">
                   {" "}
                   {product.memory} ({product.color}){" "}
                 </div>
                 <div className="flex justify-between items-center mt-3">
-                  <div className="text-gray-400 line-through">
+                  <div className="text-black dark:text-white line-through">
                     {product.price} $
                   </div>
                   <div className="text-red-500">{product.price} $</div>

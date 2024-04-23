@@ -245,7 +245,7 @@ export default function Nav() {
                     </Avatar>
                   </button>
                   {isOpen && (
-                    <div className="z-10 absolute right-0 mt-2  divide-y  rounded-lg shadow w-44 bg-[#1d1d1d] dark:divide-[#2f2f2f]">
+                    <div className="z-10 absolute right-0 mt-2  divide-y  rounded-lg shadow w-44 bg-white dark:bg-[#1d1d1d] dark:divide-[#2f2f2f]">
                       <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
                         <div>{user.name}</div>
                         <div className="font-medium truncate">{user.email}</div>
@@ -256,7 +256,7 @@ export default function Nav() {
                       >
                         <li>
                           <Link href="/profile">
-                            <div className="block px-4 py-2  hover:bg-[#2b2b2b] ">
+                            <div className="block px-4 py-2  hover:text-gray-500 ">
                               Profile
                             </div>
                           </Link>
@@ -265,7 +265,7 @@ export default function Nav() {
                       <div className="py-2">
                         <a
                           href="#"
-                          className="block px-4 py-2 text-sm text-red-600 hover:bg-[#2b2b2b]"
+                          className="block px-4 py-2 text-sm text-red-600 hover:text-red-800"
                           onClick={handleSignOut}
                         >
                           Sign out
@@ -357,14 +357,14 @@ export default function Nav() {
                   </button>
 
                   {isOpen && (
-                    <div className="z-10 absolute right-0 mt-2  divide-y  rounded-lg shadow w-44 bg-[#1d1d1d] dark:divide-[#2f2f2f]">
+                    <div className="z-10 absolute right-0 mt-2  divide-y  rounded-lg shadow w-44 bg-white dark:bg-[#1d1d1d] dark:divide-[#2f2f2f]">
                       <ul
                         className="py-2 text-sm text-gray-700 dark:text-gray-200"
                         aria-labelledby="dropdownUserAvatarButton"
                       >
                         <li>
                           <Link href="/signin">
-                            <div className="block px-4 py-2  hover:bg-[#2b2b2b] ">
+                            <div className="block px-4 py-2  hover:text-gray-500 ">
                               Sign in <span>&rarr;</span>
                             </div>
                           </Link>
@@ -373,7 +373,7 @@ export default function Nav() {
                       <div className="py-2">
                         <a
                           href="/signup"
-                          className="block px-4 py-2 text-sm  hover:bg-[#2b2b2b]"
+                          className="block px-4 py-2 text-sm  hover:text-gray-500"
                           // onClick={handleSignOut}
                         >
                           Sign up <span>&uarr;</span>

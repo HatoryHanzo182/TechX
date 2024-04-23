@@ -47,9 +47,9 @@ const Signup = () => {
       const { existing_user } = await ResUserExists.json();
 
       if (existing_user) {
-        showAlert(true);  
+        showAlert(true);
         setError("User exists");
-        console.error("User exists",error); //  <<---- Пользователь уже существует.
+        console.error("User exists", error); //  <<---- Пользователь уже существует.
         return;
       } else {
         SetisModalConfirmMailOpen(true);
@@ -189,11 +189,7 @@ const Signup = () => {
               Sign in here
             </Link>
           </p>
-          <Button
-            variant="outline"
-            className="text-black dark:text-white mt-6 "
-            onClick={() => signIn("google")}
-          >
+          <Button className=" mt-6 " onClick={() => signIn("google")}>
             <svg role="img" viewBox="0 0 24 24" className="mr-2 h-4 w-4">
               <path
                 fill="currentColor"
@@ -272,13 +268,7 @@ const Signup = () => {
               </div>
             </div>
 
-            <Button
-              variant="outline"
-              className="text-black dark:text-white mt-6 "
-            >
-              {" "}
-              Sign Up{" "}
-            </Button>
+            <Button className="mt-6 "> Sign Up </Button>
             {/* <button className="mt-6 w-full sm:w-auto rounded-lg bg-blue-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-blue-500 ring-offset-2 transition hover:bg-blue-700 focus:ring-2">
               Sign Up
             </button> */}
