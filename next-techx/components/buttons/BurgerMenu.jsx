@@ -1,5 +1,13 @@
-import React, { useState} from 'react';
-import { Smartphone, Apple, Laptop, Gamepad2, Camera, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  Smartphone,
+  Apple,
+  Laptop,
+  Gamepad2,
+  Camera,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 const categories = [
   {
@@ -162,7 +170,7 @@ const CategoryMenu = ({ category, goBack }) => {
     <>
       {!activeBrand ? (
         <>
-          <div className='flex items-center w-full border-b border-zinc-700'>
+          <div className="flex items-center w-full border-b border-zinc-700">
             <button
               onClick={goBack}
               className="flex items-center px-4 py-2 w-full"
@@ -177,8 +185,9 @@ const CategoryMenu = ({ category, goBack }) => {
               onClick={() => handleBrandSelect(item)}
               className="flex items-center justify-between px-4 py-2 w-full border-b border-zinc-700"
             >
-              <div className='flex items-center'> 
-                {item.icon && React.createElement(item.icon, { className: "h-5 w-5 mr-2" })}
+              <div className="flex items-center">
+                {item.icon &&
+                  React.createElement(item.icon, { className: "h-5 w-5 mr-2" })}
                 {item.label}
               </div>
               <ChevronRight className="h-5 w-5" />
@@ -195,16 +204,23 @@ const CategoryMenu = ({ category, goBack }) => {
               <ChevronLeft className="h-5 w-5 mr-2" />
               {activeBrand.label}
             </div>
-            <a href={activeBrand.href} className="text-gray-400">View all</a>
+            <a href={activeBrand.href} className="text-gray-400">
+              View all
+            </a>
           </button>
           <div className="">
-            {activeBrand.products.map(product => (
+            {activeBrand.products.map((product) => (
               <a
                 key={product.name}
                 href={product.href}
                 className="flex px-4 py-1 items-center px-4 py-2 w-full border-b border-zinc-700"
               >
-                {activeBrand.icon && React.createElement(activeBrand.icon, { className: "h-5 w-5 mr-2" }, null)}
+                {activeBrand.icon &&
+                  React.createElement(
+                    activeBrand.icon,
+                    { className: "h-5 w-5 mr-2" },
+                    null
+                  )}
                 {product.name}
               </a>
             ))}
@@ -216,8 +232,7 @@ const CategoryMenu = ({ category, goBack }) => {
 };
 
 const BurgerMenu = () => {
-
-const [activeCategory, setActiveCategory] = useState(null);
+  const [activeCategory, setActiveCategory] = useState(null);
 
   const showCategoryItems = (category) => {
     setActiveCategory(category);
@@ -227,13 +242,22 @@ const [activeCategory, setActiveCategory] = useState(null);
     setActiveCategory(null);
   };
 
-return (
-    <div className="w-full bg-black overflow-y-auto">
+  return (
+    <div className="w-full bg-white dark:bg-black overflow-y-auto">
       {!activeCategory ? (
         categories.map((category) => (
-          <div key={category.label} className="flex justify-between items-center text-white px-4 py-2 border-b border-zinc-700">
-            <button  onClick={() => showCategoryItems(category)} className="flex items-center w-full">
-              {category.icon && React.createElement(category.icon, { className: "h-5 w-5 mr-2" })}
+          <div
+            key={category.label}
+            className="flex justify-between items-center text-black dark:text-white px-4 py-2 border-b border-zinc-700"
+          >
+            <button
+              onClick={() => showCategoryItems(category)}
+              className="flex items-center w-full"
+            >
+              {category.icon &&
+                React.createElement(category.icon, {
+                  className: "h-5 w-5 mr-2",
+                })}
               {category.label}
             </button>
             <ChevronRight className="h-5 w-5" />

@@ -14,7 +14,7 @@ const ProductCatalog = (props) => {
     //   </div>
     // </main>
     <main>
-      <div className="m-2 md:m-1 w-[180px] sm:w-[140px] md:w-[160px] text-center justify-center max-w-sm shadow-sm border rounded-lg dark:bg-[#1d1d1d] bg-white border-neutral-200 dark:border-[#1d1d1d]">
+      <div className="m-2 md:m-1 w-[180px] sm:w-[140px] md:w-[160px] text-center justify-center max-w-sm shadow-sm  rounded-lg  dark:bg-[#1d1d1d] bg-white border-neutral-200 ">
         <img
           className="w-[150px] h-[160px]  object-fill p-6 rounded-t-lg mx-auto"
           src={props.image}

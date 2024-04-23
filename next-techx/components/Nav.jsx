@@ -391,10 +391,12 @@ export default function Nav() {
             open={mobileMenuOpen}
             onClose={() => setMobileMenuOpen(false)}
           >
-            <Dialog.Panel className="fixed inset-0 z-50 overflow-y-auto bg-black">
+            <Dialog.Panel className="fixed inset-0 z-50 overflow-y-auto bg-white dark:bg-black">
               <div className="flex items-center justify-between p-6">
                 <a href="#" className="-m-1.5 p-1.5">
-                  <h1 className="text-white font-bold text-2xl">techX</h1>
+                  <h1 className="text-black dark:text-white font-bold text-2xl">
+                    techX
+                  </h1>
                 </a>
                 {/* <ShoppingCart className="fixed top-7 left-24 h-6 w-6 text-zinc-700" /> */}
                 {mobileMenuOpen && (
@@ -432,7 +434,7 @@ export default function Nav() {
                         href="/signin"
                         className="flex flex-col items-center space-y-2"
                       >
-                        <div className="rounded-lg text-base font-semibold text-white hover:text-gray-300">
+                        <div className="rounded-lg text-base font-semibold text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300">
                           Sign in &rarr;
                         </div>
                       </Link>
@@ -440,7 +442,7 @@ export default function Nav() {
                         href="/signup"
                         className="flex flex-col items-center space-y-2"
                       >
-                        <div className="rounded-lg text-base font-semibold text-white hover:text-gray-300">
+                        <div className="rounded-lg text-base font-semibold text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300">
                           Sign up &uarr;
                         </div>
                       </Link>
