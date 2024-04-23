@@ -11,7 +11,7 @@ export const PullOutOfSession = async () =>
 
     const { success } = await CheckSignature.json();
 
-    if(success)      // <<---- Подпись токена была подтверждена.  (При рестарте сервера подпись изменится).
+    if(success)      // <<---- Подпись токена была подтверждена.
     {
         console.log("TOKEN IS TRUE");
 

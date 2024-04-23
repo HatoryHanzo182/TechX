@@ -8,6 +8,8 @@ import config from './Configs/config_token.js';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import path from 'path';
+import multer from 'multer';
 import SEND_CODE_VERIFICATION from './Configs/config_gmail.js'
 import { UserModel } from "./Models/User.js";
 import { SessionModel } from "./Models/Session.js"
@@ -15,11 +17,9 @@ import { IPhoneModel } from "./Models/IPhone.js";
 import { AirPodsModel } from "./Models/AirPods.js";
 import { AppleWatchModel } from "./Models/AppleWatch.js";
 import { MacbookModel } from "./Models/Macbook.js";
-import { IpadModel } from "./Models/IpadModel.js";
-import { ConsoleModel } from "./Models/ConsoleModel.js";
+import { IpadModel } from "./Models/Ipad.js";
+import { ConsoleModel } from "./Models/Console.js";
 import { ProductReviewModel } from "./Models/ProductReview.js";
-
-
 
 //
 //  ████████╗███████╗ █████╗ ██╗  ██╗██╗  ██╗
@@ -47,7 +47,8 @@ const _token_secret_key = config.token_secret_key;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-app.use(express.json());
+//#region [Middlewares]
+app.use(express.json());   // Middleware parses incoming requests with JSON bodies.
 app.use((req, res, next) =>  // Middleware for handling CORS.
 {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -64,13 +65,16 @@ app.use((req, res, next) => // Middleware to extract the token from the Authoriz
   req.token = utoken;
   next();
 });
+//#endregion
 
 const DB_URL = _techx_data_connection_string;  // process.env.MONGODB_URI;
 const PORT = 3001  // process.env.PORT;
 
+//#region [TECHX]
 // + + + + + + + + + + + + + + + + + + + TECHX + + + + + + + + + + + + + + + + + + +
 // REQUESTS TO SEND THIS DATA.
 //=============================================================================================
+//#region [Registration Requests]
         // Let's check if the user exists.
 app.post("/CheckUserExists", async (req, res) => 
 {
@@ -128,7 +132,8 @@ app.post("/NewUser", async (req, res) =>
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
+//#endregion
+//#region [Authorization Requests]
         // Prompt to verify user password.
 app.post("/ProofPass", async (req, res) => 
 {
@@ -155,7 +160,8 @@ app.post("/ProofPass", async (req, res) =>
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
+//#endregion
+//#region [Sessions Requests]
         // Generate and issue a token.
 app.post("/GenerateToken", async (req, res) => 
 {
@@ -269,7 +275,8 @@ app.post("/RemoveFromSession", async (req, res) =>
     res.status(500).json({});
   }
 });
-
+//#endregion
+//#region [For client Requests]
         //Search products on the site.
 app.post("/SearchForProducts", async (req, res) => 
 {
@@ -450,7 +457,8 @@ app.post("/GettingDataForCarusel", async (req, res) =>
     res.status(500).json({});
   }
 });
-
+//#endregion
+//#region [Products Requests]
         // Getting Iphone data for list product.
 app.post("/GetDataForListProduct/Iphone", async (req, res) => 
 {
@@ -575,7 +583,8 @@ app.post("/GetDataForListProduct/Console", async (req, res) =>
     res.status(500).json({});
   }
 });
-
+//#endregion
+//#region [product-detail Requests]
         // Getting Product data for product-detail.
 app.post("/ExtractData/:id", async (req, res) => 
 {
@@ -642,7 +651,8 @@ app.post("/ExtractData/:id", async (req, res) =>
     res.status(500).json({});
   }
 });
-
+//#endregion
+//#region [Product review Requests]
         // Request for product review.
 app.post("/SendProductReview", async (req, res) => 
 {
@@ -696,7 +706,8 @@ app.post("/GetProductReview/:id", async (req, res) =>
     res.status(500).json({});
   }
 });
-
+//#endregion
+//#region [Product favorits Requests]
         // Add favorite product.
 app.post("/AddFavoriteProduct/:id", async (req, res) => 
 {
@@ -811,28 +822,62 @@ app.post("/DeleteFavoriteProduct/:id", async (req, res) =>
     res.status(500).json({});
   }
 });
+//#endregion
 //=============================================================================================
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+//#endregion
 
-
-
-
-
-
+//#region [COMPASS]
 // + + + + + + + + + + + + + + + + + + + COMPASS + + + + + + + + + + + + + + + + + + +
 // REQUESTS TO SEND THIS DATA.
 //=============================================================================================
-// Push product data.
+//#region [AddProducts]
+const storage = multer.diskStorage(
+{
+  destination: (req, file, cb) => { cb(null, path.join(__dirname, 'ProductImages'));},
+  filename: (req, file, cb) => 
+  {
+    const unique_suffix = `${Date.now()}-${Math.round(Math.random() * 1E9)}`;
+    const fileName = `${unique_suffix}-${file.originalname}`;
+    
+    cb(null, fileName);
+  },
+});
+
+const upload = multer({ storage });
+
+        // Adding product images to the server.
+app.post("/AddNewProductImg", upload.array('image', 5), async (req, res) => 
+{
+  try 
+  {
+    const uploaded_files = req.files;
+
+    if (!uploaded_files || uploaded_files.length === 0) 
+      return res.status(400).json({ message: 'No files uploaded' });
+
+    const file_names = uploaded_files.map((file) => file.filename);
+
+    res.status(200).json({ message: 'Images uploaded successfully', file_names });
+  } 
+  catch (error) 
+  {
+    console.error('Error uploading images:', error);
+    res.status(400).json({ message: 'Internal Server Error' });
+  }
+});
+
+        // Push product data.
 app.post("/AddIPhone", async (req, res) => 
 {
   try 
   {
-    const { company, series, screen_diagonal } = req.body;
-    const new_phone = new IPhoneModel({ company, series, screen_diagonal });
+    const { category, brand, model, price, color, memory, displaySize, description, os, camera, processor, images, incarousel } = req.body;
+    const new_phone = new IPhoneModel({_id: new mongoose.Types.ObjectId(), category, brand, model, price, color, memory, displaySize, description, os, camera, processor, images, incarousel });
 
     await new_phone.save();
 
-    res.status(200).json({ message: "IPhone added successfully" });
+    res.status(200).json({ message: "IPhone added successfully", new_phone });
   } 
   catch (error) 
   {
@@ -840,14 +885,10 @@ app.post("/AddIPhone", async (req, res) =>
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+//#endregion
 //=============================================================================================
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
-
-
-
-
-
-
+//#endregion
 
 const start = async () => 
 {

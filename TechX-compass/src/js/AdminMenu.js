@@ -1,6 +1,7 @@
 /*==========Import Sector.==========*/
 import { changeLanguage } from "./localizationManager.js";
 import { toggleTheme } from "./dark-mode-switcher.js";
+import img_prosuct_putchs  from "./drag-and-drop.js"
 /*========================================*/
 
 /*==========Global Variables Sector.==========*/
@@ -22,6 +23,7 @@ let user_position_index_menu = 0;
 /*** Content products elements ***/
 const create_products_content = document.getElementById("id-create-product-content");
 const create_products_content_phone = document.getElementById("id-content-phone-data");
+const create_products_content_mackbook = document.getElementById("id-content-mackbook-data");
 /*========================================*/
 
 
@@ -62,6 +64,7 @@ function DisableContent()
   exit_content.style.display = "none";
   create_products_content.style.display = "none";
   create_products_content_phone.style.display = "none";
+  create_products_content_mackbook.style.display = "none";
 }
 
 function RecordWhereUserIsNow(menu_item_index) { user_position_index_menu = menu_item_index; }
@@ -132,7 +135,7 @@ function ShowContentProductCreation()
   create_products_content_phone.style.display = "flex";
 }
 
-function ShowContentProductPhone()  // <--- Show Phone content.
+function ShowContentProductIPhone()  // <--- Show IPhone content.
 {
   DisableContent();
 
@@ -140,23 +143,86 @@ function ShowContentProductPhone()  // <--- Show Phone content.
   create_products_content_phone.style.display = "flex";
 }
 
-function AddPhone()  // <--- Add Phone.
+function ShowContentProductMackbook()  // <--- Show Mackbook content.
 {
-  const company = document.getElementById("id-input-phone-data-Company").value;
-  const series = document.getElementById("id-input-phone-data-Series").value;
-  const screen_diagonal = document.getElementById("id-input-phone-data-Screen_diagonal").value;
+  DisableContent();
 
-  fetch('http://localhost:3001/AddPhone', 
+  create_products_content.style.display = "flex";
+  create_products_content_mackbook.style.display = "flex";
+}
+
+function BackToMainMenu()
+{
+  DisableContent();
+
+  create_products_content.style.display = "none";
+  products_content.style.display = "flex";
+}
+
+async function AddIPhone() 
+{
+  let img_path_genirated_server = [];
+
+  for (const image_path of img_prosuct_putchs) 
   {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ company, series, screen_diagonal }),
+    try 
+    {
+      const response = await fetch(image_path);
+      const file_blob = await response.blob();
+      const file = new File([file_blob], image_path.split('/').pop());
+      const form_data = new FormData();
+
+      form_data.append('image', file);
+
+      const upload_response = await fetch("http://localhost:3001/AddNewProductImg", 
+      {
+        method: 'POST',
+        body: form_data,
+      });
+
+      if (!upload_response.ok)
+        throw new Error('Failed to upload image');
+
+      const data = await upload_response.json();
+
+      img_path_genirated_server.push(data.file_names);
+    } 
+    catch (error) { console.error('Error uploading image:', error); }
+  }
+
+  const ResUserExists = await fetch("http://localhost:3001/AddIPhone",
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(
+    { 
+      category: "iPhone", 
+      brand: "Apple", 
+      model: "iPhone 3GS", 
+      price: 200, 
+      color: "black", 
+      memory: "16GB", 
+      displaySize: "3.5 (480x320), SD, TFT", 
+      description: "OLD", 
+      os: "IOS", 
+      camera: "3 МP", 
+      processor: "frequency: 600 MHz; number of cores: 1; video processor: PowerVR SGX535", 
+      battery: "non-removable",
+      images: img_path_genirated_server.flat(),
+      incarousel: false
+    })
   });
+
+  if(ResUserExists.ok)
+    console.log(ResUserExists.message);
 }
 
 document.getElementById("id-create-product").addEventListener("click", ShowContentProductCreation);
-document.getElementById("id-create-product-content-phone").addEventListener("click", ShowContentProductPhone);
-document.getElementById("id-button-add-phone").addEventListener("click", AddPhone);
+document.getElementById("id-create-product-content-phone").addEventListener("click", ShowContentProductIPhone);
+document.getElementById("id-create-product-content-mackbook").addEventListener("click", ShowContentProductMackbook);
+document.getElementById("id-back-to-product-menu").addEventListener("click", BackToMainMenu);
+document.getElementById("id-back-to-product-menu2").addEventListener("click", BackToMainMenu);
+document.getElementById("id-button-add-iphone").addEventListener("click", AddIPhone);
 /*========================================*/
 
 
@@ -184,14 +250,7 @@ function ClickCancelAccount()
   list_item[user_position_index_menu].classList.add("active");
 }
 
-function backToMainMenu()
-{
-  create_products_content.style.display = "none";
-  products_content.style.display = "flex";
-}
-
 document.getElementById("language-select").addEventListener("change", function () { changeLanguage(this.value, list_item); });
 document.getElementById("id-exit-exit").addEventListener("click", ClickExitAccount);
 document.getElementById("id-cancel-exit").addEventListener("click", ClickCancelAccount);
-document.getElementById("id-back-to-product-menu").addEventListener("click", backToMainMenu);
 /*========================================*/

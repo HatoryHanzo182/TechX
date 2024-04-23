@@ -26,4 +26,4 @@ const ConsoleSchema = new mongoose.Schema(
 
 const ConsoleModel = mongoose.model('console', ConsoleSchema);
 
-export {ConsoleModel};
+export { ConsoleModel };
