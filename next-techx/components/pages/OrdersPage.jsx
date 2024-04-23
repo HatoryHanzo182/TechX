@@ -32,24 +32,24 @@ const OrdersPage = () => {
     <main className="pt-24">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between gap-6 mt-10">
-          <div className="w-full md:w-2/3 bg-[#1d1d1d] shadow-lg p-6">
+          <div className="w-full md:w-2/3 dark:bg-[#1d1d1d] shadow-lg p-6">
             <h2 className="text-2xl font-bold mb-6">Billing Information</h2>
             <form>
               <div className="mb-4">
                 <Label
                   htmlFor="name"
-                  className="block text-gray-300 text-sm font-bold mb-2"
+                  className="block dark:text-white text-black text-sm font-bold mb-2"
                 >
                   Full Name
                 </Label>
                 <Input
                   type="text"
                   placeholder="Your Full Name"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
                 />
               </div>
               <div className="mb-4">
-                <Label className="block text-gray-300 text-sm font-bold mb-2">
+                <Label className="block dark:text-white text-black text-sm font-bold mb-2">
                   Address
                 </Label>
                 <Input
@@ -59,7 +59,7 @@ const OrdersPage = () => {
                 />
               </div>
               <div className="mb-4">
-                <Label className="block text-gray-300 text-sm font-bold mb-2">
+                <Label className="block dark:text-white text-black text-sm font-bold mb-2">
                   City
                 </Label>
                 <Input
@@ -70,7 +70,7 @@ const OrdersPage = () => {
               </div>
               <div className="mb-4 ">
                 <div className="flex flex-row">
-                  <Label className="block text-gray-300 text-sm font-bold mb-2 px-2">
+                  <Label className="block dark:text-white text-black text-sm font-bold mb-2 px-2">
                     State
                   </Label>
                   <Input
@@ -79,7 +79,7 @@ const OrdersPage = () => {
                     className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   />
 
-                  <Label className="block text-gray-300 text-sm font-bold mb-2 px-2">
+                  <Label className="block dark:text-white text-black text-sm font-bold mb-2 px-2">
                     ZIP code
                   </Label>
                   <Input
@@ -90,7 +90,7 @@ const OrdersPage = () => {
                 </div>
               </div>
               <div className="mb-4">
-                <Label className="block text-gray-300 text-sm font-bold mb-2">
+                <Label className="block dark:text-white text-black text-sm font-bold mb-2">
                   Phone Number
                 </Label>
                 <Input
@@ -102,7 +102,7 @@ const OrdersPage = () => {
             </form>
           </div>
 
-          <div className="w-full md:w-1/3 bg-[#1d1d1d] shadow-lg p-6">
+          <div className="w-full md:w-1/3 bg-white  dark:bg-[#1d1d1d] shadow-lg p-6">
             <h2 className="text-2xl font-bold mb-6">Order Summary</h2>
 
             {stored_array.length > 0 ? (
