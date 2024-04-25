@@ -20,7 +20,7 @@ const ProductCatalog = (props) => {
           src={props.image}
           alt="Описание изображения"
         ></img>
-        <span className="flex justify-center mb-4 font-bold text-lg text-center text-nowrap">
+        <span className="flex justify-center pb-4 font-bold text-lg text-center text-nowrap">
           {props.title}
         </span>
       </div>

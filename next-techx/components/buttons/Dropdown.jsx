@@ -231,7 +231,7 @@ const DropMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="hidden lg:flex">
+        <Button className="hidden lg:flex ">
           <MixIcon className="mr-1" height={20} />
           Catalog
         </Button>

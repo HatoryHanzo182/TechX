@@ -144,7 +144,7 @@ function ProductSelection() {
         />
       </div>
       <div className="container mx-auto  flex">
-        <div className="flex flex-col w-2/3 h-full px-10 pr-4 dark:bg-[#1d1d1d] shadow-lg border p-4 rounded-lg ">
+        <div className="flex flex-col w-2/3 h-full px-10 pr-4 dark:bg-[#1d1d1d] shadow-lg  p-4 rounded-lg ">
           <div className="flex flex-col m-4">
             <div className="mb-4">
               <h1 className="text-2xl font-bold dark:text-white text-black p-2">
@@ -217,7 +217,7 @@ function ProductSelection() {
                 query: { id: `${product.id}` },
               }}
             >
-              <div className="dark:bg-[#1d1d1d] p-4 rounded-lg border shadow-lg ">
+              <div className="dark:bg-[#1d1d1d] p-4 rounded-lg  shadow-lg ">
                 <img
                   src={`http://localhost:3001/GetImage/${product.images}`}
                   alt={`${product.model}`}

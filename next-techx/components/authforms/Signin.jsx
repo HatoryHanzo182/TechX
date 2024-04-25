@@ -9,6 +9,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useRouter } from "next/navigation";
 import { set } from "mongoose";
 
+
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -191,7 +192,7 @@ const Signin = () => {
                   type="email"
                   id="login-email"
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                  className="w-full flex-shrink appearance-none b py-2 px-4 text-base  bg-white focus:outline-none"
                   placeholder="Email"
                 />
               </div>

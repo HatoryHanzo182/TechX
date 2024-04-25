@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import ProductCatalog from "@/components/product/ProductCatalog";
 import { ProductCarousel } from "@/components/ProductCarousel";
 import Link from "next/link";
+
 import ProductCards from "@/components/product/ProductCards";
 
 export default async function Home() {
