@@ -1,6 +1,7 @@
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
   * AUTHORIZATION WINDOW LOGIC.💊
 */
+const password_icon = document.getElementById('toggle-password-visibility'); 
 
 /*========== Accessibility check sector. ==========*/
 function Confuse(str)  // <-- This function takes a string and returns the SHA-256 
@@ -31,7 +32,7 @@ function Validator()  // <-- Password check function.
 }
 /*========================================*/
 
-/*========== Error message display area. ==========*/
+
 function ShowErrorMessage(mess)  // <-- Displaying the error window.
 {
     const error_message = document.getElementById("id-error-message");

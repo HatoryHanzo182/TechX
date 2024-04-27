@@ -225,11 +225,8 @@ document.getElementById("id-back-to-product-menu2").addEventListener("click", Ba
 document.getElementById("id-button-add-iphone").addEventListener("click", AddIPhone);
 /*========================================*/
 
-
 /*========== Logic for exiting the admin panel sector.==========*/
-function ClickExitAccount() { electron.send("ShowAuthorization"); }
-
-function ClickCancelAccount() 
+export function ReturnToPreviousTab() 
 {
   exit_content.style.display = "none";
 
@@ -251,6 +248,4 @@ function ClickCancelAccount()
 }
 
 document.getElementById("language-select").addEventListener("change", function () { changeLanguage(this.value, list_item); });
-document.getElementById("id-exit-exit").addEventListener("click", ClickExitAccount);
-document.getElementById("id-cancel-exit").addEventListener("click", ClickCancelAccount);
 /*========================================*/

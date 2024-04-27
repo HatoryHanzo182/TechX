@@ -1,0 +1,95 @@
+/*---------------------
+  Exit sector styles.
+-----------------------*/
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    background-size: 100px 50px;
+    background-size: cover;
+}
+
+.exit-content {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+  
+.confirmation-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 400px;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255); /* #fff */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.exit-icon {
+    margin: 0 auto 20px;
+    margin-left: 42%;
+    font-size: 80px;
+    color: #ff8c00;
+}
+
+.confirmation-card h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.confirmation-card p {
+    margin: 0 0 20px;
+    font-size: 14px;
+    color: var(--text-color); /* #666 */
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.exit-button, .cancel-button {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    margin: 5px;
+    padding: 12px 0;
+    align-items: center;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: #fff; /* #fff */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cancel-button {
+    font-weight: bold;
+    background-color: #ab0000;
+}
+
+.exit-button {
+    background-color: #0f6dd8;
+}
+
+.cancel-button:hover {
+    background-color: rgb(233, 0, 0);
+}
+
+.exit-button:hover {
+    background-color: #1180ff;
+}

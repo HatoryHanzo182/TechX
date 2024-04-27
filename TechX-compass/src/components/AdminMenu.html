@@ -191,7 +191,6 @@
               <p class="title-card-content-product-data">Add Mackbook</p>
             </div>
             <div id="drag-and-drop-area">
-              <!--Drag And Drop-->
               <div id="drop-area">
                 <label class="custum-file-upload" id="id-custum-file-upload" for="file">
                   <div class="icon">
@@ -223,11 +222,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-
-
-
       <!--ORDERS CONTENT-->
       <div id="id-orders-content" class="orders-content" style="display: none">
         <h1>Orders</h1>
@@ -259,24 +253,36 @@
           <label for="theme-toggle"></label>
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
       <!--EXIT CONTENT-->
       <div id="id-exit-content" style="display: none">
-        <div class="exit-content">
-          <div class="confirmation-card">
-            <ion-icon name="exit-outline" class="exit-icon"></ion-icon>
-            <h2>Exit confirmation</h2>
-            <p>Are you sure you want to leave the admin panel?</p>
-            <div class="button-container">
-              <button id="id-cancel-exit" class="cancel-button">Cancel</button>
-              <button id="id-exit-exit" class="exit-button">Go out</button>
-            </div>
-          </div>
-        </div>
+        <object type="text/html" data="./MenuContents/MenuExitContent.html" style="width: 100vw; height: 100vh;"></object>
       </div>
+
+
+
+
+
+
+
+
+
     </div>
   </body>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script type="module" src="../js/AdminMenu.js"></script>
-  <script src="../js/drag-and-drop.js"></script>
+  <script type="module" src="../js/MenuContentsLogics/ExitContentLogic.js"></script>
+  <script type="module" src="../js/drag-and-drop.js"></script>
 </html>

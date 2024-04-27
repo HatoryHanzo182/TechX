@@ -366,38 +366,44 @@ app.get("/GetImage/:ImageName", (req, res) => {
 app.post("/GettingDataForCarusel", async (req, res) => {
   try {
     const iphones = await IPhoneModel.find();
-
-    const formatted_data_iphones = iphones.map((i) => {
+  
+    const formatted_data_iphones = iphones.map(i => 
+    {
       return { id: i.id, images: i.images[0], model: i.model, price: i.price };
     });
 
     const airpods = await AirPodsModel.find();
 
-    const formatted_data_airpods = airpods.map((i) => {
+    const formatted_data_airpods = airpods.map(i => 
+    {
       return { id: i.id, images: i.images[0], model: i.model, price: i.price };
     });
 
     const applewatchs = await AppleWatchModel.find();
-
-    const formatted_data_applewatchs = applewatchs.map((i) => {
+  
+    const formatted_data_applewatchs = applewatchs.map(i => 
+    {
       return { id: i.id, images: i.images[0], model: i.model, price: i.price };
     });
 
     const macbooks = await MacbookModel.find();
-
-    const formatted_data_macbooks = macbooks.map((i) => {
+  
+    const formatted_data_macbooks = macbooks.map(i => 
+    {
       return { id: i.id, images: i.images[0], model: i.model, price: i.price };
     });
 
     const ipads = await IpadModel.find();
-
-    const formatted_data_ipads = ipads.map((i) => {
+  
+    const formatted_data_ipads = ipads.map(i => 
+    {
       return { id: i.id, images: i.images[0], model: i.model, price: i.price };
     });
 
     const consoles = await ConsoleModel.find();
-
-    const formatted_data_consoles = consoles.map((i) => {
+  
+    const formatted_data_consoles = consoles.map(i => 
+    {
       return { id: i.id, images: i.images[0], model: i.model, price: i.price };
     });
 
@@ -828,40 +834,13 @@ app.post("/AddNewProductImg", upload.array("image", 5), async (req, res) => {
   }
 });
 
-// Push product data.
-app.post("/AddIPhone", async (req, res) => {
-  try {
-    const {
-      category,
-      brand,
-      model,
-      price,
-      color,
-      memory,
-      displaySize,
-      description,
-      os,
-      camera,
-      processor,
-      images,
-      incarousel,
-    } = req.body;
-    const new_phone = new IPhoneModel({
-      _id: new mongoose.Types.ObjectId(),
-      category,
-      brand,
-      model,
-      price,
-      color,
-      memory,
-      displaySize,
-      description,
-      os,
-      camera,
-      processor,
-      images,
-      incarousel,
-    });
+        // Push product data.
+app.post("/AddIPhone", async (req, res) => 
+{
+  try 
+  {
+    const { category, brand, model, price, color, memory, displaySize, description, os, camera, processor, images, incarousel } = req.body;
+    const new_phone = new IPhoneModel({_id: new mongoose.Types.ObjectId(), category, brand, model, price, color, memory, displaySize, description, os, camera, processor, images, incarousel });
 
     await new_phone.save();
 
