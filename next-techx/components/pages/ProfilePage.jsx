@@ -294,10 +294,7 @@ export function ProfilePage() {
                   {user_favorite.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ml-10 gap-4">
                       {user_favorite.map((u_f) => (
-                        <div
-                          key={u_f.id}
-                          className="bg-[#1d1d1d] p-4 rounded-lg"
-                        >
+                        <div key={u_f.id} className="shadow-lg p-4 rounded-lg">
                           <Link
                             href={{
                               pathname: "/product-detail",
@@ -311,7 +308,9 @@ export function ProfilePage() {
                             />
                             <div className="font-bold">{u_f.model}</div>
                             <div className="flex justify-between items-center mt-3">
-                              <div className="text-red-500">{u_f.price} $</div>
+                              <div className="dark:text-white text-black">
+                                {u_f.price} $
+                              </div>
                             </div>
                           </Link>
                           <span

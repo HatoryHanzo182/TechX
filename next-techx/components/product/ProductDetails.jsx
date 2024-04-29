@@ -688,7 +688,7 @@ const ProductDetails = () => {
               <Input
                 type="text"
                 placeholder="Name"
-                className="block w-full px-4 py-3 rounded-lg shadow-sm  sm:text-sm bg-white dark:bg-[#1d1d1d]"
+                className="block w-full px-4 py-3 rounded-lg shadow-sm  sm:text-sm "
                 value={user_name}
                 onChange={(e) => SetUserName(e.target.value)}
               />
