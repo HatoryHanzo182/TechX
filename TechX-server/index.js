@@ -858,24 +858,18 @@ app.post("/GetProductReview", async (req, res) =>
   try 
   {
     const review_data = await ProductReviewModel.find();
+    const formatted_data = [];
     
     if (review_data && review_data.length > 0)
     {
-      // Массив для хранения всех отзывов с информацией о продукте и владельце
       const reviews_product = [];
       const review_owner = [];
 
       for(const review of review_data)
       {
-        if(review.review_owner_id != null)
-          review_owner.push(review.review_owner_name);
-        else
-        {
-          const r_o = await UserModel.findById(review.review_owner_id, { name: 1 });
-          review_owner.push(r_o);
-        }
-
         const iphone_data = await IPhoneModel.findById(review.product_id, { model: 1, images: { $slice: 1 } });
+        
+        review_owner.push(review.review_owner_name);
         
         if(iphone_data)
         {
@@ -924,9 +918,21 @@ app.post("/GetProductReview", async (req, res) =>
         }
       }
 
-      console.log(reviews_product);
-      console.log(review_owner)
-      // res.status(200).json(reviews_with_details);
+      for (let i = 0; i < review_data.length; i++) 
+      {
+        const combined = 
+        {
+          id: review_data[i].id,
+          review: review_data[i].review,
+          grade: review_data[i].grade,
+          product_arr: reviews_product[i],
+          owner_name: review_owner[i]
+        };
+
+        formatted_data.push(combined);
+      }
+
+      res.status(200).json(formatted_data);
     }
     else 
       res.status(200).json([]);
