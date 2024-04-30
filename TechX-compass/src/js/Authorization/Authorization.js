@@ -1,9 +1,7 @@
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
   * AUTHORIZATION WINDOW LOGIC.💊
 */
-const password_icon = document.getElementById('toggle-password-visibility'); 
 
-/*========== Accessibility check sector. ==========*/
 function Confuse(str)  // <-- This function takes a string and returns the SHA-256 
 {                     // hash of that string for the password verification function.
     return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(buffer =>
@@ -30,9 +28,20 @@ function Validator()  // <-- Password check function.
             ShowErrorMessage("Incorrect password");
     });
 }
-/*========================================*/
 
+const Change = () => 
+{
+  const passwordInput = document.getElementById('id-admin-password');
+  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+  
+  passwordInput.setAttribute('type', type);
 
+  password_icon.name = password_icon.name === 'eye' ? 'eye-off' : 'eye';
+}
+
+password_icon.addEventListener('click' , Change)
+
+//#region [Error display logic.]
 function ShowErrorMessage(mess)  // <-- Displaying the error window.
 {
     const error_message = document.getElementById("id-error-message");
@@ -44,18 +53,13 @@ function ShowErrorMessage(mess)  // <-- Displaying the error window.
     setTimeout(() => { error_message.style.display = "none"; }, 4000);
 }
 
-function BreakErrorMessage()
+function BreakErrorMessage()  // <-- Break displaying the error window.
 {
     const error_message = document.getElementById("id-error-message");
     
     error_message.style.display = "none";
 }
 
-function backToMainMenu()
-{
-    window.history.back();
-}
-
-/*========== Event Handler Sector. ==========*/
 document.getElementById("id-button-confirm").onclick = Validator;
 document.getElementById("id-close-error-message").onclick = BreakErrorMessage;
+//#endregion 

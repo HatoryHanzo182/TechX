@@ -9,6 +9,14 @@
   font-family: sans-serif;
 }
 
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  background-size: 100px 50px;
+  background-image: url('../../img/WallpeperAdminMenu.jpg');
+  background-size: cover;
+}
+
 /* INFO: White theme colors */
 :root {
   --background-color: #ffffff;
@@ -177,18 +185,7 @@
     );
 }
 
-body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  background-size: 100px 50px;
-  background-image: url('../img/WallpeperAdminMenu.jpg');
-  background-size: cover;
-}
-
-/*---------------------
-  Scrollbar style 
-  sector.
------------------------*/
+/* #region [Scrollbar style sector.] */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -210,12 +207,9 @@ body {
 ::-webkit-scrollbar-thumb:active {
   background-color:  #1f2931;
 }
+/* #endregion */
 
-
-/*---------------------
-  Sector vertical menu 
-  styles.
------------------------*/
+/* #region [ Sector vertical menu styles. ] */
 .container {
   width: 100%;
   min-height: 100vh;
@@ -262,7 +256,7 @@ body {
   position: absolute;
   width: 30px;
   height: 2px;
-  background: var(--text-color); /* #333 */
+  background: var(--text-color);
   transform: translateY(-8px);
   transition: 0.5s;
 }
@@ -272,10 +266,10 @@ body {
   position: absolute;
   width: 30px;
   height: 2px;
-  background: var(--text-color); /* #333 */
+  background: var(--text-color);
   transform: translateY(8px);
   transition: 0.5s;
-  box-shadow: 0 -8px 0 var(--text-color); /* #333 */
+  box-shadow: 0 -8px 0 var(--text-color);
 }
 
 .navigation.open .menu-toggle::before {
@@ -322,7 +316,7 @@ body {
   min-width: 55px;
   height: 55px;
   line-height: 60px;
-  color: var(--text-color); /* #222 */
+  color: var(--text-color);
   border-radius: 10px;
   font-size: 1.75rem;
   transition: 0.5s;
@@ -337,8 +331,8 @@ body {
 }
 
 .navigation ul li.active a .icon {
-  color: var(--background-color); /* #fff */
-  background: var(--color); /* --color */
+  color: var(--background-color);
+  background: var(--color);
 }
 
 .navigation ul li a .icon::before {
@@ -349,7 +343,7 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  background: var(--color); /* --color */
+  background: var(--color);
   filter: blur(8px);
   opacity: 0;
   transition: 0.5s;
@@ -379,6 +373,10 @@ body {
 .navigation ul li.active a .text {
   color: var(--color);
 }
+/* #endregion */
+
+
+
 
 /*---------------------
   Products menu sector 
@@ -619,6 +617,12 @@ body {
 }
 
 
+
+
+
+
+
+
 /*---------------------
   Orders sector styles.
 -----------------------*/
@@ -631,14 +635,6 @@ body {
 -----------------------*/
 .activity-content {
 }
-
-
-/*---------------------
-  Reviews sector styles.
------------------------*/
-.reviews-content {
-}
-
 
 /*---------------------
   Accounting sector styles.

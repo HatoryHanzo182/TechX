@@ -1,18 +1,6 @@
 /*---------------------
   Exit sector styles.
 -----------------------*/
-* {
-    margin: 0%;
-    padding: 0%;
-    box-sizing: border-box;
-    font-family: sans-serif;
-}
-
-body {
-    background-size: 100px 50px;
-    background-size: cover;
-}
-
 .exit-content {
     display: flex;
     justify-content: center;
@@ -24,7 +12,8 @@ body {
     align-items: center;
     background-color: rgba(0, 0, 0, 0.6);
 }
-  
+
+/* #region [Confirmation styles.] */  
 .confirmation-card {
     display: flex;
     flex-direction: column;
@@ -47,15 +36,17 @@ body {
 .confirmation-card h2 {
     margin: 0 0 10px;
     font-size: 18px;
-    color: var(--text-color);
+    color: rgba(0, 0, 0);
 }
 
 .confirmation-card p {
     margin: 0 0 20px;
     font-size: 14px;
-    color: var(--text-color); /* #666 */
+    color: rgba(0, 0, 0);
 }
+/* #endregion */
 
+/* #region [Buttons styles.] */
 .button-container {
     display: flex;
     justify-content: space-between;
@@ -93,3 +84,4 @@ body {
 .exit-button:hover {
     background-color: #1180ff;
 }
+/* #endregion */

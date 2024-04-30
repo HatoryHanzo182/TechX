@@ -801,12 +801,12 @@ app.post("/DeleteFavoriteProduct/:id", async (req, res) => {
 // REQUESTS TO SEND THIS DATA.
 //=============================================================================================
 //#region [AddProducts]
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "ProductImages"));
-  },
-  filename: (req, file, cb) => {
-    const unique_suffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+const storage = multer.diskStorage(
+{
+  destination: (req, file, cb) => { cb(null, path.join(__dirname, 'ProductImages'));},
+  filename: (req, file, cb) => 
+  {
+    const unique_suffix = `${Date.now()}-${Math.round(Math.random() * 1E9)}`;
     const fileName = `${unique_suffix}-${file.originalname}`;
 
     cb(null, fileName);
@@ -848,6 +848,93 @@ app.post("/AddIPhone", async (req, res) =>
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+//#endregion
+//#region [Reviews for admin]
+        // Get all reviews for admin.
+app.post("/GetProductReview", async (req, res) => 
+{
+  try 
+  {
+    const review_data = await ProductReviewModel.find();
+    
+    if (review_data && review_data.length > 0)
+    {
+      // Массив для хранения всех отзывов с информацией о продукте и владельце
+      const reviews_product = [];
+      const review_owner = [];
+
+      for(const review of review_data)
+      {
+        if(review.review_owner_id != null)
+          review_owner.push(review.review_owner_name);
+        else
+        {
+          const r_o = await UserModel.findById(review.review_owner_id, { name: 1 });
+          review_owner.push(r_o);
+        }
+
+        const iphone_data = await IPhoneModel.findById(review.product_id, { model: 1, images: { $slice: 1 } });
+        
+        if(iphone_data)
+        {
+          reviews_product.push(iphone_data);
+          continue;
+        }
+
+        const airpod_data = await AirPodsModel.findById(review.product_id, { model: 1, images: { $slice: 1 } });
+        
+        if(airpod_data)
+        {
+          reviews_product.push(airpod_data);
+          continue;
+        }
+
+        const applewatch_data = await AppleWatchModel.findById(review.product_id, { model: 1, images: { $slice: 1 } });
+        
+        if(applewatch_data)
+        {
+          reviews_product.push(applewatch_data);
+          continue;
+        }
+
+        const macbook_data = await MacbookModel.findById(review.product_id, { model: 1, images: { $slice: 1 } });
+        
+        if(macbook_data)
+        {
+          reviews_product.push(macbook_data);
+          continue;
+        }
+
+        const ipad_data = await IpadModel.findById(review.product_id, { model: 1, images: { $slice: 1 } });
+        
+        if(ipad_data)
+        {
+          reviews_product.push(ipad_data);
+          continue;
+        }
+
+        const console_data = await ConsoleModel.findById(review.product_id, { model: 1, images: { $slice: 1 } });
+        
+        if(console_data)
+        {
+          reviews_product.push(console_data);
+          continue;
+        }
+      }
+
+      console.log(reviews_product);
+      console.log(review_owner)
+      // res.status(200).json(reviews_with_details);
+    }
+    else 
+      res.status(200).json([]);
+  } 
+  catch (error) 
+  {
+    console.error(error);
+    res.status(500).json({});
   }
 });
 //#endregion
