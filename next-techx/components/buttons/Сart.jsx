@@ -25,11 +25,25 @@ import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 const Cart = () => 
 {
   const [stored_array, SetStoredArray] = useState([]);
+  const [last_updated, SetLastUpdated] = useState();
 
   useEffect(() =>
   {
+    console.log("STORAGE");
+    
     SetStoredArray(JSON.parse(localStorage.getItem("Cart")) || []);
-  }, [localStorage.getItem("Cart")]);
+  }, []);
+  
+  useEffect(() => 
+  {
+    const interval = setInterval(() => 
+    {
+      const cartData = JSON.parse(localStorage.getItem("Cart")) || [];
+      SetStoredArray(cartData);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [last_updated]);
 
   const RemoveFromCart = (index) => {
     const updated_сart = [...stored_array];
