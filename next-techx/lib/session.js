@@ -2,7 +2,7 @@ export const PullOutOfSession = async () => {
   if (localStorage.getItem("token") == null) return false;
 
   const CheckSignature = await fetch(
-    "https://techx-nodeserver.vercel.app/CheckToken", // <<----- Проверяем подпись токена,
+    "http://localhost:3001/CheckToken", // <<----- Проверяем подпись токена,
     {
       // для того что бы его не подменили.
       method: "POST",
@@ -19,16 +19,13 @@ export const PullOutOfSession = async () => {
     // <<---- Подпись токена была подтверждена.
     console.log("TOKEN IS TRUE");
 
-    const PullData = await fetch(
-      "https://techx-nodeserver.vercel.app/PullOutOfSession",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
+    const PullData = await fetch("http://localhost:3001/PullOutOfSession", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
 
     const { user_data } = await PullData.json();
 

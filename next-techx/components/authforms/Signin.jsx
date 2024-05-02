@@ -41,7 +41,7 @@ const Signin = () => {
 
     try {
       const ResUserExists = await fetch(
-        "https://techx-nodeserver.vercel.app/CheckUserExists", // <<----- Проверяет есть ли пользователь в базе.
+        "http://localhost:3001/CheckUserExists", // <<----- Проверяет есть ли пользователь в базе.
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -54,7 +54,7 @@ const Signin = () => {
       if (existing_user) {
         // <<----- Если есть, проверим пароль.
         const ResProofPass = await fetch(
-          "https://techx-nodeserver.vercel.app/ProofPass", //  <<------ Проверяем пароль пользователя.
+          "http://localhost:3001/ProofPass", //  <<------ Проверяем пароль пользователя.
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -67,7 +67,7 @@ const Signin = () => {
         if (success) {
           try {
             const reply_token = await fetch(
-              "https://techx-nodeserver.vercel.app/GenerateToken", //   <<------ Создадим токен.
+              "http://localhost:3001/GenerateToken", //   <<------ Создадим токен.
               {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -80,7 +80,7 @@ const Signin = () => {
             localStorage.setItem("token", token);
 
             const CreateSessionResponse = await fetch(
-              "https://techx-nodeserver.vercel.app/CreateSession", // <<----- Создадим пользователю сессию.
+              "http://localhost:3001/CreateSession", // <<----- Создадим пользователю сессию.
               {
                 method: "POST",
                 headers: {

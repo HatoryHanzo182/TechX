@@ -83,16 +83,13 @@ export default function Nav() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(
-        "https://techx-nodeserver.vercel.app/RemoveFromSession",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch("http://localhost:3001/RemoveFromSession", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const data = await response.json();
 
@@ -125,14 +122,11 @@ export default function Nav() {
     search_results.length = 0;
 
     try {
-      const response = await fetch(
-        `https://techx-nodeserver.vercel.app/SearchForProducts`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: q }),
-        }
-      );
+      const response = await fetch(`http://localhost:3001/SearchForProducts`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: q }),
+      });
 
       const data = await response.json();
 
@@ -216,7 +210,7 @@ export default function Nav() {
                                     <img
                                       width="50"
                                       height="50"
-                                      src={`https://techx-nodeserver.vercel.app/GetImage/${result.images}`}
+                                      src={`http://localhost:3001/GetImage/${result.images}`}
                                       alt="SearchImage"
                                     />
                                     {result.model} / {result.price}$
@@ -330,7 +324,7 @@ export default function Nav() {
                                     <img
                                       width="50"
                                       height="50"
-                                      src={`https://techx-nodeserver.vercel.app/GetImage/${result.images}`}
+                                      src={`http://localhost:3001/GetImage/${result.images}`}
                                       alt="SearchImage"
                                       className="mr-2"
                                     />
