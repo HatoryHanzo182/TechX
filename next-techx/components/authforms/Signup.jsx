@@ -36,7 +36,7 @@ const Signup = () => {
 
     try {
       const ResUserExists = await fetch(
-        "http://localhost:3001/CheckUserExists",
+        "https://techx-nodeserver.vercel.app/CheckUserExists",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ const Signup = () => {
         SetisModalConfirmMailOpen(true);
 
         const SendConf = await fetch(
-          "http://localhost:3001/SendConfirmationCodeEmail", //  <<---- Отправляем код подтверждения.
+          "https://techx-nodeserver.vercel.app/SendConfirmationCodeEmail", //  <<---- Отправляем код подтверждения.
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ const Signup = () => {
 
     if (conf_u === code) {
       const res = await fetch(
-        "http://localhost:3001/NewUser", //  <<---- Добавим пользователя.
+        "https://techx-nodeserver.vercel.app/NewUser", //  <<---- Добавим пользователя.
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

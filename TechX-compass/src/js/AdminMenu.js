@@ -174,7 +174,7 @@ async function AddIPhone()
 
       form_data.append('image', file);
 
-      const upload_response = await fetch("http://localhost:3001/AddNewProductImg", 
+      const upload_response = await fetch("https://techx-nodeserver.vercel.app/AddNewProductImg", 
       {
         method: 'POST',
         body: form_data,

@@ -25,7 +25,7 @@ export function ProductCarousel() {
     const ToGetData = async () => {
       try {
         const formatted_data = await fetch(
-          "http://localhost:3001/GettingDataForCarusel",
+          "https://techx-nodeserver.vercel.app/GettingDataForCarusel",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -99,7 +99,7 @@ export function ProductCarousel() {
                 >
                   <ProductCards
                     key={Index}
-                    image={`http://localhost:3001/GetImage/${d.images}`}
+                    image={`https://techx-nodeserver.vercel.app/GetImage/${d.images}`}
                     title={d.model}
                     color={d.color}
                     price={d.price}

@@ -115,7 +115,7 @@ const OrdersPage = () => {
                     >
                       <div>
                         <img
-                          src={`http://localhost:3001/GetImage/${item.img}`}
+                          src={`https://techx-nodeserver.vercel.app/GetImage/${item.img}`}
                           alt="img"
                           className="w-14"
                         />
