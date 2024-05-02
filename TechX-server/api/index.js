@@ -690,84 +690,72 @@ app.post("/GetFavoriteProduct/:id", async (req, res) => {
     const iphone_data = await IPhoneModel.findById(product_object_id);
 
     if (iphone_data) {
-      res
-        .status(200)
-        .json({
-          id: iphone_data.id,
-          images: iphone_data.images[0],
-          model: iphone_data.model,
-          price: iphone_data.price,
-        });
+      res.status(200).json({
+        id: iphone_data.id,
+        images: iphone_data.images[0],
+        model: iphone_data.model,
+        price: iphone_data.price,
+      });
       return;
     }
 
     const airpod_data = await AirPodsModel.findById(product_object_id);
 
     if (airpod_data) {
-      res
-        .status(200)
-        .json({
-          id: airpod_data.id,
-          images: airpod_data.images[0],
-          model: airpod_data.model,
-          price: airpod_data.price,
-        });
+      res.status(200).json({
+        id: airpod_data.id,
+        images: airpod_data.images[0],
+        model: airpod_data.model,
+        price: airpod_data.price,
+      });
       return;
     }
 
     const applewatch_data = await AppleWatchModel.findById(product_object_id);
 
     if (applewatch_data) {
-      res
-        .status(200)
-        .json({
-          id: applewatch_data.id,
-          images: applewatch_data.images[0],
-          model: applewatch_data.model,
-          price: airpod_data.price,
-        });
+      res.status(200).json({
+        id: applewatch_data.id,
+        images: applewatch_data.images[0],
+        model: applewatch_data.model,
+        price: airpod_data.price,
+      });
       return;
     }
 
     const macbook_data = await MacbookModel.findById(product_object_id);
 
     if (macbook_data) {
-      res
-        .status(200)
-        .json({
-          id: macbook_data.id,
-          images: macbook_data.images[0],
-          model: macbook_data.model,
-          price: macbook_data.price,
-        });
+      res.status(200).json({
+        id: macbook_data.id,
+        images: macbook_data.images[0],
+        model: macbook_data.model,
+        price: macbook_data.price,
+      });
       return;
     }
 
     const ipad_data = await IpadModel.findById(product_object_id);
 
     if (ipad_data) {
-      res
-        .status(200)
-        .json({
-          id: ipad_data.id,
-          images: ipad_data.images[0],
-          model: ipad_data.model,
-          price: ipad_data.price,
-        });
+      res.status(200).json({
+        id: ipad_data.id,
+        images: ipad_data.images[0],
+        model: ipad_data.model,
+        price: ipad_data.price,
+      });
       return;
     }
 
     const console_data = await ConsoleModel.findById(product_object_id);
 
     if (console_data) {
-      res
-        .status(200)
-        .json({
-          id: console_data.id,
-          images: console_data.images[0],
-          model: console_data.model,
-          price: console_data.price,
-        });
+      res.status(200).json({
+        id: console_data.id,
+        images: console_data.images[0],
+        model: console_data.model,
+        price: console_data.price,
+      });
       return;
     } else res.status(404).json({ message: "Product not found" });
   } catch (error) {
