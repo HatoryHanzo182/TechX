@@ -207,6 +207,24 @@ body {
 ::-webkit-scrollbar-thumb:active {
   background-color:  #1f2931;
 }
+
+::-webkit-scrollbar-track-horizontal {
+  background-color: transparent;
+  border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb-horizontal {
+  background-color: #25313a;
+  border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb-horizontal:hover {
+  background-color: #1f2931;
+}
+
+::-webkit-scrollbar-thumb-horizontal:active {
+  background-color: #1f2931;
+}
 /* #endregion */
 
 /* #region [ Sector vertical menu styles. ] */
@@ -216,6 +234,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-x: hidden;
 }
 
 .navigation {
@@ -615,13 +634,6 @@ body {
 .button-add-product:hover::before {
   width: 250%;
 }
-
-
-
-
-
-
-
 
 /*---------------------
   Orders sector styles.

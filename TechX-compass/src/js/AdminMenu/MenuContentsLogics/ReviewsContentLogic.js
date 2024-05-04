@@ -1,4 +1,7 @@
 /*========== Logic for loading product reviews sector.==========*/
+//#region [Loading review content.]
+let number_reviews = 0;
+
 function LoadAllReviews() 
 {
     fetch('http://localhost:3001/GetProductReview', 
@@ -7,26 +10,35 @@ function LoadAllReviews()
       headers: { 'Content-Type': 'application/json' }
     }).then(response => 
     {
-      if (!response.ok)
-        throw new Error('Network response was not ok');
+        if (!response.ok)
+            throw new Error('Network response was not ok');
 
-      return response.json();
+        return response.json();
     }).then(review_data => 
     {
-        CollectReviewCard(review_data)
+        if(review_data.length != number_reviews)
+        {
+            number_reviews = review_data.length
+
+            CollectReviewCard(review_data)
+            HiddenNoReviews();
+        }
+        else if(review_data.length == 0)
+            ShowNoReviews();
     });
 }
 
 function CollectReviewCard(review_data)
 {
-    const container = document.getElementById("id-reviews-content");
+    const container = document.getElementById("id-reviews-card");
 
     container.innerHTML = '';
-    
-    const reviewCards = review_data.reverse().map(review => 
+
+    const review_cards = review_data.reverse().map(review => 
     {
       const card = document.createElement("div");
-      
+      const review_date = review.viewed_admin ? review.date : "NEW"; 
+
       card.classList.add("group");
       card.innerHTML = `
         <div class="card-box">
@@ -41,21 +53,19 @@ function CollectReviewCard(review_data)
                     <div class="title-review">
                         <p id="id-name-review" class="name-review">${review.product_arr.model}</p>
                     </div>
-                    <div class="level-review">
-
-                    </div>        
-                    <div class="infomation-review">
-                        <p class="propertion-review">2024.1.11</p>
+                    <div class="level-review"></div>        
+                    <div class="infomation-review"> 
+                        <p class="propertion-review">${review_date}</p>
                         <p class="propertion-review">${review.owner_name}</p>
-                        <ion-icon name="trash-outline"></ion-icon>
+                        <ion-icon id="id-delete-review-${review.id}" name="trash-outline"></ion-icon>
                     </div>
                 </div>
             </div>
         </div>`;
 
-        const levelReview = card.querySelector(".level-review");
+        const level_review = card.querySelector(".level-review");
         
-        levelReview.innerHTML = '';
+        level_review.innerHTML = '';
 
         for (let i = 0; i < 5; i++) 
         {
@@ -76,17 +86,166 @@ function CollectReviewCard(review_data)
                 path.setAttribute("d", "M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z");
             
                 svg.appendChild(path);
-            levelReview.appendChild(svg);
+
+            level_review.appendChild(svg);
         }
+
+        card.addEventListener("mouseover", () => 
+        { 
+            if(!review.viewed_admin)
+                AdminСhecked(review.id); 
+        });
         return card;
     });
     
-    container.append(...reviewCards);
+    container.append(...review_cards);
 }
+
+function AdminСhecked(id)
+{
+    try 
+    {
+        fetch('http://localhost:3001/AdminChecked', 
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id })
+        }).then(response => 
+        {
+            if (!response.ok)
+                throw new Error('Network response was not ok');
+        });
+    } 
+    catch (error) { console.error(error); }
+}
+//#endregion
+
+//#region [Window display window missing.]
+function ShowNoReviews()
+{
+    const card_missing_reviews = document.getElementById("id-card-missing-reviews");
+
+    card_missing_reviews.style.display = "flex";
+}
+
+function HiddenNoReviews()
+{
+    const card_missing_reviews = document.getElementById("id-card-missing-reviews");
+
+    card_missing_reviews.style.display = "none";
+}
+//#endregion
+
+//#region [Delete review content.]
+const confirmation_window = document.getElementById("id-delete-review-content");
+let _review_id;
+
+function DeleteReviewFromDB(event)
+{
+    if (event.target && event.target.matches('[id^="id-delete-review-"]')) 
+    {
+        const review_id = event.target.id.replace('id-delete-review-', '');
+        
+        ShowReviewDeletionConfirmation(review_id);
+    }
+}
+
+function ShowReviewDeletionConfirmation(review_id)
+{
+    clearInterval(interval_id);
+
+    confirmation_window.style.display = "flex";
+    _review_id = review_id
+}
+
+function CancelDeleteReview()
+{
+    confirmation_window.style.display = "none";
+
+    
+    interval_id = setInterval(() => { LoadAllReviews(); }, 5000);
+}
+
+function DeleteReview()
+{
+    CancelDeleteReview();
+
+    fetch('http://localhost:3001/RemovingReviewById', 
+    {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: _review_id })
+    }).then(response => 
+    {
+        if (!response.ok)
+            throw new Error('Network response was not ok');
+        return response.json();
+    }).then(data => 
+    {
+        if(data.success)
+            ShowSuccessMessage("Successful removal of manager");
+        else
+            ShowErrorMessage("Error, something happened on the server, try again later")
+
+        LoadAllReviews();
+    }).catch(error => 
+    {
+        console.error('Error:', error);
+    });
+}
+
+document.addEventListener('click', DeleteReviewFromDB);
+document.getElementById("id-cancel-delete-review").addEventListener("click", CancelDeleteReview);
+document.getElementById("id-delete-review").addEventListener("click", DeleteReview);
+// #endregion
+
+//#region [Message display logic.]
+function ShowSuccessMessage(mess)  // <-- Displaying the Success window.
+{
+    const success_message = document.getElementById("id-notification");
+    const message = document.getElementById("id-message-success");
+
+    message.innerText = mess;
+    success_message.style.display = "flex";
+
+    setTimeout(() => {  success_message.style.display = "none"; }, 4000);
+}
+
+function ShowErrorMessage(mess)  // <-- Displaying the Error window.
+{
+    const error_message = document.getElementById("id-error-review");
+    const message = document.getElementById("id-error-review-message");
+
+    message.innerText = mess;
+    error_message.style.display = "flex";
+
+    setTimeout(() => {  error_message.style.display = "none"; }, 4000);
+}
+
+function BreakSuccessMessage()  // <-- Break displaying the success window.
+{
+    const success_message = document.getElementById("id-notification");
+    
+    success_message.style.display = "none";
+}
+
+function BreakErrorMessage()  // <-- Break displaying the error window.
+{
+    const error_message = document.getElementById("id-error-review");
+    
+    error_message.style.display = "none";
+}
+
+document.getElementById("id-close-success-message").onclick = BreakSuccessMessage;
+document.getElementById("id-close-error-message").onclick = BreakErrorMessage;
+//#endregion 
+
+let interval_id;
 
 window.onload = function() 
 {
     LoadAllReviews();
-    setInterval(LoadAllReviews, 10000);
+
+    interval_id = setInterval(() => { LoadAllReviews(); }, 5000);
 };
 /*========================================*/

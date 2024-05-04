@@ -12,6 +12,8 @@ const ProductReviewSchema = new mongoose.Schema(
     review_owner_name: String,
     review: String,
     grade: Number,
+    date: String,
+    viewed_admin: Boolean
 }, { collection: 'ProductReviews' })
 
 const ProductReviewModel = mongoose.model('product_review', ProductReviewSchema);

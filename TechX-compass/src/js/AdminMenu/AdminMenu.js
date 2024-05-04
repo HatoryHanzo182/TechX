@@ -53,7 +53,7 @@ list_item.forEach((item) =>
 
 
 /*==========Content display logic sector.==========*/
-function DisableContent() 
+export function DisableContent() 
 {
   products_content.style.display = "none";
   orders_content.style.display = "none";
