@@ -120,6 +120,55 @@ function AdminСhecked(id)
 }
 //#endregion
 
+//#region [Search review content.]
+document.querySelector('.input').addEventListener('input', function() 
+{
+    const search_text = this.value.toLowerCase();
+    const review_cards = document.querySelectorAll('.card-review');
+    let found = false;
+
+    review_cards.forEach(card => 
+    {
+        const review_text = card.querySelector('.some').textContent.toLowerCase();
+        const product_name = card.querySelector('.name-review').textContent.toLowerCase();
+        const owner_name = card.querySelector('.propertion-review:nth-child(2)').textContent.toLowerCase();
+        const review_date = card.querySelector('.propertion-review:first-child').textContent.toLowerCase();
+
+        if (review_text.includes(search_text) || product_name.includes(search_text) || owner_name.includes(search_text) || review_date.includes(search_text)) 
+        {
+            card.style.display = 'block';
+            found = true;
+            
+            HiddenNoSearchReviews();
+        }
+        else
+            card.style.display = 'none';
+    });
+
+    if (!found)
+    {
+        if(number_reviews === 0)
+        {
+            HiddenNoReviews();
+            clearInterval(interval_id);
+        }
+
+        ShowNoSearchReviews();
+    }
+    
+    if(search_text.length === 0)
+    {
+        HiddenNoSearchReviews();
+
+        if(number_reviews === 0)
+        {
+            ShowNoReviews();
+            interval_id = setInterval(() => { LoadAllReviews(); }, 5000);
+        }
+    }
+});
+//#endregion 
+
 //#region [Window display window missing.]
 function ShowNoReviews()
 {
@@ -133,6 +182,22 @@ function HiddenNoReviews()
     const card_missing_reviews = document.getElementById("id-card-missing-reviews");
 
     card_missing_reviews.style.display = "none";
+}
+//#endregion
+
+//#region [Window display window no search result.]
+function ShowNoSearchReviews()
+{
+    const card_nosearch_reviews = document.getElementById("id-card-nosearch-reviews");
+
+    card_nosearch_reviews.style.display = "flex";
+}
+
+function HiddenNoSearchReviews()
+{
+    const card_nosearch_reviews = document.getElementById("id-card-nosearch-reviews");
+
+    card_nosearch_reviews.style.display = "none";
 }
 //#endregion
 
@@ -162,7 +227,6 @@ function CancelDeleteReview()
 {
     confirmation_window.style.display = "none";
 
-    
     interval_id = setInterval(() => { LoadAllReviews(); }, 5000);
 }
 
