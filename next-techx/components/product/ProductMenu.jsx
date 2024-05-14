@@ -23,7 +23,7 @@ function ProductSelection() {
   const [versionFilter, setVersionFilter] = useState([]);
 
   // Filter options
-  const memoryOptions = ["256GB", "512GB", "1TB"];
+  const memoryOptions = ["128GB","256GB", "512GB", "1TB"];
   const colorOptions = [
     "Black Titanium",
     "Blue Titanium",
@@ -40,22 +40,21 @@ function ProductSelection() {
   ];
   const versionOptions = ["Global", "e-Sim"];
 
-  const [products, SetProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const ToGetData = async (type_p) => {
-      SetProducts([]);
-
+      setProducts([]);
       try {
         const formatted_data = await fetch(
-          `http://localhost:3001/GetDataForListProduct/${type_p}`,
+          `https://squid-app-d6fho.ondigitalocean.app:443/GetDataForListProduct/${type_p}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
           }
         );
 
-        if (formatted_data.ok) SetProducts(await formatted_data.json());
+        if (formatted_data.ok) setProducts(await formatted_data.json());
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -66,22 +65,22 @@ function ProductSelection() {
 
     if (product_type !== null) {
       switch (product_type) {
-        case "Iphone":
+        case "iphone":
           ToGetData("Iphone");
           break;
-        case "AirPods":
+        case "airPods":
           ToGetData("AirPods");
           break;
-        case "AppleWatch":
+        case "appleWatch":
           ToGetData("AppleWatch");
           break;
-        case "Macbook":
+        case "macbook":
           ToGetData("Macbook");
           break;
-        case "Ipad":
+        case "ipad":
           ToGetData("Ipad");
           break;
-        case "Console":
+        case "console":
           ToGetData("Console");
           break;
       }
@@ -116,6 +115,16 @@ function ProductSelection() {
         break;
     }
   };
+
+  const filterProducts = () => {
+    return products.filter(product => 
+      (memoryFilter.length === 0 || memoryFilter.includes(product.memory)) &&
+      (colorFilter.length === 0 || colorFilter.includes(product.color)) &&
+      (versionFilter.length === 0 || versionFilter.some(version => product.model.includes(version)))
+    );
+  };
+
+  const filteredProducts = filterProducts();
 
   return (
     <div className="pt-20 text-white font-sans  mb-4">
@@ -209,7 +218,7 @@ function ProductSelection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 ml-10 gap-4 ">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <Link
               key={product.id}
               href={{
@@ -219,7 +228,7 @@ function ProductSelection() {
             >
               <div className="dark:bg-[#1d1d1d] p-4 rounded-lg  shadow-lg ">
                 <img
-                  src={`http://localhost:3001/GetImage/${product.images}`}
+                  src={`https://squid-app-d6fho.ondigitalocean.app:443/GetImage/${product.images}`}
                   alt={`${product.model}`}
                   className="mb-3"
                 />

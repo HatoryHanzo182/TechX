@@ -83,7 +83,7 @@ export default function Nav() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:3001/RemoveFromSession", {
+      const response = await fetch("https://squid-app-d6fho.ondigitalocean.app:443/RemoveFromSession", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -122,7 +122,7 @@ export default function Nav() {
     search_results.length = 0;
 
     try {
-      const response = await fetch(`http://localhost:3001/SearchForProducts`, {
+      const response = await fetch(`https://squid-app-d6fho.ondigitalocean.app:443/SearchForProducts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: q }),
@@ -210,7 +210,7 @@ export default function Nav() {
                                     <img
                                       width="50"
                                       height="50"
-                                      src={`http://localhost:3001/GetImage/${result.images}`}
+                                      src={`https://squid-app-d6fho.ondigitalocean.app:443/GetImage/${result.images}`}
                                       alt="SearchImage"
                                     />
                                     {result.model} / {result.price}$
@@ -324,7 +324,7 @@ export default function Nav() {
                                     <img
                                       width="50"
                                       height="50"
-                                      src={`http://localhost:3001/GetImage/${result.images}`}
+                                      src={`https://squid-app-d6fho.ondigitalocean.app:443/GetImage/${result.images}`}
                                       alt="SearchImage"
                                       className="mr-2"
                                     />

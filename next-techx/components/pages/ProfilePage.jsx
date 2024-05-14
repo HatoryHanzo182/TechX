@@ -94,7 +94,7 @@ export function ProfilePage() {
       ? `DeleteFavoriteProduct/${id}`
       : `AddFavoriteProduct/${id}`;
 
-    await fetch(`http://localhost:3001/${endpoint}`, {
+    await fetch(`https://squid-app-d6fho.ondigitalocean.app:443/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -302,7 +302,7 @@ export function ProfilePage() {
                             }}
                           >
                             <img
-                              src={`http://localhost:3001/GetImage/${u_f.images}`}
+                              src={`https://squid-app-d6fho.ondigitalocean.app:443/GetImage/${u_f.images}`}
                               alt={u_f.model}
                               className="mb-3"
                             />
