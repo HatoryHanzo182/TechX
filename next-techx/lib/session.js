@@ -2,7 +2,7 @@ export const PullOutOfSession = async () => {
   if (localStorage.getItem("token") == null) return false;
 
   const CheckSignature = await fetch(
-    "http://localhost:3001/CheckToken", // <<----- Проверяем подпись токена,
+    "https://squid-app-d6fho.ondigitalocean.app:443/CheckToken", // <<----- Проверяем подпись токена,
     {
       // для того что бы его не подменили.
       method: "POST",
@@ -19,7 +19,7 @@ export const PullOutOfSession = async () => {
     // <<---- Подпись токена была подтверждена.
     console.log("TOKEN IS TRUE");
 
-    const PullData = await fetch("http://localhost:3001/PullOutOfSession", {
+    const PullData = await fetch("https://squid-app-d6fho.ondigitalocean.app:443/PullOutOfSession", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

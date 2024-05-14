@@ -65,22 +65,22 @@ function ProductSelection() {
 
     if (product_type !== null) {
       switch (product_type) {
-        case "iphone":
+        case "Iphone":
           ToGetData("Iphone");
           break;
-        case "airPods":
+        case "AirPods":
           ToGetData("AirPods");
           break;
-        case "appleWatch":
+        case "AppleWatch":
           ToGetData("AppleWatch");
           break;
-        case "macbook":
+        case "Macbook":
           ToGetData("Macbook");
           break;
-        case "ipad":
+        case "Ipad":
           ToGetData("Ipad");
           break;
-        case "console":
+        case "Console":
           ToGetData("Console");
           break;
       }
