@@ -80,7 +80,36 @@
         </ul>
       </div>
       <!-- #endregion -->
-      
+      <!-- #region [Message for user sector.] -->
+      <!-- Success message sector. -->
+      <div id="id-notification" class="success">
+        <div class="success__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none">
+            <path fill-rule="evenodd" fill="#393a37" d="m12 1c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.925 11-11-4.925-11-11-11zm4.768 9.14c.0878-.1004.1546-.21726.1966-.34383.0419-.12657.0581-.26026.0477-.39319-.0105-.13293-.0475-.26242-.1087-.38085-.0613-.11844-.1456-.22342-.2481-.30879-.1024-.08536-.2209-.14938-.3484-.18828s-.2616-.0519-.3942-.03823c-.1327.01366-.2612.05372-.3782.1178-.1169.06409-.2198.15091-.3027.25537l-4.3 5.159-2.225-2.226c-.1886-.1822-.4412-.283-.7034-.2807s-.51301.1075-.69842.2929-.29058.4362-.29285.6984c-.00228.2622.09851.5148.28067.7034l3 3c.0983.0982.2159.1748.3454.2251.1295.0502.2681.0729.4069.0665.1387-.0063.2747-.0414.3991-.1032.1244-.0617.2347-.1487.3236-.2554z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <div class="success__title"><p id="id-message-success"></p></div>
+        <div id="id-close-success-message" class="success__close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20">
+            <path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path>
+          </svg>
+        </div>
+      </div>
+      <!-- Error message sector. -->
+      <div id="id-error-review" class="error">
+        <div class="error-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none">
+            <path fill="#393a37" d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z"></path>
+          </svg>
+        </div>
+        <div class="error-title"><p id="id-error-review-message"></p></div>
+        <div id="id-close-error-message" class="error-close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20">
+            <path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path>
+          </svg>
+        </div>
+      </div>
+      <!-- #endregion -->
       
       
       
@@ -122,91 +151,49 @@
       <div id="id-create-product-content" class="create-product-content" style="display: none">
         <!--Menu products.-->
         <section>
-          <label id="id-create-product-content-phone" title="iphone" for="home" class="label">
-            <input id="home" name="page" type="radio" checked="" />
-            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="20"
-            width="18"   fill="inherit" viewBox="0 0 90.358 90.357" class="icon cart"
-            xml:space="preserve">
-         <g>
-           <path d="M67.346,0H23.012c-2.206,0-4,1.794-4,4v82.333c0,2.206,1.794,4,4,4h10.333v0.024h24.667v-0.024h9.333c2.206,0,4-1.794,4-4
-             V4C71.346,1.795,69.551,0,67.346,0z M45.74,25.07c0.391-0.458,1.051-0.798,1.594-0.82c0.07,0.635-0.184,1.272-0.562,1.73
-             c-0.378,0.457-0.999,0.814-1.607,0.767C45.082,26.125,45.39,25.477,45.74,25.07z M41.221,28.254
-             c0.474-0.824,1.322-1.344,2.242-1.358c0.699-0.013,1.36,0.471,1.787,0.471c0.428,0,1.23-0.582,2.075-0.496
-             c0.354,0.014,1.344,0.142,1.98,1.073c-0.05,0.033-1.184,0.691-1.169,2.063c0.015,1.639,1.438,2.184,1.454,2.191
-             c-0.014,0.038-0.229,0.777-0.75,1.541c-0.453,0.66-0.92,1.317-1.659,1.331c-0.726,0.014-0.959-0.431-1.789-0.431
-             c-0.829,0-1.088,0.417-1.774,0.444c-0.712,0.026-1.255-0.713-1.71-1.372C40.977,32.368,40.266,29.912,41.221,28.254z
-              M56.012,89.607H34.346v-6.273h21.666V89.607z"/>
-         </g>
-         </svg>
-          </label>
-          <label id="id-create-product-content-mackbook" title="cart" for="cart" class="label">
-            <input id="cart" name="page" type="radio" />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="inherit"
-              viewBox="0 0 18 20"
-              height="20"
-              width="18"
-              class="icon cart"
-            >
-              <path
-                fill="inherit"
-                d="M16.8035 6.96427C16.1335 6.22427 15.1235 5.79427 13.7235 5.64427V4.88427C13.7235 3.51427 13.1435 2.19427 12.1235 1.27427C11.6202 0.812823 11.025 0.462927 10.3771 0.247511C9.72909 0.032095 9.04292 -0.0439787 8.3635 0.0242742C5.9735 0.254274 3.9635 2.56427 3.9635 5.06427V5.64427C2.5635 5.79427 1.5535 6.22427 0.883496 6.96427C-0.0865043 8.04427 -0.0565042 9.48427 0.0534958 10.4843L0.753496 16.0543C0.963496 18.0043 1.7535 20.0043 6.0535 20.0043H11.6335C15.9335 20.0043 16.7235 18.0043 16.9335 16.0643L17.6335 10.4743C17.7435 9.48427 17.7635 8.04427 16.8035 6.96427ZM8.5035 1.41427C8.98813 1.36559 9.47758 1.41913 9.94023 1.57143C10.4029 1.72372 10.8284 1.97138 11.1894 2.29841C11.5503 2.62544 11.8387 3.02456 12.0357 3.46998C12.2328 3.91539 12.3343 4.39721 12.3335 4.88427V5.58427H5.3535V5.06427C5.3535 3.28427 6.8235 1.57427 8.5035 1.41427ZM5.2635 11.1543H5.2535C4.7035 11.1543 4.2535 10.7043 4.2535 10.1543C4.2535 9.60427 4.7035 9.15427 5.2535 9.15427C5.8135 9.15427 6.2635 9.60427 6.2635 10.1543C6.2635 10.7043 5.8135 11.1543 5.2635 11.1543ZM12.2635 11.1543H12.2535C11.7035 11.1543 11.2535 10.7043 11.2535 10.1543C11.2535 9.60427 11.7035 9.15427 12.2535 9.15427C12.8135 9.15427 13.2635 9.60427 13.2635 10.1543C13.2635 10.7043 12.8135 11.1543 12.2635 11.1543Z"
-              ></path>
+          <label id="id-create-product-content-phone" title="iphone" for="iphone" class="label">
+            <input id="iphone" name="page" type="radio" checked="" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"  height="20" width="22">
+              <path d="M336 0H176a64 64 0 00-64 64v384a64 64 0 0064 64h160a64 64 0 0064-64V64a64 64 0 00-64-64zm32 448a32 32 0 01-32 32H176a32 32 0 01-32-32V64a32 32 0 0132-32h11.35a7.94 7.94 0 017.3 4.75A32 32 0 00224 56h64a32 32 0 0029.35-19.25 7.94 7.94 0 017.3-4.75H336a32 32 0 0132 32z"/>
+              <path d="M336 48a11.88 11.88 0 00-9.53 4.69A48 48 0 01288 72h-64a48 48 0 01-38.47-19.31A11.88 11.88 0 00176 48a16 16 0 00-16 16v384a16 16 0 0016 16h160a16 16 0 0016-16V64a16 16 0 00-16-16z"/>
+              <path d="M336 0H176a64 64 0 00-64 64v384a64 64 0 0064 64h160a64 64 0 0064-64V64a64 64 0 00-64-64zm32 448a32 32 0 01-32 32H176a32 32 0 01-32-32V64a32 32 0 0132-32h11.35a7.94 7.94 0 017.3 4.75A32 32 0 00224 56h64a32 32 0 0029.35-19.25 7.94 7.94 0 017.3-4.75H336a32 32 0 0132 32z"/>
             </svg>
           </label>
-          <label title="favorite" for="favorite" class="label">
-            <input id="favorite" name="page" type="radio" />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="inherit"
-              viewBox="0 0 20 18"
-              height="18"
-              width="20"
-              class="icon favorite"
-            >
-              <path
-                fill="inherit"
-                d="M14.44 0C12.63 0 11.01 0.88 10 2.23C9.48413 1.53881 8.81426 0.977391 8.04353 0.590295C7.27281 0.203198 6.42247 0.00108555 5.56 0C2.49 0 0 2.5 0 5.59C0 6.78 0.19 7.88 0.52 8.9C2.1 13.9 6.97 16.89 9.38 17.71C9.72 17.83 10.28 17.83 10.62 17.71C13.03 16.89 17.9 13.9 19.48 8.9C19.81 7.88 20 6.78 20 5.59C20 2.5 17.51 0 14.44 0Z"
-              ></path>
+          <label id="id-create-product-content-mackbook" title="mackbook" for="mackbook" class="label">
+            <input id="mackbook" name="page" type="radio" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" height="20" width="22">
+              <path d="M496 400h-28.34A47.92 47.92 0 00480 367.86V128.14A48.2 48.2 0 00431.86 80H80.14A48.2 48.2 0 0032 128.14v239.72A47.92 47.92 0 0044.34 400H16a16 16 0 000 32h480a16 16 0 000-32z"/>
             </svg>
           </label>
-          <label title="notifications" for="notifications" class="label">
-            <input id="notifications" name="page" type="radio" />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="inherit"
-              viewBox="0 0 16 20"
-              height="20"
-              width="16"
-              class="icon history"
-            >
-              <path
-                fill="inherit"
-                d="M15.0294 12.4902L14.0294 10.8302C13.8194 10.4602 13.6294 9.76016 13.6294 9.35016V6.82016C13.6282 5.70419 13.3111 4.61137 12.7147 3.66813C12.1183 2.72489 11.267 1.96978 10.2594 1.49016C10.0022 1.0335 9.62709 0.654303 9.17324 0.392195C8.71939 0.130087 8.20347 -0.00530784 7.6794 0.000159243C6.5894 0.000159243 5.6094 0.590159 5.0894 1.52016C3.1394 2.49016 1.7894 4.50016 1.7894 6.82016V9.35016C1.7894 9.76016 1.5994 10.4602 1.3894 10.8202L0.379396 12.4902C-0.0206039 13.1602 -0.110604 13.9002 0.139396 14.5802C0.379396 15.2502 0.949396 15.7702 1.6894 16.0202C3.6294 16.6802 5.6694 17.0002 7.7094 17.0002C9.7494 17.0002 11.7894 16.6802 13.7294 16.0302C14.4294 15.8002 14.9694 15.2702 15.2294 14.5802C15.4894 13.8902 15.4194 13.1302 15.0294 12.4902ZM10.5194 18.0102C10.3091 18.5923 9.92467 19.0956 9.41835 19.4516C8.91203 19.8077 8.30837 19.9992 7.6894 20.0002C6.8994 20.0002 6.1194 19.6802 5.5694 19.1102C5.2494 18.8102 5.0094 18.4102 4.8694 18.0002C4.9994 18.0202 5.1294 18.0302 5.2694 18.0502C5.4994 18.0802 5.7394 18.1102 5.9794 18.1302C6.5494 18.1802 7.1294 18.2102 7.7094 18.2102C8.2794 18.2102 8.8494 18.1802 9.4094 18.1302C9.6194 18.1102 9.8294 18.1002 10.0294 18.0702L10.5194 18.0102Z"
-              ></path>
+          <label title="ipad" for="ipad" class="label">
+            <input id="ipad" name="page" type="radio" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" height="20" width="22">
+              <path d="M384 512H128a64.07 64.07 0 01-64-64V64a64.07 64.07 0 0164-64h256a64.07 64.07 0 0164 64v384a64.07 64.07 0 01-64 64zM128 32a32 32 0 00-32 32v384a32 32 0 0032 32h256a32 32 0 0032-32V64a32 32 0 00-32-32z"/>
+              <path d="M384 0a64.07 64.07 0 0164 64v384a64.07 64.07 0 01-64 64H128a64.07 64.07 0 01-64-64V64a64.07 64.07 0 0164-64h256M128 480h256a32 32 0 0032-32V64a32 32 0 00-32-32H128a32 32 0 00-32 32v384a32 32 0 0032 32m0-16a16 16 0 01-16-16V64a16 16 0 0116-16h256a16 16 0 0116 16v384a16 16 0 01-16 16z"/>
+            </svg>
+          </label>
+          <label title="airpods" for="airpods" class="label">
+            <input id="airpods" name="page" type="radio" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" height="20" width="22">
+              <path d="M411.16 97.46C368.43 55.86 311.88 32 256 32S143.57 55.86 100.84 97.46C56.45 140.67 32 197 32 256c0 26.67 8.75 61.09 32.88 125.55S137 473 157.27 477.41c5.81 1.27 12.62 2.59 18.73 2.59a60.06 60.06 0 0030-8l14-8c15.07-8.82 19.47-28.13 10.8-43.35l-86.92-152.57a31.73 31.73 0 00-43.57-11.76l-13.69 8a56.49 56.49 0 00-14 11.59 4 4 0 01-7-2A114.68 114.68 0 0164 256c0-50.31 21-98.48 59.16-135.61C160 84.55 208.39 64 256 64s96 20.55 132.84 56.39C427 157.52 448 205.69 448 256a114.68 114.68 0 01-1.68 17.91 4 4 0 01-7 2 56.49 56.49 0 00-14-11.59l-13.69-8a31.73 31.73 0 00-43.57 11.76L281.2 420.65c-8.67 15.22-4.27 34.53 10.8 43.35l14 8a60.06 60.06 0 0030 8c6.11 0 12.92-1.32 18.73-2.59C375 473 423 446 447.12 381.55S480 282.67 480 256c0-59-24.45-115.33-68.84-158.54z"/>
+            </svg>
+          </label>
+          <label title="watch" for="watch" class="label">
+            <input id="watch" name="page" type="radio" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" height="20" width="22">
+              <rect x="136" y="136" width="240" height="240" rx="56" ry="56"/>
+              <path d="M336 96V32a16 16 0 00-16-16H192a16 16 0 00-16 16v64a80.09 80.09 0 00-80 80v160a80.09 80.09 0 0080 80v64a16 16 0 0016 16h128a16 16 0 0016-16v-64a80.09 80.09 0 0080-80V176a80.09 80.09 0 00-80-80zm56 224a72.08 72.08 0 01-72 72H192a72.08 72.08 0 01-72-72V192a72.08 72.08 0 0172-72h128a72.08 72.08 0 0172 72z"/>
+            </svg>
+          </label>
+          <label title="console" for="console" class="label">
+            <input id="console" name="page" type="radio" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" height="20" width="22">
+              <path d="M483.13 245.38C461.92 149.49 430 98.31 382.65 84.33A107.13 107.13 0 00352 80c-13.71 0-25.65 3.34-38.28 6.88C298.5 91.15 281.21 96 256 96s-42.51-4.84-57.76-9.11C185.6 83.34 173.67 80 160 80a115.74 115.74 0 00-31.73 4.32c-47.1 13.92-79 65.08-100.52 161C4.61 348.54 16 413.71 59.69 428.83a56.62 56.62 0 0018.64 3.22c29.93 0 53.93-24.93 70.33-45.34 18.53-23.1 40.22-34.82 107.34-34.82 59.95 0 84.76 8.13 106.19 34.82 13.47 16.78 26.2 28.52 38.9 35.91 16.89 9.82 33.77 12 50.16 6.37 25.82-8.81 40.62-32.1 44-69.24 2.57-28.48-1.39-65.89-12.12-114.37zM208 240h-32v32a16 16 0 01-32 0v-32h-32a16 16 0 010-32h32v-32a16 16 0 0132 0v32h32a16 16 0 010 32zm84 4a20 20 0 1120-20 20 20 0 01-20 20zm44 44a20 20 0 1120-19.95A20 20 0 01336 288zm0-88a20 20 0 1120-20 20 20 0 01-20 20zm44 44a20 20 0 1120-20 20 20 0 01-20 20z"/>
             </svg>
           </label>
         </section>
         
-        
-
-
-
-        <!-- <div class="product-creation-navigation-card">
-          <a id="id-create-product-content-phone" class="product-creation-navigation-card-tab">
-            <ion-icon name="phone-portrait-outline"></ion-icon>
-          </a>
-          <a id="id-create-product-content-mackbook" class="product-creation-navigation-card-tab">
-            <ion-icon name="laptop-outline"></ion-icon>
-          </a>
-          <a href="#" class="product-creation-navigation-card-tab">
-            <ion-icon name="tv-outline"></ion-icon>
-          </a>
-        </div> -->
-
-
-
+      
 
 
 
@@ -246,10 +233,54 @@
                 <ul id="id-drop-ul"></ul>
               </div>
             </div>
+            <!--Input data iphone-->
             <div class="line-card-content-product-data">
-              <input id="id-input-phone-data-Company" class="input-data" name="text" type="text" placeholder="Company"/>
-              <input id="id-input-phone-data-Series" class="input-data" name="text" type="text" placeholder="Series"/>
-              <input id="id-input-phone-data-Screen_diagonal" class="input-data" name="text" type="text" placeholder="Screen diagonal"/>
+              <div class="card-content-product-data-container">
+                <label class="card-content-product-data-label">Basic</label>
+                <input class="card-content-product-data-input" name="text" value="Apple" readonly type="text">
+                <input class="card-content-product-data-input" name="text" value="iPhone" readonly type="text">
+                <input class="card-content-product-data-input" name="text" type="text" placeholder="Model">
+                <p class="card-content-product-data-description">Basic iphone data.</p>
+              </div>
+              <div class="card-content-product-data-container">
+                <label class="card-content-product-data-label">Characteristics</label>
+                <input class="card-content-product-data-input" name="text" type="text" placeholder="Processor">
+                <input class="card-content-product-data-input" name="text" type="number" placeholder="Memory 'GB'">
+                <input class="card-content-product-data-input" name="text" type="text" placeholder="Display size 'example - 2532 × 1170 '">
+                <input class="card-content-product-data-input" name="text" type="number" placeholder="Battery 'mAh'">
+                <p class="card-content-product-data-description">Internal characteristics of the phone.</p>
+              </div>
+              <div class="card-content-product-data-container">
+                <label class="card-content-product-data-label">OS</label>
+                <input class="card-content-product-data-input" name="text" type="text"  placeholder="OS">
+                <p class="card-content-product-data-description">OS iphone.</p>
+              </div>
+            </div>
+            <div class="line-card-content-product-data">
+              <div class="card-content-product-data-container">
+                <label class="card-content-product-data-label">Camera</label>
+                <input class="card-content-product-data-input" name="text" type="number" placeholder="Main camera 'megapixel'">
+                <p class="card-content-product-data-description">Pixels camera iphone.</p>
+              </div>
+              <div class="card-content-product-data-container">
+                <label class="card-content-product-data-label">Color</label>
+                <input class="card-content-product-data-input" name="text" type="text" placeholder="Color">
+                <p class="card-content-product-data-description">Color iphone.</p>
+              </div>
+              <div class="card-content-product-data-container">
+                <label class="card-content-product-data-label">For store</label>
+                <input class="card-content-product-data-input" name="text" type="number" placeholder="Price '$'">
+                <input class="card-content-product-data-input" name="text" type="number" placeholder="Discount 'Not required to fill out'">
+                <input class="card-content-product-data-input" name="text" type="text" placeholder="Description">
+                <div class="check-sector">
+                  <p>Add in carousel</p>
+                  <label class="container-check">
+                    <input id="id-incarousel-ceckbox" checked="checked" type="checkbox">
+                    <div class="checkmark"></div>
+                  </label>
+                </div>
+                <p class="card-content-product-data-description">Data for TechX store.</p>
+              </div>
             </div>
             <div class="line-card-content-product-data">
               <button id="id-button-add-iphone" class="button-add-product">
@@ -259,6 +290,10 @@
           </div>
         </div>
         <!-- #endregion -->
+
+
+
+
         <!-- #region [Content mackbook data.]-->
         <div id="id-content-mackbook-data">
           <div class="card-content-product-data">
@@ -335,34 +370,6 @@
                 </g>
               </svg>
             </div>
-          </div>
-        </div>
-        <!-- Success message sector. -->
-        <div id="id-notification" class="success">
-          <div class="success__icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none">
-              <path fill-rule="evenodd" fill="#393a37" d="m12 1c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.925 11-11-4.925-11-11-11zm4.768 9.14c.0878-.1004.1546-.21726.1966-.34383.0419-.12657.0581-.26026.0477-.39319-.0105-.13293-.0475-.26242-.1087-.38085-.0613-.11844-.1456-.22342-.2481-.30879-.1024-.08536-.2209-.14938-.3484-.18828s-.2616-.0519-.3942-.03823c-.1327.01366-.2612.05372-.3782.1178-.1169.06409-.2198.15091-.3027.25537l-4.3 5.159-2.225-2.226c-.1886-.1822-.4412-.283-.7034-.2807s-.51301.1075-.69842.2929-.29058.4362-.29285.6984c-.00228.2622.09851.5148.28067.7034l3 3c.0983.0982.2159.1748.3454.2251.1295.0502.2681.0729.4069.0665.1387-.0063.2747-.0414.3991-.1032.1244-.0617.2347-.1487.3236-.2554z" clip-rule="evenodd"></path>
-            </svg>
-          </div>
-          <div class="success__title"><p id="id-message-success"></p></div>
-          <div id="id-close-success-message" class="success__close">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20">
-              <path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path>
-            </svg>
-          </div>
-        </div>
-        <!-- Error message sector. -->
-        <div id="id-error-review" class="error">
-          <div class="error-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none">
-              <path fill="#393a37" d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z"></path>
-            </svg>
-          </div>
-          <div class="error-title"><p id="id-error-review-message"></p></div>
-          <div id="id-close-error-message" class="error-close">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20">
-              <path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path>
-            </svg>
           </div>
         </div>
         <!-- Display window missing reviews sector. -->

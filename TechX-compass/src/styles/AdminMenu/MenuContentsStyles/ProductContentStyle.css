@@ -136,14 +136,18 @@ section {
   flex-direction: column;
   margin-top: 20px;
   padding: 20px;
-  border-radius: 50px;
-  background: rgb(255, 255, 255);
+  border-radius: 20px;
+  background: rgba(82, 82, 82, 0.281);
+  backdrop-filter: blur(40px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .line-card-content-product-data {
   display: flex;
   justify-content: space-between;
   text-align: center;
+  margin-top: 30px;
 }
 
 .title-card-content-product-data {
@@ -191,10 +195,11 @@ section {
   font-size: 1.2em;
   font-weight: 600;
   transition-duration: .3s;
+  white-space: nowrap;
 }
 
 .button-step-in-product-operations-menu:hover {
-  width: 125px;
+  width: 170px;
   border-radius: 40px;
   transition-duration: .3s;
 }
@@ -218,6 +223,11 @@ section {
 /*#endregion*/
 
 /*#region [Input for add product.]*/
+input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .input-data {
   margin: 30px;
   background: none;
@@ -293,7 +303,7 @@ section {
   gap: 20px;
   align-items: center;
   justify-content: center;
-  border: 2px dashed #cacaca;
+  border: 2px #000000;
   background-color: rgba(255, 255, 255, 1);
   padding: 1.5rem;
   border-radius: 10px;
@@ -334,7 +344,7 @@ section {
   align-items: space-between;
   gap: 20px;
   background-color: rgba(255, 255, 255, 1);
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb(255, 255, 255);
   padding: 1.5rem;
   border-radius: 10px;
   box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
@@ -369,3 +379,151 @@ section {
     padding-right: 5px;
 }
 /*#endregion*/
+
+/* #region [Card input data product.] */
+.card-content-product-data-container {
+  width: 265px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(210, 206, 206, 0.463);
+  padding: 15px;
+  border-radius: 20px;
+  position: relative;
+}
+
+.card-content-product-data-container::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  filter: blur(25px);
+  border-radius: 20px;
+  background-color: #e499ff;
+  background-image: radial-gradient(at 47% 69%, hsla(17,62%,65%,1) 0px, transparent 50%),
+radial-gradient(at 9% 32%, hsla(222,75%,60%,1) 0px, transparent 50%);
+}
+
+.card-content-product-data-label {
+  display: block;
+  margin-left: 0.4em;
+  color: #000;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-weight: bold;
+  z-index: 4;
+}
+
+.card-content-product-data-description {
+  font-size: 0.6em;
+  font-weight: bold;
+  z-index: 5;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  margin-top: auto; 
+}
+
+.card-content-product-data-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 0.6em;
+  padding-left: 0.9em;
+  border-radius: 20px;
+  background: #fff;
+  z-index: 5;
+  transition: background 300ms, color 300ms;
+}
+
+.card-content-product-data-input:hover, .card-content-product-data-input:focus {
+  background: rgb(0, 0, 0);
+  color: #fff;
+}
+/* #endregion */
+
+/* #region [Checkmark for add product.] */
+.check-sector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 40px; 
+  font-weight: bold;
+  z-index: 40;
+}
+
+.check-sector p {
+  margin: 0; 
+  align-self: flex-start; 
+}
+
+.container-check input {
+  position: absolute;
+  opacity: 0;
+  z-index: 40;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.container-check {
+ display: block;
+ position: relative;
+ text-align: end;
+ z-index: 40;
+ margin-top: -4px;
+ cursor: pointer;
+ font-size: 25px;
+ user-select: none;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+ position: relative;
+ top: 0;
+ left: 0;
+ height: 0.9em;
+ z-index: 40;
+ width: 0.9em;
+ background: black;
+ border-radius: 50px;
+ transition: all 0.7s;
+ --spread: 20px;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container-check input:checked ~ .checkmark {
+ background: black;
+ box-shadow: -5px -5px var(--spread) 0px #5B51D8, 0 -5px var(--spread) 0px #833AB4, 5px -5px var(--spread) 0px #E1306C, 5px 0 var(--spread) 0px #FD1D1D, 5px 5px var(--spread) 0px #F77737, 0 5px var(--spread) 0px #FCAF45, -5px 5px var(--spread) 0px #FFDC80;
+ z-index: 40;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+ content: "";
+ position: absolute;
+ z-index: 40;
+ display: none;
+}
+
+/* Show the checkmark when checked */
+.container-check input:checked ~ .checkmark:after {
+ display: block;
+ z-index: 40;
+}
+
+/* Style the checkmark/indicator */
+.container-check .checkmark:after {
+ left: 0.30em;
+ top: 0.07em;
+ width: 0.25em;
+ height: 0.5em;
+ z-index: 40;
+ border: solid #f0f0f0;
+ border-width: 0 0.15em 0.15em 0;
+ transform: rotate(45deg);
+}
+/* #endregion */

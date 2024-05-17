@@ -1,4 +1,5 @@
 import { products_content, DisableContent }  from "../AdminMenu.js";
+import { IphoneDataModel } from "../ProductModels/IphoneDataModel.js";
 
 //#region [Products tab navigation.]
 const create_products_content = document.getElementById("id-create-product-content");
@@ -55,62 +56,14 @@ document.getElementById("id-back-to-product-menu2").addEventListener("click", Ba
 //#endregion
 
 //#region [Sector for adding new product.]
-async function AddIPhone() 
+function AddIPhone() 
 {
-  let img_path_genirated_server = [];
+  const container = document.getElementById('id-content-phone-data');
+  const inputs = container.querySelectorAll('.card-content-product-data-input');
+  const in_carousel_checkbox = container.querySelector('#id-incarousel-ceckbox');
+  const new_iphone = new IphoneDataModel(inputs, in_carousel_checkbox.checked, img_product_paths);
 
-  for (const image_path of img_prosuct_putchs) 
-  {
-    try 
-    {
-      const response = await fetch(image_path);
-      const file_blob = await response.blob();
-      const file = new File([file_blob], image_path.split('/').pop());
-      const form_data = new FormData();
-
-      form_data.append('image', file);
-
-      const upload_response = await fetch("http://localhost:3001/AddNewProductImg", 
-      {
-        method: 'POST',
-        body: form_data,
-      });
-
-      if (!upload_response.ok)
-        throw new Error('Failed to upload image');
-
-      const data = await upload_response.json();
-
-      img_path_genirated_server.push(data.file_names);
-    } 
-    catch (error) { console.error('Error uploading image:', error); }
-  }
-
-  const ResUserExists = await fetch("http://localhost:3001/AddIPhone",
-  {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(
-    { 
-      category: "iPhone", 
-      brand: "Apple", 
-      model: "iPhone 3GS", 
-      price: 200, 
-      color: "black", 
-      memory: "16GB", 
-      displaySize: "3.5 (480x320), SD, TFT", 
-      description: "OLD", 
-      os: "IOS", 
-      camera: "3 МP", 
-      processor: "frequency: 600 MHz; number of cores: 1; video processor: PowerVR SGX535", 
-      battery: "non-removable",
-      images: img_path_genirated_server.flat(),
-      incarousel: false
-    })
-  });
-
-  if(ResUserExists.ok)
-    console.log(ResUserExists.message);
+  new_iphone.AddToLocalStorage();
 }
 
 document.getElementById("id-button-add-iphone").addEventListener("click", AddIPhone);
@@ -120,7 +73,7 @@ document.getElementById("id-button-add-iphone").addEventListener("click", AddIPh
 const drop_area = document.getElementById('drop-area')
 const custum_file_upload = document.getElementById('id-custum-file-upload')
 const drop_ul = document.getElementById('id-drop-ul')
-let img_prosuct_putchs = [];
+let img_product_paths = [];
 
 drop_area.addEventListener('dragover', (event) => 
 {
@@ -138,6 +91,7 @@ drop_area.addEventListener('drop', (event) =>
   event.preventDefault();
 
   custum_file_upload.style.border = '2px dashed #cacaca';
+
   const files = event.dataTransfer.files;
 
   for (let i = 0; i < files.length; i++) 
@@ -161,7 +115,7 @@ drop_area.addEventListener('drop', (event) =>
       child.id = 'id-drop-li'
       child.textContent = files[i].path;
 
-      img_prosuct_putchs.push(files[i].path);
+      img_product_paths.push(files[i].path);
 
       rm_icon.onclick = () => 
       { 
@@ -169,7 +123,7 @@ drop_area.addEventListener('drop', (event) =>
           div.removeChild(child)
           div.removeChild(rm_icon)
           drop_ul.removeChild(div)
-          img_prosuct_putchs.splice(i, 1);
+          img_product_paths.splice(i, 1);
       }
 
       div.appendChild(image_icon)

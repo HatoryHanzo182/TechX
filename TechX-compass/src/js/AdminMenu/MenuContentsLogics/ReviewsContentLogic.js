@@ -1,3 +1,5 @@
+import { ShowSuccessMessage, ShowErrorMessage } from "../AdminMenu.js";
+
 /*========== Logic for loading product reviews sector.==========*/
 //#region [Loading review content.]
 let number_reviews = 0;
@@ -262,47 +264,6 @@ document.addEventListener('click', DeleteReviewFromDB);
 document.getElementById("id-cancel-delete-review").addEventListener("click", CancelDeleteReview);
 document.getElementById("id-delete-review").addEventListener("click", DeleteReview);
 // #endregion
-
-//#region [Message display logic.]
-function ShowSuccessMessage(mess)  // <-- Displaying the Success window.
-{
-    const success_message = document.getElementById("id-notification");
-    const message = document.getElementById("id-message-success");
-
-    message.innerText = mess;
-    success_message.style.display = "flex";
-
-    setTimeout(() => {  success_message.style.display = "none"; }, 4000);
-}
-
-function ShowErrorMessage(mess)  // <-- Displaying the Error window.
-{
-    const error_message = document.getElementById("id-error-review");
-    const message = document.getElementById("id-error-review-message");
-
-    message.innerText = mess;
-    error_message.style.display = "flex";
-
-    setTimeout(() => {  error_message.style.display = "none"; }, 4000);
-}
-
-function BreakSuccessMessage()  // <-- Break displaying the success window.
-{
-    const success_message = document.getElementById("id-notification");
-    
-    success_message.style.display = "none";
-}
-
-function BreakErrorMessage()  // <-- Break displaying the error window.
-{
-    const error_message = document.getElementById("id-error-review");
-    
-    error_message.style.display = "none";
-}
-
-document.getElementById("id-close-success-message").onclick = BreakSuccessMessage;
-document.getElementById("id-close-error-message").onclick = BreakErrorMessage;
-//#endregion 
 
 let interval_id;
 

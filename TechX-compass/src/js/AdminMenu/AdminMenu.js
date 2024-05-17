@@ -152,3 +152,44 @@ export function ReturnToPreviousTab()
 
 document.getElementById("language-select").addEventListener("change", function () { changeLanguage(this.value, list_item); });
 /*========================================*/
+
+//#region [Message display logic.]
+export function ShowSuccessMessage(mess)  // <-- Displaying the Success window.
+{
+    const success_message = document.getElementById("id-notification");
+    const message = document.getElementById("id-message-success");
+
+    message.innerText = mess;
+    success_message.style.display = "flex";
+
+    setTimeout(() => {  success_message.style.display = "none"; }, 4000);
+}
+
+export function ShowErrorMessage(mess)  // <-- Displaying the Error window.
+{
+    const error_message = document.getElementById("id-error-review");
+    const message = document.getElementById("id-error-review-message");
+
+    message.innerText = mess;
+    error_message.style.display = "flex";
+
+    setTimeout(() => {  error_message.style.display = "none"; }, 4000);
+}
+
+function BreakSuccessMessage()  // <-- Break displaying the success window.
+{
+    const success_message = document.getElementById("id-notification");
+    
+    success_message.style.display = "none";
+}
+
+function BreakErrorMessage()  // <-- Break displaying the error window.
+{
+    const error_message = document.getElementById("id-error-review");
+    
+    error_message.style.display = "none";
+}
+
+document.getElementById("id-close-success-message").onclick = BreakSuccessMessage;
+document.getElementById("id-close-error-message").onclick = BreakErrorMessage;
+//#endregion 

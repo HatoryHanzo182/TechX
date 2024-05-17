@@ -1,5 +1,6 @@
 const { app, BrowserWindow, Menu, ipcMain} = require('electron');
 const path = require('path');
+const fs = require('fs');
 
 //
 //   ████████╗███████╗ █████╗ ██╗  ██╗██╗  ██╗    
@@ -53,4 +54,70 @@ app.whenReady().then(() =>  // An event handler that executes when
     
     ipcMain.on('ShowAdminPanel', () => { _app_window.loadFile(path.join(__dirname, 'src', 'components', 'AdminMenu.html')); });
     ipcMain.on('ShowAuthorization', () => { _app_window.loadFile(path.join(__dirname, 'src', 'components', 'Authorization.html')); });
+});
+
+ipcMain.handle('AddNewProductToLocalStorage', (event, data) =>  // Handler for adding data to local storage
+{       // ⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
+       // THE "FS" MODULE IS PART OF THE BUILT-IN NODE.JS LIBRARY AND IS DESIGNED TO WORK WITH THE FILE SYSTEM ON THE SERVER. 
+      // IT IS NOT SUPPORTED IN THE BROWSER BECAUSE THE BROWSER DOES NOT HAVE ACCESS TO THE COMPUTER'S FILE SYSTEM FOR 
+     // SECURITY REASONS.
+    // ⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
+    const file_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'product_assembly.json');
+    let current_data = [];
+    
+    try 
+    {
+        current_data = JSON.parse(fs.readFileSync(file_path));
+    } 
+    catch (error) { return { success: false, message: "Error reading file" }; }
+
+    current_data.push(data);
+
+    try 
+    {
+        fs.writeFileSync(file_path, JSON.stringify(current_data, null, 2));
+    } 
+    catch (error) { return { success: false, message: "Error writing to file" }; }
+
+    return { success: true, message: "Data saved successfully" };
+});
+
+ipcMain.handle('AddNewProductImgToLocalStorage', (event, data) => 
+{
+    const product_img_folder_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'ProductsImg');
+
+    if (!fs.existsSync(product_img_folder_path))
+        fs.mkdirSync(product_img_folder_path);
+    
+    const new_img_paths = [];
+    
+    for (const img_path of data) 
+    {
+        const img_name = path.basename(img_path);
+        const new_path = path.join(product_img_folder_path, img_name);
+
+        fs.copyFileSync(img_path, new_path);
+        
+        new_img_paths.push(new_path);
+    }
+
+    const json_file_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'product_assembly.json');
+    
+    let json_data = [];
+
+    try 
+    {
+        json_data = JSON.parse(fs.readFileSync(json_file_path));
+    } 
+    catch (error) { console.error('Error reading JSON file:', error); }
+
+
+    for (const item of json_data)
+        item.images = new_img_paths;
+
+    try 
+    {
+        fs.writeFileSync(json_file_path, JSON.stringify(json_data, null, 2));
+    } 
+    catch (error) { console.error('Error writing JSON file:', error); }
 });
