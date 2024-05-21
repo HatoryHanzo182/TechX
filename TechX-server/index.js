@@ -559,7 +559,7 @@ app.post("/GetDataForListProduct/Console", async (req, res) => {
   }
 });
 //#endregion
-//#region [product-detail Requests]
+//#region [ProductDetail Requests]
 // Getting Product data for product-detail.
 app.post("/ExtractData/:id", async (req, res) => {
   try {
