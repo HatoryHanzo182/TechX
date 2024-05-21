@@ -138,7 +138,7 @@ const Cart = () => {
             </SheetFooter>
           </>
         ) : (
-          <div>
+          <div className="flex flex-col ">
             <Label>Your cart is empty.</Label>
             <SheetFooter>
               <SheetClose asChild>

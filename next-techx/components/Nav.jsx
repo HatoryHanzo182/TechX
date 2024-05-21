@@ -83,13 +83,16 @@ export default function Nav() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("https://squid-app-d6fho.ondigitalocean.app:443/RemoveFromSession", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://squid-app-d6fho.ondigitalocean.app:443/RemoveFromSession",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const data = await response.json();
 
@@ -122,11 +125,14 @@ export default function Nav() {
     search_results.length = 0;
 
     try {
-      const response = await fetch(`https://squid-app-d6fho.ondigitalocean.app:443/SearchForProducts`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: q }),
-      });
+      const response = await fetch(
+        `https://squid-app-d6fho.ondigitalocean.app:443/SearchForProducts`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: q }),
+        }
+      );
 
       const data = await response.json();
 
@@ -178,13 +184,6 @@ export default function Nav() {
                   </Link>
                   {/*Search window.*/}
                   <CommandDialog open={menuOpen} onOpenChange={setMenuOpen}>
-                    {/* Product entry field. */}
-                    {/* <input
-                      className=" bg-black text-white px-2 "
-                      placeholder="Search..."
-                      onChange={handleChangeSerch}
-                    /> */}
-
                     <Input
                       placeholder="Search..."
                       onChange={handleChangeSerch}

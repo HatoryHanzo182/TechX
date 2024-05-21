@@ -148,14 +148,28 @@ const OrdersPage = () => {
                     Total : {CountTotal()}$
                   </Label>
 
-                  <Button type="button">Checkout</Button>
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      window.location.href = "/";
+                    }}
+                  >
+                    Checkout
+                  </Button>
                 </div>
               </>
             ) : (
-              <div>
-                <Label>Your cart is empty.</Label>
+              <div className="flex flex-row ">
+                <Label className="p-2 text-base">Your cart is empty.</Label>
 
-                <Button type="button">Close</Button>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    window.location.href = "/";
+                  }}
+                >
+                  Close
+                </Button>
               </div>
             )}
           </div>

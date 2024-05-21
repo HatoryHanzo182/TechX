@@ -23,7 +23,7 @@ function ProductSelection() {
   const [versionFilter, setVersionFilter] = useState([]);
 
   // Filter options
-  const memoryOptions = ["128GB","256GB", "512GB", "1TB"];
+  const memoryOptions = ["128GB", "256GB", "512GB", "1TB"];
   const colorOptions = [
     "Black Titanium",
     "Blue Titanium",
@@ -117,10 +117,12 @@ function ProductSelection() {
   };
 
   const filterProducts = () => {
-    return products.filter(product => 
-      (memoryFilter.length === 0 || memoryFilter.includes(product.memory)) &&
-      (colorFilter.length === 0 || colorFilter.includes(product.color)) &&
-      (versionFilter.length === 0 || versionFilter.some(version => product.model.includes(version)))
+    return products.filter(
+      (product) =>
+        (memoryFilter.length === 0 || memoryFilter.includes(product.memory)) &&
+        (colorFilter.length === 0 || colorFilter.includes(product.color)) &&
+        (versionFilter.length === 0 ||
+          versionFilter.some((version) => product.model.includes(version)))
     );
   };
 
@@ -153,13 +155,13 @@ function ProductSelection() {
         />
       </div>
       <div className="container mx-auto  flex">
-        <div className="flex flex-col w-2/3 h-full px-10 pr-4 dark:bg-[#1d1d1d] shadow-lg  p-4 rounded-lg ">
+        <div className="flex flex-col max-w-2/3 h-full px-10 pr-4 dark:bg-[#1d1d1d] shadow-lg  p-4 rounded-lg ">
           <div className="flex flex-col m-4">
             <div className="mb-4">
               <h1 className="text-2xl font-bold dark:text-white text-black p-2">
                 Memory
               </h1>
-              {/* <div className="mb-2">Объем памяти</div> */}
+
               <div className="space-y-2 text-base text-black dark:text-white">
                 {memoryOptions.map((memory) => (
                   <label key={memory} className="flex items-center">
@@ -235,7 +237,7 @@ function ProductSelection() {
                 <div className="font-bold text-black dark:text-white">
                   {product.model}
                 </div>
-                <div className="text-gray-500">
+                <div className="text-gray-500 text-sm text-nowrap">
                   {" "}
                   {product.memory} ({product.color}){" "}
                 </div>

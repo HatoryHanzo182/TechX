@@ -357,33 +357,6 @@ const ProductDetails = () => {
                     </div>
                   ))}
                 </div>
-                {/* <div className="px-6 pb-6 mt-6 border-t border-gray-300 dark:border-gray-400 ">
-                  <div className="flex items-center justify-center mt-6">
-                    <span className="mr-3">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        className="w-5 h-5 text-blue-700 dark:text-gray-400 bi bi-chat-left-dots-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-                      </svg>
-                    </span>
-                    <div>
-                      <h2 className="text-sm font-bold text-gray-700 lg:text-lg dark:text-gray-400">
-                        Have question?
-                      </h2>
-                      <a
-                        className="text-xs text-blue-400 lg:text-sm dark:text-blue-200"
-                        href="#"
-                      >
-                        Chat with...
-                      </a>
-                    </div>
-                  </div>
-                </div> */}
               </div>
             </div>
             <div className="w-full px-4 md:w-1/2">
@@ -588,9 +561,13 @@ const ProductDetails = () => {
                     </svg>
                   </Button>
                 </div>
-                <div className="flex items-center mt-6 ">
+                <div className="flex justify-between mt-6 ">
+                  <span className="mr-2 text-base font-bold text-gray-700 dark:text-gray-400">
+                    Add to favorites
+                  </span>
+
                   {!show_logged_content ? null : (
-                    <span className="ml-6" onClick={toggleLike}>
+                    <span className="mr-6" onClick={toggleLike}>
                       {liked ? (
                         <AiFillHeart size="22" />
                       ) : (
