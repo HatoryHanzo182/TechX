@@ -1,17 +1,19 @@
 import { ShowSuccessMessage, ShowErrorMessage } from "../AdminMenu.js";
 
-export class IphoneDataModel 
+export class IpadDataModel 
 {
     #brand;
     #category;
     #model;
     #processor;
+    #CPU;
+    #GPU;
     #memory;
+    #RAM;
     #displaySize;
     #battery;
     #os;
     #camera;
-    
     #color;
     #price;
     #descont_price;
@@ -26,15 +28,18 @@ export class IphoneDataModel
         this.#category = inputs[1].value;
         this.#model = inputs[2].value;
         this.#processor = inputs[3].value;
-        this.#memory = inputs[4].value;
-        this.#displaySize = inputs[5].value;
-        this.#battery = inputs[6].value;
-        this.#os = inputs[7].value;
-        this.#camera = inputs[8].value;
-        this.#color = inputs[9].value;
-        this.#price = inputs[10].value;
-        this.#descont_price = inputs[11].value;
-        this.#description = inputs[12].value;
+        this.#CPU = inputs[4].value;
+        this.#GPU = inputs[5].value;
+        this.#memory = inputs[6].value;
+        this.#RAM = inputs[7].value;
+        this.#displaySize = inputs[8].value;
+        this.#battery = inputs[9].value;
+        this.#os = inputs[10].value;
+        this.#camera = inputs[11].value;
+        this.#color = inputs[12].value;
+        this.#price = inputs[13].value;
+        this.#descont_price = inputs[14].value;
+        this.#description = inputs[15].value;
         this.#images = img_product_paths;
         this.#incarousel = in_carousel;
         this.#status = "not active";
@@ -48,7 +53,10 @@ export class IphoneDataModel
             category: this.#category,
             model: this.#model,
             processor: this.#processor,
+            CPU: this.#CPU,
+            GPU: this.#GPU,
             memory: this.#memory,
+            RAM: this.#RAM,
             displaySize: this.#displaySize,
             battery: this.#battery,
             os: this.#os,

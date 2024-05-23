@@ -136,6 +136,7 @@ section {
   flex-direction: column;
   margin-top: 20px;
   padding: 20px;
+  margin-bottom: 20px;
   border-radius: 20px;
   background: rgba(82, 82, 82, 0.281);
   backdrop-filter: blur(40px);
@@ -336,7 +337,41 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   display: none;
 }
 
-#id-drop-ul {
+#id-drop-ul-iphone {
+  height: 200px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgb(255, 255, 255);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+  list-style-type: none;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+#id-drop-ul-mackbook {
+  height: 200px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgb(255, 255, 255);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+  list-style-type: none;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+#id-drop-ul-ipad {
   height: 200px;
   width: 500px;
   display: flex;
@@ -356,7 +391,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 #id-drop-li {
     /* color: var(--text-color); */
     color: black;
-    height: 50px;
+    /* height: 50px; */
     width: 400px;
     overflow-y: auto;
     margin: 0%;
@@ -402,7 +437,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   z-index: 1;
   filter: blur(25px);
   border-radius: 20px;
-  background-color: #e499ff;
+  background-color: #a87db7;
   background-image: radial-gradient(at 47% 69%, hsla(17,62%,65%,1) 0px, transparent 50%),
 radial-gradient(at 9% 32%, hsla(222,75%,60%,1) 0px, transparent 50%);
 }

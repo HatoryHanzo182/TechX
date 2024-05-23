@@ -6,7 +6,7 @@ let number_reviews = 0;
 
 function LoadAllReviews() 
 {
-    fetch('http://localhost:3001/GetProductReview', 
+    fetch('https://squid-app-d6fho.ondigitalocean.app:443/GetProductReview', 
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
@@ -49,7 +49,7 @@ function CollectReviewCard(review_data)
                     <p id="id-review-text" class="some">${review.review}</p>
                 </div>
                 <div class="thumb-review">
-                    <img id="id-img-review" src="http://localhost:3001/GetImage/${review.product_arr.images[0]}" height="250px" width="250px" alt="img-review">
+                    <img id="id-img-review" src="https://squid-app-d6fho.ondigitalocean.app:443/GetImage/${review.product_arr.images[0]}" height="250px" width="250px" alt="img-review">
                 </div>
                 <div class="detial-review">
                     <div class="title-review">
@@ -107,7 +107,7 @@ function AdminСhecked(id)
 {
     try 
     {
-        fetch('http://localhost:3001/AdminChecked', 
+        fetch('https://squid-app-d6fho.ondigitalocean.app:443/AdminChecked', 
         {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -236,7 +236,7 @@ function DeleteReview()
 {
     CancelDeleteReview();
 
-    fetch('http://localhost:3001/RemovingReviewById', 
+    fetch('https://squid-app-d6fho.ondigitalocean.app:443/RemovingReviewById', 
     {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
