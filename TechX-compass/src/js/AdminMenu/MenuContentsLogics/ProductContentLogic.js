@@ -2,12 +2,18 @@ import { products_content, DisableContent, ShowErrorMessage }  from "../AdminMen
 import { IphoneDataModel } from "../ProductModels/IphoneDataModel.js";
 import { MackbookDataModel } from "../ProductModels/MacbookDataModel.js";
 import { IpadDataModel } from "../ProductModels/IpadDataModel.js";
+import { AirpodsDataModel } from "../ProductModels/AirpodsDataModel.js";
+import { WatchDataModel } from "../ProductModels/WatchDataModel.js";
+import { ConsoleDataModel } from "../ProductModels/ConsoleDataModel.js";
 
 //#region [Products tab add product navigation.]
 const create_products_content = document.getElementById("id-create-product-content");
 const create_products_content_phone = document.getElementById("id-content-phone-data");
 const create_products_content_mackbook = document.getElementById("id-content-mackbook-data");
 const create_products_content_ipad = document.getElementById("id-content-ipad-data");
+const create_products_content_airpods = document.getElementById("id-content-airpods-data");
+const create_products_content_watch = document.getElementById("id-content-watch-data");
+const create_products_content_console = document.getElementById("id-content-console-data");
 
 export function HideAllAddProductMenuItems()
 {
@@ -15,12 +21,20 @@ export function HideAllAddProductMenuItems()
     create_products_content_phone.style.display = "none";
     create_products_content_mackbook.style.display = "none";
     create_products_content_ipad.style.display = "none";
+    create_products_content_airpods.style.display = "none";
+    create_products_content_watch.style.display = "none";
+    create_products_content_console.style.display = "none";
 }
 
 function ShowContentProductCreation() 
 {
   DisableContent();
   HideAllAddProductMenuItems();
+
+  const first_r = document.querySelector('input[name="page"]');
+  
+  if (first_r)
+    first_r.checked = true;
 
   create_products_content.style.display = "flex";
   create_products_content_phone.style.display = "flex";
@@ -53,6 +67,33 @@ function ShowContentProductIpad()  // <--- Show IPad content.
   create_products_content_ipad.style.display = "flex";
 }
 
+function ShowContentProductAirpods()  // <--- Show AirPods content.
+{
+  DisableContent();
+  HideAllAddProductMenuItems();
+
+  create_products_content.style.display = "flex";
+  create_products_content_airpods.style.display = "flex";
+}
+
+function ShowContentProductWatch()  // <--- Show Watch content.
+{
+  DisableContent();
+  HideAllAddProductMenuItems();
+
+  create_products_content.style.display = "flex";
+  create_products_content_watch.style.display = "flex";
+}
+
+function ShowContentProductConsole()  // <--- Show Console content.
+{
+  DisableContent();
+  HideAllAddProductMenuItems();
+
+  create_products_content.style.display = "flex";
+  create_products_content_console.style.display = "flex";
+}
+
 function BackToMainMenu()
 {
   DisableContent();
@@ -65,9 +106,15 @@ document.getElementById("id-create-product").addEventListener("click", ShowConte
 document.getElementById("id-create-product-content-phone").addEventListener("click", ShowContentProductIPhone);
 document.getElementById("id-create-product-content-mackbook").addEventListener("click", ShowContentProductMackbook);
 document.getElementById("id-create-product-content-ipad").addEventListener("click", ShowContentProductIpad);
+document.getElementById("id-create-product-content-airpods").addEventListener("click", ShowContentProductAirpods);
+document.getElementById("id-create-product-content-watch").addEventListener("click", ShowContentProductWatch);
+document.getElementById("id-create-product-content-console").addEventListener("click", ShowContentProductConsole);
 document.getElementById("id-back-to-product-menu").addEventListener("click", BackToMainMenu);
 document.getElementById("id-back-to-product-menu2").addEventListener("click", BackToMainMenu);
 document.getElementById("id-back-to-product-menu3").addEventListener("click", BackToMainMenu);
+document.getElementById("id-back-to-product-menu4").addEventListener("click", BackToMainMenu);
+document.getElementById("id-back-to-product-menu5").addEventListener("click", BackToMainMenu);
+document.getElementById("id-back-to-product-menu6").addEventListener("click", BackToMainMenu);
 //#endregion
 
 //#region [Sector for adding new product.]
@@ -152,6 +199,85 @@ function AddIpad()
   }
 }
 
+function AddAirpods()
+{
+  const container = document.getElementById('id-content-airpods-data');
+  const inputs = container.querySelectorAll('.card-content-product-data-input');
+  const in_carousel_checkbox = container.querySelector('#id-incarousel-ceckbox4');
+  let empty_fields_flag = CheckForEmptyLines(inputs);
+
+  if(empty_fields_flag)
+    ShowErrorMessage(`Field (${empty_fields_flag}) should not be empty`)
+  else
+  {
+    const new_airpods = new AirpodsDataModel(inputs, in_carousel_checkbox.checked, _img_product_paths_airpods);
+    
+    new_airpods.AddToLocalStorage();
+
+    inputs.forEach(input => { input.value = ''; });
+
+    inputs[0].value = 'Apple'; 
+    inputs[1].value = 'AirPods';   
+
+    while (drop_ul4.firstChild)
+      drop_ul4.removeChild(drop_ul4.firstChild);
+
+    _img_product_paths_airpods = [];
+  }
+}
+
+function AddWatch()
+{
+  const container = document.getElementById('id-content-watch-data');
+  const inputs = container.querySelectorAll('.card-content-product-data-input');
+  const in_carousel_checkbox = container.querySelector('#id-incarousel-ceckbox5');
+  let empty_fields_flag = CheckForEmptyLines(inputs);
+
+  if(empty_fields_flag)
+    ShowErrorMessage(`Field (${empty_fields_flag}) should not be empty`)
+  else
+  {
+    const new_watch = new WatchDataModel(inputs, in_carousel_checkbox.checked, _img_product_paths_watch);
+    
+    new_watch.AddToLocalStorage();
+
+    inputs.forEach(input => { input.value = ''; });
+ 
+    inputs[1].value = 'Watch';   
+
+    while (drop_ul5.firstChild)
+      drop_ul5.removeChild(drop_ul5.firstChild);
+
+    _img_product_paths_watch = [];
+  }
+}
+
+function AddConsole()
+{
+  const container = document.getElementById('id-content-console-data');
+  const inputs = container.querySelectorAll('.card-content-product-data-input');
+  const in_carousel_checkbox = container.querySelector('#id-incarousel-ceckbox6');
+  let empty_fields_flag = CheckForEmptyLines(inputs);
+
+  if(empty_fields_flag)
+    ShowErrorMessage(`Field (${empty_fields_flag}) should not be empty`)
+  else
+  {
+    const new_console = new ConsoleDataModel(inputs, in_carousel_checkbox.checked, _img_product_paths_console);
+    
+    new_console.AddToLocalStorage();
+
+    inputs.forEach(input => { input.value = ''; });
+ 
+    inputs[1].value = 'Console';   
+
+    while (drop_ul6.firstChild)
+      drop_ul6.removeChild(drop_ul6.firstChild);
+
+    _img_product_paths_console = [];
+  }
+}
+
 function CheckForEmptyLines(inputs)
 {
   for(let i = 0; i < inputs.length; i++)
@@ -167,6 +293,9 @@ function CheckForEmptyLines(inputs)
 document.getElementById("id-button-add-iphone").addEventListener("click", AddIPhone);
 document.getElementById("id-button-add-macbook").addEventListener("click", AddMacbook);
 document.getElementById("id-button-add-ipad").addEventListener("click", AddIpad);
+document.getElementById("id-button-add-airpods").addEventListener("click", AddAirpods);
+document.getElementById("id-button-add-watch").addEventListener("click", AddWatch);
+document.getElementById("id-button-add-console").addEventListener("click", AddConsole);
 //#endregion
 
 //#region [Dragandrop sector.]
@@ -350,6 +479,189 @@ drop_area3.addEventListener('drop', (event) =>
     div.appendChild(child)
     div.appendChild(rm_icon)
     drop_ul3.appendChild(div)
+  }
+});
+//#endregion
+//#region [Dragandrop AirPods data srctor.]
+const drop_area4 = document.getElementById('drop-area-airpods')
+const custum_file_upload4 = document.getElementById('id-custum-file-upload-airpods')
+const drop_ul4 = document.getElementById('id-drop-ul-airpods')
+let _img_product_paths_airpods = [];
+
+drop_area4.addEventListener('dragover', (event) => 
+{
+  event.stopPropagation();
+  event.preventDefault();
+
+  custum_file_upload4.style.border = '2px dashed #000000';
+});
+
+drop_area4.addEventListener('dragleave', (event) => { custum_file_upload4.style.border = '2px dashed #cacaca'; });
+
+drop_area4.addEventListener('drop', (event) => 
+{
+  event.stopPropagation();
+  event.preventDefault();
+
+  custum_file_upload4.style.border = '2px dashed #cacaca';
+
+  const files = event.dataTransfer.files;
+
+  for (let i = 0; i < files.length; i++) 
+  {
+    if (!files[i].type.startsWith('image/')) 
+      continue;
+
+    const child = document.createElement('li');
+    const rm_icon = document.createElement('ion-icon');
+    const div = document.createElement('div');
+    const image_icon = document.createElement('ion-icon');
+
+    image_icon.setAttribute('name', 'image');
+    image_icon.id = 'id-drop-image';
+    div.id = 'id-drop-div';
+    rm_icon.setAttribute('name', 'trash');
+    rm_icon.id = 'id-drop-trash'
+    child.id = 'id-drop-li'
+    child.textContent = files[i].path;
+    
+    _img_product_paths_airpods.push(files[i].path);
+
+    rm_icon.onclick = () => 
+    { 
+      div.removeChild(image_icon)
+      div.removeChild(child)
+      div.removeChild(rm_icon)
+      drop_ul4.removeChild(div)
+      _img_product_paths_airpods.splice(i, 1);
+    }
+
+    div.appendChild(image_icon)
+    div.appendChild(child)
+    div.appendChild(rm_icon)
+    drop_ul4.appendChild(div)
+  }
+});
+//#endregion
+//#region [Dragandrop Watch data srctor.]
+const drop_area5 = document.getElementById('drop-area-watch')
+const custum_file_upload5 = document.getElementById('id-custum-file-upload-watch')
+const drop_ul5 = document.getElementById('id-drop-ul-watch')
+let _img_product_paths_watch = [];
+
+drop_area5.addEventListener('dragover', (event) => 
+{
+  event.stopPropagation();
+  event.preventDefault();
+
+  custum_file_upload5.style.border = '2px dashed #000000';
+});
+
+drop_area5.addEventListener('dragleave', (event) => { custum_file_upload5.style.border = '2px dashed #cacaca'; });
+
+drop_area5.addEventListener('drop', (event) => 
+{
+  event.stopPropagation();
+  event.preventDefault();
+
+  custum_file_upload5.style.border = '2px dashed #cacaca';
+
+  const files = event.dataTransfer.files;
+
+  for (let i = 0; i < files.length; i++) 
+  {
+    if (!files[i].type.startsWith('image/')) 
+      continue;
+
+    const child = document.createElement('li');
+    const rm_icon = document.createElement('ion-icon');
+    const div = document.createElement('div');
+    const image_icon = document.createElement('ion-icon');
+
+    image_icon.setAttribute('name', 'image');
+    image_icon.id = 'id-drop-image';
+    div.id = 'id-drop-div';
+    rm_icon.setAttribute('name', 'trash');
+    rm_icon.id = 'id-drop-trash'
+    child.id = 'id-drop-li'
+    child.textContent = files[i].path;
+    
+    _img_product_paths_watch.push(files[i].path);
+
+    rm_icon.onclick = () => 
+    { 
+      div.removeChild(image_icon)
+      div.removeChild(child)
+      div.removeChild(rm_icon)
+      drop_ul5.removeChild(div)
+      _img_product_paths_watch.splice(i, 1);
+    }
+
+    div.appendChild(image_icon)
+    div.appendChild(child)
+    div.appendChild(rm_icon)
+    drop_ul5.appendChild(div)
+  }
+});
+//#endregion
+//#region [Dragandrop Console data srctor.]
+const drop_area6 = document.getElementById('drop-area-console')
+const custum_file_upload6 = document.getElementById('id-custum-file-upload-console')
+const drop_ul6 = document.getElementById('id-drop-ul-console')
+let _img_product_paths_console = [];
+
+drop_area6.addEventListener('dragover', (event) => 
+{
+  event.stopPropagation();
+  event.preventDefault();
+
+  custum_file_upload6.style.border = '2px dashed #000000';
+});
+
+drop_area6.addEventListener('dragleave', (event) => { custum_file_upload6.style.border = '2px dashed #cacaca'; });
+
+drop_area6.addEventListener('drop', (event) => 
+{
+  event.stopPropagation();
+  event.preventDefault();
+
+  custum_file_upload6.style.border = '2px dashed #cacaca';
+
+  const files = event.dataTransfer.files;
+
+  for (let i = 0; i < files.length; i++) 
+  {
+    if (!files[i].type.startsWith('image/')) 
+      continue;
+
+    const child = document.createElement('li');
+    const rm_icon = document.createElement('ion-icon');
+    const div = document.createElement('div');
+    const image_icon = document.createElement('ion-icon');
+
+    image_icon.setAttribute('name', 'image');
+    image_icon.id = 'id-drop-image';
+    div.id = 'id-drop-div';
+    rm_icon.setAttribute('name', 'trash');
+    rm_icon.id = 'id-drop-trash'
+    child.id = 'id-drop-li'
+    child.textContent = files[i].path;
+    
+    _img_product_paths_console.push(files[i].path);
+
+    rm_icon.onclick = () => 
+    { 
+      div.removeChild(image_icon)
+      div.removeChild(child)
+      div.removeChild(rm_icon)
+      drop_ul6.removeChild(div)
+      _img_product_paths_console.splice(i, 1);
+    }
+
+    div.appendChild(image_icon)
+    div.appendChild(child)
+    div.appendChild(rm_icon)
+    drop_ul6.appendChild(div)
   }
 });
 //#endregion

@@ -388,6 +388,57 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   overflow-y: auto;
 }
 
+#id-drop-ul-airpods {
+  height: 200px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgb(255, 255, 255);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+  list-style-type: none;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+#id-drop-ul-watch {
+  height: 200px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgb(255, 255, 255);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+  list-style-type: none;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+#id-drop-ul-console {
+  height: 200px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgb(255, 255, 255);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+  list-style-type: none;
+  padding: 10px;
+  overflow-y: auto;
+}
+
 #id-drop-li {
     /* color: var(--text-color); */
     color: black;
