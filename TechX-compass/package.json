@@ -1,9 +1,11 @@
 {
   "devDependencies": {
-    "electron": "^28.2.0"
+    "electron": "^28.2.0",
+    "electron-builder": "^24.13.3"
   },
   "scripts": {
-    "compass": "electron index.js"
+    "compass": "electron index.js",
+    "build-compass": "electron-builder"
   },
   "dependencies": {
     "path": "^0.12.7",

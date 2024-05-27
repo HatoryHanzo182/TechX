@@ -64,16 +64,26 @@ export class ConsoleDataModel
         try 
         {
             const result_p = await window.electron.invoke('AddNewProductToLocalStorage', data);
-            
-            if(result_p.success)
+
+            if (result_p.success)
             {
                 await window.electron.invoke('AddNewProductImgToLocalStorage', this.#images);
-                
+
                 ShowSuccessMessage(result_p.message);
+
+                return true;
             }
             else
+            {
                 ShowErrorMessage(result_p.message);
+
+                return false;
+            }
         } 
-        catch (error) { console.error('Error when adding data to local storage: ', error); }
+        catch (error) 
+        {
+            console.error('Error when adding data to local storage: ', error);
+            return false;
+        }
     }
 }

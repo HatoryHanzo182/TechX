@@ -276,7 +276,7 @@ body {
   left: 0;
   background-color: var(--background-color); /* #fff */
   transition: 0.5s;
-  z-index: 40000;
+  z-index: 1000;
 }
 
 .navigation.open {

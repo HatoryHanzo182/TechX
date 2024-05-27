@@ -6,8 +6,10 @@ import { AirpodsDataModel } from "../ProductModels/AirpodsDataModel.js";
 import { WatchDataModel } from "../ProductModels/WatchDataModel.js";
 import { ConsoleDataModel } from "../ProductModels/ConsoleDataModel.js";
 
-//#region [Products tab add product navigation.]
+//#region [Add product sector.]
+//#region [Navigation sector.]
 const create_products_content = document.getElementById("id-create-product-content");
+const create_products_menu = document.getElementById("id-create-product-menu");
 const create_products_content_phone = document.getElementById("id-content-phone-data");
 const create_products_content_mackbook = document.getElementById("id-content-mackbook-data");
 const create_products_content_ipad = document.getElementById("id-content-ipad-data");
@@ -18,6 +20,7 @@ const create_products_content_console = document.getElementById("id-content-cons
 export function HideAllAddProductMenuItems()
 {
     create_products_content.style.display = "none";
+    manage_products_content.style.display = "none";
     create_products_content_phone.style.display = "none";
     create_products_content_mackbook.style.display = "none";
     create_products_content_ipad.style.display = "none";
@@ -37,6 +40,7 @@ function ShowContentProductCreation()
     first_r.checked = true;
 
   create_products_content.style.display = "flex";
+  create_products_menu.style.display = "flex";
   create_products_content_phone.style.display = "flex";
 }
 
@@ -118,34 +122,40 @@ document.getElementById("id-back-to-product-menu6").addEventListener("click", Ba
 //#endregion
 
 //#region [Sector for adding new product.]
-function AddIPhone() 
+async function AddIPhone() 
 {
   const container = document.getElementById('id-content-phone-data');
   const inputs = container.querySelectorAll('.card-content-product-data-input');
   const in_carousel_checkbox = container.querySelector('#id-incarousel-ceckbox');
   let empty_fields_flag = CheckForEmptyLines(inputs);
 
-  if(empty_fields_flag)
-    ShowErrorMessage(`Field (${empty_fields_flag}) should not be empty`)
-  else
+  if (empty_fields_flag) 
+    ShowErrorMessage(`Field (${empty_fields_flag}) should not be empty`);
+  else 
   {
     const new_iphone = new IphoneDataModel(inputs, in_carousel_checkbox.checked, _img_product_paths_iphone);
-    
-    new_iphone.AddToLocalStorage();
+    const is_added = await new_iphone.AddToLocalStorage();
 
-    inputs.forEach(input => { input.value = ''; });
+    if (is_added) 
+    {
+      inputs.forEach(input => { input.value = ''; });
 
-    inputs[0].value = 'Apple'; 
-    inputs[1].value = 'iPhone'; 
+      inputs[0].value = 'Apple'; 
+      inputs[1].value = 'iPhone'; 
 
-    while (drop_ul.firstChild)
-      drop_ul.removeChild(drop_ul.firstChild);
+      while (drop_ul.firstChild)
+        drop_ul.removeChild(drop_ul.firstChild);
 
-    _img_product_paths_iphone = [];
+      _img_product_paths_iphone = [];
+
+      await FetchProducts();
+      DisplayTable();
+    }
   }
 }
 
-function AddMacbook()
+
+async function AddMacbook()
 {
   const container = document.getElementById('id-content-mackbook-data');
   const inputs = container.querySelectorAll('.card-content-product-data-input');
@@ -157,22 +167,27 @@ function AddMacbook()
   else
   {
     const new_macbook = new MackbookDataModel(inputs, in_carousel_checkbox.checked, _img_product_paths_mackbook);
-    
-    new_macbook.AddToLocalStorage();
+    const is_added = await new_macbook.AddToLocalStorage();
 
-    inputs.forEach(input => { input.value = ''; });
+    if (is_added) 
+    {
+      inputs.forEach(input => { input.value = ''; });
 
-    inputs[0].value = 'Apple'; 
-    inputs[1].value = 'Macbook'; 
+      inputs[0].value = 'Apple'; 
+      inputs[1].value = 'Macbook'; 
 
-    while (drop_ul2.firstChild)
-      drop_ul2.removeChild(drop_ul2.firstChild);
+      while (drop_ul2.firstChild)
+        drop_ul2.removeChild(drop_ul2.firstChild);
 
-    _img_product_paths_mackbook = [];
+      _img_product_paths_mackbook = [];
+
+      await FetchProducts();
+      DisplayTable();
+    }
   }
 }
 
-function AddIpad()
+async function AddIpad()
 {
   const container = document.getElementById('id-content-ipad-data');
   const inputs = container.querySelectorAll('.card-content-product-data-input');
@@ -184,22 +199,28 @@ function AddIpad()
   else
   {
     const new_ipad = new IpadDataModel(inputs, in_carousel_checkbox.checked, _img_product_paths_ipad);
-    
-    new_ipad.AddToLocalStorage();
+    const is_added = await new_ipad.AddToLocalStorage();
 
-    inputs.forEach(input => { input.value = ''; });
+    if (is_added) 
+    {
+      inputs.forEach(input => { input.value = ''; });
 
-    inputs[0].value = 'Apple'; 
-    inputs[1].value = 'Ipad';   
+      inputs[0].value = 'Apple'; 
+      inputs[1].value = 'Ipad';   
 
-    while (drop_ul3.firstChild)
-      drop_ul3.removeChild(drop_ul3.firstChild);
+      while (drop_ul3.firstChild)
+        drop_ul3.removeChild(drop_ul3.firstChild);
 
-    _img_product_paths_ipad = [];
+      _img_product_paths_ipad = [];
+
+            
+      await FetchProducts();
+      DisplayTable();
+    }
   }
 }
 
-function AddAirpods()
+async function AddAirpods()
 {
   const container = document.getElementById('id-content-airpods-data');
   const inputs = container.querySelectorAll('.card-content-product-data-input');
@@ -211,22 +232,27 @@ function AddAirpods()
   else
   {
     const new_airpods = new AirpodsDataModel(inputs, in_carousel_checkbox.checked, _img_product_paths_airpods);
-    
-    new_airpods.AddToLocalStorage();
+    const is_added = await new_airpods.AddToLocalStorage();
 
-    inputs.forEach(input => { input.value = ''; });
+    if (is_added) 
+    {
+      inputs.forEach(input => { input.value = ''; });
 
-    inputs[0].value = 'Apple'; 
-    inputs[1].value = 'AirPods';   
+      inputs[0].value = 'Apple'; 
+      inputs[1].value = 'AirPods';   
 
-    while (drop_ul4.firstChild)
-      drop_ul4.removeChild(drop_ul4.firstChild);
+      while (drop_ul4.firstChild)
+        drop_ul4.removeChild(drop_ul4.firstChild);
 
-    _img_product_paths_airpods = [];
+      _img_product_paths_airpods = [];
+
+      await FetchProducts();
+      DisplayTable();
+    }
   }
 }
 
-function AddWatch()
+async function AddWatch()
 {
   const container = document.getElementById('id-content-watch-data');
   const inputs = container.querySelectorAll('.card-content-product-data-input');
@@ -238,21 +264,26 @@ function AddWatch()
   else
   {
     const new_watch = new WatchDataModel(inputs, in_carousel_checkbox.checked, _img_product_paths_watch);
-    
-    new_watch.AddToLocalStorage();
+    const is_added = await new_watch.AddToLocalStorage();
 
-    inputs.forEach(input => { input.value = ''; });
- 
-    inputs[1].value = 'Watch';   
+    if (is_added) 
+    {
+      inputs.forEach(input => { input.value = ''; });
+      
+      inputs[1].value = 'Watch';   
 
-    while (drop_ul5.firstChild)
-      drop_ul5.removeChild(drop_ul5.firstChild);
+      while (drop_ul5.firstChild)
+        drop_ul5.removeChild(drop_ul5.firstChild);
 
-    _img_product_paths_watch = [];
+      _img_product_paths_watch = [];
+
+      await FetchProducts();
+      DisplayTable();
+    }
   }
 }
 
-function AddConsole()
+async function AddConsole()
 {
   const container = document.getElementById('id-content-console-data');
   const inputs = container.querySelectorAll('.card-content-product-data-input');
@@ -264,17 +295,22 @@ function AddConsole()
   else
   {
     const new_console = new ConsoleDataModel(inputs, in_carousel_checkbox.checked, _img_product_paths_console);
-    
-    new_console.AddToLocalStorage();
+    const is_added = await new_console.AddToLocalStorage();
 
-    inputs.forEach(input => { input.value = ''; });
- 
-    inputs[1].value = 'Console';   
+    if (is_added) 
+    {
+      inputs.forEach(input => { input.value = ''; });
+      
+      inputs[1].value = 'Console';   
 
-    while (drop_ul6.firstChild)
-      drop_ul6.removeChild(drop_ul6.firstChild);
+      while (drop_ul6.firstChild)
+        drop_ul6.removeChild(drop_ul6.firstChild);
 
-    _img_product_paths_console = [];
+      _img_product_paths_console = [];
+
+      await FetchProducts();
+      DisplayTable();
+    }
   }
 }
 
@@ -664,5 +700,178 @@ drop_area6.addEventListener('drop', (event) =>
     drop_ul6.appendChild(div)
   }
 });
+//#endregion
+//#endregion
+//#endregion
+
+//#region [Manage sector.]
+//#region [Navigation sector.]
+const manage_products_content = document.getElementById("id-manage-product-content");
+
+function ShowContentProductManage() 
+{
+  DisableContent();
+  HideAllAddProductMenuItems();
+
+  create_products_content.style.display = "none";
+  create_products_menu.style.display = "none";
+  manage_products_content.style.display = "flex";
+}
+
+document.getElementById("id-manage-product").addEventListener("click", ShowContentProductManage);
+//#endregion
+//#region [Table logic sector.]
+const rows_per_page = 12;
+let current_page = 1;
+let _products = [];
+
+document.addEventListener('DOMContentLoaded', async () => 
+{
+  await FetchProducts();
+  DisplayTable();
+
+  document.getElementById('search').addEventListener('input', DisplayTable);
+  document.getElementById('status-filter').addEventListener('change', DisplayTable);
+  document.getElementById('prev').addEventListener('click', () => ChangePage(-1));
+  document.getElementById('next').addEventListener('click', () => ChangePage(1));
+});
+
+async function FetchProducts() 
+{
+  try 
+  {
+    const products = await window.electron.invoke('GetProductsFromLocalStorage');
+    
+    UpdateProductsArray(products);
+  } 
+  catch (error) { console.error('Error fetching products: ', error); }
+}
+
+function UpdateProductsArray(products) 
+{
+  _products = products.map(product => (
+  {
+    image: product.images[0],
+    brand: product.brand,
+    model: product.model,
+    price: `${product.price}$`,
+    discount: product.descont_price ? `${product.descont_price}$` : 'not discount',
+    status: product.status
+  }));
+}
+
+function DisplayTable() 
+{
+  const table_body = document.querySelector('#product-table tbody');
+  const no_items_message = document.getElementById('no-items-message');
+  
+  table_body.innerHTML = '';
+
+  const filtered_products = GetFilteredProducts();
+  const start = (current_page - 1) * rows_per_page;
+  const end = start + rows_per_page;
+  const paginated_products = filtered_products.slice(start, end);
+
+  if (paginated_products.length === 0) 
+  {
+    no_items_message.style.display = 'block';
+    
+    UpdatePaginationInfo(0);
+  } 
+  else 
+  {
+    no_items_message.style.display = 'none';
+    
+    paginated_products.forEach(product => 
+    {
+      const row = document.createElement('tr');
+
+      row.innerHTML = `
+        <td><img src="${product.image}" alt="${product.model}" style="width: 50px; height: 50px;"></td>
+        <td>${product.brand}</td>
+        <td>${product.model}</td>
+        <td>${product.price}</td>
+        <td>${product.discount}</td>
+        <td>
+          <select class="status-dropdown">
+            <option value="active">Activate</option>
+            <option value="no active">Deactivate</option>
+          </select>
+        </td>
+      `;
+
+      table_body.appendChild(row);
+    });
+
+    UpdatePaginationInfo(filtered_products.length);
+  }
+
+  document.querySelectorAll('.status-dropdown').forEach(dropdown => 
+  {
+    dropdown.removeEventListener('change', onStatusChange);
+  });
+
+  function onStatusChange() 
+  {
+    const selected_model = this.closest('tr').querySelectorAll('td')[2].textContent;
+    const new_status = this.value;
+    const product_index = _products.findIndex(product => product.model === selected_model);
+
+    if (product_index !== -1) 
+      {
+      _products[product_index].status = new_status;
+
+      UpdateProductStatusInLocalStorage(selected_model, new_status);
+    }
+  }
+
+  document.querySelectorAll('.status-dropdown').forEach((dropdown, index) => 
+  {
+    dropdown.addEventListener('change', onStatusChange);
+
+    dropdown.value = _products[start + index].status;
+  });
+}
+
+async function UpdateProductStatusInLocalStorage(model, new_status) 
+{
+  try 
+  {
+    const new_status_data = { model: model, new_status: new_status };
+    const u = await window.electron.invoke('UpdateProductStatusInLocalStorage', new_status_data);
+
+    if (u.success) 
+    {
+        await FetchProducts();
+        DisplayTable();
+    }
+  } 
+  catch (error) { console.error('Error updating product status:', error); }
+}
+
+function GetFilteredProducts() 
+{
+  const search_query = document.getElementById('search').value.toLowerCase();
+  const status_filter = document.getElementById('status-filter').value;
+
+  return _products.filter(product => (product.model.toLowerCase().includes(search_query) || product.brand.toLowerCase().includes(search_query)) && (status_filter === '' || product.status === status_filter));
+}
+
+function UpdatePaginationInfo(total_rows) 
+{
+  const total_pages = Math.ceil(total_rows / rows_per_page);
+
+  document.getElementById('page-info').innerText = total_rows === 0 ? 'No items available' : `Page ${current_page} of ${total_pages}`;
+  document.getElementById('prev').disabled = current_page === 1 || total_pages === 0;
+  document.getElementById('next').disabled = current_page === total_pages || total_pages === 0;
+}
+
+function ChangePage(direction) 
+{
+  current_page += direction;
+  DisplayTable();
+}
+
+document.getElementById("id-back-to-product-menu8").addEventListener("click", BackToMainMenu);
 //#endregion
 //#endregion

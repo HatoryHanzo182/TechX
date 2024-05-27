@@ -1,3 +1,38 @@
 [
-  
+  {
+    "brand": "Apple",
+    "category": "iPhone",
+    "model": "ASASA",
+    "processor": "ASASA",
+    "memory": "12342",
+    "displaySize": "12342",
+    "battery": "12342",
+    "os": "12342",
+    "camera": "12342",
+    "color": "12342",
+    "price": "12342",
+    "descont_price": "",
+    "description": "12342",
+    "images": [
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\IPH1.jpeg"
+    ],
+    "incarousel": true,
+    "status": "no active"
+  },
+  {
+    "brand": "Apple",
+    "category": "AirPods",
+    "model": "2323",
+    "processor": "43234",
+    "battery": "4323455",
+    "color": "5345",
+    "price": "345",
+    "descont_price": "345",
+    "description": "345343",
+    "images": [
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\IPH2.jpeg"
+    ],
+    "incarousel": false,
+    "status": "no active"
+  }
 ]

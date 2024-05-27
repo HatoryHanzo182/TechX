@@ -488,7 +488,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   z-index: 1;
   filter: blur(25px);
   border-radius: 20px;
-  background-color: #a87db7;
+  background-color: #b494c0;
   background-image: radial-gradient(at 47% 69%, hsla(17,62%,65%,1) 0px, transparent 50%),
 radial-gradient(at 9% 32%, hsla(222,75%,60%,1) 0px, transparent 50%);
 }
@@ -611,5 +611,139 @@ radial-gradient(at 9% 32%, hsla(222,75%,60%,1) 0px, transparent 50%);
  border: solid #f0f0f0;
  border-width: 0 0.15em 0.15em 0;
  transform: rotate(45deg);
+}
+/* #endregion */
+
+/* #region [Table style sector.] */
+.table-container {
+  width: 130vh;
+  margin: auto;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.table-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.table-controls .button-step-in-product-operations-menu {
+  margin-right: 10px;
+}
+
+.table-controls input, .table-controls select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  margin-left: 10px;
+  flex: 1;
+}
+
+.table-controls input {
+  margin-right: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+table thead {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 0 5px;
+  border: 1px solid #ced4da;
+  background-color: #ffffff;
+  color: #495057;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.status-dropdown-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.status-dropdown {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.status-dropdown:focus {
+  outline: none;
+  border-color: rgb(0, 0, 0);
+  box-shadow: 0 0 0 2px rgb(0, 0, 0);
+}
+
+.status-buttons {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  display: none;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.status-buttons.active {
+  display: flex;
+  max-height: 100px;
+}
+
+.status-buttons button {
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.status-buttons button:hover {
+  background-color: #f2f2f2;
 }
 /* #endregion */

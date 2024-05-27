@@ -82,7 +82,7 @@ ipcMain.handle('AddNewProductToLocalStorage', (event, data) =>  // Handler for a
     return { success: true, message: "Data saved successfully" };
 });
 
-ipcMain.handle('AddNewProductImgToLocalStorage', (event, data) => 
+ipcMain.handle('AddNewProductImgToLocalStorage', async (event, data) => 
 {
     const product_img_folder_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'ProductsImg');
 
@@ -90,7 +90,7 @@ ipcMain.handle('AddNewProductImgToLocalStorage', (event, data) =>
         fs.mkdirSync(product_img_folder_path);
     
     const new_img_paths = [];
-    
+
     for (const img_path of data) 
     {
         const img_name = path.basename(img_path);
@@ -111,13 +111,58 @@ ipcMain.handle('AddNewProductImgToLocalStorage', (event, data) =>
     } 
     catch (error) { console.error('Error reading JSON file:', error); }
 
-
-    for (const item of json_data)
-        item.images = new_img_paths;
+    if (json_data.length > 0)
+        json_data[json_data.length - 1].images = new_img_paths;
 
     try 
     {
         fs.writeFileSync(json_file_path, JSON.stringify(json_data, null, 2));
     } 
     catch (error) { console.error('Error writing JSON file:', error); }
+});
+
+ipcMain.handle('GetProductsFromLocalStorage', (event) => 
+{
+    const file_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'product_assembly.json');
+    let products = [];
+
+    try 
+    {
+        const data = JSON.parse(fs.readFileSync(file_path));
+        
+        products = data;
+    } 
+    catch (error) { console.error('Error reading file: ', error); }
+
+    return products;
+});
+  
+ipcMain.handle('UpdateProductStatusInLocalStorage', async (event, new_status) => 
+{
+    const file_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'product_assembly.json');
+
+    try 
+    {
+        let products = JSON.parse(fs.readFileSync(file_path));
+        const product_index = products.findIndex(product => product.model === new_status.model);    
+        
+        if (product_index !== -1) 
+        {
+            products[product_index].status = new_status.new_status; 
+            
+            fs.writeFileSync(file_path, JSON.stringify(products, null, 2)); 
+            
+            return { success: true, message: "Product status updated successfully" };
+        } 
+        else 
+        {
+            console.log('Product not found');
+            return { success: false, message: "Product not found" };
+        }
+    } 
+    catch (error) 
+    {
+        console.error('Error updating product status:', error);
+        return { success: false, message: "Error updating product status" };
+    }
 });
