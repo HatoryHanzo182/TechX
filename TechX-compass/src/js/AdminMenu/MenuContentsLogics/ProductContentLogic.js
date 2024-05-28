@@ -702,6 +702,31 @@ drop_area6.addEventListener('drop', (event) =>
 });
 //#endregion
 //#endregion
+
+//#region [Api config]
+function ShowApiWindow()
+{
+  const api_window = document.getElementById("id-API-product-window");
+
+  api_window.style.display = 'none';
+}
+
+function OkApi()
+{
+
+}
+
+function CloseApiWindow()
+{
+  const api_window = document.getElementById("id-API-product-window");
+
+  api_window.style.display = 'none';
+}
+
+document.getElementById("id-cancel-API").addEventListener("click", CloseApiWindow);
+document.getElementById("id-API-OK").addEventListener("click", OkApi);
+//#endregion 
+
 //#endregion
 
 //#region [Manage sector.]
@@ -843,10 +868,7 @@ async function UpdateProductStatusInLocalStorage(model, new_status)
     if (u.success) 
     {
       if(new_status === 'active')
-      {
-        console.log("Status ")
         await AddProduct(u.product);
-      }
 
       await FetchProducts();
       DisplayTable();
