@@ -2,37 +2,43 @@
   {
     "brand": "Apple",
     "category": "iPhone",
-    "model": "ASASA",
-    "processor": "ASASA",
-    "memory": "12342",
-    "displaySize": "12342",
-    "battery": "12342",
-    "os": "12342",
-    "camera": "12342",
-    "color": "12342",
-    "price": "12342",
-    "descont_price": "",
-    "description": "12342",
+    "model": "3GS",
+    "processor": "600 MHz Cortex-A8",
+    "memory": "12",
+    "displaySize": "3.5 inches",
+    "battery": "1220",
+    "os": "iOS 6.1.6",
+    "camera": "3",
+    "color": "Black",
+    "price": "199",
+    "descont_price": "190",
+    "description": "The iPhone 3GS is a smartphone that was designed and marketed by Apple Inc. It is the third generation iPhone, succeeding the iPhone 3G.",
     "images": [
-      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\IPH1.jpeg"
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\apple-iphone-3gs-16gb-black-1.1000x1000.jpg",
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\a372690cd305443a94ff242db35b7698.jpeg",
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\apple-iphone-3gs-16gb-black-5.1000x.jpg"
     ],
     "incarousel": true,
-    "status": "no active"
+    "status": "active"
   },
   {
-    "brand": "Apple",
-    "category": "AirPods",
-    "model": "2323",
-    "processor": "43234",
-    "battery": "4323455",
-    "color": "5345",
-    "price": "345",
-    "descont_price": "345",
-    "description": "345343",
+    "brand": "Sony",
+    "category": "Console",
+    "model": "PlayStation 2",
+    "processor": "Emotion Engine",
+    "CPU": "294.912 MHz",
+    "GPU": "Graphics Synthesizer",
+    "memory": "32",
+    "RAM": "32",
+    "os": "PlayStation 2 System Software",
+    "color": "Black",
+    "price": "200",
+    "descont_price": "199",
+    "description": "The PlayStation 2 (PS2) is a home video game console developed and marketed by Sony Computer Entertainment. It was first released in Japan on March 4, 2000, followed by North America on October 26, 2000, and Europe and Australia on November 24, 2000. The successor to the original PlayStation, as well as the second installment in the PlayStation console line-up, it competed with Sega's Dreamcast, Microsoft's Xbox, and Nintendo's GameCube during its generation.",
     "images": [
-      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\IPH2.jpeg"
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\SONY-PLAYSTATION-2-SLIM-2-GRY-PLAY-GWARANCJA.jpg"
     ],
     "incarousel": false,
-    "status": "no active"
+    "status": "active"
   }
 ]

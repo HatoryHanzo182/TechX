@@ -881,17 +881,43 @@ app.post("/AddNewProductImg", upload.array('image', 5), async (req, res) =>
   }
 });
 
-        // Push new IPhone data.
-app.post("/AddIPhone", async (req, res) => 
+        // Push new data.
+app.post("/AddProduct", async (req, res) => 
 {
+  const new_p = req.body;
+  
   try 
   {
-    const { category, brand, model, price, color, memory, displaySize, description, os, camera, processor, images, incarousel } = req.body;
-    const new_phone = new IPhoneModel({_id: new mongoose.Types.ObjectId(), category, brand, model, price, color, memory, displaySize, description, os, camera, processor, images, incarousel });
+    switch (new_p.product.category) 
+    {
+      case "iPhone":
+        const new_phone = new IPhoneModel(
+        {
+          _id: new mongoose.Types.ObjectId(), 
+          category: new_p.product.category, 
+          brand: new_p.product.brand, 
+          model: new_p.product.model, 
+          price: new_p.product.price, 
+          descont_price: new_p.product.descont_price,
+          color: new_p.product.color, 
+          memory: new_p.product.memory, 
+          displaySize: new_p.product.displaySize, 
+          description: new_p.product.description, 
+          os: new_p.product.os, 
+          camera: new_p.product.camera, 
+          processor: new_p.product.processor, 
+          images: new_p.server_img, 
+          incarousel: new_p.product.incarousel
+        });
 
-    await new_phone.save();
+        await new_phone.save();
+        break;
+    
+      default:
+        break;
+    }
 
-    res.status(200).json({ message: "IPhone added successfully", new_phone });
+    res.status(200).json({ message: `${new_p.category} added successfully`});
   } 
   catch (error) 
   {

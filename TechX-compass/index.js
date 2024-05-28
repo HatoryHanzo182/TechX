@@ -152,7 +152,7 @@ ipcMain.handle('UpdateProductStatusInLocalStorage', async (event, new_status) =>
             
             fs.writeFileSync(file_path, JSON.stringify(products, null, 2)); 
             
-            return { success: true, message: "Product status updated successfully" };
+            return { success: true, product: products[product_index] };
         } 
         else 
         {

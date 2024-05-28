@@ -842,8 +842,14 @@ async function UpdateProductStatusInLocalStorage(model, new_status)
 
     if (u.success) 
     {
-        await FetchProducts();
-        DisplayTable();
+      if(new_status === 'active')
+      {
+        console.log("Status ")
+        await AddProduct(u.product);
+      }
+
+      await FetchProducts();
+      DisplayTable();
     }
   } 
   catch (error) { console.error('Error updating product status:', error); }
@@ -870,6 +876,52 @@ function ChangePage(direction)
 {
   current_page += direction;
   DisplayTable();
+}
+
+async function AddProduct(product)
+{
+  let img_path_genirated_server = [];
+
+  for (const image_path of product.images) 
+  {
+    try 
+    {
+      const response = await fetch(image_path);
+      const file_blob = await response.blob();
+      const file = new File([file_blob], image_path.split('/').pop());
+      const form_data = new FormData();
+
+      form_data.append('image', file);
+
+      const upload_response = await fetch("https://squid-app-d6fho.ondigitalocean.app:443/AddNewProductImg", 
+      {
+        method: 'POST',
+        body: form_data,
+      });
+
+      if (!upload_response.ok)
+        throw new Error('Failed to upload image');
+      else
+      {
+        const data = await upload_response.json();
+
+        img_path_genirated_server.push(...data.file_names);
+      }
+    } 
+    catch (error) { console.error('Error uploading image:', error); }
+  }
+  
+  const new_produc_object = {product, server_img: img_path_genirated_server};
+  
+  const res_user_exists = await fetch("https://squid-app-d6fho.ondigitalocean.app:443/AddProduct",
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(new_produc_object)
+  });
+  
+  if(res_user_exists.ok)
+    console.log(res_user_exists.message);
 }
 
 document.getElementById("id-back-to-product-menu8").addEventListener("click", BackToMainMenu);
