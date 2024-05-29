@@ -199,9 +199,9 @@ const ProductDetails = () => {
       array_coast.push(p_in_cart);
       localStorage.setItem("Cart", JSON.stringify(array_coast));
 
-      setShowAlert(true);
-      setMessage("Product added to cart");
-    }, 5000);
+    //    выведете сообщение пользователю о том что товар добавлен в корзину или анимацию, что бы было понятно что добавлено в корзину.
+    setShowAlert(true);
+    setMessage("Product added to cart");
   };
 
   const handleSendReview = async (e) => {
@@ -209,7 +209,8 @@ const ProductDetails = () => {
 
     if (!show_logged_content) {
       if (!user_name.trim() || !user_review.trim()) {
-        //    выведете тут сообщение о том что имя или поля не должны быть пустыми.
+        setShowAlert(true);
+        setMessage("Name or fields must not be empty");
         return;
       }
 
@@ -233,16 +234,19 @@ const ProductDetails = () => {
       const answer = await ServerReview.json();
 
       if (answer) {
-        ///   < выведите модальное окно о том что отзыв отправлен.
+        setShowAlert(true);
+        setMessage("Review sent successfully");
         SetUserName("");
         SetUserReview("");
         SetGrade(0);
       } else {
-        ///   < выведите сообщение о том что произошла хуйня и отзыв не отправлен.
+        setShowAlert(true);
+        setMessage("Something went wrong, review not sent");
       }
     } else {
       if (!user_review.trim()) {
-        //    выведете тут сообщение о том что имя или поля не должны быть пустыми.
+        setShowAlert(true);
+        setMessage("Name or fields must not be empty");
         return;
       }
 
@@ -267,11 +271,13 @@ const ProductDetails = () => {
       const answer = await ServerReview.json();
 
       if (answer) {
-        ///   < выведите модальное окно о том что отзыв отправлен.
+        setShowAlert(true);
+        setMessage("Review sent successfully");
         SetUserReview("");
         SetGrade(0);
       } else {
-        ///   < выведите сообщение о том что произошла хуйня и отзыв не отправлен.
+        setShowAlert(true);
+        setMessage("Name or fields must not be empty");
       }
     }
   };
