@@ -354,7 +354,7 @@ export function ProfilePage() {
           <Card>
             <CardHeader>
               <CardTitle>Orders</CardTitle>
-              {/* <CardDescription>Your order history</CardDescription> */}
+              <CardDescription>Your order history</CardDescription>
             </CardHeader>
             <CardContent>
               <OrdersTable />

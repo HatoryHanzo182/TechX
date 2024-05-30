@@ -19,7 +19,7 @@ import { useState, useEffect } from "react";
 //
 export function ProductCarousel() {
   const [c_data, SetCData] = useState([]);
-  const [carouselSlideWidth, SetCarouselSlideWidth] = useState(4); // Предположим, что по умолчанию отображается 5 элементов
+  const [carouselSlideWidth, SetCarouselSlideWidth] = useState(4);
 
   useEffect(() => {
     const ToGetData = async () => {
