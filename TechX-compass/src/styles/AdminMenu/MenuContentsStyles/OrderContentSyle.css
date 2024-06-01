@@ -1,0 +1,79 @@
+/*---------------------
+  Orders sector styles.
+-----------------------*/
+.orders-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10%;
+}
+
+.orders-content > .table-container {
+    margin-left: 15%;
+    width: 75%;
+}
+
+/* Table wrapper with horizontal scroll */
+.table-wrapper {
+    width: 100%;
+    max-height: 400px; /* Adjust this value as needed */
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.order-table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-head {
+    background-color: #000000;
+    color: white;
+}
+
+.order-th,
+.order-td {
+    padding: 12px 15px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.order-th {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.order-body tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.order-body tr:hover {
+    background-color: #f1f1f1;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.status.pending {
+    background-color: #ff9800;
+    color: white;
+}
+
+.status.completed {
+    background-color: #4caf50;
+    color: white;
+}
+
+.status.cancelled {
+    background-color: #f44336;
+    color: white;
+}

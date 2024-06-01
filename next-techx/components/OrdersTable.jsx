@@ -15,7 +15,8 @@ export function OrdersTable()
 
       try 
       {
-        const response = await fetch("https://squid-app-d6fho.ondigitalocean.app:443/GetOrderHistory", {
+        const response = await fetch("https://squid-app-d6fho.ondigitalocean.app:443/GetOrderHistory", 
+        {
           method: "POST",
           headers: {"Content-Type": "application/json", "Authorization": `Bearer ${u_t}` }
         });

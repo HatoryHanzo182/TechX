@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/AdminMenu/AdminMenu.css" />
     <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/ProductContentStyle.css"/>
+    <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/OrdercontentSyle.css"/>
     <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/MenuReviewsContentStyle.css"/>
     <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/MenuExitContentStyle.css">
   </head>
@@ -110,13 +111,6 @@
         </div>
       </div>
       <!-- #endregion -->
-      
-  
-
-
-
-
-      
       <!-- #region [PRODUCTS CONTENT]-->
       <div id="id-products-content" class="products-content" style="display: none">
         <!--Creation product item-->
@@ -798,16 +792,51 @@
       </div>      
       <!-- #endregion -->
       <!-- #endregion -->
-
-
-
-
-
-
-
       <!--#region [ORDERS CONTENT.]-->
       <div id="id-orders-content" class="orders-content" style="display: none">
-        <h1>Orders</h1>
+        <div class="table-container">
+          <!-- #region [Search Bar.] -->
+          <div class="table-controls">
+            <input type="text" id="search-order" placeholder="Search...">
+            <select id="sort-order">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+            </select>
+            <select id="filter-status-order">
+              <option value="all">All</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="shipped">Shipped</option>
+              <option value="received">Received</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+          <!-- #endregion -->
+          <!-- #region [Order table.] -->
+          <div class="table-wrapper">
+            <table class="order-table">
+              <thead class="order-head">
+                <tr class="order-tr">
+                  <th class="order-th">Order ID</th>
+                  <th class="order-th">Products</th>
+                  <th class="order-th">Name</th>
+                  <th class="order-th">Phone</th>
+                  <th class="order-th">Email</th>
+                  <th class="order-th">City</th>
+                  <th class="order-th">Address</th>
+                  <th class="order-th">Payment</th>
+                  <th class="order-th">Sum</th>
+                  <th class="order-th">Date</th>
+                  <th class="order-th">Status</th>
+                </tr>
+              </thead>
+              <tbody id="order-body" class="order-body">
+                <!-- Rows will be inserted here dynamically -->
+              </tbody>
+            </table>
+          </div>
+          <!-- #endregion -->
+        </div>
       </div>
       <!-- #endregion -->
       <!--#region [ACTIVITY CONTENT.]-->
@@ -923,6 +952,7 @@
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script type="module" src="../js/AdminMenu/AdminMenu.js"></script>
   <script type="module" src="../js/AdminMenu/MenuContentsLogics/ProductContentLogic.js"></script>
+  <script type="module" src="../js/AdminMenu/MenuContentsLogics/OrderContentLogic.js"></script>
   <script type="module" src="../js/AdminMenu/MenuContentsLogics/ReviewsContentLogic.js"></script>
   <script type="module" src="../js/AdminMenu/MenuContentsLogics/ExitContentLogic.js"></script>
 </html>

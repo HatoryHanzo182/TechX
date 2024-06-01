@@ -66,7 +66,7 @@ const OrdersPage = () =>
 
   const Checkout = async () => 
   {    
-    if (user_name.trim() !== "" && user_email.trim() !== "" && user_phone.length === 17 && user_city.trim() !== "" && user_del_address.trim() !== "") 
+    if (user_name.trim() !== "" && user_phone.length === 17 && user_city.trim() !== "" && user_del_address.trim() !== "") 
     {
       const order_data = 
       {
