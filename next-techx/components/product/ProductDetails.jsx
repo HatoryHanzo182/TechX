@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { motion } from "framer-motion";
+import { delay, motion } from "framer-motion";
 import { PullOutOfSession } from "@/lib/session";
 import { get } from "mongoose";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
@@ -28,6 +28,7 @@ const ProductDetails = () => {
   const [grade, SetGrade] = useState(0);
   const [liked, setLiked] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -188,14 +189,19 @@ const ProductDetails = () => {
       model: product_data.model,
       price: product_data.price,
     };
-    const array_coast = JSON.parse(localStorage.getItem("Cart")) || [];
 
-    array_coast.push(p_in_cart);
-    localStorage.setItem("Cart", JSON.stringify(array_coast));
+    setIsLoading(true);
 
-    //    выведете сообщение пользователю о том что товар добавлен в корзину или анимацию, что бы было понятно что добавлено в корзину.
-    setShowAlert(true);
-    setMessage("Product added to cart");
+    setTimeout(() => {
+      setIsLoading(false);
+      const array_coast = JSON.parse(localStorage.getItem("Cart")) || [];
+
+      array_coast.push(p_in_cart);
+      localStorage.setItem("Cart", JSON.stringify(array_coast));
+
+      setShowAlert(true);
+      setMessage("Product added to cart");
+    }, 5000);
   };
 
   const handleSendReview = async (e) => {
@@ -272,7 +278,7 @@ const ProductDetails = () => {
 
   return (
     <main>
-      <div className="fixed right-0 top-2 mr-4 mt-4 w-[300px]">
+      <div className="fixed z-50 right-0 top-2 mr-4 mt-4 w-[300px]">
         {showAlert && message && (
           <Alert>
             <SketchLogoIcon />
@@ -282,10 +288,18 @@ const ProductDetails = () => {
         )}
       </div>
       <section className="py-20 font-poppins   ">
-        {/* <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
-              <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                style={{ clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",}}/>
-            </div> */}
+        <div
+          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+          aria-hidden="true"
+        >
+          <div
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            style={{
+              clipPath:
+                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+            }}
+          />
+        </div>
         <div className=" flex flex-row px-6 py-4 gap-6 mb-1 font-bold ml-10">
           <a className="hover:text-gray-400 cursor-pointer " href="#details">
             Details
@@ -514,59 +528,87 @@ const ProductDetails = () => {
                     className="w-full flex items-center justify-between px-4 py-2 font-bold text-white bg-black border lg:w-96 "
                     onClick={() => handleAddToCart()}
                   >
-                    <span>Add to cart</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="ionicon ml-2"
-                      viewBox="0 0 512 512"
-                      width={20}
-                      height={20}
-                    >
-                      <circle
-                        cx="176"
-                        cy="416"
-                        r="16"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="32"
-                      />
-                      <circle
-                        cx="400"
-                        cy="416"
-                        r="16"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="32"
-                      />
-                      <path
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="32"
-                        d="M48 80h64l48 272h256"
-                      />
-                      <path
-                        d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="32"
-                      />
-                    </svg>
+                    {isLoading ? (
+                      <>
+                        <span>Proccessing....</span>
+                        <svg
+                          className="animate-spin-slow h-5 w-5 ml-2"
+                          viewBox="0 0 24 24"
+                        >
+                          {/* Simple spinner SVG */}
+                          <circle
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                            fill="none"
+                            strokeDasharray="80"
+                            strokeDashoffset="60"
+                          />
+                        </svg>
+                      </>
+                    ) : (
+                      <>
+                        <span>Add to cart</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="ionicon ml-2"
+                          viewBox="0 0 512 512"
+                          width={20}
+                          height={20}
+                        >
+                          <circle
+                            cx="176"
+                            cy="416"
+                            r="16"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="32"
+                          />
+                          <circle
+                            cx="400"
+                            cy="416"
+                            r="16"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="32"
+                          />
+                          <path
+                            fill="none"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="32"
+                            d="M48 80h64l48 272h256"
+                          />
+                          <path
+                            d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="32"
+                          />
+                        </svg>
+                      </>
+                    )}
                   </Button>
                 </div>
-                <div className="flex justify-between mt-6 ">
+                {/* <div className="flex justify-between mt-6 ">
                   <span className="mr-2 text-base font-bold text-gray-700 dark:text-gray-400">
                     Add to favorites
-                  </span>
+                  </span> */}
 
-                  {!show_logged_content ? null : (
+                {!show_logged_content ? null : (
+                  <div className="flex justify-between mt-6 ">
+                    <span className="mr-2 text-base font-bold text-gray-700 dark:text-gray-400">
+                      Add to favorites
+                    </span>
                     <span className="mr-6" onClick={toggleLike}>
                       {liked ? (
                         <AiFillHeart size="22" />
@@ -574,8 +616,8 @@ const ProductDetails = () => {
                         <AiOutlineHeart size="22" />
                       )}
                     </span>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

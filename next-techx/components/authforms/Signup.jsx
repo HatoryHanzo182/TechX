@@ -107,7 +107,7 @@ const Signup = () => {
 
       if (res.ok) window.location.href = "/signin";
       else
-        <div className="fixed right-0 top-32 mr-4 mt-4 w-[250px]">
+        <div className="fixed right-0 z-50 top-32 mr-4 mt-4 w-[250px]">
           {showAlert && error && (
             <Alert>
               <ExclamationTriangleIcon className="h-4 w-4" />
