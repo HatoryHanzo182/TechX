@@ -256,11 +256,11 @@ ipcMain.handle('DeleteProductFromLocalStorage', (event, data) =>  // Processes a
 });
 //#endregion
 
-app.on('window-all-closed', () => 
-{
-  if (process.platform !== 'darwin')
-    app.quit();
-});
+// app.on('window-all-closed', () => 
+// {
+//   if (process.platform !== 'darwin')
+//     app.quit();
+// });
 
 app.on('activate', () => 
 {
