@@ -2,67 +2,23 @@
   {
     "brand": "Apple",
     "category": "iPhone",
-    "model": "3GS",
-    "processor": "600 MHz Cortex-A8",
-    "memory": "12",
-    "displaySize": "3.5 inches",
-    "battery": "1220",
-    "os": "iOS 6.1.6",
-    "camera": "3",
+    "model": "Sempai 3G XXXX",
+    "processor": "IntelSSS",
+    "memory": "1024",
+    "displaySize": "1092x1080",
+    "battery": "12000",
+    "os": "Hentai_OS 19.01",
+    "camera": "400",
     "color": "Black",
-    "price": "199",
-    "descont_price": "190",
-    "description": "The iPhone 3GS is a smartphone that was designed and marketed by Apple Inc. It is the third generation iPhone, succeeding the iPhone 3G.",
+    "price": "1999",
+    "descont_price": "",
+    "description": "Anime Phone",
     "images": [
-      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\apple-iphone-3gs-16gb-black-1.1000x1000.jpg",
-      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\a372690cd305443a94ff242db35b7698.jpeg",
-      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\apple-iphone-3gs-16gb-black-5.1000x.jpg"
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\2unv.gif",
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\FUxe.gif",
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\cp.gif"
     ],
     "incarousel": true,
-    "status": "active"
-  },
-  {
-    "brand": "Sony",
-    "category": "Console",
-    "model": "PlayStation 2",
-    "processor": "Emotion Engine",
-    "CPU": "294.912 MHz",
-    "GPU": "Graphics Synthesizer",
-    "memory": "32",
-    "RAM": "32",
-    "os": "PlayStation 2 System Software",
-    "color": "Black",
-    "price": "200",
-    "descont_price": "199",
-    "description": "The PlayStation 2 (PS2) is a home video game console developed and marketed by Sony Computer Entertainment. It was first released in Japan on March 4, 2000, followed by North America on October 26, 2000, and Europe and Australia on November 24, 2000. The successor to the original PlayStation, as well as the second installment in the PlayStation console line-up, it competed with Sega's Dreamcast, Microsoft's Xbox, and Nintendo's GameCube during its generation.",
-    "images": [
-      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\SONY-PLAYSTATION-2-SLIM-2-GRY-PLAY-GWARANCJA.jpg"
-    ],
-    "incarousel": false,
-    "status": "active"
-  },
-  {
-    "brand": "Apple",
-    "category": "iPhone",
-    "model": "A2",
-    "processor": "krytoi",
-    "memory": "11",
-    "displaySize": "1232x1213",
-    "battery": "123123",
-    "os": "31",
-    "camera": "11",
-    "color": "black",
-    "price": "11111",
-    "descont_price": "11",
-    "description": "123123",
-    "images": [
-      "/Users/lour/Clone/TechX/TechX-compass/src/CompassLocalStorage/ProductsImg/test_send_image.jpeg",
-      "/Users/lour/Clone/TechX/TechX-compass/src/CompassLocalStorage/ProductsImg/orig.webp",
-      "/Users/lour/Clone/TechX/TechX-compass/src/CompassLocalStorage/ProductsImg/Giga Chad GIF - Giga Chad - Discover & Share GIFs.gif",
-      "/Users/lour/Clone/TechX/TechX-compass/src/CompassLocalStorage/ProductsImg/Computer Work GIF - Computer Work Online - Discover & Share GIFs.gif",
-      "/Users/lour/Clone/TechX/TechX-compass/src/CompassLocalStorage/ProductsImg/_ (1).jpeg"
-    ],
-    "incarousel": false,
     "status": "active"
   }
 ]

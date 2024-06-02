@@ -187,8 +187,8 @@
             </svg>
           </label>
         </section>
-        <!-- #region [Content iphone data.] -->
-        <div id="id-API-product-window" style="display: flex;">
+        <!-- #region [Modal window API.] -->
+        <div id="id-API-product-window" style="display: none;">
           <div class="exit-content">
             <div class="confirmation-card">
               <ion-icon name="earth-outline" class="exit-icon"></ion-icon>
@@ -740,6 +740,19 @@
       <!-- #endregion -->
       <!-- #region [Product menege content]-->
       <div id="id-manage-product-content" style="display: none">
+        <div id="id-manage-delete-product" style="display: none">
+          <div class="exit-content">
+            <div class="confirmation-card">
+              <ion-icon name="trash-outline" class="exit-icon"></ion-icon>
+              <h2>Delete this product??</h2>
+              <p>Do you definitely want to delete the product permanently??</p>
+              <div class="button-container">
+                <button id="id-menege-cancel" class="exit-button">Cancel</button>
+                <button id="id-menege-delete" class="cancel-button">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="table-container">
           <div class="table-controls">
             <button class="button-step-in-product-operations-menu" id="id-back-to-product-menu8">
@@ -759,6 +772,7 @@
             <thead>
               <tr>
                 <th>Image</th>
+                <th>Category</th>
                 <th>Brand</th>
                 <th>Model</th>
                 <th>Price</th>

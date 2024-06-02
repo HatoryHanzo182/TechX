@@ -746,4 +746,14 @@ table tbody tr:nth-child(even) {
 .status-buttons button:hover {
   background-color: #f2f2f2;
 }
+
+.tresh-meneger-product {
+  margin-left: 30px;
+  font-size: 20px;
+}
+
+.tresh-meneger-product:hover {
+  color: rgb(185, 6, 6);
+  cursor: pointer;
+}
 /* #endregion */

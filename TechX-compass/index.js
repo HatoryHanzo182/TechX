@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, ipcMain} = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, Tray} = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -24,6 +24,7 @@ const fs = require('fs');
 //
 
 let _app_window;  // Main window of the admin panel.
+let _tray;  // Tray context menu.
 
 function CreateMainWindow() 
 {
@@ -48,14 +49,50 @@ function CreateMainWindow()
     _app_window.webContents.openDevTools();   // <-----  DevTools.
 }
 
+//#region [Context menu sector]
+function CreateTray()
+{
+    _tray = new Tray(path.join(__dirname, 'src', 'img', 'icon.png'));
+  
+    const context_menu = Menu.buildFromTemplate([
+    {
+      label: 'Open',
+      click: () => { _app_window.show(); }
+    },
+    {
+      label: 'Close',
+      click: () =>
+      { 
+        app.quit();
+        _tray.destroy(); 
+      }
+    }
+    ]);
+
+    _tray.setToolTip('TechX-compass');
+    _tray.setContextMenu(context_menu);
+    _tray.on('click', () => { _app_window.show(); });
+    _app_window.on('close', (event) => 
+    {
+      if(!app.isQuitting)
+      {
+        event.preventDefault();
+        _app_window.hide();
+      }
+    })
+}
+//#endregion
+
 app.whenReady().then(() =>  // An event handler that executes when 
 {                          // the application is ready for use.
     CreateMainWindow();
+    CreateTray();
     
     ipcMain.on('ShowAdminPanel', () => { _app_window.loadFile(path.join(__dirname, 'src', 'components', 'AdminMenu.html')); });
     ipcMain.on('ShowAuthorization', () => { _app_window.loadFile(path.join(__dirname, 'src', 'components', 'Authorization.html')); });
 });
 
+//#region [Requests for working with goods.]
 ipcMain.handle('AddNewProductToLocalStorage', (event, data) =>  // Handler for adding data to local storage
 {       // ⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔⛔
        // THE "FS" MODULE IS PART OF THE BUILT-IN NODE.JS LIBRARY AND IS DESIGNED TO WORK WITH THE FILE SYSTEM ON THE SERVER. 
@@ -82,8 +119,10 @@ ipcMain.handle('AddNewProductToLocalStorage', (event, data) =>  // Handler for a
     return { success: true, message: "Data saved successfully" };
 });
 
-ipcMain.handle('AddNewProductImgToLocalStorage', async (event, data) => 
-{
+ipcMain.handle('AddNewProductImgToLocalStorage', async (event, data) =>  // Add new product images to local storage. 
+{           // It creates a folder for the product images, copies the images to that folder, updates the corresponding 
+           // JSON file with product information including the new image paths.
+          // If something goes wrong while reading or writing files, it catches and prints an error.
     const product_img_folder_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'ProductsImg');
 
     if (!fs.existsSync(product_img_folder_path))
@@ -121,8 +160,9 @@ ipcMain.handle('AddNewProductImgToLocalStorage', async (event, data) =>
     catch (error) { console.error('Error writing JSON file:', error); }
 });
 
-ipcMain.handle('GetProductsFromLocalStorage', (event) => 
-{
+ipcMain.handle('GetProductsFromLocalStorage', (event) =>  // Processes a request to retrieve products from local storage. 
+{               // It reads a JSON file containing product information from the specified path, then parses it and 
+               // returns an array of products. If an error occurs while reading the file, the code displays an error message.
     const file_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'product_assembly.json');
     let products = [];
 
@@ -137,8 +177,12 @@ ipcMain.handle('GetProductsFromLocalStorage', (event) =>
     return products;
 });
   
-ipcMain.handle('UpdateProductStatusInLocalStorage', async (event, new_status) => 
-{
+ipcMain.handle('UpdateProductStatusInLocalStorage', async (event, new_status) =>  // Reads a JSON file containing product information
+{                                           // from the specified path, then finds the index of the product with the given model. 
+                                           // If the product is found, it updates its status according to the new status passed in and 
+                                          // writes the changes back to the file. When the operation completes, it returns 
+                                         // an object with information about the success of the operation and the updated product,
+                                        // or an error message if problems occur.
     const file_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'product_assembly.json');
 
     try 
@@ -165,4 +209,61 @@ ipcMain.handle('UpdateProductStatusInLocalStorage', async (event, new_status) =>
         console.error('Error updating product status:', error);
         return { success: false, message: "Error updating product status" };
     }
+});
+
+ipcMain.handle('DeleteProductFromLocalStorage', (event, data) =>  // Processes a request to remove a product from local storage. 
+{                                       // It first reads a JSON file containing product information from the specified path,
+                                       // then finds the product based on the given brand and model. If the product is not found,
+                                      // it returns an error message. Otherwise, it removes the product from the data,
+                                     // overwrites the JSON file without the removed product, and removes the corresponding product images
+                                    // from the images folder. When the operation completes, it returns an object indicating 
+                                   // whether the operation was successful or an error message if problems occurred.
+    const { brand, model } = data;
+    const file_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'product_assembly.json');
+    const product_img_folder_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'ProductsImg');
+    let current_data = [];
+
+    try 
+    {
+        current_data = JSON.parse(fs.readFileSync(file_path));
+    } 
+    catch (error) { return { success: false, message: "Error reading file" }; }
+
+    const product = current_data.find(product => product.brand === brand && product.model === model);
+
+    if (!product)
+        return { success: false, message: "Product not found" };
+
+    const image_paths = product.images;
+    const new_data = current_data.filter(product => product.brand !== brand || product.model !== model);
+
+    try 
+    {
+        fs.writeFileSync(file_path, JSON.stringify(new_data, null, 2));
+    } 
+    catch (error) { return { success: false, message: "Error writing to file" }; }
+
+    for (const img_path of image_paths) 
+    {
+        try 
+        {
+            fs.unlinkSync(img_path);
+        } 
+        catch (error) { console.error(`Error deleting image ${img_path}:`, error); }
+    }
+
+    return { success: true, message: "Product and images deleted successfully" };
+});
+//#endregion
+
+app.on('window-all-closed', () => 
+{
+  if (process.platform !== 'darwin')
+    app.quit();
+});
+
+app.on('activate', () => 
+{
+  if (BrowserWindow.getAllWindows().length === 0)
+    createWindow();
 });

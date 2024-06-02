@@ -7,7 +7,6 @@ import { WatchDataModel } from "../ProductModels/WatchDataModel.js";
 import { ConsoleDataModel } from "../ProductModels/ConsoleDataModel.js";
 
 //#region [Add product sector.]
-
 //#region [Navigation sector.]
 const create_products_content = document.getElementById("id-create-product-content");
 const create_products_menu = document.getElementById("id-create-product-menu");
@@ -728,7 +727,6 @@ function CloseApiWindow()
 document.getElementById("id-cancel-API").addEventListener("click", CloseApiWindow);
 document.getElementById("id-API-OK").addEventListener("click", OkApi);
 //#endregion 
-
 //#endregion
 
 //#region [Manage sector.]
@@ -761,6 +759,12 @@ document.addEventListener('DOMContentLoaded', async () =>
   document.getElementById('status-filter').addEventListener('change', DisplayTable);
   document.getElementById('prev').addEventListener('click', () => ChangePage(-1));
   document.getElementById('next').addEventListener('click', () => ChangePage(1));
+
+  document.querySelector('#product-table tbody').addEventListener('click', function(event) 
+  {
+    if (event.target.classList.contains('tresh-meneger-product'))
+      OnTrashIconClick.call(event.target);
+  });
 });
 
 async function FetchProducts() 
@@ -768,7 +772,6 @@ async function FetchProducts()
   try 
   {
     const products = await window.electron.invoke('GetProductsFromLocalStorage');
-    
     UpdateProductsArray(products);
   } 
   catch (error) { console.error('Error fetching products: ', error); }
@@ -776,9 +779,9 @@ async function FetchProducts()
 
 function UpdateProductsArray(products) 
 {
-  _products = products.map(product => (
-  {
+  _products = products.map(product => ({
     image: product.images[0],
+    category: product.category,
     brand: product.brand,
     model: product.model,
     price: `${product.price}$`,
@@ -802,19 +805,19 @@ function DisplayTable()
   if (paginated_products.length === 0) 
   {
     no_items_message.style.display = 'block';
-    
     UpdatePaginationInfo(0);
   } 
   else 
   {
     no_items_message.style.display = 'none';
     
-    paginated_products.forEach(product => 
+    paginated_products.forEach((product, index) => 
     {
       const row = document.createElement('tr');
 
       row.innerHTML = `
         <td><img src="${product.image}" alt="${product.model}" style="width: 50px; height: 50px;"></td>
+        <td>${product.category}</td>
         <td>${product.brand}</td>
         <td>${product.model}</td>
         <td>${product.price}</td>
@@ -824,6 +827,7 @@ function DisplayTable()
             <option value="active">Activate</option>
             <option value="no active">Deactivate</option>
           </select>
+          <ion-icon name="trash-outline" class="tresh-meneger-product"></ion-icon>
         </td>
       `;
 
@@ -833,31 +837,96 @@ function DisplayTable()
     UpdatePaginationInfo(filtered_products.length);
   }
 
-  document.querySelectorAll('.status-dropdown').forEach(dropdown => 
-  {
-    dropdown.removeEventListener('change', onStatusChange);
-  });
-
-  function onStatusChange() 
-  {
-    const selected_model = this.closest('tr').querySelectorAll('td')[2].textContent;
-    const new_status = this.value;
-    const product_index = _products.findIndex(product => product.model === selected_model);
-
-    if (product_index !== -1) 
-      {
-      _products[product_index].status = new_status;
-
-      UpdateProductStatusInLocalStorage(selected_model, new_status);
-    }
-  }
-
   document.querySelectorAll('.status-dropdown').forEach((dropdown, index) => 
   {
-    dropdown.addEventListener('change', onStatusChange);
-
     dropdown.value = _products[start + index].status;
+
+    dropdown.addEventListener('change', OnStatusChange);
   });
+}
+
+async function OnTrashIconClick() 
+{
+  console.log("OnTrashIconClick");
+
+  const row = this.closest('tr');
+  const selected_brand = row.querySelectorAll('td')[2].textContent;
+  const selected_model = row.querySelectorAll('td')[3].textContent;
+  const product_index = _products.findIndex(product => product.model === selected_model && product.brand === selected_brand);
+
+  if (product_index !== -1) 
+  {
+    const product = _products[product_index];
+    
+    ConfirmDeletingProductFromTable().then(async confirmation => 
+    {
+      if (confirmation) 
+      {
+        const response = await window.electron.invoke('DeleteProductFromLocalStorage', 
+        { 
+          brand: product.brand, 
+          model: product.model, 
+        });
+    
+        if (response.success) 
+        {
+          if (product.status === "active")
+          {
+            const del_product = { category: product.category, model: product.model };
+            await RemoveProductFromDB(del_product);
+          }
+    
+          ShowSuccessMessage("The product has been removed");
+          await FetchProducts();
+          DisplayTable();
+        } 
+        else 
+        {
+          ShowErrorMessage(response.message);
+          console.error('Error deleting product:', response.message);
+        }
+      } 
+    });
+  }
+}
+
+function ConfirmDeletingProductFromTable() 
+{
+  const modal_window = document.getElementById('id-manage-delete-product');
+  modal_window.style.display = "flex";
+
+  return new Promise((resolve, reject) => 
+  {
+    const delete_button = document.getElementById('id-menege-delete');
+    const cancel_button = document.getElementById('id-menege-cancel');
+
+    delete_button.addEventListener('click', () => 
+    {
+      modal_window.style.display = "none";
+      
+      resolve(true);
+    });
+
+    cancel_button.addEventListener('click', () => 
+    {
+      modal_window.style.display = "none";
+      
+      resolve(false); 
+    });
+  });
+}
+
+function OnStatusChange() 
+{
+  const selected_model = this.closest('tr').querySelectorAll('td')[3].textContent;
+  const new_status = this.value;
+  const product_index = _products.findIndex(product => product.model === selected_model);
+
+  if (product_index !== -1) 
+  {
+    _products[product_index].status = new_status;
+    UpdateProductStatusInLocalStorage(selected_model, new_status);
+  }
 }
 
 async function UpdateProductStatusInLocalStorage(model, new_status) 
@@ -869,7 +938,7 @@ async function UpdateProductStatusInLocalStorage(model, new_status)
 
     if (u.success) 
     {
-      if(new_status === 'active')
+      if (new_status === 'active')
         await AddProduct(u.product);
       else
         await RemoveProductFromDB(u.product);
@@ -901,7 +970,6 @@ function UpdatePaginationInfo(total_rows)
 function ChangePage(direction) 
 {
   current_page += direction;
-
   DisplayTable();
 }
 
@@ -920,7 +988,7 @@ async function AddProduct(product)
 
       form_data.append('image', file);
 
-      const upload_response = await fetch("http://localhost:3001/AddNewProductImg", 
+      const upload_response = await fetch("https://techx-server.tech:443/AddNewProductImg", 
       {
         method: 'POST',
         body: form_data,
@@ -931,28 +999,30 @@ async function AddProduct(product)
       else
       {
         const data = await upload_response.json();
-
+        
         img_path_genirated_server.push(...data.file_names);
       }
     } 
     catch (error) { console.error('Error uploading image:', error); }
   }
   
-  const new_produc_object = {product, server_img: img_path_genirated_server};
-  const res_user_exists = await fetch("http://localhost:3001/AddProduct",
+  const new_produc_object = { product, server_img: img_path_genirated_server };
+  const res_user_exists = await fetch("https://techx-server.tech:443/AddProduct",
   {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(new_produc_object)
   });
   
-  if(res_user_exists.ok)
-    console.log(res_user_exists.message);
+  if (res_user_exists.ok)
+    ShowSuccessMessage("Product added to the site");
+  else
+    ShowErrorMessage(res_user_exists.message);
 }
 
 function RemoveProductFromDB(product)
 {
-  fetch('http://localhost:3001/RemoveProductFromDB', 
+  fetch('https://techx-server.tech:443/RemoveProductFromDB', 
   {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -961,7 +1031,9 @@ function RemoveProductFromDB(product)
   .then(response => response.json())
   .then(data => 
   {
-    if (!data.success)
+    if (data.success)
+      ShowSuccessMessage(`${data.message}`);
+    else
       ShowErrorMessage(`${data.message}`);
   })
   .catch(error => { console.error('Error:', error); });

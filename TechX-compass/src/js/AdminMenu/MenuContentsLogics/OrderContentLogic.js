@@ -7,7 +7,7 @@ let orders = [];
 
 function LoadAllOrders() 
 {
-    fetch('https://squid-app-d6fho.ondigitalocean.app:443/GetOrder', 
+    fetch('https://techx-server.tech:443/GetOrder', 
     {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
@@ -157,7 +157,7 @@ function HiddenNotOrderMessage()
 //#region [Change status sector.]
 function ChangeStatusOrder(order_id, new_status) 
 {
-    fetch('https://squid-app-d6fho.ondigitalocean.app:443/ChangeStatusOrder', 
+    fetch('https://techx-server.tech:443/ChangeStatusOrder', 
     {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
