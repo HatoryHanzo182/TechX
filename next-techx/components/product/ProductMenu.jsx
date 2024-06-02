@@ -47,7 +47,7 @@ function ProductSelection() {
       setProducts([]);
       try {
         const formatted_data = await fetch(
-          `https://squid-app-d6fho.ondigitalocean.app:443/GetDataForListProduct/${type_p}`,
+          `https://techx-server.tech:443/GetDataForListProduct/${type_p}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -230,7 +230,7 @@ function ProductSelection() {
             >
               <div className="dark:bg-[#1d1d1d] p-4 rounded-lg  shadow-lg ">
                 <img
-                  src={`https://squid-app-d6fho.ondigitalocean.app:443/GetImage/${product.images}`}
+                  src={`https://techx-server.tech:443/GetImage/${product.images}`}
                   alt={`${product.model}`}
                   className="mb-3"
                 />

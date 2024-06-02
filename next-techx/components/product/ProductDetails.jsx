@@ -55,7 +55,7 @@ const ProductDetails = () => {
 
     if (!liked) {
       const formatted_data = await fetch(
-        `https://squid-app-d6fho.ondigitalocean.app:443/AddFavoriteProduct/${id_product}`,
+        `https://techx-server.tech:443/AddFavoriteProduct/${id_product}`,
         {
           method: "POST",
           headers: {
@@ -66,7 +66,7 @@ const ProductDetails = () => {
       );
     } else {
       const formatted_data = await fetch(
-        `https://squid-app-d6fho.ondigitalocean.app:443/DeleteFavoriteProduct/${id_product}`,
+        `https://techx-server.tech:443/DeleteFavoriteProduct/${id_product}`,
         {
           method: "POST",
           headers: {
@@ -112,7 +112,7 @@ const ProductDetails = () => {
     const ToGetData = async (id) => {
       try {
         const formatted_data = await fetch(
-          `https://squid-app-d6fho.ondigitalocean.app:443/ExtractData/${id}`,
+          `https://techx-server.tech:443/ExtractData/${id}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -137,7 +137,7 @@ const ProductDetails = () => {
         );
 
         const rew = await fetch(
-          `https://squid-app-d6fho.ondigitalocean.app:443/GetProductReview/${id_product}`,
+          `https://techx-server.tech:443/GetProductReview/${id_product}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -217,7 +217,7 @@ const ProductDetails = () => {
       const product_id = new URLSearchParams(window.location.search).get("id");
 
       const ServerReview = await fetch(
-        "https://squid-app-d6fho.ondigitalocean.app:443/SendProductReview",
+        "https://techx-server.tech:443/SendProductReview",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -254,7 +254,7 @@ const ProductDetails = () => {
       const product_id = new URLSearchParams(window.location.search).get("id");
 
       const ServerReview = await fetch(
-        "https://squid-app-d6fho.ondigitalocean.app:443/SendProductReview",
+        "https://techx-server.tech:443/SendProductReview",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -341,7 +341,7 @@ const ProductDetails = () => {
                   <img
                     className="object-cover w-full max-sm:w-auto lg:h-1/2"
                     src={
-                      `https://squid-app-d6fho.ondigitalocean.app:443/GetImage/${selectedImage}` ||
+                      `https://techx-server.tech:443/GetImage/${selectedImage}` ||
                       "Loading..."
                     }
                     alt=""
@@ -370,7 +370,7 @@ const ProductDetails = () => {
                       >
                         <img
                           className="object-cover w-full lg:h-32"
-                          src={`https://squid-app-d6fho.ondigitalocean.app:443/GetImage/${image}`}
+                          src={`https://techx-server.tech:443/GetImage/${image}`}
                           alt={`Product Image ${index + 1}`}
                         />
                       </a>

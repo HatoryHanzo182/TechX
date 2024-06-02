@@ -135,7 +135,7 @@ const BurgerMenu = () => {
           const items = await Promise.all(
             category.endpoints.map(async (endpoint) => {
               if(endpoint.name === "In progress") return { name: endpoint.name, products: [] }
-              const response = await fetch(`https://squid-app-d6fho.ondigitalocean.app${endpoint.endpoint}`, {
+              const response = await fetch(`https://techx-server.tech${endpoint.endpoint}`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -163,7 +163,7 @@ const BurgerMenu = () => {
   };
 
   return (
-    <div className="w-full bg-white dark:bg-black overflow-auto max-h-[463px]">
+    <div className="w-full bg-white dark:bg-black overflow-auto max-h-[600px]">
       {!activeCategory ? (
         categories.map((category) => (
           <div

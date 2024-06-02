@@ -36,7 +36,7 @@ const Signup = () => {
 
     try {
       const ResUserExists = await fetch(
-        "https://squid-app-d6fho.ondigitalocean.app:443/CheckUserExists",
+        "https://techx-server.tech:443/CheckUserExists",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ const Signup = () => {
         SetisModalConfirmMailOpen(true);
 
         const SendConf = await fetch(
-          "https://squid-app-d6fho.ondigitalocean.app:443/SendConfirmationCodeEmail", //  <<---- Отправляем код подтверждения.
+          "https://techx-server.tech:443/SendConfirmationCodeEmail", //  <<---- Отправляем код подтверждения.
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ const Signup = () => {
 
     if (conf_u === code) {
       const res = await fetch(
-        "https://squid-app-d6fho.ondigitalocean.app:443/NewUser", //  <<---- Добавим пользователя.
+        "https://techx-server.tech:443/NewUser", //  <<---- Добавим пользователя.
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

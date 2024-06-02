@@ -95,7 +95,7 @@ const Cart = () => {
                 >
                   <div>
                     <img
-                      src={`https://squid-app-d6fho.ondigitalocean.app:443/GetImage/${item.img}`}
+                      src={`https://techx-server.tech:443/GetImage/${item.img}`}
                       alt="img"
                       className="w-10"
                     />
