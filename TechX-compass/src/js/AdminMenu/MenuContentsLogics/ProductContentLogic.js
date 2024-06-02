@@ -706,14 +706,15 @@ drop_area6.addEventListener('drop', (event) =>
 //#region [Api config]
 function ShowApiWindow()
 {
-  const api_window = document.getElementById("id-API-product-window");
-
-  api_window.style.display = 'none';
+  console.log()
 }
 
 function OkApi()
 {
-
+  const api_window = document.getElementById("id-API-product-window");
+  api_window.style.display = 'none';
+  
+  ShowApiWindow();
 }
 
 function CloseApiWindow()
@@ -915,7 +916,7 @@ async function AddProduct(product)
 
       form_data.append('image', file);
 
-      const upload_response = await fetch("https://squid-app-d6fho.ondigitalocean.app:443/AddNewProductImg", 
+      const upload_response = await fetch("https://techx-server.tech:443/AddNewProductImg", 
       {
         method: 'POST',
         body: form_data,
@@ -935,7 +936,7 @@ async function AddProduct(product)
   
   const new_produc_object = {product, server_img: img_path_genirated_server};
   
-  const res_user_exists = await fetch("https://squid-app-d6fho.ondigitalocean.app:443/AddProduct",
+  const res_user_exists = await fetch("https://techx-server.tech:443/AddProduct",
   {
     method: "POST",
     headers: { "Content-Type": "application/json" },

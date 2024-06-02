@@ -40,5 +40,29 @@
     ],
     "incarousel": false,
     "status": "active"
+  },
+  {
+    "brand": "Apple",
+    "category": "iPhone",
+    "model": "A2",
+    "processor": "krytoi",
+    "memory": "11",
+    "displaySize": "1232x1213",
+    "battery": "123123",
+    "os": "31",
+    "camera": "11",
+    "color": "black",
+    "price": "11111",
+    "descont_price": "11",
+    "description": "123123",
+    "images": [
+      "/Users/lour/Clone/TechX/TechX-compass/src/CompassLocalStorage/ProductsImg/test_send_image.jpeg",
+      "/Users/lour/Clone/TechX/TechX-compass/src/CompassLocalStorage/ProductsImg/orig.webp",
+      "/Users/lour/Clone/TechX/TechX-compass/src/CompassLocalStorage/ProductsImg/Giga Chad GIF - Giga Chad - Discover & Share GIFs.gif",
+      "/Users/lour/Clone/TechX/TechX-compass/src/CompassLocalStorage/ProductsImg/Computer Work GIF - Computer Work Online - Discover & Share GIFs.gif",
+      "/Users/lour/Clone/TechX/TechX-compass/src/CompassLocalStorage/ProductsImg/_ (1).jpeg"
+    ],
+    "incarousel": false,
+    "status": "active"
   }
 ]
