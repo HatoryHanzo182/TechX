@@ -24,6 +24,16 @@ function LoadAllReviews()
 
             CollectReviewCard(review_data)
             HiddenNoReviews();
+
+            let context_review = 0;
+
+            review_data.forEach(new_review => 
+            {
+                if(!new_review.viewed_admin)
+                    context_review++;
+            });
+
+            window.electron.send('UpdateReviewCountForContextMenu', context_review);
         }
         else if(review_data.length == 0)
             ShowNoReviews();
@@ -116,6 +126,8 @@ function AdminСhecked(id)
         {
             if (!response.ok)
                 throw new Error('Network response was not ok');
+            else
+                previous_number_reviews--;
         });
     } 
     catch (error) { console.error(error); }

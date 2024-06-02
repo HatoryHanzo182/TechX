@@ -50,7 +50,9 @@ function CreateMainWindow()
 }
 
 //#region [Context menu sector]
-function CreateTray()
+let review_count = 0; 
+
+function CreateTray() 
 {
     _tray = new Tray(path.join(__dirname, 'src', 'img', 'icon.png'));
   
@@ -60,14 +62,25 @@ function CreateTray()
       click: () => { _app_window.show(); }
     },
     {
+        label: review_count === 0 ? 'Reviews' : `(${review_count}) Reviews`,
+        click: () => 
+        { 
+            review_count = 0;
+
+            UpdateContextMenu();
+            
+            _app_window.show();
+            _app_window.webContents.send('ShowReview');
+        }
+    },
+    {
       label: 'Close',
       click: () =>
       { 
         app.quit();
         _tray.destroy(); 
       }
-    }
-    ]);
+    }]);
 
     _tray.setToolTip('TechX-compass');
     _tray.setContextMenu(context_menu);
@@ -79,7 +92,39 @@ function CreateTray()
         event.preventDefault();
         _app_window.hide();
       }
-    })
+    });
+}
+
+function UpdateContextMenu() 
+{
+    const context_menu = Menu.buildFromTemplate([
+    {
+      label: 'Open',
+      click: () => { _app_window.show(); }
+    },
+    {
+        label: review_count === 0 ? 'Reviews' : `(${review_count}) Reviews`,
+        click: () => 
+        { 
+            review_count = 0;
+
+            UpdateContextMenu();
+            
+            _app_window.show();
+            _app_window.webContents.send('ShowReview');
+        }
+    },
+    {
+      label: 'Close',
+      click: () =>
+      { 
+        app.quit();
+        _tray.destroy(); 
+      }
+    }
+    ]);
+
+    _tray.setContextMenu(context_menu);
 }
 //#endregion
 
@@ -91,6 +136,16 @@ app.whenReady().then(() =>  // An event handler that executes when
     ipcMain.on('ShowAdminPanel', () => { _app_window.loadFile(path.join(__dirname, 'src', 'components', 'AdminMenu.html')); });
     ipcMain.on('ShowAuthorization', () => { _app_window.loadFile(path.join(__dirname, 'src', 'components', 'Authorization.html')); });
 });
+
+//#region [Requests for context menu.]
+ipcMain.on('UpdateReviewCountForContextMenu', (event, new_review_count) => 
+{
+    review_count = new_review_count;
+
+    UpdateContextMenu();
+});
+//#endregion
+
 
 //#region [Requests for working with goods.]
 ipcMain.handle('AddNewProductToLocalStorage', (event, data) =>  // Handler for adding data to local storage
@@ -255,12 +310,6 @@ ipcMain.handle('DeleteProductFromLocalStorage', (event, data) =>  // Processes a
     return { success: true, message: "Product and images deleted successfully" };
 });
 //#endregion
-
-// app.on('window-all-closed', () => 
-// {
-//   if (process.platform !== 'darwin')
-//     app.quit();
-// });
 
 app.on('activate', () => 
 {

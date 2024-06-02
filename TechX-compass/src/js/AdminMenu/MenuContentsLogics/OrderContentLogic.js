@@ -181,6 +181,7 @@ function ChangeStatusOrder(order_id, new_status)
 
 
 //#endregion
+
 let interval_id;
 
 document.addEventListener("DOMContentLoaded", function() 
