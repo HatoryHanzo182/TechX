@@ -920,11 +920,7 @@ async function AddProduct(product)
 
       form_data.append('image', file);
 
-<<<<<<< HEAD
-      const upload_response = await fetch("https://techx-server.tech:443/AddNewProductImg", 
-=======
       const upload_response = await fetch("http://localhost:3001/AddNewProductImg", 
->>>>>>> 72d64d4 (new vesion + hotfix 👽)
       {
         method: 'POST',
         body: form_data,
@@ -943,12 +939,7 @@ async function AddProduct(product)
   }
   
   const new_produc_object = {product, server_img: img_path_genirated_server};
-  
-<<<<<<< HEAD
-  const res_user_exists = await fetch("https://techx-server.tech:443/AddProduct",
-=======
   const res_user_exists = await fetch("http://localhost:3001/AddProduct",
->>>>>>> 72d64d4 (new vesion + hotfix 👽)
   {
     method: "POST",
     headers: { "Content-Type": "application/json" },
