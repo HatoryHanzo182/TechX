@@ -108,12 +108,18 @@ function FilterAndSortOrders()
         order.date.toLowerCase().includes(search_query)
     );
 
-    filtered_orders = filterOrders(filtered_orders, sort_order, status_filter);
+    filtered_orders = FilterOrders(filtered_orders, sort_order, status_filter);
 
-    UpdateOrderTable(filtered_orders);
+    if (filtered_orders.length === 0) 
+        ShowNotOrderMessage();
+    else 
+    {
+        UpdateOrderTable(filtered_orders);
+        HiddenNotOrderMessage();
+    }
 }
 
-function filterOrders(orders, sort_order, status_filter) 
+function FilterOrders(orders, sort_order, status_filter) 
 {
     let filtered_orders = orders.slice();
 
@@ -125,6 +131,26 @@ function filterOrders(orders, sort_order, status_filter)
         filtered_orders = filtered_orders.filter(order => order.status.toLowerCase() === status_filter);
 
     return filtered_orders;
+}
+//#endregion
+
+//#region [Not found message sector.]
+function ShowNotOrderMessage()
+{
+    const card_not_found = document.getElementById("no-items-order-message");
+    const order_table = document.getElementById("id-order-table");
+
+    order_table.style.display = "none";
+    card_not_found.style.display = "flex";
+}
+
+function HiddenNotOrderMessage()
+{
+    const card_not_found = document.getElementById("no-items-order-message");
+    const order_table = document.getElementById("id-order-table");
+
+    order_table.style.display = "flex";
+    card_not_found.style.display = "none";
 }
 //#endregion
 

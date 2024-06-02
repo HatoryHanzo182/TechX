@@ -6,11 +6,12 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 10%;
+    overflow: hidden;
 }
 
 .orders-content > .table-container {
-    margin-left: 15%;
-    width: 75%;
+    margin-left: -2%;
+    width: 113%;
 }
 
 /* Table wrapper with horizontal scroll */
@@ -76,4 +77,9 @@
 .status.cancelled {
     background-color: #f44336;
     color: white;
+}
+
+/* New style for the status dropdown */
+.status-dropdown {
+    width: 150px; /* Adjust this value as needed */
 }

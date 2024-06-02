@@ -1,4 +1,4 @@
-import { products_content, DisableContent, ShowErrorMessage }  from "../AdminMenu.js";
+import { products_content, DisableContent, ShowErrorMessage, ShowSuccessMessage }  from "../AdminMenu.js";
 import { IphoneDataModel } from "../ProductModels/IphoneDataModel.js";
 import { MackbookDataModel } from "../ProductModels/MacbookDataModel.js";
 import { IpadDataModel } from "../ProductModels/IpadDataModel.js";
@@ -7,6 +7,7 @@ import { WatchDataModel } from "../ProductModels/WatchDataModel.js";
 import { ConsoleDataModel } from "../ProductModels/ConsoleDataModel.js";
 
 //#region [Add product sector.]
+
 //#region [Navigation sector.]
 const create_products_content = document.getElementById("id-create-product-content");
 const create_products_menu = document.getElementById("id-create-product-menu");
@@ -870,6 +871,8 @@ async function UpdateProductStatusInLocalStorage(model, new_status)
     {
       if(new_status === 'active')
         await AddProduct(u.product);
+      else
+        await RemoveProductFromDB(u.product);
 
       await FetchProducts();
       DisplayTable();
@@ -898,6 +901,7 @@ function UpdatePaginationInfo(total_rows)
 function ChangePage(direction) 
 {
   current_page += direction;
+
   DisplayTable();
 }
 
@@ -916,7 +920,11 @@ async function AddProduct(product)
 
       form_data.append('image', file);
 
+<<<<<<< HEAD
       const upload_response = await fetch("https://techx-server.tech:443/AddNewProductImg", 
+=======
+      const upload_response = await fetch("http://localhost:3001/AddNewProductImg", 
+>>>>>>> 72d64d4 (new vesion + hotfix 👽)
       {
         method: 'POST',
         body: form_data,
@@ -936,7 +944,11 @@ async function AddProduct(product)
   
   const new_produc_object = {product, server_img: img_path_genirated_server};
   
+<<<<<<< HEAD
   const res_user_exists = await fetch("https://techx-server.tech:443/AddProduct",
+=======
+  const res_user_exists = await fetch("http://localhost:3001/AddProduct",
+>>>>>>> 72d64d4 (new vesion + hotfix 👽)
   {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -945,6 +957,23 @@ async function AddProduct(product)
   
   if(res_user_exists.ok)
     console.log(res_user_exists.message);
+}
+
+function RemoveProductFromDB(product)
+{
+  fetch('http://localhost:3001/RemoveProductFromDB', 
+  {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ category: product.category, model: product.model })
+  })
+  .then(response => response.json())
+  .then(data => 
+  {
+    if (!data.success)
+      ShowErrorMessage(`${data.message}`);
+  })
+  .catch(error => { console.error('Error:', error); });
 }
 
 document.getElementById("id-back-to-product-menu8").addEventListener("click", BackToMainMenu);

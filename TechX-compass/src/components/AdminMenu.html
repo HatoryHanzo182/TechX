@@ -11,7 +11,7 @@
   </head>
   <body>
     <div id="id-main-container" class="container">
-      <!-- #region [Vertical menu sector.] -->
+      <!--#region [Vertical menu sector.]-->
       <div class="navigation">
         <div class="menu-toggle"></div>
         <ul class="list">
@@ -81,7 +81,7 @@
         </ul>
       </div>
       <!-- #endregion -->
-      <!-- #region [Message for user sector.] -->
+      <!--#region [Message for user sector.]-->
       <!-- Success message sector. -->
       <div id="id-notification" class="success">
         <div class="success__icon">
@@ -111,7 +111,7 @@
         </div>
       </div>
       <!-- #endregion -->
-      <!-- #region [PRODUCTS CONTENT]-->
+      <!--#region [PRODUCTS CONTENT]-->
       <div id="id-products-content" class="products-content" style="display: none">
         <!--Creation product item-->
         <div id="id-create-product" class="products-card">
@@ -767,7 +767,6 @@
               </tr>
             </thead>
             <tbody>
-              
             </tbody>
           </table>
           <div id="no-items-message" style="display: none;">
@@ -812,8 +811,22 @@
             </select>
           </div>
           <!-- #endregion -->
+          <!-- Not found message -->
+          <div id="no-items-order-message" style="display: none;">
+            <div class="header-nosearch-reviews" style="width: 100%;"> 
+              <div class="div_image_vs">
+                <div class="image-nosearch-reviews">
+                  <ion-icon name="thumbs-down-outline"></ion-icon>
+                </div> 
+              </div> 
+              <div class="content-missing-reviews">
+                <span class="title-nosearch-reviews">We didn't find anything</span> 
+                <p class="message-nosearch-reviews">We did not find a product in any suitable category</p> 
+              </div> 
+            </div> 
+          </div>
           <!-- #region [Order table.] -->
-          <div class="table-wrapper">
+          <div id="id-order-table" class="table-wrapper">
             <table class="order-table">
               <thead class="order-head">
                 <tr class="order-tr">
