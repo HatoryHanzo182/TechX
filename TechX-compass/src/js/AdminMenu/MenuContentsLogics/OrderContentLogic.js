@@ -33,7 +33,7 @@ function UpdateOrderTable(orders)
     const order_body = document.getElementById('order-body');
     order_body.innerHTML = '';
 
-    orders.reverse().forEach(order => 
+    orders.forEach(order => 
     {
         const order_row = document.createElement('tr');
 
