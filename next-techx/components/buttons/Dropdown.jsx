@@ -25,14 +25,6 @@ const categoriesConfig = [
     { name: "Macbook", endpoint: "/GetDataForListProduct/Macbook" },
     { name: "Ipad", endpoint: "/GetDataForListProduct/Ipad" },
   ]},
-  { label: "Samsung", icon: Cog, endpoints: [
-    // TODO: Add endpoints for Samsung
-    {name: "In progress", endpoint: "" }
-  ]},
-  { label: "Google", icon: Cog, endpoints: [
-    // TODO: Add endpoints for Google
-    {name: "In progress", endpoint: "" }
-  ]},
   { label: "Consoles", icon: Gamepad2, endpoints: [{ name: "Consoles", endpoint: "/GetDataForListProduct/Console" }] },
 ];
 
