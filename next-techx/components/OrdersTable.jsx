@@ -15,7 +15,7 @@ export function OrdersTable()
 
       try 
       {
-        const response = await fetch("https://squid-app-d6fho.ondigitalocean.app:443/GetOrderHistory", 
+        const response = await fetch("https://techx-server.tech:443/GetOrderHistory", 
         {
           method: "POST",
           headers: {"Content-Type": "application/json", "Authorization": `Bearer ${u_t}` }
@@ -57,7 +57,7 @@ export function OrdersTable()
               <TableRow key={`${invoice._id}_${productIndex}`}>
                 <TableCell className="font-medium">{index += 1}</TableCell>
                 <TableCell>
-                  <img src={`https://squid-app-d6fho.ondigitalocean.app:443/GetImage/${product.images[0]}`} className="w-12 h-12 flex flex-row" alt="Product"/>
+                  <img src={`https://techx-server.tech:443/GetImage/${product.images[0]}`} className="w-12 h-12 flex flex-row" alt="Product"/>
                 </TableCell>
                 <TableCell>{product.model}</TableCell>
                 <TableCell>{invoice.status}</TableCell>
