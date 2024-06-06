@@ -117,13 +117,12 @@ const ProductDetails = () => {
           }
         );
 
-        if (formatted_data.ok) {
+        if (formatted_data.ok) 
+        {
           const data = await formatted_data.json();
 
-          
           SetProductData(data);
           setSelectedImage(data.images[0]);
-          console.log(data);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -187,7 +186,7 @@ const ProductDetails = () => {
     const p_in_cart = {
       img: product_data.images[0],
       model: product_data.model,
-      price: product_data.price,
+      price: product_data.descont_price !== 0 ? product_data.descont_price : product_data.price,
     };
 
     setIsLoading(true);

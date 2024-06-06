@@ -45,8 +45,8 @@ function CreateMainWindow()
 
     Menu.setApplicationMenu(null);  // Set the default menu to null.
 
-    _app_window.loadFile(path.join(__dirname, 'src', 'components', 'AdminMenu.html'));
-    _app_window.webContents.openDevTools();   // <-----  DevTools.
+    _app_window.loadFile(path.join(__dirname, 'src', 'components', 'Authorization.html'));
+    //_app_window.webContents.openDevTools();   // <-----  DevTools.
 }
 
 //#region [Context menu sector]

@@ -32,12 +32,14 @@ export function ProductCarousel() {
           }
         );
 
-        if (formatted_data.ok) SetCData(await formatted_data.json());
+        if (formatted_data.ok) 
+          SetCData(await formatted_data.json());
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-    };
 
+    };
+    
     ToGetData();
   }, []);
 
@@ -45,13 +47,13 @@ export function ProductCarousel() {
     const updateCarouselDisplay = () => {
       const screenWidth = window.innerWidth;
       if (screenWidth < 640) {
-        SetCarouselSlideWidth(2); // Для мобильных устройств
+        SetCarouselSlideWidth(2); 
       } else if (screenWidth >= 640 && screenWidth < 768) {
-        SetCarouselSlideWidth(3); // Для планшетов
+        SetCarouselSlideWidth(3);
       } else if (screenWidth >= 768 && screenWidth < 1024) {
-        SetCarouselSlideWidth(4); // Для маленьких ноутбуков
+        SetCarouselSlideWidth(4); 
       } else {
-        SetCarouselSlideWidth(4); // Для больших экранов и настольных компьютеров
+        SetCarouselSlideWidth(4);
       }
     };
 
@@ -66,7 +68,7 @@ export function ProductCarousel() {
     { length: Math.ceil(c_data.length / carouselSlideWidth) },
     (_, index) => index
   );
-
+  
   return (
     <Carousel
       opts={{ align: "start" }}
@@ -79,33 +81,13 @@ export function ProductCarousel() {
       className="mx-20 max-w-full justify-center"
     >
       <CarouselContent className="-ml-1">
-        {iterations_array.map((iteration) => (
-          <CarouselItem
-            key={iteration}
-            className="flex flex-row justify-center p-2"
-          >
-            {c_data
-              .slice(
-                iteration * carouselSlideWidth,
-                (iteration + 1) * carouselSlideWidth
-              )
-              .map((d, Index) => (
-                <Link
-                  key={d.id}
-                  href={{
-                    pathname: "/product-detail",
-                    query: { id: `${d.id}` },
-                  }}
-                >
-                  <ProductCards
-                    key={Index}
-                    image={`https://techx-server.tech:443/GetImage/${d.images}`}
-                    title={d.model}
-                    color={d.color}
-                    price={d.price}
-                  />
-                </Link>
-              ))}
+        { iterations_array.map((iteration) => (
+          <CarouselItem key={iteration} className="flex flex-row justify-center p-2">
+            {c_data.slice(iteration * carouselSlideWidth, (iteration + 1) * carouselSlideWidth).map((d, Index) => (
+              <Link key={d.id} href={{pathname: "/product-detail", query: { id: `${d.id}` }, }}>
+                <ProductCards key={Index} image={`https://techx-server.tech:443/GetImage/${d.images}`} title={d.model} color={d.color} price={d.price} descont_price={d.descont_price}/>
+              </Link>
+            ))}
           </CarouselItem>
         ))}
       </CarouselContent>

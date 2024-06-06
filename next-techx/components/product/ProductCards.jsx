@@ -1,7 +1,8 @@
 import Image from "next/image";
 import React from "react";
 
-const ProductCards = (props) => {
+const ProductCards = (props) => 
+{
   return (
     <div className="m-4 md:m-2 w-[160px] md:w-[140px] h-[280px] md:h-[200px] lg:w-[200px] lg:h-[320px] rounded-lg shadow  dark:bg-[#1d1d1d] flex flex-col">
       <div className="h-1/2 w-full flex justify-center items-center p-2">
@@ -18,13 +19,23 @@ const ProductCards = (props) => {
         <p className="text-sm text-gray-500">{props.color}</p>
         <p className="text-sm text-gray-600">{props.memory}</p>
         <hr className="border-t-[0.1px] border-gray-300 my-1"></hr>
-        <div className="flex justify-between items-center">
-          <span className="text-base p-2 md:text-xs lg:text-base font-bold dark:text-white">
-            {props.price}$
-          </span>
-          <span className="text-sm p-2 md:text-xs lg:text-base font-bold text-red-600 line-through">
-            {props.oldPrice}1200$
-          </span>
+        <div className="flex justify-between items-center">        
+          <>
+            { props.descont_price !== 0 ? (
+              <>
+                <span className="text-base p-2 md:text-xs lg:text-base font-bold dark:text-white">
+                  {props.descont_price}$
+                </span>
+                <span className="text-sm p-2 md:text-xs lg:text-base font-bold text-red-600 line-through">
+                  {props.price}$
+                </span>
+              </>
+            ) : (
+              <span className="text-base p-2 md:text-xs lg:text-base font-bold dark:text-white">
+                {props.price}$
+              </span>
+            )}
+          </>
         </div>
       </div>
     </div>

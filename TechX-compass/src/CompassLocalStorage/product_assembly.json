@@ -2,23 +2,19 @@
   {
     "brand": "Apple",
     "category": "iPhone",
-    "model": "Sempai 3G XXXX",
-    "processor": "IntelSSS",
-    "memory": "1024",
-    "displaySize": "1092x1080",
-    "battery": "12000",
-    "os": "Hentai_OS 19.01",
-    "camera": "400",
-    "color": "Black",
-    "price": "1999",
-    "descont_price": "",
-    "description": "Anime Phone",
-    "images": [
-      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\2unv.gif",
-      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\FUxe.gif",
-      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\cp.gif"
-    ],
+    "model": "123",
+    "processor": "123",
+    "memory": "123",
+    "displaySize": "123",
+    "battery": "123",
+    "os": "123",
+    "camera": "123",
+    "color": "123",
+    "price": "123",
+    "descont_price": "123",
+    "description": "123",
+    "images": [],
     "incarousel": true,
-    "status": "active"
+    "status": "no active"
   }
 ]

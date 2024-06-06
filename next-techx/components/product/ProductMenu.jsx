@@ -242,10 +242,18 @@ function ProductSelection() {
                   {product.memory} ({product.color}){" "}
                 </div>
                 <div className="flex justify-between items-center mt-3">
-                  <div className="text-black dark:text-white line-through">
-                    {product.price} $
-                  </div>
-                  <div className="text-red-500">{product.price} $</div>
+                  { product.descont_price !== 0 ? 
+                  (
+                    <>
+                      <div className="text-black dark:text-white"> {product.descont_price} $ </div>
+                      <div className="text-red-500 line-through">{product.price} $</div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-black dark:text-white">{product.price} $ </div>
+                    </>
+                  )} 
+
                 </div>
               </div>
             </Link>
