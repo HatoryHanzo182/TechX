@@ -22,13 +22,13 @@ import {
 } from "lucide-react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 
-const Cart = () => {
+const Cart = () => 
+{
   const [stored_array, SetStoredArray] = useState([]);
   const [last_updated, SetLastUpdated] = useState();
 
-  useEffect(() => {
-    console.log("STORAGE");
-
+  useEffect(() => 
+    {
     SetStoredArray(JSON.parse(localStorage.getItem("Cart")) || []);
   }, []);
 

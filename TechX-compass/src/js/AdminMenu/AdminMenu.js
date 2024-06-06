@@ -195,19 +195,11 @@ document.getElementById("id-close-error-message").onclick = BreakErrorMessage;
 //#endregion 
 
 
-
-
-
-
-
-
-
-
 window.electron.receive('ShowReview', () => 
 {
   list_item[0].classList.remove("active");
   list_item[3].classList.add("active");
-  
+
   DisableContent();
   HideAllAddProductMenuItems();
   RecordWhereUserIsNow(3);
