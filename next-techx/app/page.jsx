@@ -106,18 +106,6 @@ export default async function Home()
               title="PlayStation"
             />
           </Link>
-          <Link href="/product">
-            <ProductCatalog
-              image="https://img.jabko.ua/image/cache/-main-new/image13full.png.webp"
-              title="Samsung Galaxy"
-            />
-          </Link>
-          <Link href="/product">
-            <ProductCatalog
-              image="https://img.jabko.ua/image/cache/-main-new/image14full.png.webp"
-              title="Google Pixel"
-            />
-          </Link>
         </div>
       </div>
 

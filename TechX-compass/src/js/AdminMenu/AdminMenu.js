@@ -197,7 +197,7 @@ document.getElementById("id-close-error-message").onclick = BreakErrorMessage;
 
 window.electron.receive('ShowReview', () => 
 {
-  list_item[0].classList.remove("active");
+  menu_toggle.addEventListener("click", () => { navigation.classList.toggle("open"); });
   list_item[3].classList.add("active");
 
   DisableContent();
