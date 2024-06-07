@@ -55,7 +55,7 @@ export function ProfilePage() {
 
       for (const u in u_data.favourites) {
         const formatted_data = await fetch(
-          `https://techx-nodeserver.vercel.app/GetFavoriteProduct/${u_data.favourites[u]}`,
+          `https://techx-server.tech:443/${u_data.favourites[u]}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
