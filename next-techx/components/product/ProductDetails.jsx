@@ -117,8 +117,7 @@ const ProductDetails = () => {
           }
         );
 
-        if (formatted_data.ok) 
-        {
+        if (formatted_data.ok) {
           const data = await formatted_data.json();
 
           SetProductData(data);
@@ -186,7 +185,10 @@ const ProductDetails = () => {
     const p_in_cart = {
       img: product_data.images[0],
       model: product_data.model,
-      price: product_data.descont_price !== 0 ? product_data.descont_price : product_data.price,
+      price:
+        product_data.descont_price !== 0
+          ? product_data.descont_price
+          : product_data.price,
     };
 
     setIsLoading(true);
@@ -292,11 +294,10 @@ const ProductDetails = () => {
           </Alert>
         )}
       </div>
-      <section className="py-20 font-poppins   ">
+      <section className="py-20 font-poppins mx-10  ">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
           <div
             className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
             style={{
@@ -311,8 +312,7 @@ const ProductDetails = () => {
           </a>
           <a
             className="hover:text-gray-400 cursor-pointer"
-            href="#characteristics"
-          >
+            href="#characteristics">
             Characteristics
           </a>
           <a className="hover:text-gray-400 cursor-pointer" href="#reviews">
@@ -321,24 +321,22 @@ const ProductDetails = () => {
         </div>
         <div className="max-w-5xl px-4 mx-auto">
           <div className="flex flex-wrap mb-24 -mx-4">
-            <div className="w-full px-4 mb-8 md:w-1/2 md:mb-0">
-              <div className="sticky top-0 z-50 overflow-hidden ">
-                <div className="relative mb-6 lg:mb-10 ">
+            <div className="w-full px-4 mb-8 md:w-1/2  md:mb-0">
+              <div className="sticky top-0 z-10 overflow-hidden ">
+                <div className="relative  mb-6 lg:mb-10 ">
                   <a
                     className="absolute left-0 transform lg:ml-2 top-1/2 translate-1/2 "
-                    href="#"
-                  >
+                    href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
                       fill="currentColor"
                       className="w-5 h-5 text-blue-500 bi bi-chevron-left dark:text-blue-200"
-                      viewBox="0 0 16 16"
-                    ></svg>
+                      viewBox="0 0 16 16"></svg>
                   </a>
                   <img
-                    className="object-cover w-full max-sm:w-auto lg:h-1/2"
+                    className="object-cover w-full max-sm:w-auto  lg:h-1/2"
                     src={
                       `https://techx-server.tech:443/GetImage/${selectedImage}` ||
                       "Loading..."
@@ -347,16 +345,14 @@ const ProductDetails = () => {
                   />
                   <a
                     className="absolute right-0 transform lg:mr-2 top-1/2 translate-1/2"
-                    href="#"
-                  >
+                    href="#">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
                       fill="currentColor"
                       className="w-5 h-5 text-blue-500 bi bi-chevron-right dark:text-blue-200"
-                      viewBox="0 0 16 16"
-                    ></svg>
+                      viewBox="0 0 16 16"></svg>
                   </a>
                 </div>
                 <div className="flex-wrap hidden -mx-2 md:flex">
@@ -365,8 +361,7 @@ const ProductDetails = () => {
                       <a
                         className="block border border-transparent hover:border-blue-400"
                         href="#"
-                        onClick={() => handleImageClick(image)}
-                      >
+                        onClick={() => handleImageClick(image)}>
                         <img
                           className="object-cover w-full lg:h-32"
                           src={`https://techx-server.tech:443/GetImage/${image}`}
@@ -386,94 +381,27 @@ const ProductDetails = () => {
                     {product_data?.model || "Loading..."}
                   </h2>
                 </div>
-                <div className="">
-                  <p className="mb-4 text-lg font-semibold dark:text-gray-400">
-                    Choose your Color
-                  </p>
-                  <div className="grid grid-cols-2 gap-4 pb-4 border-b-2 border-gray-300 lg:grid-cols-3 dark:border-gray-600">
-                    <div>
-                      <button className="flex items-center justify-center w-full h-full py-4 border-2 border-gray-300 dark:hover:border-blue-400 dark:border-gray-500 hover:border-blue-400">
-                        <div>
-                          <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-emerald-400"></div>
-                          <p className="text-xs text-center text-gray-700 dark:text-gray-400">
-                            {product_data?.color || "Loading..."}
-                          </p>
-                        </div>
-                      </button>
-                    </div>
-                    <div>
-                      <button className="flex items-center justify-center w-full h-full py-4 border-2 border-gray-300 dark:hover:border-blue-400 dark:border-gray-500 hover:border-blue-400">
-                        <div>
-                          <div className="w-8 h-8 mx-auto mb-2 bg-gray-700 rounded-full dark:bg-gray-600"></div>
-                          <p className="text-xs text-center text-gray-700 dark:text-gray-400">
-                            Mattee Black
-                          </p>
-                        </div>
-                      </button>
-                    </div>
-                    <div>
-                      <button className="flex items-center justify-center w-full h-full py-4 border-2 border-gray-300 dark:hover:border-blue-400 dark:border-gray-500 hover:border-blue-400">
-                        <div>
-                          <div className="w-8 h-8 mx-auto mb-2 bg-red-500 rounded-full"></div>
-                          <p className="text-xs text-center text-gray-700 dark:text-gray-400">
-                            Red
-                          </p>
-                        </div>
-                      </button>
-                    </div>
-                    <div>
-                      <button className="flex items-center justify-center w-full h-full py-4 border-2 border-gray-300 dark:hover:border-blue-400 dark:border-gray-500 hover:border-blue-400">
-                        <div>
-                          <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-stone-200"></div>
-                          <p className="text-xs text-center text-gray-700 dark:text-gray-400">
-                            Silver
-                          </p>
-                        </div>
-                      </button>
-                    </div>
-                    <div>
-                      <button className="flex items-center justify-center w-full h-full py-4 border-2 border-gray-300 dark:hover:border-blue-400 dark:border-gray-500 hover:border-blue-400">
-                        <div>
-                          <div className="w-8 h-8 mx-auto mb-2 bg-blue-200 rounded-full"></div>
-                          <p className="text-xs text-center text-gray-700 dark:text-gray-400">
-                            Sierra Blue
-                          </p>
-                        </div>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-6">
-                  <p className="mb-2 text-lg font-semibold dark:text-gray-400">
-                    Choose your Capacity
-                  </p>
 
-                  <RadioGroup value={capacity} onChange={setCapacity}>
-                    <div className="grid grid-cols-2 gap-4 pb-4 mt-2 mb-4 border-b-2 lg:grid-cols-3 dark:border-gray-600">
-                      {/*{product_data?.memory || "Loading..."}*/}
-                      {["128", "256", "512", "1"].map((size) => (
-                        <div key={size} className="">
-                          <button
-                            className={`flex items-center justify-center w-full h-full  py-4 border-2 ${
-                              capacity === size
-                                ? "border-blue-400"
-                                : "border-gray-300"
-                            } dark:border-gray-600 hover:border-blue-400`}
-                            onClick={() => setCapacity(size)}
-                          >
-                            <div>
-                              <div className="mb-2 font-semibold dark:text-gray-400">
-                                {size} GB
-                              </div>
-                              {/* <p className="px-2 text-xs font-medium text-center text-gray-700 dark:text-gray-400">
-                                From $99 or $41.62/mo. for 24 mo.
-                              </p> */}
-                            </div>
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </RadioGroup>
+                <div className="grid grid-cols-2 gap-2 pb-4 border-b-2  border-gray-300 lg:grid-cols-2 dark:border-gray-600">
+                  <div>
+                    <button className="flex items-center rounded-lg  justify-center w-full h-full py-4 border-2 border-gray-300 dark:hover:border-white dark:border-gray-500 hover:border-black">
+                      <div>
+                        <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-[#555352]"></div>
+                        <p className="text-xs text-center text-gray-200 dark:text-gray-400">
+                          {product_data?.color || "Loading..."}
+                        </p>
+                      </div>
+                    </button>
+                  </div>
+                  <div>
+                    <button className="flex items-center justify-center rounded-lg w-full h-full py-4 border-2 border-gray-300 dark:hover:border-blue-400 dark:border-gray-500 hover:border-blue-400">
+                      <div>
+                        <p className="text-base text-center text-gray-200 dark:text-gray-400">
+                          {product_data?.memory || "Loading..."}
+                        </p>
+                      </div>
+                    </button>
+                  </div>
                 </div>
 
                 <div className="mt-6 ">
@@ -485,8 +413,7 @@ const ProductDetails = () => {
                         height="16"
                         fill="currentColor"
                         className="w-4 h-4 text-gray-700 dark:text-gray-400 bi bi-truck"
-                        viewBox="0 0 16 16"
-                      >
+                        viewBox="0 0 16 16">
                         <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
                       </svg>
                     </span>
@@ -510,8 +437,7 @@ const ProductDetails = () => {
                         height="16"
                         fill="currentColor"
                         className="w-4 h-4 text-gray-700 dark:text-gray-400 bi bi-bag"
-                        viewBox="0 0 16 16"
-                      >
+                        viewBox="0 0 16 16">
                         <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"></path>
                       </svg>
                     </span>
@@ -522,8 +448,7 @@ const ProductDetails = () => {
                   <div className="px-7">
                     <a
                       className="mb-2 text-sm text-blue-400 dark:text-blue-200"
-                      href="#"
-                    >
+                      href="#">
                       Check availability
                     </a>
                   </div>
@@ -531,15 +456,13 @@ const ProductDetails = () => {
                 <div className="mt-6 ">
                   <Button
                     className="w-full flex items-center justify-between px-4 py-2 font-bold text-white bg-black border lg:w-96 "
-                    onClick={() => handleAddToCart()}
-                  >
+                    onClick={() => handleAddToCart()}>
                     {isLoading ? (
                       <>
                         <span>Proccessing....</span>
                         <svg
                           className="animate-spin-slow h-5 w-5 ml-2"
-                          viewBox="0 0 24 24"
-                        >
+                          viewBox="0 0 24 24">
                           {/* Simple spinner SVG */}
                           <circle
                             cx="12"
@@ -561,8 +484,7 @@ const ProductDetails = () => {
                           className="ionicon ml-2"
                           viewBox="0 0 512 512"
                           width={20}
-                          height={20}
-                        >
+                          height={20}>
                           <circle
                             cx="176"
                             cy="416"
@@ -604,11 +526,6 @@ const ProductDetails = () => {
                     )}
                   </Button>
                 </div>
-                {/* <div className="flex justify-between mt-6 ">
-                  <span className="mr-2 text-base font-bold text-gray-700 dark:text-gray-400">
-                    Add to favorites
-                  </span> */}
-
                 {!show_logged_content ? null : (
                   <div className="flex justify-between mt-6 ">
                     <span className="mr-2 text-base font-bold text-gray-700 dark:text-gray-400">
@@ -632,112 +549,285 @@ const ProductDetails = () => {
       <section className="">
         <motion.div
           id="characteristics"
-          className="mt-24"
+          className=""
           initial="hidden"
           animate="visible"
           variants={variants}
           transition={{ duration: 0.5 }}
         />
 
-        <div className="rounded-lg p-4 mx-20 dark:bg-[#1d1d1d] shadow-lg">
+        <div className="rounded-lg p-4 mx-10 dark:bg-[#1d1d1d] shadow-lg">
           <div className="mt-4">
-            <h4 className="dark:text-white text-lg font-bold mb-2">Main characteristics</h4>
-            <div className="grid grid-cols-2 gap-4">
-              {(product_data?.category === "iPhone" ? (
-                [
-                  { title: "Brand", value: product_data?.brand || "Loading..." },
-                  { title: "Model", value: product_data?.model || "Loading..." },
-                  { title: "Color", value: product_data?.color || "Loading..." },
-                  { title: "Memory", value: product_data?.memory || "Loading..." },
-                  { title: "Processor", value: product_data?.processor || "Loading..." },
-                  { title: "OS", value: product_data?.os || "Loading..." },
-                  { title: "Display size", value: product_data?.displaySize || "Loading..." },
-                  { title: "Main camera", value: product_data?.camera || "Loading..." },
-                  { title: "Battery", value: product_data?.battery || "Loading..." },
-                  { title: "Description", value: product_data?.description || "Loading..." },
-                  { title: "Guarantee", value: "1 year from the manufacturer + 31 days from TechX" },
-                ]
-              ) : product_data?.category === "Macbook" ? (
-                [
-                  { title: "Brand", value: product_data?.brand || "Loading..." },
-                  { title: "Model", value: product_data?.model || "Loading..." },
-                  { title: "Color", value: product_data?.color || "Loading..." },
-                  { title: "Processor", value: product_data?.processor || "Loading..." },
-                  { title: "CPU", value: product_data?.CPU || "Loading..." },
-                  { title: "GPU", value: product_data?.GPU || "Loading..." },
-                  { title: "Memory", value: product_data?.memory || "Loading..." },
-                  { title: "RAM", value: product_data?.RAM || "Loading..." },
-                  { title: "Graphics", value: product_data?.graphics || "Loading..." },
-                  { title: "OS", value: product_data?.os || "Loading..." },
-                  { title: "Display size", value: product_data?.displaySize || "Loading..." },
-                  { title: "Main camera", value: product_data?.camera || "Loading..." },
-                  { title: "Battery", value: product_data?.battery || "Loading..." },
-                  { title: "Description", value: product_data?.description || "Loading..." },
-                  { title: "Guarantee", value: "1 year from the manufacturer + 31 days from TechX" },
-                ]
-              ) : product_data?.category === "AirPods" ? (
-                [
-                  { title: "Brand", value: product_data?.brand || "Loading..." },
-                  { title: "Model", value: product_data?.model || "Loading..." },
-                  { title: "Color", value: product_data?.color || "Loading..." },
-                  { title: "Processor", value: product_data?.processor || "Loading..." },
-                  { title: "Battery", value: product_data?.battery || "Loading..." },
-                  { title: "Description", value: product_data?.description || "Loading..." },
-                  { title: "Guarantee", value: "1 year from the manufacturer + 31 days from TechX" },
-                ]
-              ) : product_data?.category === "Watch" ? (
-                [
-                  { title: "Brand", value: product_data?.brand || "Loading..." },
-                  { title: "Model", value: product_data?.model || "Loading..." },
-                  { title: "Color", value: product_data?.color || "Loading..." },
-                  { title: "Processor", value: product_data?.processor || "Loading..." },
-                  { title: "CPU", value: product_data?.CPU || "Loading..." },
-                  { title: "GPU", value: product_data?.GPU || "Loading..." },
-                  { title: "Memory", value: product_data?.memory || "Loading..." },
-                  { title: "RAM", value: product_data?.RAM || "Loading..." },
-                  { title: "OS", value: product_data?.os || "Loading..." },
-                  { title: "Display size", value: product_data?.displaySize || "Loading..." },
-                  { title: "Battery", value: product_data?.battery || "Loading..." },
-                  { title: "Description", value: product_data?.description || "Loading..." },
-                  { title: "Guarantee", value: "1 year from the manufacturer + 31 days from TechX" },
-                ]
-              ) : product_data?.category === "Ipad" ? (
-                [
-                  { title: "Brand", value: product_data?.brand || "Loading..." },
-                  { title: "Model", value: product_data?.model || "Loading..." },
-                  { title: "Color", value: product_data?.color || "Loading..." },
-                  { title: "Processor", value: product_data?.processor || "Loading..." },
-                  { title: "CPU", value: product_data?.CPU || "Loading..." },
-                  { title: "GPU", value: product_data?.GPU || "Loading..." },
-                  { title: "Memory", value: product_data?.memory || "Loading..." },
-                  { title: "RAM", value: product_data?.RAM || "Loading..." },
-                  { title: "OS", value: product_data?.os || "Loading..." },
-                  { title: "Display size", value: product_data?.displaySize || "Loading..." },
-                  { title: "Main camera", value: product_data?.camera || "Loading..." },
-                  { title: "Battery", value: product_data?.battery || "Loading..." },
-                  { title: "Description", value: product_data?.description || "Loading..." },
-                  { title: "Guarantee", value: "1 year from the manufacturer + 31 days from TechX" },
-                ]
-              ) : product_data?.category === "Console" ? (
-                [
-                  { title: "Brand", value: product_data?.brand || "Loading..." },
-                  { title: "Model", value: product_data?.model || "Loading..." },
-                  { title: "Color", value: product_data?.color || "Loading..." },
-                  { title: "Processor", value: product_data?.processor || "Loading..." },
-                  { title: "CPU", value: product_data?.CPU || "Loading..." },
-                  { title: "GPU", value: product_data?.GPU || "Loading..." },
-                  { title: "Memory", value: product_data?.memory || "Loading..." },
-                  { title: "RAM", value: product_data?.RAM || "Loading..." },
-                  { title: "OS", value: product_data?.os || "Loading..." },
-                  { title: "Description", value: product_data?.description || "Loading..." },
-                  { title: "Guarantee", value: "1 year from the manufacturer + 31 days from TechX" },
-                ]
-              ) : (
-                [{ title: "No data available", value: ":(" }]
-              )).map((item) => (
-                <div key={item.title} className="flex items-center shadow-lg dark:bg-black rounded-md p-2">
-                  <h6 className="text-black dark:text-white font-medium mr-2">{item.title}:</h6>
-                  <p className="text-gray-500">{item.value}</p>
+            <h4 className="dark:text-white text-lg font-bold mb-2">
+              Main characteristics
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {(product_data?.category === "iPhone"
+                ? [
+                    {
+                      title: "Brand",
+                      value: product_data?.brand || "Loading...",
+                    },
+                    {
+                      title: "Model",
+                      value: product_data?.model || "Loading...",
+                    },
+                    {
+                      title: "Color",
+                      value: product_data?.color || "Loading...",
+                    },
+                    {
+                      title: "Memory",
+                      value: product_data?.memory || "Loading...",
+                    },
+                    {
+                      title: "Processor",
+                      value: product_data?.processor || "Loading...",
+                    },
+                    { title: "OS", value: product_data?.os || "Loading..." },
+                    {
+                      title: "Display size",
+                      value: product_data?.displaySize || "Loading...",
+                    },
+                    {
+                      title: "Main camera",
+                      value: product_data?.camera || "Loading...",
+                    },
+                    {
+                      title: "Battery",
+                      value: product_data?.battery || "Loading...",
+                    },
+                    {
+                      title: "Description",
+                      value: product_data?.description || "Loading...",
+                    },
+                    {
+                      title: "Guarantee",
+                      value:
+                        "1 year from the manufacturer + 31 days from TechX",
+                    },
+                  ]
+                : product_data?.category === "Macbook"
+                ? [
+                    {
+                      title: "Brand",
+                      value: product_data?.brand || "Loading...",
+                    },
+                    {
+                      title: "Model",
+                      value: product_data?.model || "Loading...",
+                    },
+                    {
+                      title: "Color",
+                      value: product_data?.color || "Loading...",
+                    },
+                    {
+                      title: "Processor",
+                      value: product_data?.processor || "Loading...",
+                    },
+                    { title: "CPU", value: product_data?.CPU || "Loading..." },
+                    { title: "GPU", value: product_data?.GPU || "Loading..." },
+                    {
+                      title: "Memory",
+                      value: product_data?.memory || "Loading...",
+                    },
+                    { title: "RAM", value: product_data?.RAM || "Loading..." },
+                    {
+                      title: "Graphics",
+                      value: product_data?.graphics || "Loading...",
+                    },
+                    { title: "OS", value: product_data?.os || "Loading..." },
+                    {
+                      title: "Display size",
+                      value: product_data?.displaySize || "Loading...",
+                    },
+                    {
+                      title: "Main camera",
+                      value: product_data?.camera || "Loading...",
+                    },
+                    {
+                      title: "Battery",
+                      value: product_data?.battery || "Loading...",
+                    },
+                    {
+                      title: "Description",
+                      value: product_data?.description || "Loading...",
+                    },
+                    {
+                      title: "Guarantee",
+                      value:
+                        "1 year from the manufacturer + 31 days from TechX",
+                    },
+                  ]
+                : product_data?.category === "AirPods"
+                ? [
+                    {
+                      title: "Brand",
+                      value: product_data?.brand || "Loading...",
+                    },
+                    {
+                      title: "Model",
+                      value: product_data?.model || "Loading...",
+                    },
+                    {
+                      title: "Color",
+                      value: product_data?.color || "Loading...",
+                    },
+                    {
+                      title: "Processor",
+                      value: product_data?.processor || "Loading...",
+                    },
+                    {
+                      title: "Battery",
+                      value: product_data?.battery || "Loading...",
+                    },
+                    {
+                      title: "Description",
+                      value: product_data?.description || "Loading...",
+                    },
+                    {
+                      title: "Guarantee",
+                      value:
+                        "1 year from the manufacturer + 31 days from TechX",
+                    },
+                  ]
+                : product_data?.category === "Watch"
+                ? [
+                    {
+                      title: "Brand",
+                      value: product_data?.brand || "Loading...",
+                    },
+                    {
+                      title: "Model",
+                      value: product_data?.model || "Loading...",
+                    },
+                    {
+                      title: "Color",
+                      value: product_data?.color || "Loading...",
+                    },
+                    {
+                      title: "Processor",
+                      value: product_data?.processor || "Loading...",
+                    },
+                    { title: "CPU", value: product_data?.CPU || "Loading..." },
+                    { title: "GPU", value: product_data?.GPU || "Loading..." },
+                    {
+                      title: "Memory",
+                      value: product_data?.memory || "Loading...",
+                    },
+                    { title: "RAM", value: product_data?.RAM || "Loading..." },
+                    { title: "OS", value: product_data?.os || "Loading..." },
+                    {
+                      title: "Display size",
+                      value: product_data?.displaySize || "Loading...",
+                    },
+                    {
+                      title: "Battery",
+                      value: product_data?.battery || "Loading...",
+                    },
+                    {
+                      title: "Description",
+                      value: product_data?.description || "Loading...",
+                    },
+                    {
+                      title: "Guarantee",
+                      value:
+                        "1 year from the manufacturer + 31 days from TechX",
+                    },
+                  ]
+                : product_data?.category === "Ipad"
+                ? [
+                    {
+                      title: "Brand",
+                      value: product_data?.brand || "Loading...",
+                    },
+                    {
+                      title: "Model",
+                      value: product_data?.model || "Loading...",
+                    },
+                    {
+                      title: "Color",
+                      value: product_data?.color || "Loading...",
+                    },
+                    {
+                      title: "Processor",
+                      value: product_data?.processor || "Loading...",
+                    },
+                    { title: "CPU", value: product_data?.CPU || "Loading..." },
+                    { title: "GPU", value: product_data?.GPU || "Loading..." },
+                    {
+                      title: "Memory",
+                      value: product_data?.memory || "Loading...",
+                    },
+                    { title: "RAM", value: product_data?.RAM || "Loading..." },
+                    { title: "OS", value: product_data?.os || "Loading..." },
+                    {
+                      title: "Display size",
+                      value: product_data?.displaySize || "Loading...",
+                    },
+                    {
+                      title: "Main camera",
+                      value: product_data?.camera || "Loading...",
+                    },
+                    {
+                      title: "Battery",
+                      value: product_data?.battery || "Loading...",
+                    },
+                    {
+                      title: "Description",
+                      value: product_data?.description || "Loading...",
+                    },
+                    {
+                      title: "Guarantee",
+                      value:
+                        "1 year from the manufacturer + 31 days from TechX",
+                    },
+                  ]
+                : product_data?.category === "Console"
+                ? [
+                    {
+                      title: "Brand",
+                      value: product_data?.brand || "Loading...",
+                    },
+                    {
+                      title: "Model",
+                      value: product_data?.model || "Loading...",
+                    },
+                    {
+                      title: "Color",
+                      value: product_data?.color || "Loading...",
+                    },
+                    {
+                      title: "Processor",
+                      value: product_data?.processor || "Loading...",
+                    },
+                    { title: "CPU", value: product_data?.CPU || "Loading..." },
+                    { title: "GPU", value: product_data?.GPU || "Loading..." },
+                    {
+                      title: "Memory",
+                      value: product_data?.memory || "Loading...",
+                    },
+                    { title: "RAM", value: product_data?.RAM || "Loading..." },
+                    { title: "OS", value: product_data?.os || "Loading..." },
+                    {
+                      title: "Description",
+                      value: product_data?.description || "Loading...",
+                    },
+                    {
+                      title: "Guarantee",
+                      value:
+                        "1 year from the manufacturer + 31 days from TechX",
+                    },
+                  ]
+                : [{ title: "No data available", value: ":(" }]
+              ).map((item) => (
+                <div
+                  key={item.title}
+                  className="flex items-center shadow-lg dark:bg-black rounded-md p-2 md:p-4">
+                  <h6 className="text-black dark:text-white font-medium mr-2 flex-shrink-0">
+                    {item.title}:
+                  </h6>
+                  <p className="text-gray-500 flex-grow">{item.value}</p>
                 </div>
               ))}
             </div>
@@ -749,17 +839,17 @@ const ProductDetails = () => {
       <section>
         <motion.div
           id="reviews"
-          className="mt-24"
+          className="mt-12"
           initial="hidden"
           animate="visible"
           variants={variants}
           transition={{ duration: 0.5 }}
         />
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 dark:bg-[#1d1d1d]  shadow-lg rounded-lg">
-          <h2 className="text-3xl font-extrabold tracking-tight dark:text-white sm:text-4xl">
+        <div className=" mx-10 py-12 px-4 sm:px-6 lg:px-8 dark:bg-[#1d1d1d] shadow-lg rounded-lg">
+          <h2 className="text-3xl font-extrabold tracking-tight dark:text-white text-center sm:text-4xl">
             Write Review
           </h2>
-          <form className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+          <form className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
             {!show_logged_content ? (
               <Input
                 type="text"
@@ -770,12 +860,11 @@ const ProductDetails = () => {
               />
             ) : null}
 
-            <div className="px-3 py-0.5 flex flex-row">
-              {" "}
+            <div className="px-3 py-0.5 flex flex-row items-center justify-center">
               <p className="text-center p-3 py-[0.4] text-lg text-black dark:text-white font-bold">
-                Grade{" "}
+                Grade
               </p>
-              <span className="flex flex-row">
+              <span className="flex flex-row items-center">
                 <>
                   <style>
                     {`
@@ -841,15 +930,14 @@ const ProductDetails = () => {
             <Input
               type="text"
               placeholder="Review"
-              className="block w-full px-4 py-4 rounded-lg shadow-sm  sm:text-sm "
+              className="block w-full p-4 rounded-lg shadow-sm  sm:text-sm "
               value={user_review}
               onChange={(e) => SetUserReview(e.target.value)}
             />
 
             <Button
               className=" w-24 rounded-lg "
-              onClick={(e) => handleSendReview(e)}
-            >
+              onClick={(e) => handleSendReview(e)}>
               Send
             </Button>
           </form>
@@ -867,8 +955,7 @@ const ProductDetails = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6 text-yellow-500"
                       fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
+                      viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
                     </svg>
                   ))}

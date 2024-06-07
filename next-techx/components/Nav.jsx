@@ -114,7 +114,7 @@ export default function Nav() {
     // localStorage.setItem("Cart", JSON.stringify(ArrayCoast));
   };
 
-  const handleChangeSerch = (e) => {
+  const handleChangeSearch = (e) => {
     const query = e.target.value.trim();
 
     if (query === "") return;
@@ -148,8 +148,7 @@ export default function Nav() {
         <header className="absolute inset-x-0 top-0 z-50">
           <nav
             className="flex items-center justify-between p-6 lg:px-8"
-            aria-label="Global"
-          >
+            aria-label="Global">
             <div className="flex items-center lg:flex-1 space-x-4">
               <Link href="/">
                 <div className="-m-1.5 p-1.5">
@@ -166,8 +165,7 @@ export default function Nav() {
                 <button
                   type="button"
                   className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 dark:text-white text-black"
-                  onClick={() => setMobileMenuOpen(true)}
-                >
+                  onClick={() => setMobileMenuOpen(true)}>
                   <span className="sr-only">Open main menu</span>
                   <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                 </button>
@@ -186,7 +184,7 @@ export default function Nav() {
                   <CommandDialog open={menuOpen} onOpenChange={setMenuOpen}>
                     <Input
                       placeholder="Search..."
-                      onChange={handleChangeSerch}
+                      onChange={handleChangeSearch}
                     />
 
                     {/* Search result output. */}
@@ -203,8 +201,7 @@ export default function Nav() {
                                   }}
                                   onClick={() => {
                                     setMenuOpen(false);
-                                  }}
-                                >
+                                  }}>
                                   <CommandItem className="">
                                     <img
                                       width="50"
@@ -233,8 +230,7 @@ export default function Nav() {
                 <div className="relative inline-block text-left">
                   <button
                     onClick={toggleDropdown}
-                    className="flex text-sm  rounded-full md:me-0  "
-                  >
+                    className="flex text-sm  rounded-full md:me-0  ">
                     <span className="sr-only">Open user menu</span>
                     <Avatar className="p-1">
                       <AvatarImage src="https://github.com/" />
@@ -251,8 +247,7 @@ export default function Nav() {
                       </div>
                       <ul
                         className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownUserAvatarButton"
-                      >
+                        aria-labelledby="dropdownUserAvatarButton">
                         <li>
                           <Link href="/profile">
                             <div className="block px-4 py-2  hover:text-gray-500 ">
@@ -265,8 +260,7 @@ export default function Nav() {
                         <a
                           href="#"
                           className="block px-4 py-2 text-sm text-red-600 hover:text-red-800"
-                          onClick={handleSignOut}
-                        >
+                          onClick={handleSignOut}>
                           Sign out
                         </a>
                       </div>
@@ -280,8 +274,7 @@ export default function Nav() {
                   <Link
                     href="/search"
                     className="h-6 w-6"
-                    onClick={handleLinkClick}
-                  >
+                    onClick={handleLinkClick}>
                     <MagnifyingGlassIcon
                       className="h-6 w-6 mr-2"
                       aria-hidden="true"
@@ -291,8 +284,7 @@ export default function Nav() {
                   <CommandDialog
                     className="h-1/2"
                     open={menuOpen}
-                    onOpenChange={setMenuOpen}
-                  >
+                    onOpenChange={setMenuOpen}>
                     {/*Product entry field.*/}
                     {/* <input
                       className="border bg-black text-white px-2 rounded-lg"
@@ -301,7 +293,7 @@ export default function Nav() {
                     /> */}
                     <Input
                       placeholder="Search..."
-                      onChange={handleChangeSerch}
+                      onChange={handleChangeSearch}
                     />
                     {/*Search result output.*/}
                     {search_results && search_results.length > 0 ? (
@@ -317,8 +309,7 @@ export default function Nav() {
                                   }}
                                   onClick={() => {
                                     setMenuOpen(false);
-                                  }}
-                                >
+                                  }}>
                                   <CommandItem className="">
                                     <img
                                       width="50"
@@ -347,8 +338,7 @@ export default function Nav() {
                 <div className="relative inline-block text-left">
                   <button
                     onClick={toggleDropdown}
-                    className="flex text-sm  rounded-full md:me-0  "
-                  >
+                    className="flex text-sm  rounded-full md:me-0  ">
                     <span className="sr-only">Open user menu</span>
                     <Avatar className="w-5 h-6 mt-2">
                       <PersonIcon className="h-6 w-5" aria-hidden="true" />
@@ -356,11 +346,10 @@ export default function Nav() {
                   </button>
 
                   {isOpen && (
-                    <div className="z-10 absolute right-0 mt-2  divide-y  rounded-lg shadow w-44 bg-white dark:bg-[#1d1d1d] dark:divide-[#2f2f2f]">
+                    <div className=" absolute right-0 mt-2  divide-y  rounded-lg shadow w-44 bg-white dark:bg-[#1d1d1d] dark:divide-[#2f2f2f]">
                       <ul
                         className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownUserAvatarButton"
-                      >
+                        aria-labelledby="dropdownUserAvatarButton">
                         <li>
                           <Link href="/signin">
                             <div className="block px-4 py-2  hover:text-gray-500 ">
@@ -388,9 +377,8 @@ export default function Nav() {
             as="div"
             className="lg:hidden"
             open={mobileMenuOpen}
-            onClose={() => setMobileMenuOpen(false)}
-          >
-            <Dialog.Panel className="fixed inset-0 z-50 overflow-y-auto bg-white dark:bg-black">
+            onClose={() => setMobileMenuOpen(false)}>
+            <Dialog.Panel className="fixed inset-0 overflow-y-auto bg-white dark:bg-black">
               <div className="flex items-center justify-between p-6">
                 <a href="#" className="-m-1.5 p-1.5">
                   <h1 className="text-black dark:text-white font-bold text-2xl">
@@ -402,8 +390,7 @@ export default function Nav() {
                   <button
                     type="button"
                     className="-m-2.5 rounded-md p-2.5 dark:text-white text-black"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
+                    onClick={() => setMobileMenuOpen(false)}>
                     <span className="sr-only">Close menu</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
@@ -431,16 +418,14 @@ export default function Nav() {
                     <div className="flex justify-around items-center">
                       <Link
                         href="/signin"
-                        className="flex flex-col items-center space-y-2"
-                      >
+                        className="flex flex-col items-center space-y-2">
                         <div className="rounded-lg text-base font-semibold text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300">
                           Sign in &rarr;
                         </div>
                       </Link>
                       <Link
                         href="/signup"
-                        className="flex flex-col items-center space-y-2"
-                      >
+                        className="flex flex-col items-center space-y-2">
                         <div className="rounded-lg text-base font-semibold text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300">
                           Sign up &uarr;
                         </div>
