@@ -194,7 +194,6 @@ document.getElementById("id-close-success-message").onclick = BreakSuccessMessag
 document.getElementById("id-close-error-message").onclick = BreakErrorMessage;
 //#endregion 
 
-
 window.electron.receive('ShowReview', () => 
 {
   list_item.forEach((item) => item.classList.remove("active"));
@@ -205,4 +204,16 @@ window.electron.receive('ShowReview', () =>
   RecordWhereUserIsNow(3);
 
   reviews_content.style.display = "flex";
+});
+
+window.electron.receive('ShowOrder', () => 
+{
+  list_item.forEach((item) => item.classList.remove("active"));
+  list_item[1].classList.add("active");
+
+  DisableContent();
+  HideAllAddProductMenuItems();
+  RecordWhereUserIsNow(3);
+
+  orders_content.style.display = "flex";
 });

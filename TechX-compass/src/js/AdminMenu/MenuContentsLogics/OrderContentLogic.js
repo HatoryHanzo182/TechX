@@ -1,8 +1,9 @@
 import { ShowSuccessMessage, ShowErrorMessage } from "../AdminMenu.js";
 
 /*========== Logic for loading product orders sector.==========*/
-//#region [Loading review content.]
+//#region [Loading orders content.]
 let number_orders = 0;
+let new_order_counter = 0;
 let orders = [];
 
 function LoadAllOrders() 
@@ -31,7 +32,9 @@ function LoadAllOrders()
 function UpdateOrderTable(orders) 
 {
     const order_body = document.getElementById('order-body');
+    
     order_body.innerHTML = '';
+    new_order_counter = 0;
 
     orders.forEach(order => 
     {
@@ -46,7 +49,7 @@ function UpdateOrderTable(orders)
         `).join('');
 
         order_row.innerHTML = `
-            <td class="order-td">${order._id}</td>
+            <td class="order-td">${order.viewed_admin ? order._id : `<span class="new-label" style="color: red;">NEW</span> ${order._id}`}</td>
             <td class="order-td">${products}</td>
             <td class="order-td">${order.name}</td>
             <td class="order-td">${order.phone}</td>
@@ -66,6 +69,22 @@ function UpdateOrderTable(orders)
                 </select>
             </td>
         `;
+
+        if(order.viewed_admin == false)
+        {
+            new_order_counter++;
+
+            fetch('https://techx-server.tech:443/MarkOrderVerification', 
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ _id: order._id })
+            });
+
+            window.electron.send('UpdateOrderCountForContextMenu', new_order_counter);
+
+            console.log(new_order_counter);
+        }
 
         order_body.appendChild(order_row);
     });
@@ -130,6 +149,8 @@ function FilterOrders(orders, sort_order, status_filter)
     if (status_filter !== 'all')
         filtered_orders = filtered_orders.filter(order => order.status.toLowerCase() === status_filter);
 
+    filtered_orders.reverse();
+    
     return filtered_orders;
 }
 //#endregion

@@ -45,12 +45,13 @@ function CreateMainWindow()
 
     Menu.setApplicationMenu(null);  // Set the default menu to null.
 
-    _app_window.loadFile(path.join(__dirname, 'src', 'components', 'Authorization.html'));
-    //_app_window.webContents.openDevTools();   // <-----  DevTools.
+    _app_window.loadFile(path.join(__dirname, 'src', 'components', 'AdminMenu.html'));
+    _app_window.webContents.openDevTools();   // <-----  DevTools.
 }
 
 //#region [Context menu sector]
 let review_count = 0; 
+let order_count = 0; 
 
 function CreateTray() 
 {
@@ -60,6 +61,18 @@ function CreateTray()
     {
       label: 'Open',
       click: () => { _app_window.show(); }
+    },
+    {
+        label: order_count === 0 ? 'Order' : `(${order_count}) Order`,
+        click: () => 
+        { 
+            order_count = 0;
+
+            UpdateContextMenu();
+            
+            _app_window.show();
+            _app_window.webContents.send('ShowOrder');
+        }
     },
     {
         label: review_count === 0 ? 'Reviews' : `(${review_count}) Reviews`,
@@ -103,6 +116,18 @@ function UpdateContextMenu()
       click: () => { _app_window.show(); }
     },
     {
+        label: order_count === 0 ? 'Order' : `(${order_count}) Order`,
+        click: () => 
+        { 
+            order_count = 0;
+
+            UpdateContextMenu();
+            
+            _app_window.show();
+            _app_window.webContents.send('ShowOrder');
+        }
+    },
+    {
         label: review_count === 0 ? 'Reviews' : `(${review_count}) Reviews`,
         click: () => 
         { 
@@ -141,6 +166,13 @@ app.whenReady().then(() =>  // An event handler that executes when
 ipcMain.on('UpdateReviewCountForContextMenu', (event, new_review_count) => 
 {
     review_count = new_review_count;
+
+    UpdateContextMenu();
+});
+
+ipcMain.on('UpdateOrderCountForContextMenu', (event, new_order_count) => 
+{
+    order_count = new_order_count;
 
     UpdateContextMenu();
 });
