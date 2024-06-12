@@ -732,6 +732,9 @@ document.getElementById("id-API-OK").addEventListener("click", OkApi);
 //#region [Manage sector.]
 //#region [Navigation sector.]
 const manage_products_content = document.getElementById("id-manage-product-content");
+const product_table = document.getElementById("id-table-container");
+const change_product_w = document.getElementById("id-manage-product-change-content");
+const modal_window_change_data = document.getElementById("id-manage-modal-change-data-product");
 
 function ShowContentProductManage() 
 {
@@ -740,11 +743,22 @@ function ShowContentProductManage()
 
   create_products_content.style.display = "none";
   create_products_menu.style.display = "none";
+  change_product_w.style.display = "none";
+  modal_window_change_data.style.display = "none";
   manage_products_content.style.display = "flex";
+  product_table.style.display = "block";
+}
+
+function ShowProductChangeWindow()
+{
+  product_table.style.display = "none"; 
+  change_product_w.style.display = "flex";
 }
 
 document.getElementById("id-manage-product").addEventListener("click", ShowContentProductManage);
+document.getElementById("id-back-to-product-menu7").addEventListener("click", ShowContentProductManage);
 //#endregion
+
 //#region [Table logic sector.]
 const rows_per_page = 12;
 let current_page = 1;
@@ -764,6 +778,8 @@ document.addEventListener('DOMContentLoaded', async () =>
   {
     if (event.target.classList.contains('tresh-meneger-product'))
       OnTrashIconClick.call(event.target);
+    else if (event.target.classList.contains('bruch-meneger-product'))
+      OnBrushIconClick.call(event.target);
   });
 });
 
@@ -805,6 +821,7 @@ function DisplayTable()
   if (paginated_products.length === 0) 
   {
     no_items_message.style.display = 'block';
+    
     UpdatePaginationInfo(0);
   } 
   else 
@@ -827,8 +844,9 @@ function DisplayTable()
             <option value="active">Activate</option>
             <option value="no active">Deactivate</option>
           </select>
-          <ion-icon name="trash-outline" class="tresh-meneger-product"></ion-icon>
         </td>
+        <td><ion-icon class="bruch-meneger-product" name="brush-outline"></ion-icon></td>
+        <td><ion-icon name="trash-outline" class="tresh-meneger-product"></ion-icon></td>
       `;
 
       table_body.appendChild(row);
@@ -847,8 +865,6 @@ function DisplayTable()
 
 async function OnTrashIconClick() 
 {
-  console.log("OnTrashIconClick");
-
   const row = this.closest('tr');
   const selected_brand = row.querySelectorAll('td')[2].textContent;
   const selected_model = row.querySelectorAll('td')[3].textContent;
@@ -873,6 +889,7 @@ async function OnTrashIconClick()
           if (product.status === "active")
           {
             const del_product = { category: product.category, model: product.model };
+
             await RemoveProductFromDB(del_product);
           }
     
@@ -888,6 +905,100 @@ async function OnTrashIconClick()
       } 
     });
   }
+}
+
+async function OnBrushIconClick() 
+{
+  _deleted_img = [];
+
+  const row = this.closest('tr');
+  const selected_brand = row.querySelectorAll('td')[2].textContent;
+  const selected_model = row.querySelectorAll('td')[3].textContent;
+
+  try 
+  {
+    const response = await window.electron.invoke('FindProductDetails', { brand: selected_brand, model: selected_model });
+
+    if (response.success) 
+    {
+      const product = response.product;
+      const product_info_container = document.getElementById('product-info');
+      const product_images_container = document.getElementById('product-images');
+
+      product_info_container.innerHTML = '';
+      product_images_container.innerHTML = '';
+
+      _brand = product.brand;
+      _category = product.category;
+      _model = product.model;
+      _status = product.status;
+
+      Object.keys(product).forEach(key => 
+      {
+        const key_t = key.charAt(0).toUpperCase() + key.slice(1);
+
+        if (key !== 'images' && product[key] !== null && product[key] !== undefined) 
+        {
+          if(key_t === 'Brand' || key_t === 'Category' || key_t === 'Model' || key_t === 'Status')
+            return;
+          
+          const div = document.createElement('div');
+          
+          if (key_t === 'Incarousel') 
+          {
+            div.innerHTML = `
+              <div class="check-sector">
+                <p>Add in carousel</p>
+                <label class="container-check">
+                  <input id="id-incarousel-checkbox-change-product" type="checkbox" ${product[key] ? 'checked' : ''}>
+                  <div class="checkmark"></div>
+                </label>
+              </div>`;
+          
+            const checkbox = div.querySelector('#id-incarousel-checkbox-change-product');
+
+            _new_carousel = checkbox.checked;
+
+            checkbox.addEventListener('change', function () { _new_carousel = this.checked; });
+          }
+          else 
+          {
+            div.innerHTML = `
+              <div class="change-product-data">
+                <label>${key_t}:</label>
+                <input class="card-content-product-data-input" name="text" type="text" value="${product[key]}" />
+              </div>`;
+          }
+          
+          product_info_container.appendChild(div);
+        }
+      });
+
+      product.images.forEach(image_path => 
+      {
+        const image_container = document.createElement('div');
+        
+        image_container.classList.add('image-container');
+
+        const img = document.createElement('img');
+        
+        img.src = image_path;
+        img.classList.add('product-image');
+
+        const trash_icon = document.createElement('div');
+        
+        trash_icon.classList.add('trash-icon');
+        trash_icon.innerHTML = '<ion-icon name="trash-outline"></ion-icon>';
+        trash_icon.addEventListener('click', () => RemoveImage(image_path, image_container));
+        image_container.appendChild(img);
+        image_container.appendChild(trash_icon);
+        product_images_container.appendChild(image_container);
+      });
+
+      ShowProductChangeWindow();
+    }
+  } 
+  catch (error) { console.error('Error fetching product details: ', error); }
 }
 
 function ConfirmDeletingProductFromTable() 
@@ -925,6 +1036,7 @@ function OnStatusChange()
   if (product_index !== -1) 
   {
     _products[product_index].status = new_status;
+
     UpdateProductStatusInLocalStorage(selected_model, new_status);
   }
 }
@@ -970,6 +1082,7 @@ function UpdatePaginationInfo(total_rows)
 function ChangePage(direction) 
 {
   current_page += direction;
+
   DisplayTable();
 }
 
@@ -1040,5 +1153,138 @@ function RemoveProductFromDB(product)
 }
 
 document.getElementById("id-back-to-product-menu8").addEventListener("click", BackToMainMenu);
+document.getElementById("id-button-change-product-data").addEventListener("click", ShowModaForChangeData);
+//#endregion
+
+//#region [Change logic.]
+let _deleted_img = [];
+let _img_product_paths_change_data7 = [];
+let _new_carousel;
+let _brand, _category, _model, _status;
+
+function ShowModaForChangeData()
+{
+  modal_window_change_data.style.display = "flex";
+}
+
+function CancelModaForChangeData()
+{
+  modal_window_change_data.style.display = "none";
+}
+
+function RemoveImage(image_path, image_container) 
+{
+  const product_images_container = document.getElementById('product-images');
+  
+  product_images_container.removeChild(image_container);
+
+  _deleted_img.push(image_path);
+}
+
+async function ChangeDataProduct()
+{
+  const product_info_container = document.getElementById('product-info');
+  const inputs = product_info_container.querySelectorAll('input[type="text"]');
+  const new_data = 
+  {
+    Brand: _brand,
+    Category: _category,
+    Model: _model,
+    Status: _status
+  };
+
+  inputs.forEach(input => 
+  {
+    const key = input.previousElementSibling.textContent.replace(':', '').trim();
+
+    new_data[key] = input.value;
+  });
+
+  const data = {_deleted_img, _img_product_paths_change_data7, _new_carousel, new_data}
+
+  await window.electron.invoke('UpdateCangeProductData', data).then(response => 
+  {
+    if(response.success)
+    {
+      ShowSuccessMessage(response.message);
+
+      while (drop_ul7.firstChild)
+        drop_ul7.removeChild(drop_ul7.firstChild);
+
+      _img_product_paths_change_data7 = [];
+
+      UpdateProductStatusInLocalStorage(data.new_data.Model, response.status)
+      ShowContentProductManage();
+    }
+    else
+      ShowErrorMessage(response.message);
+
+  })
+  .catch(error => { console.error("Error sending data to main process: ", error);});
+}
+
+document.getElementById("id-menege-cancel-change").addEventListener("click", CancelModaForChangeData);
+document.getElementById("id-menege-change").addEventListener("click", ChangeDataProduct);
+
+//#region [Dragandrop change product data srctor.]
+const drop_area7 = document.getElementById('drop-area-change-data');
+const custum_file_upload7 = document.getElementById('id-custum-file-upload-change-data');
+const drop_ul7 = document.getElementById('id-drop-ul-change-data');
+
+drop_area7.addEventListener('dragover', (event) => 
+{
+  event.stopPropagation();
+  event.preventDefault();
+
+  custum_file_upload7.style.border = '2px dashed #000000';
+});
+
+drop_area7.addEventListener('dragleave', (event) => { custum_file_upload7.style.border = '2px dashed #cacaca'; });
+
+drop_area7.addEventListener('drop', (event) => 
+{
+  event.stopPropagation();
+  event.preventDefault();
+
+  custum_file_upload7.style.border = '2px dashed #cacaca';
+
+  const files = event.dataTransfer.files;
+
+  for (let i = 0; i < files.length; i++) 
+  {
+    if (!files[i].type.startsWith('image/')) 
+      continue;
+    
+    const child = document.createElement('li');
+    const rm_icon = document.createElement('ion-icon');
+    const div = document.createElement('div');
+    const image_icon = document.createElement('ion-icon');
+    
+    image_icon.setAttribute('name', 'image');
+    image_icon.id = 'id-drop-image';
+    div.id = 'id-drop-div';
+    rm_icon.setAttribute('name', 'trash');
+    rm_icon.id = 'id-drop-trash'
+    child.id = 'id-drop-li'
+    child.textContent = files[i].path;
+    
+    _img_product_paths_change_data7.push(files[i].path);
+    
+    rm_icon.onclick = () => 
+    { 
+      div.removeChild(image_icon)
+      div.removeChild(child)
+      div.removeChild(rm_icon)
+      drop_ul7.removeChild(div)
+      _img_product_paths_change_data7.splice(i, 1);
+    }
+
+    div.appendChild(image_icon)
+    div.appendChild(child)
+    div.appendChild(rm_icon)
+    drop_ul7.appendChild(div)
+  }
+});
+//#endregion
 //#endregion
 //#endregion

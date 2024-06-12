@@ -1,1 +1,25 @@
-[]
+[
+  {
+    "brand": "Apple",
+    "category": "iPhone",
+    "model": "iPhone 3GS",
+    "processor": "Ты шо голова, ИНТЕЛ",
+    "memory": "JUJ",
+    "displaySize": "3.5 inches, 320 x 480 pixels",
+    "battery": "Li-Ion 1219 mAh, non-removable",
+    "os": "iOS 3, upgradable to iOS 6.1.6",
+    "camera": "3.15 MP, autofocus",
+    "color": "Black",
+    "price": "300",
+    "descont_price": "200",
+    "description": "The iPhone 3GS is a smartphone designed and marketed by Apple Inc. It is the third generation of the iPhone and was introduced in June 2009.",
+    "images": [
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\apple-iphone-3gs-16gb-black-1.1000x1000.jpg",
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\apple-iphone-3gs-16gb-black-5.1000x.jpg",
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\a372690cd305443a94ff242db35b7698.jpeg"
+    ],
+    "incarousel": false,
+    "status": "no active",
+    "displaysize": "3.5 inches, 320 x 480 pixels"
+  }
+]

@@ -337,7 +337,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   display: none;
 }
 
-#id-drop-ul-iphone {
+#id-drop-ul-change-data {
   height: 200px;
   width: 500px;
   display: flex;
@@ -755,5 +755,93 @@ table tbody tr:nth-child(even) {
 .tresh-meneger-product:hover {
   color: rgb(185, 6, 6);
   cursor: pointer;
+}
+
+.bruch-meneger-product {
+  margin-left: 30px;
+  font-size: 20px;
+}
+
+.bruch-meneger-product:hover {
+  color: rgb(0, 112, 11);
+  cursor: pointer;
+}
+/* #endregion */
+
+/* #region [Change product data sector.] */
+.change-product-data-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+  padding: 40px;
+  margin: 50px;
+  background-color: rgba(255, 255, 255, 0.414);
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.line-card-content-product-data-change {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.change-product-data {
+  display: flex;
+  padding: 5px;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 30px;
+  margin-left: 2px;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.trash-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  display: none;
+  cursor: pointer;
+}
+
+.image-container:hover .trash-icon {
+  display: block;
+}
+
+#id-drop-ul-iphone {
+  height: 200px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgb(255, 255, 255);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+  list-style-type: none;
+  padding: 10px;
+  overflow-y: auto;
 }
 /* #endregion */

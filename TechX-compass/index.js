@@ -153,16 +153,7 @@ function UpdateContextMenu()
 }
 //#endregion
 
-app.whenReady().then(() =>  // An event handler that executes when 
-{                          // the application is ready for use.
-    CreateMainWindow();
-    CreateTray();
-    
-    ipcMain.on('ShowAdminPanel', () => { _app_window.loadFile(path.join(__dirname, 'src', 'components', 'AdminMenu.html')); });
-    ipcMain.on('ShowAuthorization', () => { _app_window.loadFile(path.join(__dirname, 'src', 'components', 'Authorization.html')); });
-});
-
-//#region [Requests for context menu.]
+//#region [Requests for render processes.]
 ipcMain.on('UpdateReviewCountForContextMenu', (event, new_review_count) => 
 {
     review_count = new_review_count;
@@ -178,6 +169,14 @@ ipcMain.on('UpdateOrderCountForContextMenu', (event, new_order_count) =>
 });
 //#endregion
 
+app.whenReady().then(() =>  // An event handler that executes when 
+{                          // the application is ready for use.
+    CreateMainWindow();
+    CreateTray();
+    
+    ipcMain.on('ShowAdminPanel', () => { _app_window.loadFile(path.join(__dirname, 'src', 'components', 'AdminMenu.html')); });
+    ipcMain.on('ShowAuthorization', () => { _app_window.loadFile(path.join(__dirname, 'src', 'components', 'Authorization.html')); });
+});
 
 //#region [Requests for working with goods.]
 ipcMain.handle('AddNewProductToLocalStorage', (event, data) =>  // Handler for adding data to local storage
@@ -263,7 +262,29 @@ ipcMain.handle('GetProductsFromLocalStorage', (event) =>  // Processes a request
 
     return products;
 });
+
+ipcMain.handle('FindProductDetails', (event, data) => 
+{
+    const { brand, model } = data;
+    const file_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'product_assembly.json');
   
+    try 
+    {
+        const products = JSON.parse(fs.readFileSync(file_path));
+        const product = products.find(p => p.brand === brand && p.model === model);
+        
+        if (product) 
+          return { success: true, product };
+        else
+          return { success: false, message: 'Product not found' };
+    } 
+    catch (error) 
+    {
+      console.error('Error reading file: ', error);
+      return { success: false, message: 'Error reading file' };
+    }
+});
+
 ipcMain.handle('UpdateProductStatusInLocalStorage', async (event, new_status) =>  // Reads a JSON file containing product information
 {                                           // from the specified path, then finds the index of the product with the given model. 
                                            // If the product is found, it updates its status according to the new status passed in and 
@@ -340,6 +361,87 @@ ipcMain.handle('DeleteProductFromLocalStorage', (event, data) =>  // Processes a
     }
 
     return { success: true, message: "Product and images deleted successfully" };
+});
+
+ipcMain.handle('UpdateCangeProductData', async (event, data) =>  // Handler for updating product data in the local storage JSON file. This method:
+{                                 // - Reads the current data from the JSON file.
+                                 // - Finds the product based on brand, category, and model.
+                                // - Deletes specified images from the product's image list and filesystem.
+                               // - Adds new images to the product's image list and copies them to the local storage folder.
+                              // - Updates product details and status.
+                             // - Saves the updated product data back to the JSON file.
+                            // - Returns a success or error message indicating the result of the operation.
+    try 
+    {
+        const json_file_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'product_assembly.json');
+        const file_content = await fs.promises.readFile(json_file_path, 'utf8');
+        const products = JSON.parse(file_content);
+        const { _deleted_img, _img_product_paths_change_data7, _new_carousel, new_data } = data;
+        const product_index = products.findIndex(product =>
+            product.brand === new_data.Brand &&
+            product.category === new_data.Category &&
+            product.model === new_data.Model
+        );
+
+        if (product_index !== -1) 
+        {
+            const product = products[product_index];
+
+            _deleted_img.forEach(image_path => 
+            {
+                const image_index = product.images.indexOf(image_path);
+
+                if (image_index !== -1) 
+                {
+                    product.images.splice(image_index, 1);
+
+                    try { fs.unlinkSync(image_path); } 
+                    catch (error) { console.error(`Error deleting image file: ${image_path}`, error); }
+                }
+            });
+
+            const product_img_folder_path = path.join(__dirname, 'src', 'CompassLocalStorage', 'ProductsImg');
+
+            if (!fs.existsSync(product_img_folder_path)) 
+                fs.mkdirSync(product_img_folder_path);
+
+            const new_img_paths = [];
+
+            for (const img_path of _img_product_paths_change_data7) 
+            {
+                const img_name = path.basename(img_path);
+                const new_path = path.join(product_img_folder_path, img_name);
+
+                try 
+                {
+                    fs.copyFileSync(img_path, new_path);
+                    new_img_paths.push(new_path);
+                } 
+                catch (error) { console.error('Error copying new image file:', error); }
+            }
+
+            product.images = [...product.images, ...new_img_paths];
+            product.incarousel = _new_carousel;
+            product.status = "no active";
+
+            Object.keys(new_data).forEach(key => 
+            {
+                if (key !== 'Brand' && key !== 'Category' && key !== 'Model' && key !== 'Status') 
+                    product[key.toLowerCase()] = new_data[key];
+            });
+
+            await fs.promises.writeFile(json_file_path, JSON.stringify(products, null, 2), 'utf8');
+
+            return { success: true, message: 'Product data updated successfully', status: product.status  };
+        } 
+        else 
+            return { success: false, message: 'Product not found'};
+    } 
+    catch (error) 
+    {
+        console.error('Error updating product data:', error);
+        return { success: false, message: 'Failed to update product data', error };
+    }
 });
 //#endregion
 
