@@ -1,6 +1,5 @@
 /*==========Import Sector.==========*/
-import { changeLanguage } from "./localizationManager.js";
-import { toggleTheme } from "./dark-mode-switcher.js";
+import { toggleTheme, changeLanguage } from "./MenuContentsLogics/SettingContentLogic.js";
 import { HideAllAddProductMenuItems } from "./MenuContentsLogics/ProductContentLogic.js";
 /*========================================*/
 
@@ -20,16 +19,11 @@ const accounting_content = document.getElementById("id-accounting-content");
 const settings_content = document.getElementById("id-settings-content");
 const exit_content = document.getElementById("id-exit-content");
 let user_position_index_menu = 0;
-
-/*** Content products elements ***/
-
 /*========================================*/
-
 
 /*==========Initialization Sector.==========*/
 toggleTheme();
 /*========================================*/
-
 
 /*==========Logic of the vertical menu sector.==========*/
 menu_toggle.addEventListener("click", () => { navigation.classList.toggle("open"); });
@@ -49,7 +43,6 @@ list_item.forEach((item) =>
   });
 });
 /*========================================*/
-
 
 /*==========Content display logic sector.==========*/
 export function DisableContent() 

@@ -23,7 +23,7 @@
     align-items: center;
     text-align: center;
     border-radius: 10px;
-    background-color: rgb(255, 255, 255); /* #fff */
+    background-color: rgb(255, 255, 255);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -31,7 +31,7 @@
     margin: 0 auto 20px;
     margin-left: 42%;
     font-size: 80px;
-    color: #ff8c00;
+    color: #000000;
 }
 
 .confirmation-card h2 {

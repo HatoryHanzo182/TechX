@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/AdminMenu/AdminMenu.css" />
-    <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/ProductContentStyle.css"/>
-    <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/OrdercontentSyle.css"/>
+    <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/MenuProductContentStyle.css"/>
+    <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/MenuOrdercontentSyle.css"/>
     <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/MenuReviewsContentStyle.css"/>
+    <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/MenuSettingContentStyle.css">
     <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/MenuExitContentStyle.css">
   </head>
   <body>
@@ -995,17 +996,47 @@
       <!-- #endregion -->
       <!--#region [SETTINGS CONTENT.]-->
       <div id="id-settings-content" class="settings-content" style="display: none">
-        <div class="settings-content">
-          <h1>Settings</h1>
-          <div>
-            <label for="language-select">Select Language:</label>
-            <select id="language-select">
-              <option value="en">English</option>
-              <option value="ru">Русский</option>
-            </select>
+        <!-- Modal window change password -->
+        <div id="id-modal-settings-content" style="display: none">
+          <div class="exit-content">
+            <div class="confirmation-card">
+              <ion-icon name="construct-outline" class="exit-icon"></ion-icon>
+              <h2>Change password</h2>
+              <div class="input-group">
+                <label class="label-input-change-pass">old password</label>
+                <input autocomplete="off" class="input-change-pass" type="text">
+              <div></div></div>
+              <div class="input-group">
+                <label class="label-input-change-pass">new password</label>
+                <input autocomplete="off" class="input-change-pass" type="text">
+              <div></div></div>
+              <div class="button-container">
+                  <button id="id-cancel-change-password-setting" class="cancel-button">Cancel</button>
+                  <button id="id-change-password-setting" class="exit-button">Change</button>
+              </div>
+            </div>
           </div>
-          <input type="checkbox" id="theme-toggle" name="theme-toggle" />
-          <label for="theme-toggle"></label>
+        </div>
+        <h1>Settings</h1>
+        <div class="settings-content">
+            <div>
+                <label for="language-select">Language:</label>
+                <select id="language-select">
+                    <option value="en">English</option>
+                    <option value="ru">Русский</option>
+                </select>
+            </div>
+            <div class="toggle-wrapper">
+                <label for="theme-toggle" class="toggle-label">Dark light theme:</label>
+                <label class="switch">
+                    <input id="theme-toggle" name="theme-toggle" type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="password-change-wrapper">
+              <label for="change-password" class="password-label">Change Password:</label>
+              <button class="button-settings" id="id-change-password">Password</button>
+          </div>
         </div>
       </div>
       <!-- #endregion -->
@@ -1032,5 +1063,6 @@
   <script type="module" src="../js/AdminMenu/MenuContentsLogics/ProductContentLogic.js"></script>
   <script type="module" src="../js/AdminMenu/MenuContentsLogics/OrderContentLogic.js"></script>
   <script type="module" src="../js/AdminMenu/MenuContentsLogics/ReviewsContentLogic.js"></script>
+  <script type="module" src="../js/AdminMenu/MenuContentsLogics/SettingContentLogic.js"></script>
   <script type="module" src="../js/AdminMenu/MenuContentsLogics/ExitContentLogic.js"></script>
 </html>

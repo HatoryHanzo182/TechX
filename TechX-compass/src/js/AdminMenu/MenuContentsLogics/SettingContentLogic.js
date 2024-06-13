@@ -1,3 +1,47 @@
+//#region [Modal window settings.]
+const _change_password_mw = document.getElementById("id-modal-settings-content");
+
+function ShowModalWindowChangePassword() { _change_password_mw.style.display = "flex"; }
+
+function CloseModalWindowChangePassword() { _change_password_mw.style.display = "none"; }
+
+document.getElementById("id-change-password").addEventListener('click', ShowModalWindowChangePassword);
+document.getElementById("id-cancel-change-password-setting").addEventListener('click', CloseModalWindowChangePassword);
+//#endregion
+
+//#region [Dark light theme.]
+export const toggleTheme = () => 
+{
+    const body = document.body;
+    const isDarkTheme = localStorage.getItem("darkTheme") === "true";
+
+    if (isDarkTheme) 
+    {
+      body.classList.add("dark-theme");
+
+      document.getElementById("theme-toggle").click();
+    } 
+    else
+      body.classList.remove("dark-theme");
+
+    document.getElementById("theme-toggle").addEventListener("change", function () 
+    {
+      if (this.checked) 
+      {
+        body.classList.add("dark-theme");
+        
+        localStorage.setItem("darkTheme", "true");
+      } 
+      else 
+      {
+        body.classList.remove("dark-theme");
+        localStorage.setItem("darkTheme", "false");
+      }
+    });
+};
+//#endregion
+
+//#region [Localization.]
 // INFO: Async load and return localization data from a JSON file
 const loadLocalization = async (language) => 
 {
@@ -56,3 +100,4 @@ export const changeLanguage = async (language, list_item) =>
   document.querySelector("#id-cancel-exit").textContent = localization["exit"]["cancel_button"];
   document.querySelector("#id-exit-exit").textContent = localization["exit"]["exit_button"];
 };
+//#endregion
