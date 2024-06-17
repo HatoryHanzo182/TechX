@@ -42,7 +42,8 @@ function ProductSelection() {
 
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => 
+  {
     const ToGetData = async (type_p) => {
       setProducts([]);
       try {

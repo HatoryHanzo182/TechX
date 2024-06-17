@@ -49,13 +49,13 @@ const Signup = () => {
       if (existing_user) {
         showAlert(true);
         setError("User exists");
-        console.error("User exists", error); //  <<---- Пользователь уже существует.
+        console.error("User exists", error);
         return;
       } else {
         SetisModalConfirmMailOpen(true);
 
         const SendConf = await fetch(
-          "https://techx-server.tech:443/SendConfirmationCodeEmail", //  <<---- Отправляем код подтверждения.
+          "https://techx-server.tech:443/SendConfirmationCodeEmail",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ const Signup = () => {
 
     if (conf_u === code) {
       const res = await fetch(
-        "https://techx-server.tech:443/NewUser", //  <<---- Добавим пользователя.
+        "https://techx-server.tech:443/NewUser",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

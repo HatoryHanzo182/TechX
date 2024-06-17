@@ -92,7 +92,6 @@ export default async function Home() {
               title="Macbook"
             />
           </Link>
-
           <Link href={{ pathname: "/product", query: { type: "Ipad" } }}>
             <ProductCatalog
               image="https://img.jabko.ua/image/cache/home_cats/ipad-pcfull.jpg.webp"

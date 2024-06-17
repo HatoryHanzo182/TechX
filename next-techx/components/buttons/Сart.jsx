@@ -32,7 +32,7 @@ const Cart = () =>
     SetStoredArray(JSON.parse(localStorage.getItem("Cart")) || []);
   }, []);
 
-  useEffect(() => {
+  useEffect(() => { 
     const interval = setInterval(() => {
       const cartData = JSON.parse(localStorage.getItem("Cart")) || [];
       SetStoredArray(cartData);
