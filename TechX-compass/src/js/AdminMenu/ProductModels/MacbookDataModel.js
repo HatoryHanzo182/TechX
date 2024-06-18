@@ -10,7 +10,7 @@ export class MackbookDataModel
     #GPU;
     #memory;
     #RAM;
-    #displaySize;
+    #display_size;
     #battery;
     #os;
     #camera;
@@ -32,7 +32,7 @@ export class MackbookDataModel
         this.#GPU = inputs[5].value;
         this.#memory = inputs[6].value;
         this.#RAM = inputs[7].value;
-        this.#displaySize = inputs[8].value;
+        this.#display_size = inputs[8].value;
         this.#battery = inputs[9].value;
         this.#os = inputs[10].value;
         this.#camera = inputs[11].value;
@@ -57,7 +57,7 @@ export class MackbookDataModel
             GPU: this.#GPU,
             memory: this.#memory,
             RAM: this.#RAM,
-            displaySize: this.#displaySize,
+            display_size: this.#display_size,
             battery: this.#battery,
             os: this.#os,
             camera: this.#camera,

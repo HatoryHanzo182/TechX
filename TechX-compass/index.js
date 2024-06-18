@@ -435,7 +435,10 @@ ipcMain.handle('UpdateCangeProductData', async (event, data) =>  // Handler for 
             Object.keys(new_data).forEach(key => 
             {
                 if (key !== 'Brand' && key !== 'Category' && key !== 'Model' && key !== 'Status') 
+                {
                     product[key.toLowerCase()] = new_data[key];
+                    console.log(key.toLowerCase());
+                }
             });
 
             await fs.promises.writeFile(json_file_path, JSON.stringify(products, null, 2), 'utf8');

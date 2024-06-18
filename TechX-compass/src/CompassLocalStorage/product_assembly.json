@@ -2,24 +2,23 @@
   {
     "brand": "Apple",
     "category": "iPhone",
-    "model": "iPhone 3GS",
-    "processor": "600 MHz Cortex-A8",
-    "memory": "256 MB",
-    "displaySize": "256 MB RAM",
-    "battery": "Li-Ion 1219 mAh, non-removable",
-    "os": "iOS 3, upgradable to iOS 6.1.6",
-    "camera": "3.15 MP, autofocus",
-    "color": "Black, White",
-    "price": "400",
-    "descont_price": "299.99",
-    "description": "The iPhone 3GS is a smartphone designed and marketed by Apple Inc. It is the third generation of the iPhone and was introduced in June 2009. The iPhone 3GS offers faster performance, improved camera, and voice control compared to its predecessor, the iPhone 3G.",
+    "model": "123",
+    "processor": "123",
+    "memory": "123",
+    "display_size": "123",
+    "battery": "123",
+    "os": "123",
+    "camera": "123",
+    "color": "123",
+    "price": "123",
+    "descont_price": "122",
+    "description": "123123123123",
     "images": [
       "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\apple-iphone-3gs-16gb-black-5.1000x.jpg",
       "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\a372690cd305443a94ff242db35b7698.jpeg",
       "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\apple-iphone-3gs-16gb-black-1.1000x1000.jpg"
     ],
     "incarousel": true,
-    "status": "active",
-    "displaysize": "3.5 inches, 320 x 480 pixels"
+    "status": "no active"
   }
 ]

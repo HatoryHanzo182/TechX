@@ -7,7 +7,7 @@ export class IphoneDataModel
     #model;
     #processor;
     #memory;
-    #displaySize;
+    #display_size;
     #battery;
     #os;
     #camera;
@@ -26,7 +26,7 @@ export class IphoneDataModel
         this.#model = inputs[2].value;
         this.#processor = inputs[3].value;
         this.#memory = inputs[4].value;
-        this.#displaySize = inputs[5].value;
+        this.#display_size = inputs[5].value;
         this.#battery = inputs[6].value;
         this.#os = inputs[7].value;
         this.#camera = inputs[8].value;
@@ -48,7 +48,7 @@ export class IphoneDataModel
             model: this.#model,
             processor: this.#processor,
             memory: this.#memory,
-            displaySize: this.#displaySize,
+            display_size: this.#display_size,
             battery: this.#battery,
             os: this.#os,
             camera: this.#camera,

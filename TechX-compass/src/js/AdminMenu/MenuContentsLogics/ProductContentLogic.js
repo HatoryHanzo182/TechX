@@ -1120,6 +1120,9 @@ async function AddProduct(product)
   }
   
   const new_produc_object = { product, server_img: img_path_genirated_server };
+
+  console.log(new_produc_object.product);
+
   const res_user_exists = await fetch("https://techx-server.tech:443/AddProduct",
   {
     method: "POST",
@@ -1202,8 +1205,11 @@ async function ChangeDataProduct()
 
   const data = {_deleted_img, _img_product_paths_change_data7, _new_carousel, new_data}
 
+  console.log(data);
+  
   await window.electron.invoke('UpdateCangeProductData', data).then(response => 
   {
+    
     if(response.success)
     {
       ShowSuccessMessage(response.message);
