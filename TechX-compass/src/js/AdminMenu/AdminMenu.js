@@ -15,7 +15,6 @@ export const products_content = document.getElementById("id-products-content");
 const orders_content = document.getElementById("id-orders-content");
 const activity_content = document.getElementById("id-activity-content");
 const reviews_content = document.getElementById("id-reviews-content");
-const accounting_content = document.getElementById("id-accounting-content");
 const settings_content = document.getElementById("id-settings-content");
 const exit_content = document.getElementById("id-exit-content");
 let user_position_index_menu = 0;
@@ -51,7 +50,6 @@ export function DisableContent()
   orders_content.style.display = "none";
   activity_content.style.display = "none";
   reviews_content.style.display = "none";
-  accounting_content.style.display = "none";
   settings_content.style.display = "none";
   exit_content.style.display = "none";
 }
@@ -100,19 +98,10 @@ list_item[4].addEventListener("click", () =>
   HideAllAddProductMenuItems();
   RecordWhereUserIsNow(4);
 
-  accounting_content.style.display = "flex";
-});
-
-list_item[5].addEventListener("click", () => 
-{
-  DisableContent();
-  HideAllAddProductMenuItems();
-  RecordWhereUserIsNow(5);
-
   settings_content.style.display = "flex";
 });
 
-list_item[6].addEventListener("click", () => 
+list_item[5].addEventListener("click", () => 
 {
   DisableContent();
   HideAllAddProductMenuItems();
@@ -135,11 +124,9 @@ export function ReturnToPreviousTab()
   else if (user_position_index_menu === 3)
     reviews_content.style.display = "flex";
   else if (user_position_index_menu === 4)
-    accounting_content.style.display = "flex";
-  else if (user_position_index_menu === 5)
     settings_content.style.display = "flex";
 
-  list_item[6].classList.remove("active");
+  list_item[5].classList.remove("active");
   list_item[user_position_index_menu].classList.add("active");
 }
 

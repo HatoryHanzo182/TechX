@@ -87,6 +87,10 @@ function CreateTray()
         }
     },
     {
+        label: 'Block',
+        click: () => {  _app_window.loadFile(path.join(__dirname, 'src', 'components', 'Authorization.html')); }
+    },
+    {
       label: 'Close',
       click: () =>
       { 
@@ -138,6 +142,10 @@ function UpdateContextMenu()
             _app_window.show();
             _app_window.webContents.send('ShowReview');
         }
+    },
+        {
+        label: 'Block',
+        click: () => {  _app_window.loadFile(path.join(__dirname, 'src', 'components', 'Authorization.html')); }
     },
     {
       label: 'Close',
