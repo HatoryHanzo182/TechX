@@ -5,7 +5,7 @@ export const authOptions = {
   // Список провайдеров аутентификации
   providers: [
     // Конфигурация провайдера Google
-    GoogleProvider({
+    GoogleProvider({  
       clientId: process.env.GOOGLE_CLIENT_ID,  // Идентификатор клиента, полученный из Google Console (в тг кину env файл)
       clientSecret: process.env.GOOGLE_CLIENT_SECRET, // Секрет клиента, полученный из Google Console
     }),
