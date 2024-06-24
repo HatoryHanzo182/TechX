@@ -1,0 +1,156 @@
+{
+  "product_management": {
+    "label": "Управління продуктами",
+    "create_new_product": "Створити новий продукт",
+    "create_new_product_desc": "Тут ви можете створити продукт для свого веб-сайту. Деякі моделі автомобілів вже збережені, тому вам не потрібно вручну заповнювати всі характеристики. Після створення продукту перейдіть на вкладку 'Усі продукти'.",
+    "edit_product": "Редагувати продукт",
+    "edit_product_desc": "Редагувати дані ваших продуктів.",
+    "manage_products": "Управління продуктами",
+    "manage_products_desc": "Переглянути та керувати всіма вашими продуктами."
+  },
+  "orders": {
+    "label": "Замовлення",
+    "search_placeholder": "Пошук за моделлю або брендом",
+    "sort_options": {
+      "newest_first": "Спочатку нові",
+      "oldest_first": "Спочатку старі"
+    },
+    "filter_status_options": {
+      "all": "Усі",
+      "pending": "Очікування",
+      "confirmed": "Підтверджено",
+      "shipped": "Відправлено",
+      "received": "Отримано",
+      "cancelled": "Скасовано"
+    },
+    "table_headers": {
+      "order_id": "ID замовлення",
+      "products": "Продукти",
+      "name": "Ім'я",
+      "phone": "Телефон",
+      "email": "Електронна пошта",
+      "city": "Місто",
+      "address": "Адреса",
+      "payment": "Оплата",
+      "sum": "Сума",
+      "date": "Дата",
+      "status": "Статус"
+    },
+    "no_items_message": {
+      "title": "Ми нічого не знайшли",
+      "message": "Ми не знайшли продукт у жодній підходящій категорії"
+    }
+  },
+  "activity": {
+    "label": "Активність",
+    "analytics": "Аналітика продуктів"
+  },
+  "user_reviews": {
+    "label": "Відгуки користувачів",
+    "no_reviews_message": {
+      "title": "Немає відгуків про продукт",
+      "message": "На даний момент немає відгуків про жоден з продуктів, якщо щось з'явиться, ми негайно вас повідомимо"
+    },
+    "no_search_results_message": {
+      "title": "Ми нічого не знайшли",
+      "message": "Пошук можливий тільки за ім'ям відправника, датою та заголовком"
+    },
+    "delete_review": {
+      "confirmation_title": "Видалити цей відгук?",
+      "confirmation_message": "Ви впевнені, що хочете видалити цей відгук? Після видалення він більше не відображатиметься на сайті та не може бути відновлений.",
+      "cancel_button": "Скасувати",
+      "delete_button": "Видалити"
+    }
+  },
+  "settings": {
+    "label": "Налаштування",
+    "language_select_label": "Мова:",
+    "theme_button": "Темна світла тема:",
+    "change_password": {
+      "button": "Змінити пароль",
+      "modal_title": "Змінити пароль",
+      "old_password_label": "старий пароль",
+      "new_password_label": "новий пароль",
+      "cancel_button": "Скасувати",
+      "change_button": "Змінити"
+    }
+  },
+  "exit": {
+    "label": "Вихід",
+    "confirmation_title": "Підтвердження виходу",
+    "confirmation_message": "Ви впевнені, що хочете вийти з панелі адміністратора?",
+    "cancel_button": "Скасувати",
+    "exit_button": "Вийти"
+  },
+  "product_data": {
+    "back_menu": "Повернутися",
+    "add_iphone": "Додати IPhone",
+    "upload_image": "Завантажити зображення",
+    "brand_placeholder": "Бренд",
+    "basic_data": "Основні дані",
+    "model_placeholder": "Модель",
+    "basic_iphone_data": "Основні дані iPhone.",
+    "characteristics": "Характеристики",
+    "processor_placeholder": "Процесор",
+    "memory_placeholder": "Пам'ять",
+    "display_size_placeholder": "Розмір екрану",
+    "battery_placeholder": "Батарея",
+    "internal_characteristics_iphone": "Внутрішні характеристики телефону.",
+    "camera": "Камера",
+    "main_camera_placeholder": "Основна камера",
+    "pixels_camera_iphone": "Пікселі камери iPhone.",
+    "color": "Колір",
+    "color_placeholder": "Колір",
+    "color_iphone": "Колір iPhone.",
+    "for_store": "Для магазину",
+    "price_placeholder": "Ціна '$'",
+    "discount_placeholder": "Знижка 'Не обов'язково'",
+    "description_placeholder": "Опис",
+    "add_in_carousel": "Додати в карусель",
+    "data_for_techx_store": "Дані для магазину TechX.",
+    "add_iphone_button": "Додати IPhone",
+    "add_macbook": "Додати Macbook",
+    "add_ipad": "Додати IPad",
+    "add_airpods": "Додати AirPods",
+    "add_apple_watch": "Додати Watch",
+    "add_console": "Додати Консоль",
+    "internal_characteristics_macbook": "Внутрішні характеристики Macbook.",
+    "basic_macbook_data": "Основні дані Macbook.",
+    "pixels_camera_macbook": "Пікселі камери Macbook.",
+    "color_macbook": "Колір Macbook.",
+    "add_macbook_button": "Додати Macbook",
+    "basic_ipad_data": "Основні дані iPad.",
+    "basic_airpods_data": "Основні дані AirPods.",
+    "basic_apple_watch_data": "Основні дані Watch.",
+    "basic_console_data": "Основні дані Консолі.",
+    "internal_characteristics_ipad": "Внутрішні характеристики iPad.",
+    "internal_characteristics_airpods": "Внутрішні характеристики AirPods.",
+    "internal_characteristics_apple_watch": "Внутрішні характеристики Watch.",
+    "internal_characteristics_console": "Внутрішні характеристики Консолі.",
+    "color_ipad": "Колір iPad.",
+    "color_airpods": "Колір AirPods.",
+    "color_apple_watch": "Колір Watch.",
+    "color_console": "Колір Консолі.",
+    "pixels_camera_ipad": "Пікселі камери iPad."
+  },
+  "status_filter": {
+    "all_status": "Усі статуси",
+    "active": "Активний",
+    "no_active": "Неактивний"
+  },
+  "product_table": {
+    "image": "Зображення",
+    "category": "Категорія",
+    "brand": "Бренд",
+    "model": "Модель",
+    "price": "Ціна",
+    "discount": "Знижка",
+    "status": "Статус",
+    "change": "Змінити",
+    "delete": "Видалити",
+    "prev": "Поперед",
+    "next": "Далі",
+    "update_data": "Оновити дані",
+    "change_data": "Змінити дані"
+  }
+}

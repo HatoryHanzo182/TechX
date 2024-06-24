@@ -1,5 +1,5 @@
 /*==========Import Sector.==========*/
-import { toggleTheme, changeLanguage } from "./MenuContentsLogics/SettingContentLogic.js";
+import { toggleTheme } from "./MenuContentsLogics/SettingContentLogic.js";
 import { HideAllAddProductMenuItems } from "./MenuContentsLogics/ProductContentLogic.js";
 /*========================================*/
 
@@ -25,17 +25,17 @@ toggleTheme();
 /*========================================*/
 
 /*==========Logic of the vertical menu sector.==========*/
-menu_toggle.addEventListener("click", () => { navigation.classList.toggle("open"); });
+menu_toggle.addEventListener("click", () => {
+  navigation.classList.toggle("open");
+});
 
 list_item.forEach((item) => item.classList.remove("active"));
 
 list_item[0].classList.add("active");
 products_content.style.display = "flex";
 
-list_item.forEach((item) => 
-{
-  item.addEventListener("click", () => 
-  {
+list_item.forEach((item) => {
+  item.addEventListener("click", () => {
     list_item.forEach((item) => item.classList.remove("active"));
 
     item.classList.add("active");
@@ -44,8 +44,7 @@ list_item.forEach((item) =>
 /*========================================*/
 
 /*==========Content display logic sector.==========*/
-export function DisableContent() 
-{
+export function DisableContent() {
   products_content.style.display = "none";
   orders_content.style.display = "none";
   activity_content.style.display = "none";
@@ -54,19 +53,19 @@ export function DisableContent()
   exit_content.style.display = "none";
 }
 
-function RecordWhereUserIsNow(menu_item_index) { user_position_index_menu = menu_item_index; }
+function RecordWhereUserIsNow(menu_item_index) {
+  user_position_index_menu = menu_item_index;
+}
 
-list_item[0].addEventListener("click", () => 
-{
+list_item[0].addEventListener("click", () => {
   DisableContent();
   HideAllAddProductMenuItems();
   RecordWhereUserIsNow(0);
-  
+
   products_content.style.display = "flex";
 });
 
-list_item[1].addEventListener("click", () => 
-{
+list_item[1].addEventListener("click", () => {
   DisableContent();
   HideAllAddProductMenuItems();
   RecordWhereUserIsNow(1);
@@ -74,17 +73,15 @@ list_item[1].addEventListener("click", () =>
   orders_content.style.display = "flex";
 });
 
-list_item[2].addEventListener("click", () => 
-{
+list_item[2].addEventListener("click", () => {
   DisableContent();
-  HideAllAddProductMenuItems()
+  HideAllAddProductMenuItems();
   RecordWhereUserIsNow(2);
 
   activity_content.style.display = "flex";
 });
 
-list_item[3].addEventListener("click", () => 
-{
+list_item[3].addEventListener("click", () => {
   DisableContent();
   HideAllAddProductMenuItems();
   RecordWhereUserIsNow(3);
@@ -92,8 +89,7 @@ list_item[3].addEventListener("click", () =>
   reviews_content.style.display = "flex";
 });
 
-list_item[4].addEventListener("click", () => 
-{
+list_item[4].addEventListener("click", () => {
   DisableContent();
   HideAllAddProductMenuItems();
   RecordWhereUserIsNow(4);
@@ -101,8 +97,7 @@ list_item[4].addEventListener("click", () =>
   settings_content.style.display = "flex";
 });
 
-list_item[5].addEventListener("click", () => 
-{
+list_item[5].addEventListener("click", () => {
   DisableContent();
   HideAllAddProductMenuItems();
 
@@ -111,12 +106,10 @@ list_item[5].addEventListener("click", () =>
 /*========================================*/
 
 /*========== Logic for exiting the admin panel sector.==========*/
-export function ReturnToPreviousTab() 
-{
+export function ReturnToPreviousTab() {
   exit_content.style.display = "none";
 
-  if (user_position_index_menu === 0) 
-    products_content.style.display = "flex";
+  if (user_position_index_menu === 0) products_content.style.display = "flex";
   else if (user_position_index_menu === 1)
     orders_content.style.display = "flex";
   else if (user_position_index_menu === 2)
@@ -130,52 +123,55 @@ export function ReturnToPreviousTab()
   list_item[user_position_index_menu].classList.add("active");
 }
 
-document.getElementById("language-select").addEventListener("change", function () { changeLanguage(this.value, list_item); });
 /*========================================*/
 
 //#region [Message display logic.]
-export function ShowSuccessMessage(mess)  // <-- Displaying the Success window.
-{
-    const success_message = document.getElementById("id-notification");
-    const message = document.getElementById("id-message-success");
+export function ShowSuccessMessage(mess) {
+  // <-- Displaying the Success window.
+  const success_message = document.getElementById("id-notification");
+  const message = document.getElementById("id-message-success");
 
-    message.innerText = mess;
-    success_message.style.display = "flex";
+  message.innerText = mess;
+  success_message.style.display = "flex";
 
-    setTimeout(() => {  success_message.style.display = "none"; }, 4000);
-}
-
-export function ShowErrorMessage(mess)  // <-- Displaying the Error window.
-{
-    const error_message = document.getElementById("id-error-review");
-    const message = document.getElementById("id-error-review-message");
-
-    message.innerText = mess;
-    error_message.style.display = "flex";
-
-    setTimeout(() => {  error_message.style.display = "none"; }, 4000);
-}
-
-function BreakSuccessMessage()  // <-- Break displaying the success window.
-{
-    const success_message = document.getElementById("id-notification");
-    
+  setTimeout(() => {
     success_message.style.display = "none";
+  }, 4000);
 }
 
-function BreakErrorMessage()  // <-- Break displaying the error window.
-{
-    const error_message = document.getElementById("id-error-review");
-    
+export function ShowErrorMessage(mess) {
+  // <-- Displaying the Error window.
+  const error_message = document.getElementById("id-error-review");
+  const message = document.getElementById("id-error-review-message");
+
+  message.innerText = mess;
+  error_message.style.display = "flex";
+
+  setTimeout(() => {
     error_message.style.display = "none";
+  }, 4000);
 }
 
-document.getElementById("id-close-success-message").onclick = BreakSuccessMessage;
-document.getElementById("id-close-error-message").onclick = BreakErrorMessage;
-//#endregion 
+function BreakSuccessMessage() {
+  // <-- Break displaying the success window.
+  const success_message = document.getElementById("id-notification");
 
-window.electron.receive('ShowReview', () => 
-{
+  success_message.style.display = "none";
+}
+
+function BreakErrorMessage() {
+  // <-- Break displaying the error window.
+  const error_message = document.getElementById("id-error-review");
+
+  error_message.style.display = "none";
+}
+
+document.getElementById("id-close-success-message").onclick =
+  BreakSuccessMessage;
+document.getElementById("id-close-error-message").onclick = BreakErrorMessage;
+//#endregion
+
+window.electron.receive("ShowReview", () => {
   list_item.forEach((item) => item.classList.remove("active"));
   list_item[3].classList.add("active");
 
@@ -186,8 +182,7 @@ window.electron.receive('ShowReview', () =>
   reviews_content.style.display = "flex";
 });
 
-window.electron.receive('ShowOrder', () => 
-{
+window.electron.receive("ShowOrder", () => {
   list_item.forEach((item) => item.classList.remove("active"));
   list_item[1].classList.add("active");
 

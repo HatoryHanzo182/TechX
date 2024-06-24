@@ -62,7 +62,7 @@ function UpdateChart()
         borderWidth: 1
       }
     ]
-    };
+  };
 
   const config_product_analitic = 
   {
@@ -78,7 +78,7 @@ function UpdateChart()
           beginAtZero: true
         }
       }
-    }
+    },
   };
 
   const ctx = document.getElementById('id-product-chart').getContext('2d');

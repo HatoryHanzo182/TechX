@@ -12,6 +12,7 @@
 .orders-content > .table-container {
     margin-left: -2%;
     width: 113%;
+    background:var(--background-color);
 }
 
 /* Table wrapper with horizontal scroll */
@@ -27,13 +28,16 @@
     table-layout: auto;
     border-collapse: collapse;
     margin: 20px 0;
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: var(--background-color);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .order-head {
-    background-color: #000000;
-    color: white;
+    /* background-color: #000000; */
+    background-color: var(--text-color);
+    /* color: white; */
+    color: var(--background-color);
 }
 
 .order-th,
@@ -50,11 +54,14 @@
 }
 
 .order-body tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: var(--background-color);
+    /* background-color: #f2f2f2; */
 }
 
 .order-body tr:hover {
-    background-color: #f1f1f1;
+    background-color: var(--text-color);
+    color:var(--background-color);
+    /* background-color: #f1f1f1; */
 }
 
 .status {

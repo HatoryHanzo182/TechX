@@ -1,5 +1,5 @@
 /*---------------------
-  Style for admin menu 
+  Style for admin menu
   elements.
 -----------------------*/
 * {
@@ -12,178 +12,24 @@
 body {
   background-color: var(--background-color);
   color: var(--text-color);
-  background-image: url('../../img/WallpeperAdminMenu.jpg');
-  background-size: cover;
+  background-image: var(--background-image);
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-size: cover;
 }
 
 /* INFO: White theme colors */
 :root {
   --background-color: #ffffff;
   --text-color: #000000;
-  --background-image: radial-gradient(
-      circle at 100% 150%,
-      silver 24%,
-      white 24%,
-      white 28%,
-      silver 28%,
-      silver 36%,
-      white 36%,
-      white 40%,
-      transparent 40%,
-      transparent
-    ),
-    radial-gradient(
-      circle at 0 150%,
-      silver 24%,
-      white 24%,
-      white 28%,
-      silver 28%,
-      silver 36%,
-      white 36%,
-      white 40%,
-      transparent 40%,
-      transparent
-    ),
-    radial-gradient(
-      circle at 50% 100%,
-      white 10%,
-      silver 10%,
-      silver 23%,
-      white 23%,
-      white 30%,
-      silver 30%,
-      silver 43%,
-      white 43%,
-      white 50%,
-      silver 50%,
-      silver 63%,
-      white 63%,
-      white 71%,
-      transparent 71%,
-      transparent
-    ),
-    radial-gradient(
-      circle at 100% 50%,
-      white 5%,
-      silver 5%,
-      silver 15%,
-      white 15%,
-      white 20%,
-      silver 20%,
-      silver 29%,
-      white 29%,
-      white 34%,
-      silver 34%,
-      silver 44%,
-      white 44%,
-      white 49%,
-      transparent 49%,
-      transparent
-    ),
-    radial-gradient(
-      circle at 0 50%,
-      white 5%,
-      silver 5%,
-      silver 15%,
-      white 15%,
-      white 20%,
-      silver 20%,
-      silver 29%,
-      white 29%,
-      white 34%,
-      silver 34%,
-      silver 44%,
-      white 44%,
-      white 49%,
-      transparent 49%,
-      transparent
-    );
+  --background-image: url("../../img/WallpaperAdminMenu.jpg");
 }
 
 /* INFO: Dark theme colors */
 .dark-theme {
   --background-color: #000000;
   --text-color: #ffffff;
-  --background-image: radial-gradient(
-      circle at 100% 150%,
-      #333 24%,
-      #111 24%,
-      #111 28%,
-      #333 28%,
-      #333 36%,
-      #111 36%,
-      #111 40%,
-      transparent 40%,
-      transparent
-    ),
-    radial-gradient(
-      circle at 0 150%,
-      #333 24%,
-      #111 24%,
-      #111 28%,
-      #333 28%,
-      #333 36%,
-      #111 36%,
-      #111 40%,
-      transparent 40%,
-      transparent
-    ),
-    radial-gradient(
-      circle at 50% 100%,
-      #111 10%,
-      #333 10%,
-      #333 23%,
-      #111 23%,
-      #111 30%,
-      #333 30%,
-      #333 43%,
-      #111 43%,
-      #111 50%,
-      #333 50%,
-      #333 63%,
-      #111 63%,
-      #111 71%,
-      transparent 71%,
-      transparent
-    ),
-    radial-gradient(
-      circle at 100% 50%,
-      #111 5%,
-      #333 5%,
-      #333 15%,
-      #111 15%,
-      #111 20%,
-      #333 20%,
-      #333 29%,
-      #111 29%,
-      #111 34%,
-      #333 34%,
-      #333 44%,
-      #111 44%,
-      #111 49%,
-      transparent 49%,
-      transparent
-    ),
-    radial-gradient(
-      circle at 0 50%,
-      #111 5%,
-      #333 5%,
-      #333 15%,
-      #111 15%,
-      #111 20%,
-      #333 20%,
-      #333 29%,
-      #111 29%,
-      #111 34%,
-      #333 34%,
-      #333 44%,
-      #111 44%,
-      #111 49%,
-      transparent 49%,
-      transparent
-    );
+  --background-image: url("../../img/WallpaperAdminMenuDarkTheme.png");
 }
 
 /* #region [Scrollbar style sector.] */
@@ -252,6 +98,7 @@ body {
 .scrollbar-horizontal::-webkit-scrollbar-thumb:active {
   background-color: #1f2931;
 }
+
 /* #endregion */
 
 /* #region [Sector vertical menu styles.] */
@@ -274,7 +121,8 @@ body {
   top: 0;
   bottom: 0;
   left: 0;
-  background-color: var(--background-color); /* #fff */
+  background-color: var(--background-color);
+  /* #fff */
   transition: 0.5s;
   z-index: 1000;
 }
@@ -289,7 +137,7 @@ body {
   left: 0;
   width: 100%;
   height: 60px;
-  border-bottom: 1px solid var(--text-color); /* rgba(0, 0, 0, 0.25) */
+  border-bottom: 1px solid var(--text-color);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -405,7 +253,7 @@ body {
   height: 60px;
   display: flex;
   align-items: center;
-  color: var(--text-color); /* #333 */
+  color: var(--text-color);
   opacity: 0;
   visibility: hidden;
   transition: 0.5s;
@@ -419,6 +267,7 @@ body {
 .navigation ul li.active a .text {
   color: var(--color);
 }
+
 /* #endregion */
 
 /* #region [Notification good.] */
@@ -427,13 +276,24 @@ body {
   top: 30px;
   right: 0;
   display: none;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   width: 320px;
   padding: 12px;
   flex-direction: row;
   align-items: center;
   justify-content: start;
-  background: #84D65A;
+  background: #84d65a;
   border-radius: 8px;
   box-shadow: 0px 0px 5px -3px #111;
   z-index: 1000;
@@ -448,13 +308,13 @@ body {
 }
 
 .success__icon path {
-  fill: #393A37;
+  fill: #393a37;
 }
 
 .success__title {
   font-weight: 500;
   font-size: 14px;
-  color: #393A37;
+  color: #393a37;
 }
 
 .success__close {
@@ -465,13 +325,14 @@ body {
 }
 
 .success__close path {
-  fill: #393A37;
+  fill: #393a37;
 }
+
 /* #endregion */
 
 /* #region [Error message sector.] */
 .error {
-  position: fixed; 
+  position: fixed;
   top: 30px;
   right: 0;
   align-self: flex-end;
@@ -482,7 +343,18 @@ body {
   margin-bottom: 500px;
   padding: 12px;
   width: 320px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   background: #e91c0d;
   border-radius: 8px;
   box-shadow: 0px 0px 5px -3px #111;
@@ -522,6 +394,7 @@ body {
   from {
     transform: translateX(100%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -531,10 +404,12 @@ body {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(100%);
   }
 }
+
 /* #endregion */
 
 /*---------------------
@@ -575,3 +450,22 @@ body {
   cursor: pointer;
   transition: background-color 0.3s;
 } */
+
+/* #region Edit product sector */
+
+#id-table-container{
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+#id-manage-product-change-content input {
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+#id-manage-product-change-content input:hover{
+  background: var(--text-color);
+  color: var(--background-color);
+}
+
+/* #endregion */

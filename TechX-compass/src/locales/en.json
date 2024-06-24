@@ -2,20 +2,78 @@
   "product_management": {
     "label": "Product Management",
     "create_new_product": "Create new product",
-    "create_new_product_desc": "Here you can create a product for your website. Some of the vehicle models are already saved, so you do not have to manually fill in all the characteristics. After creating the product, go to the \"All Products\" tab.",
-    "edit_product": "Edit product",
-    "edit_product_desc": "Here you can edit the content of your products. Attention, only those products that are not yet listed on the site are edited.",
-    "manage_products": "Display and manage all products",
-    "manage_products_desc": "All your products will be displayed here. After adding products, you can display it on the site, or leave the best time. If the product is no longer needed, the delete function is available."
+    "create_new_product_desc": "Here you can create a product for your website. Some of the vehicle models are already saved, so you do not have to manually fill in all the characteristics. After creating the product, go to the 'All Products' tab.",
+    "edit_product": "Edit Product",
+    "edit_product_desc": "Edit the details of your products.",
+    "manage_products": "Manage Products",
+    "manage_products_desc": "View and manage all your products."
   },
-  "orders": "Orders",
-  "activity": "Activity",
-  "user_reviews": "User reviews",
-  "sales_accounting": "Sales accounting",
+  "orders": {
+    "label": "Orders",
+    "search_placeholder": "Search by model or brand",
+    "sort_options": {
+      "newest_first": "Newest First",
+      "oldest_first": "Oldest First"
+    },
+    "filter_status_options": {
+      "all": "All",
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "shipped": "Shipped",
+      "received": "Received",
+      "cancelled": "Cancelled"
+    },
+    "table_headers": {
+      "order_id": "Order ID",
+      "products": "Products",
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "city": "City",
+      "address": "Address",
+      "payment": "Payment",
+      "sum": "Sum",
+      "date": "Date",
+      "status": "Status"
+    },
+    "no_items_message": {
+      "title": "We didn't find anything",
+      "message": "We did not find a product in any suitable category"
+    }
+  },
+  "activity": {
+    "label": "Activity",
+    "analytics": "Product Analytics"
+  },
+  "user_reviews": {
+    "label": "User Reviews",
+    "no_reviews_message": {
+      "title": "There are no product reviews",
+      "message": "At the moment there are no reviews for any of the products, if anything appears we will inform you immediately"
+    },
+    "no_search_results_message": {
+      "title": "We didn't find anything",
+      "message": "Search is only possible for sender name, date, and title"
+    },
+    "delete_review": {
+      "confirmation_title": "Delete this review?",
+      "confirmation_message": "Are you sure you want to delete this review? Once deleted, it will no longer be displayed on the site and cannot be restored.",
+      "cancel_button": "Cancel",
+      "delete_button": "Delete"
+    }
+  },
   "settings": {
     "label": "Settings",
-    "language_select_label": "Select Language:",
-    "theme_button": "Change theme"
+    "language_select_label": "Language:",
+    "theme_button": "Dark light theme:",
+    "change_password": {
+      "button": "Change Password",
+      "modal_title": "Change password",
+      "old_password_label": "old password",
+      "new_password_label": "new password",
+      "cancel_button": "Cancel",
+      "change_button": "Change"
+    }
   },
   "exit": {
     "label": "Exit",
@@ -23,5 +81,76 @@
     "confirmation_message": "Are you sure you want to leave the admin panel?",
     "cancel_button": "Cancel",
     "exit_button": "Go out"
+  },
+  "product_data": {
+    "back_menu": "Back menu",
+    "add_iphone": "Add IPhone",
+    "upload_image": "Upload image",
+    "brand_placeholder": "Brand",
+    "basic_data": "Basic",
+    "model_placeholder": "Model",
+    "basic_iphone_data": "Basic iPhone data.",
+    "characteristics": "Characteristics",
+    "processor_placeholder": "Processor",
+    "memory_placeholder": "Memory",
+    "display_size_placeholder": "Display size",
+    "battery_placeholder": "Battery",
+    "internal_characteristics_iphone": "Internal characteristics of the phone.",
+    "camera": "Camera",
+    "main_camera_placeholder": "Main camera",
+    "pixels_camera_iphone": "Pixels camera iPhone.",
+    "color": "Color",
+    "color_placeholder": "Color",
+    "color_iphone": "Color iPhone.",
+    "for_store": "For store",
+    "price_placeholder": "Price '$'",
+    "discount_placeholder": "Discount 'Not required to fill out'",
+    "description_placeholder": "Description",
+    "add_in_carousel": "Add in carousel",
+    "data_for_techx_store": "Data for TechX store.",
+    "add_iphone_button": "Add IPhone",
+    "add_macbook": "Add Macbook",
+    "add_ipad": "Add IPad",
+    "add_airpods": "Add AirPods",
+    "add_apple_watch": "Add Watch",
+    "add_console": "Add Console",
+    "internal_characteristics_macbook": "Internal characteristics of the macbook.",
+    "basic_macbook_data": "Basic Macbook data.",
+    "pixels_camera_macbook": "Pixels camera Macbook.",
+    "color_macbook": "Color Macbook.",
+    "add_macbook_button": "Add Macbook",
+    "basic_ipad_data": "Basic ipad data.",
+    "basic_airpods_data": "Basic airpods data.",
+    "basic_apple_watch_data": "Basic watch data.",
+    "basic_console_data": "Basic console data.",
+    "internal_characteristics_ipad": "Internal characteristics of the ipad.",
+    "internal_characteristics_airpods": "Internal characteristics of the airpods.",
+    "internal_characteristics_apple_watch": "Internal characteristics of the watch.",
+    "internal_characteristics_console": "Internal characteristics of the console.",
+    "color_ipad": "Color ipad.",
+    "color_airpods": "Color airpods.",
+    "color_apple_watch": "Color watch.",
+    "color_console": "Color console.",
+    "pixels_camera_ipad": "Pixels camera Macbook."
+  },
+  "status_filter": {
+    "all_status": "All Status",
+    "active": "Active",
+    "no_active": "No Active"
+  },
+  "product_table": {
+    "image": "Image",
+    "category": "Category",
+    "brand": "Brand",
+    "model": "Model",
+    "price": "Price",
+    "discount": "Discount",
+    "status": "Status",
+    "change": "Change",
+    "delete": "Delete",
+    "prev": "Prev",
+    "next": "Next",
+    "update_data": "Update data",
+    "change_data": "Change data"
   }
 }

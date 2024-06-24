@@ -253,16 +253,19 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   letter-spacing: 5px;
   text-transform: uppercase;
   cursor: pointer;
-  color: #000000;
+  /* color: #000000; */
+  color: var(--text-color);
   transition: all 1000ms;
   font-size: 15px;
   position: relative;
   overflow: hidden;
   outline: 2px solid #000000;
+  background-color: var(--background-color);
 }
 
 .button-add-product:hover {
-  color: #ffffff;
+  /* color: #ffffff; */
+  color:var(--background-color);
   transform: scale(1.1);
   outline: 2px solid #000000;
   box-shadow: 4px 5px 17px -4px #000000;
@@ -275,7 +278,8 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   top: 0;
   width: 0;
   height: 100%;
-  background-color: #000000;
+  /* background-color: #000000; */
+  background-color: var(--text-color);
   transform: skewX(45deg);
   z-index: -1;
   transition: width 1000ms;

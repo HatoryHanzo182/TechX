@@ -4,12 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/AdminMenu/AdminMenu.css" />
-    <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/MenuProductContentStyle.css"/>
-    <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/MenuOrdercontentSyle.css"/>
-    <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/MenuActivityContent.css"/>
-    <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/MenuReviewsContentStyle.css"/>
-    <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/MenuSettingContentStyle.css">
-    <link rel="stylesheet" href="../styles/AdminMenu/MenuContentsStyles/MenuExitContentStyle.css">
+    <link
+      rel="stylesheet"
+      href="../styles/AdminMenu/MenuContentsStyles/MenuProductContentStyle.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../styles/AdminMenu/MenuContentsStyles/MenuOrdercontentSyle.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../styles/AdminMenu/MenuContentsStyles/MenuActivityContent.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../styles/AdminMenu/MenuContentsStyles/MenuReviewsContentStyle.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../styles/AdminMenu/MenuContentsStyles/MenuSettingContentStyle.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../styles/AdminMenu/MenuContentsStyles/MenuExitContentStyle.css"
+    />
   </head>
   <body>
     <div id="id-main-container" class="container">
@@ -18,7 +36,11 @@
         <div class="menu-toggle"></div>
         <ul class="list">
           <!--Products item sector.-->
-          <li class="list-item active" style="--color: #10e010">
+          <li
+            class="list-item active"
+            id="menu-product-management"
+            style="--color: #10e010"
+          >
             <a href="#">
               <span class="icon">
                 <ion-icon name="bag-handle-outline"></ion-icon>
@@ -27,7 +49,11 @@
             </a>
           </li>
           <!--Orders item sector.-->
-          <li class="list-item active" style="--color: #fc0a0a">
+          <li
+            class="list-item active"
+            id="menu-orders"
+            style="--color: #fc0a0a"
+          >
             <a href="#">
               <span class="icon">
                 <ion-icon name="file-tray-outline"></ion-icon>
@@ -36,7 +62,11 @@
             </a>
           </li>
           <!--Activity item sector.-->
-          <li class="list-item active" style="--color: #ebdf05">
+          <li
+            class="list-item active"
+            id="menu-activity"
+            style="--color: #ebdf05"
+          >
             <a href="#">
               <span class="icon">
                 <ion-icon name="analytics-outline"></ion-icon>
@@ -45,7 +75,11 @@
             </a>
           </li>
           <!--User reviews item sector.-->
-          <li class="list-item active" style="--color: #2196f3">
+          <li
+            class="list-item active"
+            id="menu-user-reviews"
+            style="--color: #2196f3"
+          >
             <a href="#">
               <span class="icon">
                 <ion-icon name="chatbox-outline"></ion-icon>
@@ -54,7 +88,11 @@
             </a>
           </li>
           <!--Settings item sector.-->
-          <li class="list-item active" style="--color: #10ded0">
+          <li
+            class="list-item active"
+            id="menu-settings"
+            style="--color: #10ded0"
+          >
             <a href="#">
               <span class="icon">
                 <ion-icon name="settings-outline"></ion-icon>
@@ -63,7 +101,7 @@
             </a>
           </li>
           <!--Exit item sector.-->
-          <li class="list-item active" style="--color: #581845">
+          <li class="list-item active" id="menu-exit" style="--color: #581845">
             <a href="#">
               <span class="icon">
                 <ion-icon name="exit-outline"></ion-icon>
@@ -78,34 +116,74 @@
       <!-- Success message sector. -->
       <div id="id-notification" class="success">
         <div class="success__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none">
-            <path fill-rule="evenodd" fill="#393a37" d="m12 1c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.925 11-11-4.925-11-11-11zm4.768 9.14c.0878-.1004.1546-.21726.1966-.34383.0419-.12657.0581-.26026.0477-.39319-.0105-.13293-.0475-.26242-.1087-.38085-.0613-.11844-.1456-.22342-.2481-.30879-.1024-.08536-.2209-.14938-.3484-.18828s-.2616-.0519-.3942-.03823c-.1327.01366-.2612.05372-.3782.1178-.1169.06409-.2198.15091-.3027.25537l-4.3 5.159-2.225-2.226c-.1886-.1822-.4412-.283-.7034-.2807s-.51301.1075-.69842.2929-.29058.4362-.29285.6984c-.00228.2622.09851.5148.28067.7034l3 3c.0983.0982.2159.1748.3454.2251.1295.0502.2681.0729.4069.0665.1387-.0063.2747-.0414.3991-.1032.1244-.0617.2347-.1487.3236-.2554z" clip-rule="evenodd"></path>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            viewBox="0 0 24 24"
+            height="24"
+            fill="none"
+          >
+            <path
+              fill-rule="evenodd"
+              fill="#393a37"
+              d="m12 1c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.925 11-11-4.925-11-11-11zm4.768 9.14c.0878-.1004.1546-.21726.1966-.34383.0419-.12657.0581-.26026.0477-.39319-.0105-.13293-.0475-.26242-.1087-.38085-.0613-.11844-.1456-.22342-.2481-.30879-.1024-.08536-.2209-.14938-.3484-.18828s-.2616-.0519-.3942-.03823c-.1327.01366-.2612.05372-.3782.1178-.1169.06409-.2198.15091-.3027.25537l-4.3 5.159-2.225-2.226c-.1886-.1822-.4412-.283-.7034-.2807s-.51301.1075-.69842.2929-.29058.4362-.29285.6984c-.00228.2622.09851.5148.28067.7034l3 3c.0983.0982.2159.1748.3454.2251.1295.0502.2681.0729.4069.0665.1387-.0063.2747-.0414.3991-.1032.1244-.0617.2347-.1487.3236-.2554z"
+              clip-rule="evenodd"
+            ></path>
           </svg>
         </div>
         <div class="success__title"><p id="id-message-success"></p></div>
         <div id="id-close-success-message" class="success__close">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20">
-            <path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            viewBox="0 0 20 20"
+            height="20"
+          >
+            <path
+              fill="#393a37"
+              d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"
+            ></path>
           </svg>
         </div>
       </div>
       <!-- Error message sector. -->
       <div id="id-error-review" class="error">
         <div class="error-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none">
-            <path fill="#393a37" d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z"></path>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            viewBox="0 0 24 24"
+            height="24"
+            fill="none"
+          >
+            <path
+              fill="#393a37"
+              d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z"
+            ></path>
           </svg>
         </div>
         <div class="error-title"><p id="id-error-review-message"></p></div>
         <div id="id-close-error-message" class="error-close">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20">
-            <path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            viewBox="0 0 20 20"
+            height="20"
+          >
+            <path
+              fill="#393a37"
+              d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"
+            ></path>
           </svg>
         </div>
       </div>
       <!-- #endregion -->
       <!--#region [PRODUCTS CONTENT]-->
-      <div id="id-products-content" class="products-content" style="display: none">
+      <div
+        id="id-products-content"
+        class="products-content"
+        style="display: none"
+      >
         <!--Creation product item-->
         <div id="id-create-product" class="products-card">
           <ion-icon name="color-wand-outline"></ion-icon>
@@ -128,60 +206,150 @@
         </div>
       </div>
       <!-- #region [Product creation content]-->
-      <div id="id-create-product-content" class="create-product-content" style="display: none">
+      <div
+        id="id-create-product-content"
+        class="create-product-content"
+        style="display: none"
+      >
         <!--Menu products.-->
         <section id="id-create-product-menu">
-          <label id="id-create-product-content-phone" title="iphone" for="iphone" class="label">
+          <label
+            id="id-create-product-content-phone"
+            title="iphone"
+            for="iphone"
+            class="label"
+          >
             <input id="iphone" name="page" type="radio" checked="" />
-            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"  height="20" width="22">
-              <path d="M336 0H176a64 64 0 00-64 64v384a64 64 0 0064 64h160a64 64 0 0064-64V64a64 64 0 00-64-64zm32 448a32 32 0 01-32 32H176a32 32 0 01-32-32V64a32 32 0 0132-32h11.35a7.94 7.94 0 017.3 4.75A32 32 0 00224 56h64a32 32 0 0029.35-19.25 7.94 7.94 0 017.3-4.75H336a32 32 0 0132 32z"/>
-              <path d="M336 48a11.88 11.88 0 00-9.53 4.69A48 48 0 01288 72h-64a48 48 0 01-38.47-19.31A11.88 11.88 0 00176 48a16 16 0 00-16 16v384a16 16 0 0016 16h160a16 16 0 0016-16V64a16 16 0 00-16-16z"/>
-              <path d="M336 0H176a64 64 0 00-64 64v384a64 64 0 0064 64h160a64 64 0 0064-64V64a64 64 0 00-64-64zm32 448a32 32 0 01-32 32H176a32 32 0 01-32-32V64a32 32 0 0132-32h11.35a7.94 7.94 0 017.3 4.75A32 32 0 00224 56h64a32 32 0 0029.35-19.25 7.94 7.94 0 017.3-4.75H336a32 32 0 0132 32z"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="ionicon"
+              viewBox="0 0 512 512"
+              height="20"
+              width="22"
+            >
+              <path
+                d="M336 0H176a64 64 0 00-64 64v384a64 64 0 0064 64h160a64 64 0 0064-64V64a64 64 0 00-64-64zm32 448a32 32 0 01-32 32H176a32 32 0 01-32-32V64a32 32 0 0132-32h11.35a7.94 7.94 0 017.3 4.75A32 32 0 00224 56h64a32 32 0 0029.35-19.25 7.94 7.94 0 017.3-4.75H336a32 32 0 0132 32z"
+              />
+              <path
+                d="M336 48a11.88 11.88 0 00-9.53 4.69A48 48 0 01288 72h-64a48 48 0 01-38.47-19.31A11.88 11.88 0 00176 48a16 16 0 00-16 16v384a16 16 0 0016 16h160a16 16 0 0016-16V64a16 16 0 00-16-16z"
+              />
+              <path
+                d="M336 0H176a64 64 0 00-64 64v384a64 64 0 0064 64h160a64 64 0 0064-64V64a64 64 0 00-64-64zm32 448a32 32 0 01-32 32H176a32 32 0 01-32-32V64a32 32 0 0132-32h11.35a7.94 7.94 0 017.3 4.75A32 32 0 00224 56h64a32 32 0 0029.35-19.25 7.94 7.94 0 017.3-4.75H336a32 32 0 0132 32z"
+              />
             </svg>
           </label>
-          <label id="id-create-product-content-mackbook" title="mackbook" for="mackbook" class="label">
+          <label
+            id="id-create-product-content-mackbook"
+            title="mackbook"
+            for="mackbook"
+            class="label"
+          >
             <input id="mackbook" name="page" type="radio" />
-            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" height="20" width="22">
-              <path d="M496 400h-28.34A47.92 47.92 0 00480 367.86V128.14A48.2 48.2 0 00431.86 80H80.14A48.2 48.2 0 0032 128.14v239.72A47.92 47.92 0 0044.34 400H16a16 16 0 000 32h480a16 16 0 000-32z"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="ionicon"
+              viewBox="0 0 512 512"
+              height="20"
+              width="22"
+            >
+              <path
+                d="M496 400h-28.34A47.92 47.92 0 00480 367.86V128.14A48.2 48.2 0 00431.86 80H80.14A48.2 48.2 0 0032 128.14v239.72A47.92 47.92 0 0044.34 400H16a16 16 0 000 32h480a16 16 0 000-32z"
+              />
             </svg>
           </label>
-          <label id="id-create-product-content-ipad" title="ipad" for="ipad" class="label">
+          <label
+            id="id-create-product-content-ipad"
+            title="ipad"
+            for="ipad"
+            class="label"
+          >
             <input id="ipad" name="page" type="radio" />
-            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" height="20" width="22">
-              <path d="M384 512H128a64.07 64.07 0 01-64-64V64a64.07 64.07 0 0164-64h256a64.07 64.07 0 0164 64v384a64.07 64.07 0 01-64 64zM128 32a32 32 0 00-32 32v384a32 32 0 0032 32h256a32 32 0 0032-32V64a32 32 0 00-32-32z"/>
-              <path d="M384 0a64.07 64.07 0 0164 64v384a64.07 64.07 0 01-64 64H128a64.07 64.07 0 01-64-64V64a64.07 64.07 0 0164-64h256M128 480h256a32 32 0 0032-32V64a32 32 0 00-32-32H128a32 32 0 00-32 32v384a32 32 0 0032 32m0-16a16 16 0 01-16-16V64a16 16 0 0116-16h256a16 16 0 0116 16v384a16 16 0 01-16 16z"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="ionicon"
+              viewBox="0 0 512 512"
+              height="20"
+              width="22"
+            >
+              <path
+                d="M384 512H128a64.07 64.07 0 01-64-64V64a64.07 64.07 0 0164-64h256a64.07 64.07 0 0164 64v384a64.07 64.07 0 01-64 64zM128 32a32 32 0 00-32 32v384a32 32 0 0032 32h256a32 32 0 0032-32V64a32 32 0 00-32-32z"
+              />
+              <path
+                d="M384 0a64.07 64.07 0 0164 64v384a64.07 64.07 0 01-64 64H128a64.07 64.07 0 01-64-64V64a64.07 64.07 0 0164-64h256M128 480h256a32 32 0 0032-32V64a32 32 0 00-32-32H128a32 32 0 00-32 32v384a32 32 0 0032 32m0-16a16 16 0 01-16-16V64a16 16 0 0116-16h256a16 16 0 0116 16v384a16 16 0 01-16 16z"
+              />
             </svg>
           </label>
-          <label id="id-create-product-content-airpods" title="airpods" for="airpods" class="label">
+          <label
+            id="id-create-product-content-airpods"
+            title="airpods"
+            for="airpods"
+            class="label"
+          >
             <input id="airpods" name="page" type="radio" />
-            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" height="20" width="22">
-              <path d="M411.16 97.46C368.43 55.86 311.88 32 256 32S143.57 55.86 100.84 97.46C56.45 140.67 32 197 32 256c0 26.67 8.75 61.09 32.88 125.55S137 473 157.27 477.41c5.81 1.27 12.62 2.59 18.73 2.59a60.06 60.06 0 0030-8l14-8c15.07-8.82 19.47-28.13 10.8-43.35l-86.92-152.57a31.73 31.73 0 00-43.57-11.76l-13.69 8a56.49 56.49 0 00-14 11.59 4 4 0 01-7-2A114.68 114.68 0 0164 256c0-50.31 21-98.48 59.16-135.61C160 84.55 208.39 64 256 64s96 20.55 132.84 56.39C427 157.52 448 205.69 448 256a114.68 114.68 0 01-1.68 17.91 4 4 0 01-7 2 56.49 56.49 0 00-14-11.59l-13.69-8a31.73 31.73 0 00-43.57 11.76L281.2 420.65c-8.67 15.22-4.27 34.53 10.8 43.35l14 8a60.06 60.06 0 0030 8c6.11 0 12.92-1.32 18.73-2.59C375 473 423 446 447.12 381.55S480 282.67 480 256c0-59-24.45-115.33-68.84-158.54z"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="ionicon"
+              viewBox="0 0 512 512"
+              height="20"
+              width="22"
+            >
+              <path
+                d="M411.16 97.46C368.43 55.86 311.88 32 256 32S143.57 55.86 100.84 97.46C56.45 140.67 32 197 32 256c0 26.67 8.75 61.09 32.88 125.55S137 473 157.27 477.41c5.81 1.27 12.62 2.59 18.73 2.59a60.06 60.06 0 0030-8l14-8c15.07-8.82 19.47-28.13 10.8-43.35l-86.92-152.57a31.73 31.73 0 00-43.57-11.76l-13.69 8a56.49 56.49 0 00-14 11.59 4 4 0 01-7-2A114.68 114.68 0 0164 256c0-50.31 21-98.48 59.16-135.61C160 84.55 208.39 64 256 64s96 20.55 132.84 56.39C427 157.52 448 205.69 448 256a114.68 114.68 0 01-1.68 17.91 4 4 0 01-7 2 56.49 56.49 0 00-14-11.59l-13.69-8a31.73 31.73 0 00-43.57 11.76L281.2 420.65c-8.67 15.22-4.27 34.53 10.8 43.35l14 8a60.06 60.06 0 0030 8c6.11 0 12.92-1.32 18.73-2.59C375 473 423 446 447.12 381.55S480 282.67 480 256c0-59-24.45-115.33-68.84-158.54z"
+              />
             </svg>
           </label>
-          <label id="id-create-product-content-watch" title="watch" for="watch" class="label">
+          <label
+            id="id-create-product-content-watch"
+            title="watch"
+            for="watch"
+            class="label"
+          >
             <input id="watch" name="page" type="radio" />
-            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" height="20" width="22">
-              <rect x="136" y="136" width="240" height="240" rx="56" ry="56"/>
-              <path d="M336 96V32a16 16 0 00-16-16H192a16 16 0 00-16 16v64a80.09 80.09 0 00-80 80v160a80.09 80.09 0 0080 80v64a16 16 0 0016 16h128a16 16 0 0016-16v-64a80.09 80.09 0 0080-80V176a80.09 80.09 0 00-80-80zm56 224a72.08 72.08 0 01-72 72H192a72.08 72.08 0 01-72-72V192a72.08 72.08 0 0172-72h128a72.08 72.08 0 0172 72z"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="ionicon"
+              viewBox="0 0 512 512"
+              height="20"
+              width="22"
+            >
+              <rect x="136" y="136" width="240" height="240" rx="56" ry="56" />
+              <path
+                d="M336 96V32a16 16 0 00-16-16H192a16 16 0 00-16 16v64a80.09 80.09 0 00-80 80v160a80.09 80.09 0 0080 80v64a16 16 0 0016 16h128a16 16 0 0016-16v-64a80.09 80.09 0 0080-80V176a80.09 80.09 0 00-80-80zm56 224a72.08 72.08 0 01-72 72H192a72.08 72.08 0 01-72-72V192a72.08 72.08 0 0172-72h128a72.08 72.08 0 0172 72z"
+              />
             </svg>
           </label>
-          <label id="id-create-product-content-console" title="console" for="console" class="label">
+          <label
+            id="id-create-product-content-console"
+            title="console"
+            for="console"
+            class="label"
+          >
             <input id="console" name="page" type="radio" />
-            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" height="20" width="22">
-              <path d="M483.13 245.38C461.92 149.49 430 98.31 382.65 84.33A107.13 107.13 0 00352 80c-13.71 0-25.65 3.34-38.28 6.88C298.5 91.15 281.21 96 256 96s-42.51-4.84-57.76-9.11C185.6 83.34 173.67 80 160 80a115.74 115.74 0 00-31.73 4.32c-47.1 13.92-79 65.08-100.52 161C4.61 348.54 16 413.71 59.69 428.83a56.62 56.62 0 0018.64 3.22c29.93 0 53.93-24.93 70.33-45.34 18.53-23.1 40.22-34.82 107.34-34.82 59.95 0 84.76 8.13 106.19 34.82 13.47 16.78 26.2 28.52 38.9 35.91 16.89 9.82 33.77 12 50.16 6.37 25.82-8.81 40.62-32.1 44-69.24 2.57-28.48-1.39-65.89-12.12-114.37zM208 240h-32v32a16 16 0 01-32 0v-32h-32a16 16 0 010-32h32v-32a16 16 0 0132 0v32h32a16 16 0 010 32zm84 4a20 20 0 1120-20 20 20 0 01-20 20zm44 44a20 20 0 1120-19.95A20 20 0 01336 288zm0-88a20 20 0 1120-20 20 20 0 01-20 20zm44 44a20 20 0 1120-20 20 20 0 01-20 20z"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="ionicon"
+              viewBox="0 0 512 512"
+              height="20"
+              width="22"
+            >
+              <path
+                d="M483.13 245.38C461.92 149.49 430 98.31 382.65 84.33A107.13 107.13 0 00352 80c-13.71 0-25.65 3.34-38.28 6.88C298.5 91.15 281.21 96 256 96s-42.51-4.84-57.76-9.11C185.6 83.34 173.67 80 160 80a115.74 115.74 0 00-31.73 4.32c-47.1 13.92-79 65.08-100.52 161C4.61 348.54 16 413.71 59.69 428.83a56.62 56.62 0 0018.64 3.22c29.93 0 53.93-24.93 70.33-45.34 18.53-23.1 40.22-34.82 107.34-34.82 59.95 0 84.76 8.13 106.19 34.82 13.47 16.78 26.2 28.52 38.9 35.91 16.89 9.82 33.77 12 50.16 6.37 25.82-8.81 40.62-32.1 44-69.24 2.57-28.48-1.39-65.89-12.12-114.37zM208 240h-32v32a16 16 0 01-32 0v-32h-32a16 16 0 010-32h32v-32a16 16 0 0132 0v32h32a16 16 0 010 32zm84 4a20 20 0 1120-20 20 20 0 01-20 20zm44 44a20 20 0 1120-19.95A20 20 0 01336 288zm0-88a20 20 0 1120-20 20 20 0 01-20 20zm44 44a20 20 0 1120-20 20 20 0 01-20 20z"
+              />
             </svg>
           </label>
         </section>
         <!-- #region [Modal window API.] -->
-        <div id="id-API-product-window" style="display: none;">
+        <div id="id-API-product-window" style="display: none">
           <div class="exit-content">
             <div class="confirmation-card">
               <ion-icon name="earth-outline" class="exit-icon"></ion-icon>
               <h2>We found information about this product in the API</h2>
-              <p>After confirmation, the fields will be automatically recorded.</p>
+              <p>
+                After confirmation, the fields will be automatically recorded.
+              </p>
               <div class="button-container">
-                  <button id="id-cancel-API" class="cancel-button">Cancel</button>
-                  <button id="id-API-OK" class="exit-button">OK</button>
+                <button id="id-cancel-API" class="cancel-button">Cancel</button>
+                <button id="id-API-OK" class="exit-button">OK</button>
               </div>
             </div>
           </div>
@@ -191,7 +359,10 @@
         <div id="id-content-phone-data">
           <div class="card-content-product-data">
             <div class="line-card-content-product-data">
-              <button class="button-step-in-product-operations-menu" id="id-back-to-product-menu">
+              <button
+                class="button-step-in-product-operations-menu"
+                id="id-back-to-product-menu"
+              >
                 <div class="arrow-back-circle-outline">
                   <ion-icon name="arrow-back-circle-outline"></ion-icon>
                 </div>
@@ -202,13 +373,30 @@
             <!--Drag And Drop Iphone-->
             <div id="drag-and-drop-area">
               <div id="drop-area-iphone">
-                <label class="custum-file-upload" id="id-custum-file-upload-iphone" for="file">
+                <label
+                  class="custum-file-upload"
+                  id="id-custum-file-upload-iphone"
+                  for="file"
+                >
                   <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill=""
+                      viewBox="0 0 24 24"
+                    >
                       <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
-                      <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                      <g
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        id="SVGRepo_tracerCarrier"
+                      ></g>
                       <g id="SVGRepo_iconCarrier">
-                        <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                        <path
+                          fill=""
+                          d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                          clip-rule="evenodd"
+                          fill-rule="evenodd"
+                        ></path>
                       </g>
                     </svg>
                   </div>
@@ -224,50 +412,168 @@
             <!--Input data iphone-->
             <div class="line-card-content-product-data">
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Basic</label>
-                <input class="card-content-product-data-input" name="text" value="Apple" readonly type="text">
-                <input class="card-content-product-data-input" name="text" value="iPhone" readonly type="text">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Model">
-                <p class="card-content-product-data-description">Basic iphone data.</p>
+                <label class="card-content-product-data-label" for="basic"
+                  >Basic</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  value="Apple"
+                  readonly
+                  type="text"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  value="iPhone"
+                  readonly
+                  type="text"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-model"
+                  placeholder="Model"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="basic-iphone-data"
+                >
+                  Basic iphone data.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Characteristics</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Processor">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Memory">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Display size'">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Battery">
-                <p class="card-content-product-data-description">Internal characteristics of the phone.</p>
+                <label
+                  class="card-content-product-data-label"
+                  for="characteristics"
+                  >Characteristics</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-processor"
+                  placeholder="Processor"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-memory"
+                  placeholder="Memory"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-display-size"
+                  placeholder="Display size'"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-battery"
+                  placeholder="Battery"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-internal-characteristics-iphone"
+                >
+                  Internal characteristics of the phone.
+                </p>
               </div>
               <div class="card-content-product-data-container">
                 <label class="card-content-product-data-label">OS</label>
-                <input class="card-content-product-data-input" name="text" type="text"  placeholder="OS">
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="OS"
+                />
                 <p class="card-content-product-data-description">OS iphone.</p>
               </div>
             </div>
             <div class="line-card-content-product-data">
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Camera</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Main camera">
-                <p class="card-content-product-data-description">Pixels camera iphone.</p>
+                <label class="card-content-product-data-label" for="camera"
+                  >Camera</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-front-camera"
+                  placeholder="Main camera"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-pixel-camera-iphone"
+                >
+                  Pixels camera iphone.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Color</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Color">
-                <p class="card-content-product-data-description">Color iphone.</p>
+                <label class="card-content-product-data-label" for="color"
+                  >Color</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-color"
+                  placeholder="Color"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-color-iphone"
+                >
+                  Color iphone.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">For store</label>
-                <input class="card-content-product-data-input" name="text" type="number" placeholder="Price '$'">
-                <input class="card-content-product-data-input" name="text" type="number" placeholder="Discount 'Not required to fill out'">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Description">
+                <label class="card-content-product-data-label" for="for-store"
+                  >For store</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="number"
+                  id="id-price"
+                  placeholder="Price '$'"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="number"
+                  id="id-discount"
+                  placeholder="Discount 'Not required to fill out'"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-description"
+                  placeholder="Description"
+                />
                 <div class="check-sector">
                   <p>Add in carousel</p>
                   <label class="container-check">
-                    <input id="id-incarousel-ceckbox" checked="checked" type="checkbox">
+                    <input
+                      id="id-incarousel-ceckbox"
+                      checked="checked"
+                      type="checkbox"
+                    />
                     <div class="checkmark"></div>
                   </label>
                 </div>
-                <p class="card-content-product-data-description">Data for TechX store.</p>
+                <p
+                  class="card-content-product-data-description"
+                  id="id-techx-store-data"
+                >
+                  Data for TechX store.
+                </p>
               </div>
             </div>
             <div class="line-card-content-product-data">
@@ -282,7 +588,10 @@
         <div id="id-content-mackbook-data">
           <div class="card-content-product-data">
             <div class="line-card-content-product-data">
-              <button class="button-step-in-product-operations-menu" id="id-back-to-product-menu2">
+              <button
+                class="button-step-in-product-operations-menu"
+                id="id-back-to-product-menu2"
+              >
                 <div class="arrow-back-circle-outline">
                   <ion-icon name="arrow-back-circle-outline"></ion-icon>
                 </div>
@@ -293,13 +602,30 @@
             <!--Drag And Drop macbook-->
             <div id="drag-and-drop-area">
               <div id="drop-area-mackbook">
-                <label class="custum-file-upload" id="id-custum-file-upload-mackbook" for="file">
+                <label
+                  class="custum-file-upload"
+                  id="id-custum-file-upload-mackbook"
+                  for="file"
+                >
                   <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill=""
+                      viewBox="0 0 24 24"
+                    >
                       <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
-                      <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                      <g
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        id="SVGRepo_tracerCarrier"
+                      ></g>
                       <g id="SVGRepo_iconCarrier">
-                        <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                        <path
+                          fill=""
+                          d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                          clip-rule="evenodd"
+                          fill-rule="evenodd"
+                        ></path>
                       </g>
                     </svg>
                   </div>
@@ -315,53 +641,186 @@
             <!--Input data macbook-->
             <div class="line-card-content-product-data">
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Basic</label>
-                <input class="card-content-product-data-input" name="text" value="Apple" readonly type="text">
-                <input class="card-content-product-data-input" name="text" value="Macbook" readonly type="text">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Model">
-                <p class="card-content-product-data-description">Basic macbook data.</p>
+                <label class="card-content-product-data-label" for="basic"
+                  >Basic</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  value="Apple"
+                  readonly
+                  type="text"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  value="Macbook"
+                  readonly
+                  type="text"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-model"
+                  placeholder="Model"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="basic-macbook-data"
+                >
+                  Basic macbook data.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Characteristics</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Processor">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="CPU">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="GPU">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Memory">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="RAM">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Display size">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Battery">
-                <p class="card-content-product-data-description">Internal characteristics of the macbook.</p>
+                <label
+                  class="card-content-product-data-label"
+                  for="characteristics"
+                  >Characteristics</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-processor"
+                  placeholder="Processor"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="CPU"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="GPU"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-memory"
+                  placeholder="Memory"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="RAM"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-display-size"
+                  placeholder="Display size"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-battery"
+                  placeholder="Battery"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-internal-characteristics-macbook"
+                >
+                  Internal characteristics of the macbook.
+                </p>
               </div>
               <div class="card-content-product-data-container">
                 <label class="card-content-product-data-label">OS</label>
-                <input class="card-content-product-data-input" name="text" type="text"  placeholder="OS">
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="OS"
+                />
                 <p class="card-content-product-data-description">OS macbook.</p>
               </div>
             </div>
             <div class="line-card-content-product-data">
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Camera</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Main camera">
-                <p class="card-content-product-data-description">Pixels camera macbook.</p>
+                <label class="card-content-product-data-label" for="camera"
+                  >Camera</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-front-camera"
+                  placeholder="Main camera"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-pixel-camera-macbook"
+                >
+                  Pixels camera macbook.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Color</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Color">
-                <p class="card-content-product-data-description">Color macbook.</p>
+                <label class="card-content-product-data-label" for="color"
+                  >Color</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-color"
+                  placeholder="Color"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-color-macbook"
+                >
+                  Color macbook.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">For store</label>
-                <input class="card-content-product-data-input" name="text" type="number" placeholder="Price '$'">
-                <input class="card-content-product-data-input" name="text" type="number" placeholder="Discount 'Not required to fill out'">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Description">
+                <label class="card-content-product-data-label" for="for-store"
+                  >For store</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="number"
+                  id="id-price"
+                  placeholder="Price '$'"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="number"
+                  id="id-discount"
+                  placeholder="Discount 'Not required to fill out'"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-description"
+                  placeholder="Description"
+                />
                 <div class="check-sector">
                   <p>Add in carousel</p>
                   <label class="container-check">
-                    <input id="id-incarousel-ceckbox2" checked="checked" type="checkbox">
+                    <input
+                      id="id-incarousel-ceckbox2"
+                      checked="checked"
+                      type="checkbox"
+                    />
                     <div class="checkmark"></div>
                   </label>
                 </div>
-                <p class="card-content-product-data-description">Data for TechX store.</p>
+                <p
+                  class="card-content-product-data-description"
+                  id="id-techx-store-data"
+                >
+                  Data for TechX store.
+                </p>
               </div>
             </div>
             <div class="line-card-content-product-data">
@@ -376,7 +835,10 @@
         <div id="id-content-ipad-data">
           <div class="card-content-product-data">
             <div class="line-card-content-product-data">
-              <button class="button-step-in-product-operations-menu" id="id-back-to-product-menu3">
+              <button
+                class="button-step-in-product-operations-menu"
+                id="id-back-to-product-menu3"
+              >
                 <div class="arrow-back-circle-outline">
                   <ion-icon name="arrow-back-circle-outline"></ion-icon>
                 </div>
@@ -387,13 +849,30 @@
             <!--Drag And Drop ipad-->
             <div id="drag-and-drop-area">
               <div id="drop-area-ipad">
-                <label class="custum-file-upload" id="id-custum-file-upload-ipad" for="file">
+                <label
+                  class="custum-file-upload"
+                  id="id-custum-file-upload-ipad"
+                  for="file"
+                >
                   <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill=""
+                      viewBox="0 0 24 24"
+                    >
                       <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
-                      <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                      <g
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        id="SVGRepo_tracerCarrier"
+                      ></g>
                       <g id="SVGRepo_iconCarrier">
-                        <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                        <path
+                          fill=""
+                          d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                          clip-rule="evenodd"
+                          fill-rule="evenodd"
+                        ></path>
                       </g>
                     </svg>
                   </div>
@@ -409,53 +888,186 @@
             <!--Input data ipad-->
             <div class="line-card-content-product-data">
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Basic</label>
-                <input class="card-content-product-data-input" name="text" value="Apple" readonly type="text">
-                <input class="card-content-product-data-input" name="text" value="Ipad" readonly type="text">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Model">
-                <p class="card-content-product-data-description">Basic ipad data.</p>
+                <label class="card-content-product-data-label" for="basic"
+                  >Basic</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  value="Apple"
+                  readonly
+                  type="text"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  value="Ipad"
+                  readonly
+                  type="text"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-model"
+                  placeholder="Model"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="basic-ipad-data"
+                >
+                  Basic ipad data.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Characteristics</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Processor">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="CPU">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="GPU">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Memory">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="RAM">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Display size">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Battery">
-                <p class="card-content-product-data-description">Internal characteristics of the ipad.</p>
+                <label
+                  class="card-content-product-data-label"
+                  for="characteristics"
+                  >Characteristics</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-processor"
+                  placeholder="Processor"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="CPU"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="GPU"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-memory"
+                  placeholder="Memory"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="RAM"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-display-size"
+                  placeholder="Display size"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-battery"
+                  placeholder="Battery"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-internal-characteristics-ipad"
+                >
+                  Internal characteristics of the ipad.
+                </p>
               </div>
               <div class="card-content-product-data-container">
                 <label class="card-content-product-data-label">OS</label>
-                <input class="card-content-product-data-input" name="text" type="text"  placeholder="OS">
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="OS"
+                />
                 <p class="card-content-product-data-description">OS ipad.</p>
               </div>
             </div>
             <div class="line-card-content-product-data">
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Camera</label>
-                <input class="card-content-product-data-input" name="text" type="number" placeholder="Main camera">
-                <p class="card-content-product-data-description">Pixels camera ipad.</p>
+                <label class="card-content-product-data-label" for="camera"
+                  >Camera</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="number"
+                  id="id-front-camera"
+                  placeholder="Main camera"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-pixel-camera-ipad"
+                >
+                  Pixels camera ipad.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Color</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Color">
-                <p class="card-content-product-data-description">Color ipad.</p>
+                <label class="card-content-product-data-label" for="color"
+                  >Color</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-color"
+                  placeholder="Color"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-color-ipad"
+                >
+                  Color ipad.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">For store</label>
-                <input class="card-content-product-data-input" name="text" type="number" placeholder="Price '$'">
-                <input class="card-content-product-data-input" name="text" type="number" placeholder="Discount 'Not required to fill out'">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Description">
+                <label class="card-content-product-data-label" for="for-store"
+                  >For store</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="number"
+                  id="id-price"
+                  placeholder="Price '$'"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="number"
+                  id="id-discount"
+                  placeholder="Discount 'Not required to fill out'"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-description"
+                  placeholder="Description"
+                />
                 <div class="check-sector">
                   <p>Add in carousel</p>
                   <label class="container-check">
-                    <input id="id-incarousel-ceckbox3" checked="checked" type="checkbox">
+                    <input
+                      id="id-incarousel-ceckbox3"
+                      checked="checked"
+                      type="checkbox"
+                    />
                     <div class="checkmark"></div>
                   </label>
                 </div>
-                <p class="card-content-product-data-description">Data for TechX store.</p>
+                <p
+                  class="card-content-product-data-description"
+                  id="id-techx-store-data"
+                >
+                  Data for TechX store.
+                </p>
               </div>
             </div>
             <div class="line-card-content-product-data">
@@ -470,7 +1082,10 @@
         <div id="id-content-airpods-data">
           <div class="card-content-product-data">
             <div class="line-card-content-product-data">
-              <button class="button-step-in-product-operations-menu" id="id-back-to-product-menu4">
+              <button
+                class="button-step-in-product-operations-menu"
+                id="id-back-to-product-menu4"
+              >
                 <div class="arrow-back-circle-outline">
                   <ion-icon name="arrow-back-circle-outline"></ion-icon>
                 </div>
@@ -481,13 +1096,30 @@
             <!--Drag And Drop airpods-->
             <div id="drag-and-drop-area">
               <div id="drop-area-airpods">
-                <label class="custum-file-upload" id="id-custum-file-upload-airpods" for="file">
+                <label
+                  class="custum-file-upload"
+                  id="id-custum-file-upload-airpods"
+                  for="file"
+                >
                   <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill=""
+                      viewBox="0 0 24 24"
+                    >
                       <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
-                      <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                      <g
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        id="SVGRepo_tracerCarrier"
+                      ></g>
                       <g id="SVGRepo_iconCarrier">
-                        <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                        <path
+                          fill=""
+                          d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                          clip-rule="evenodd"
+                          fill-rule="evenodd"
+                        ></path>
                       </g>
                     </svg>
                   </div>
@@ -503,38 +1135,126 @@
             <!--Input data airpods-->
             <div class="line-card-content-product-data">
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Basic</label>
-                <input class="card-content-product-data-input" name="text" value="Apple" readonly type="text">
-                <input class="card-content-product-data-input" name="text" value="AirPods" readonly type="text">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Model">
-                <p class="card-content-product-data-description">Basic airpods data.</p>
+                <label class="card-content-product-data-label" for="basic"
+                  >Basic</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  value="Apple"
+                  readonly
+                  type="text"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  value="AirPods"
+                  readonly
+                  type="text"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-model"
+                  placeholder="Model"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="basic-airpods-data"
+                >
+                  Basic airpods data.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Characteristics</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Processor">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Battery">
-                <p class="card-content-product-data-description">Internal characteristics of the airpods.</p>
+                <label
+                  class="card-content-product-data-label"
+                  for="characteristics"
+                  >Characteristics</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-processor"
+                  placeholder="Processor"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-battery"
+                  placeholder="Battery"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-internal-characteristics-airpods"
+                >
+                  Internal characteristics of the airpods.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Color</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Color">
-                <p class="card-content-product-data-description">Color airpods.</p>
+                <label class="card-content-product-data-label" for="color"
+                  >Color</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-color"
+                  placeholder="Color"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-color-airpods"
+                >
+                  Color airpods.
+                </p>
               </div>
             </div>
             <div class="line-card-content-product-data">
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">For store</label>
-                <input class="card-content-product-data-input" name="text" type="number" placeholder="Price '$'">
-                <input class="card-content-product-data-input" name="text" type="number" placeholder="Discount 'Not required to fill out'">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Description">
+                <label class="card-content-product-data-label" for="for-store"
+                  >For store</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="number"
+                  id="id-price"
+                  placeholder="Price '$'"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="number"
+                  id="id-discount"
+                  placeholder="Discount 'Not required to fill out'"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-description"
+                  placeholder="Description"
+                />
                 <div class="check-sector">
                   <p>Add in carousel</p>
                   <label class="container-check">
-                    <input id="id-incarousel-ceckbox4" checked="checked" type="checkbox">
+                    <input
+                      id="id-incarousel-ceckbox4"
+                      checked="checked"
+                      type="checkbox"
+                    />
                     <div class="checkmark"></div>
                   </label>
                 </div>
-                <p class="card-content-product-data-description">Data for TechX store.</p>
+                <p
+                  class="card-content-product-data-description"
+                  id="id-techx-store-data"
+                >
+                  Data for TechX store.
+                </p>
               </div>
             </div>
             <div class="line-card-content-product-data">
@@ -549,7 +1269,10 @@
         <div id="id-content-watch-data">
           <div class="card-content-product-data">
             <div class="line-card-content-product-data">
-              <button class="button-step-in-product-operations-menu" id="id-back-to-product-menu5">
+              <button
+                class="button-step-in-product-operations-menu"
+                id="id-back-to-product-menu5"
+              >
                 <div class="arrow-back-circle-outline">
                   <ion-icon name="arrow-back-circle-outline"></ion-icon>
                 </div>
@@ -560,13 +1283,30 @@
             <!--Drag And Drop watch-->
             <div id="drag-and-drop-area">
               <div id="drop-area-watch">
-                <label class="custum-file-upload" id="id-custum-file-upload-watch" for="file">
+                <label
+                  class="custum-file-upload"
+                  id="id-custum-file-upload-watch"
+                  for="file"
+                >
                   <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill=""
+                      viewBox="0 0 24 24"
+                    >
                       <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
-                      <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                      <g
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        id="SVGRepo_tracerCarrier"
+                      ></g>
                       <g id="SVGRepo_iconCarrier">
-                        <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                        <path
+                          fill=""
+                          d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                          clip-rule="evenodd"
+                          fill-rule="evenodd"
+                        ></path>
                       </g>
                     </svg>
                   </div>
@@ -582,48 +1322,168 @@
             <!--Input data watch-->
             <div class="line-card-content-product-data">
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Basic</label>
-                <input class="card-content-product-data-input" name="text" placeholder="Brend" type="text">
-                <input class="card-content-product-data-input" name="text" value="Watch" readonly type="text">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Model">
-                <p class="card-content-product-data-description">Basic watch data.</p>
+                <label class="card-content-product-data-label" for="basic"
+                  >Basic</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  id="id-brand"
+                  placeholder="Brand"
+                  type="text"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  value="Watch"
+                  readonly
+                  type="text"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-model"
+                  placeholder="Model"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="basic-watch-data"
+                >
+                  Basic watch data.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Characteristics</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Processor">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="CPU">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="GPU">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Memory">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="RAM">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Display size 'example - 2532 × 1170 '">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Battery">
-                <p class="card-content-product-data-description">Internal characteristics of the watch.</p>
+                <label
+                  class="card-content-product-data-label"
+                  for="characteristics"
+                  >Characteristics</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-processor"
+                  placeholder="Processor"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="CPU"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="GPU"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-memory"
+                  placeholder="Memory"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="RAM"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-display-size"
+                  placeholder="Display size 'example - 2532 × 1170 '"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-battery"
+                  placeholder="Battery"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-internal-characteristics-watch"
+                >
+                  Internal characteristics of the watch.
+                </p>
               </div>
               <div class="card-content-product-data-container">
                 <label class="card-content-product-data-label">OS</label>
-                <input class="card-content-product-data-input" name="text" type="text"  placeholder="OS">
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="OS"
+                />
                 <p class="card-content-product-data-description">OS watch.</p>
               </div>
             </div>
             <div class="line-card-content-product-data">
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Color</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Color">
-                <p class="card-content-product-data-description">Color watch.</p>
+                <label class="card-content-product-data-label" for="color"
+                  >Color</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-color"
+                  placeholder="Color"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-color-watch"
+                >
+                  Color watch.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">For store</label>
-                <input class="card-content-product-data-input" name="text" type="number" placeholder="Price '$'">
-                <input class="card-content-product-data-input" name="text" type="number" placeholder="Discount 'Not required to fill out'">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Description">
+                <label class="card-content-product-data-label" for="for-store"
+                  >For store</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="number"
+                  id="id-price"
+                  placeholder="Price '$'"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="number"
+                  id="id-discount"
+                  placeholder="Discount 'Not required to fill out'"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-description"
+                  placeholder="Description"
+                />
                 <div class="check-sector">
                   <p>Add in carousel</p>
                   <label class="container-check">
-                    <input id="id-incarousel-ceckbox5" checked="checked" type="checkbox">
+                    <input
+                      id="id-incarousel-ceckbox5"
+                      checked="checked"
+                      type="checkbox"
+                    />
                     <div class="checkmark"></div>
                   </label>
                 </div>
-                <p class="card-content-product-data-description">Data for TechX store.</p>
+                <p
+                  class="card-content-product-data-description"
+                  id="id-techx-store-data"
+                >
+                  Data for TechX store.
+                </p>
               </div>
             </div>
             <div class="line-card-content-product-data">
@@ -638,7 +1498,10 @@
         <div id="id-content-console-data">
           <div class="card-content-product-data">
             <div class="line-card-content-product-data">
-              <button class="button-step-in-product-operations-menu" id="id-back-to-product-menu6">
+              <button
+                class="button-step-in-product-operations-menu"
+                id="id-back-to-product-menu6"
+              >
                 <div class="arrow-back-circle-outline">
                   <ion-icon name="arrow-back-circle-outline"></ion-icon>
                 </div>
@@ -649,13 +1512,30 @@
             <!--Drag And Drop console-->
             <div id="drag-and-drop-area">
               <div id="drop-area-console">
-                <label class="custum-file-upload" id="id-custum-file-upload-console" for="file">
+                <label
+                  class="custum-file-upload"
+                  id="id-custum-file-upload-console"
+                  for="file"
+                >
                   <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill=""
+                      viewBox="0 0 24 24"
+                    >
                       <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
-                      <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                      <g
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        id="SVGRepo_tracerCarrier"
+                      ></g>
                       <g id="SVGRepo_iconCarrier">
-                        <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                        <path
+                          fill=""
+                          d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                          clip-rule="evenodd"
+                          fill-rule="evenodd"
+                        ></path>
                       </g>
                     </svg>
                   </div>
@@ -671,46 +1551,154 @@
             <!--Input data console-->
             <div class="line-card-content-product-data">
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Basic</label>
-                <input class="card-content-product-data-input" name="text" placeholder="Brend" type="text">
-                <input class="card-content-product-data-input" name="text" value="Console" readonly type="text">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Model">
-                <p class="card-content-product-data-description">Basic console data.</p>
+                <label class="card-content-product-data-label" for="basic"
+                  >Basic</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  id="id-brand"
+                  placeholder="Brand"
+                  type="text"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  value="Console"
+                  readonly
+                  type="text"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-model"
+                  placeholder="Model"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="basic-console-data"
+                >
+                  Basic console data.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Characteristics</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Processor">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="CPU">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="GPU">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Memory">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="RAM">
-                <p class="card-content-product-data-description">Internal characteristics of the console.</p>
+                <label
+                  class="card-content-product-data-label"
+                  for="characteristics"
+                  >Characteristics</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-processor"
+                  placeholder="Processor"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="CPU"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="GPU"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-memory"
+                  placeholder="Memory"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="RAM"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-internal-characteristics-console"
+                >
+                  Internal characteristics of the console.
+                </p>
               </div>
               <div class="card-content-product-data-container">
                 <label class="card-content-product-data-label">OS</label>
-                <input class="card-content-product-data-input" name="text" type="text"  placeholder="OS">
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  placeholder="OS"
+                />
                 <p class="card-content-product-data-description">OS console.</p>
               </div>
             </div>
             <div class="line-card-content-product-data">
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">Color</label>
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Color">
-                <p class="card-content-product-data-description">Color console.</p>
+                <label class="card-content-product-data-label" for="color"
+                  >Color</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-color"
+                  placeholder="Color"
+                />
+                <p
+                  class="card-content-product-data-description"
+                  id="id-color-console"
+                >
+                  Color console.
+                </p>
               </div>
               <div class="card-content-product-data-container">
-                <label class="card-content-product-data-label">For store</label>
-                <input class="card-content-product-data-input" name="text" type="number" placeholder="Price '$'">
-                <input class="card-content-product-data-input" name="text" type="number" placeholder="Discount 'Not required to fill out'">
-                <input class="card-content-product-data-input" name="text" type="text" placeholder="Description">
+                <label class="card-content-product-data-label" for="for-store"
+                  >For store</label
+                >
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="number"
+                  id="id-price"
+                  placeholder="Price '$'"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="number"
+                  id="id-discount"
+                  placeholder="Discount 'Not required to fill out'"
+                />
+                <input
+                  class="card-content-product-data-input"
+                  name="text"
+                  type="text"
+                  id="id-description"
+                  placeholder="Description"
+                />
                 <div class="check-sector">
                   <p>Add in carousel</p>
                   <label class="container-check">
-                    <input id="id-incarousel-ceckbox6" checked="checked" type="checkbox">
+                    <input
+                      id="id-incarousel-ceckbox6"
+                      checked="checked"
+                      type="checkbox"
+                    />
                     <div class="checkmark"></div>
                   </label>
                 </div>
-                <p class="card-content-product-data-description">Data for TechX store.</p>
+                <p
+                  class="card-content-product-data-description"
+                  id="id-techx-store-data"
+                >
+                  Data for TechX store.
+                </p>
               </div>
             </div>
             <div class="line-card-content-product-data">
@@ -719,9 +1707,9 @@
               </button>
             </div>
           </div>
-        </div>    
+        </div>
         <!-- #endregion -->
-      </div>    
+      </div>
       <!-- #endregion -->
       <!-- #region [Product menege content]-->
       <div id="id-manage-product-content" style="display: none">
@@ -733,8 +1721,12 @@
               <h2>Delete this product??</h2>
               <p>Do you definitely want to delete the product permanently??</p>
               <div class="button-container">
-                <button id="id-menege-cancel" class="exit-button">Cancel</button>
-                <button id="id-menege-delete" class="cancel-button">Delete</button>
+                <button id="id-menege-cancel" class="exit-button">
+                  Cancel
+                </button>
+                <button id="id-menege-delete" class="cancel-button">
+                  Delete
+                </button>
               </div>
             </div>
           </div>
@@ -745,36 +1737,62 @@
             <div class="confirmation-card">
               <ion-icon name="brush-outline" class="exit-icon"></ion-icon>
               <h2>Change data this product??</h2>
-              <p>Are you sure you want to change the details of this product??</p>
+              <p>
+                Are you sure you want to change the details of this product??
+              </p>
               <div class="button-container">
-                <button id="id-menege-cancel-change" class="exit-button">Cancel</button>
-                <button id="id-menege-change" class="cancel-button">Change</button>
+                <button id="id-menege-cancel-change" class="exit-button">
+                  Cancel
+                </button>
+                <button id="id-menege-change" class="cancel-button">
+                  Change
+                </button>
               </div>
             </div>
           </div>
         </div>
         <!--Product change sector-->
-        <div id="id-manage-product-change-content" style="display: none;">
+        <div id="id-manage-product-change-content" style="display: none">
           <div id="product-details" class="change-product-data-card">
             <div class="line-card-content-product-data-change">
-              <button class="button-step-in-product-operations-menu" id="id-back-to-product-menu7">
+              <button
+                class="button-step-in-product-operations-menu"
+                id="id-back-to-product-menu7"
+              >
                 <div class="arrow-back-circle-outline">
                   <ion-icon name="arrow-back-circle-outline"></ion-icon>
                 </div>
-                <div class="arrow-back-circle-outline-text">Back</div>
+                <div class="arrow-back-circle-outline-text">Back menu</div>
               </button>
               <p class="title-card-content-product-data">Update data</p>
             </div>
             <!--Drag And Drop IMG For change product.-->
             <div id="drag-and-drop-area">
               <div id="drop-area-change-data">
-                <label class="custum-file-upload" id="id-custum-file-upload-change-data" for="file">
+                <label
+                  class="custum-file-upload"
+                  id="id-custum-file-upload-change-data"
+                  for="file"
+                >
                   <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill=""
+                      viewBox="0 0 24 24"
+                    >
                       <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
-                      <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                      <g
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        id="SVGRepo_tracerCarrier"
+                      ></g>
                       <g id="SVGRepo_iconCarrier">
-                        <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                        <path
+                          fill=""
+                          d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                          clip-rule="evenodd"
+                          fill-rule="evenodd"
+                        ></path>
                       </g>
                     </svg>
                   </div>
@@ -789,21 +1807,32 @@
             </div>
             <div id="product-images"></div>
             <div id="product-info"></div>
-            <button id="id-button-change-product-data" class="button-add-product">
+            <button
+              id="id-button-change-product-data"
+              class="button-add-product"
+            >
               Change data
             </button>
           </div>
-        </div>        
+        </div>
         <!-- Product table -->
         <div id="id-table-container" class="table-container">
           <div class="table-controls">
-            <button class="button-step-in-product-operations-menu" id="id-back-to-product-menu8">
+            <button
+              class="button-step-in-product-operations-menu"
+              id="id-back-to-product-menu8"
+            >
               <div class="arrow-back-circle-outline">
                 <ion-icon name="arrow-back-circle-outline"></ion-icon>
               </div>
               <div class="arrow-back-circle-outline-text">Back menu</div>
             </button>
-            <input type="text" id="search" placeholder="Search by model or brand">
+            <input
+              type="text"
+              id="search"
+              class="search-by-model-or-brand"
+              placeholder="Search by model or brand"
+            />
             <select id="status-filter">
               <option value="">All Status</option>
               <option value="active">Active</option>
@@ -824,21 +1853,24 @@
                 <th>Delete</th>
               </tr>
             </thead>
-            <tbody>
-            </tbody>
+            <tbody></tbody>
           </table>
-          <div id="no-items-message" style="display: none;">
-            <div class="header-nosearch-reviews" style="margin: 40px;"> 
+          <div id="no-items-message" style="display: none">
+            <div class="header-nosearch-reviews" style="margin: 40px">
               <div class="div_image_vs">
                 <div class="image-nosearch-reviews">
                   <ion-icon name="thumbs-down-outline"></ion-icon>
-                </div> 
-              </div> 
+                </div>
+              </div>
               <div class="content-missing-reviews">
-                <span class="title-nosearch-reviews">We didn't find anything</span> 
-                <p class="message-nosearch-reviews">We did not find a product in any suitable category</p> 
-              </div> 
-            </div> 
+                <span class="title-nosearch-reviews"
+                  >We didn't find anything</span
+                >
+                <p class="message-nosearch-reviews">
+                  We did not find a product in any suitable category
+                </p>
+              </div>
+            </div>
           </div>
           <div class="pagination">
             <button id="prev" disabled>Prev</button>
@@ -846,7 +1878,7 @@
             <button id="next">Next</button>
           </div>
         </div>
-      </div>      
+      </div>
       <!-- #endregion -->
       <!-- #endregion -->
       <!--#region [ORDERS CONTENT.]-->
@@ -854,7 +1886,7 @@
         <div class="table-container">
           <!-- #region [Search Bar.] -->
           <div class="table-controls">
-            <input type="text" id="search-order" placeholder="Search...">
+            <input type="text" id="search-order" placeholder="Search..." />
             <select id="sort-order">
               <option value="oldest">Newest First</option>
               <option value="newest">Oldest First</option>
@@ -870,18 +1902,22 @@
           </div>
           <!-- #endregion -->
           <!-- Not found message -->
-          <div id="no-items-order-message" style="display: none;">
-            <div class="header-nosearch-reviews" style="width: 100%;"> 
+          <div id="no-items-order-message" style="display: none">
+            <div class="header-nosearch-reviews" style="width: 100%">
               <div class="div_image_vs">
                 <div class="image-nosearch-reviews">
                   <ion-icon name="thumbs-down-outline"></ion-icon>
-                </div> 
-              </div> 
+                </div>
+              </div>
               <div class="content-missing-reviews">
-                <span class="title-nosearch-reviews">We didn't find anything</span> 
-                <p class="message-nosearch-reviews">We did not find a product in any suitable category</p> 
-              </div> 
-            </div> 
+                <span class="title-nosearch-reviews"
+                  >We didn't find anything</span
+                >
+                <p class="message-nosearch-reviews">
+                  We did not find a product in any suitable category
+                </p>
+              </div>
+            </div>
           </div>
           <!-- #region [Order table.] -->
           <div id="id-order-table" class="table-wrapper">
@@ -911,7 +1947,11 @@
       </div>
       <!-- #endregion -->
       <!--#region [ACTIVITY CONTENT.]-->
-      <div id="id-activity-content" class="activity-content" style="display: none">
+      <div
+        id="id-activity-content"
+        class="activity-content"
+        style="display: none"
+      >
         <div class="container-activity">
           <div class="activity-schedule">
             <h1 class="h1-activity">Product Analytics</h1>
@@ -921,49 +1961,72 @@
       </div>
       <!-- #endregion -->
       <!--#region [REVIEWS CONTENT.] -->
-      <div id="id-reviews-content" class="reviews-content" style="display: none">
+      <div
+        id="id-reviews-content"
+        class="reviews-content"
+        style="display: none"
+      >
         <!-- Search by reviews sector. -->
         <div id="id-search-by-reviews" class="_search_">
           <div class="container-review-search">
             <div class="search-container">
-              <input class="input" type="text">
+              <input class="input" type="text" />
               <svg viewBox="0 0 24 24" class="search__icon">
                 <g>
-                  <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                  <path
+                    d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"
+                  ></path>
                 </g>
               </svg>
             </div>
           </div>
         </div>
         <!-- Display window missing reviews sector. -->
-        <div id="id-card-missing-reviews" class="card-missing-reviews" style="display: none"> 
-          <button class="dismiss-missing-reviews" type="button">×</button> 
-          <div class="header-missing-reviews"> 
+        <div
+          id="id-card-missing-reviews"
+          class="card-missing-reviews"
+          style="display: none"
+        >
+          <button class="dismiss-missing-reviews" type="button">×</button>
+          <div class="header-missing-reviews">
             <div class="div_image_v">
               <div class="image-missing-reviews">
                 <ion-icon name="document-outline"></ion-icon>
-              </div> 
-            </div> 
+              </div>
+            </div>
             <div class="content-missing-reviews">
-              <span class="title-missing-reviews">There are no product reviews</span> 
-              <p class="message-missing-reviews">At the moment there are no reviews for any of the products, if anything appears we will inform you immediately</p> 
-            </div> 
-          </div> 
+              <span class="title-missing-reviews"
+                >There are no product reviews</span
+              >
+              <p class="message-missing-reviews">
+                At the moment there are no reviews for any of the products, if
+                anything appears we will inform you immediately
+              </p>
+            </div>
+          </div>
         </div>
         <!-- Display window no search reviews sector. -->
-        <div id="id-card-nosearch-reviews" class="card-nosearch-reviews" style="display: none"> 
-          <button class="dismiss-nosearch-reviews" type="button">×</button> 
-          <div class="header-nosearch-reviews"> 
+        <div
+          id="id-card-nosearch-reviews"
+          class="card-nosearch-reviews"
+          style="display: none"
+        >
+          <button class="dismiss-nosearch-reviews" type="button">×</button>
+          <div class="header-nosearch-reviews">
             <div class="div_image_vs">
               <div class="image-nosearch-reviews">
                 <ion-icon name="thumbs-down-outline"></ion-icon>
-              </div> 
-            </div> 
+              </div>
+            </div>
             <div class="content-missing-reviews">
-              <span class="title-nosearch-reviews">We didn't find anything</span> 
-              <p class="message-nosearch-reviews">Search is only possible for sender name, date, and title</p> 
-            </div> 
-          </div> 
+              <span class="title-nosearch-reviews"
+                >We didn't find anything</span
+              >
+              <p class="message-nosearch-reviews">
+                Search is only possible for sender name, date, and title
+              </p>
+            </div>
+          </div>
         </div>
         <!-- Modal window sector. -->
         <div id="id-delete-review-content" style="display: none">
@@ -972,12 +2035,19 @@
               <ion-icon name="trash-outline" class="trash-outline"></ion-icon>
               <h2>Delete this review??</h2>
               <p>
-                Are you sure you want to delete this review? Once deleted, it will no longer be displayed 
-                on the site and cannot be restored.
+                Are you sure you want to delete this review? Once deleted, it
+                will no longer be displayed on the site and cannot be restored.
               </p>
               <div class="delete-review-button-container">
-                  <button id="id-cancel-delete-review" class="delete-review-cancel-button">Cancel</button>
-                  <button id="id-delete-review" class="delete-review-button">Delete</button>
+                <button
+                  id="id-cancel-delete-review"
+                  class="delete-review-cancel-button"
+                >
+                  Cancel
+                </button>
+                <button id="id-delete-review" class="delete-review-button">
+                  Delete
+                </button>
               </div>
             </div>
           </div>
@@ -987,7 +2057,11 @@
       </div>
       <!-- #endregion -->
       <!--#region [SETTINGS CONTENT.]-->
-      <div id="id-settings-content" class="settings-content" style="display: none">
+      <div
+        id="id-settings-content"
+        class="settings-content"
+        style="display: none"
+      >
         <!-- Modal window change password -->
         <div id="id-modal-settings-content" style="display: none">
           <div class="exit-content">
@@ -995,39 +2069,66 @@
               <ion-icon name="construct-outline" class="exit-icon"></ion-icon>
               <h2>Change password</h2>
               <div class="input-group">
-                <label class="label-input-change-pass">old password</label>
-                <input autocomplete="off" class="input-change-pass" type="text">
-              <div></div></div>
+                <label class="label-input-change-pass" for="old-password"
+                  >old password</label
+                >
+                <input
+                  autocomplete="off"
+                  class="input-change-pass"
+                  type="text"
+                />
+                <div></div>
+              </div>
               <div class="input-group">
-                <label class="label-input-change-pass">new password</label>
-                <input autocomplete="off" class="input-change-pass" type="text">
-              <div></div></div>
+                <label class="label-input-change-pass" for="new-password"
+                  >new password</label
+                >
+                <input
+                  autocomplete="off"
+                  class="input-change-pass"
+                  type="text"
+                />
+                <div></div>
+              </div>
               <div class="button-container">
-                  <button id="id-cancel-change-password-setting" class="cancel-button">Cancel</button>
-                  <button id="id-change-password-setting" class="exit-button">Change</button>
+                <button
+                  id="id-cancel-change-password-setting"
+                  class="cancel-button"
+                >
+                  Cancel
+                </button>
+                <button id="id-change-password-setting" class="exit-button">
+                  Change
+                </button>
               </div>
             </div>
           </div>
         </div>
         <h1>Settings</h1>
         <div class="settings-content">
-            <div>
-                <label for="language-select">Language:</label>
-                <select id="language-select">
-                    <option value="en">English</option>
-                    <option value="ru">Русский</option>
-                </select>
-            </div>
-            <div class="toggle-wrapper">
-                <label for="theme-toggle" class="toggle-label">Dark light theme:</label>
-                <label class="switch">
-                    <input id="theme-toggle" name="theme-toggle" type="checkbox">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            <div class="password-change-wrapper">
-              <label for="change-password" class="password-label">Change Password:</label>
-              <button class="button-settings" id="id-change-password">Password</button>
+          <div>
+            <label for="language-select">Language:</label>
+            <select id="language-select">
+              <option value="en">English</option>
+              <option value="ua">Українська</option>
+            </select>
+          </div>
+          <div class="toggle-wrapper">
+            <label for="theme-toggle" class="toggle-label"
+              >Dark light theme:</label
+            >
+            <label class="switch">
+              <input id="theme-toggle" name="theme-toggle" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="password-change-wrapper">
+            <label for="change-password" class="password-label"
+              >Change Password:</label
+            >
+            <button class="button-settings" id="id-change-password">
+              Password
+            </button>
           </div>
         </div>
       </div>
@@ -1040,8 +2141,8 @@
             <h2>Exit confirmation</h2>
             <p>Are you sure you want to leave the admin panel?</p>
             <div class="button-container">
-                <button id="id-cancel-exit" class="cancel-button">Cancel</button>
-                <button id="id-exit-exit" class="exit-button">Go out</button>
+              <button id="id-cancel-exit" class="cancel-button">Cancel</button>
+              <button id="id-exit-exit" class="exit-button">Go out</button>
             </div>
           </div>
         </div>
@@ -1049,14 +2150,38 @@
       <!-- #endregion -->
     </div>
   </body>
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script
+    type="module"
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+  ></script>
   <script type="module" src="../js/AdminMenu/AdminMenu.js"></script>
-  <script type="module" src="../js/AdminMenu/MenuContentsLogics/ProductContentLogic.js"></script>
-  <script type="module" src="../js/AdminMenu/MenuContentsLogics/OrderContentLogic.js"></script>
-  <script type="module" src="../js/AdminMenu/MenuContentsLogics/ActivityContentLogic.js"></script>
-  <script type="module" src="../js/AdminMenu/MenuContentsLogics/ReviewsContentLogic.js"></script>
-  <script type="module" src="../js/AdminMenu/MenuContentsLogics/SettingContentLogic.js"></script>
-  <script type="module" src="../js/AdminMenu/MenuContentsLogics/ExitContentLogic.js"></script>
+  <script
+    type="module"
+    src="../js/AdminMenu/MenuContentsLogics/ProductContentLogic.js"
+  ></script>
+  <script
+    type="module"
+    src="../js/AdminMenu/MenuContentsLogics/OrderContentLogic.js"
+  ></script>
+  <script
+    type="module"
+    src="../js/AdminMenu/MenuContentsLogics/ActivityContentLogic.js"
+  ></script>
+  <script
+    type="module"
+    src="../js/AdminMenu/MenuContentsLogics/ReviewsContentLogic.js"
+  ></script>
+  <script
+    type="module"
+    src="../js/AdminMenu/MenuContentsLogics/SettingContentLogic.js"
+  ></script>
+  <script
+    type="module"
+    src="../js/AdminMenu/MenuContentsLogics/ExitContentLogic.js"
+  ></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </html>
