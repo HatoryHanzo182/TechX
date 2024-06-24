@@ -386,15 +386,15 @@ const ProductDetails = () => {
                   <div>
                     <button className="flex items-center rounded-lg  justify-center w-full h-full py-4 border-2 border-gray-300 dark:hover:border-white dark:border-gray-500 hover:border-black">
                       <div>
-                        <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-[#555352]"></div>
-                        <p className="text-xs text-center text-gray-200 dark:text-gray-400">
+                        {/* <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-[#555352]"></div> */}
+                        <p className=" text-center text-gray-200 dark:text-gray-400 text-base">
                           {product_data?.color || "Loading..."}
                         </p>
                       </div>
                     </button>
                   </div>
                   <div>
-                    <button className="flex items-center justify-center rounded-lg w-full h-full py-4 border-2 border-gray-300 dark:hover:border-blue-400 dark:border-gray-500 hover:border-blue-400">
+                    <button className="flex items-center rounded-lg  justify-center w-full h-full py-4 border-2 border-gray-300 dark:hover:border-white dark:border-gray-500 hover:border-black">
                       <div>
                         <p className="text-base text-center text-gray-200 dark:text-gray-400">
                           {product_data?.memory || "Loading..."}

@@ -29,6 +29,7 @@ import {
   ShoppingCart,
   Building2,
   LayoutGrid,
+  Car,
 } from "lucide-react";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Separator } from "@radix-ui/react-separator";
@@ -113,34 +114,32 @@ export default function Nav() {
     // localStorage.setItem("Cart", JSON.stringify(ArrayCoast));
   };
 
-  const handleChangeSearch = (e) => 
-  {
+  const handleChangeSearch = (e) => {
     const query = e.target.value.trim();
 
-    if (query === "") 
-      return;
-    else 
-      Search(query);
+    if (query === "") return;
+    else Search(query);
   };
 
-  const Search = async (q) => 
-  {
+  const Search = async (q) => {
     search_results.length = 0;
 
-    try 
-    {
-      const response = await fetch(`https://techx-server.tech:443/SearchForProducts`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: q }),
-      });
+    try {
+      const response = await fetch(
+        `https://techx-server.tech:443/SearchForProducts`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: q }),
+        }
+      );
 
       const data = await response.json();
 
       SetSearchResults(data);
-    } 
-    catch (error) { console.error("Error searching:", error); }
+    } catch (error) {
+      console.error("Error searching:", error);
+    }
   };
 
   return (
@@ -162,7 +161,7 @@ export default function Nav() {
               <DropMenu />
             </div>
             {!mobileMenuOpen && (
-              <div className="flex lg:hidden">
+              <div className="flex  lg:hidden">
                 <button
                   type="button"
                   className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 dark:text-white text-black"
@@ -379,7 +378,7 @@ export default function Nav() {
             className="lg:hidden"
             open={mobileMenuOpen}
             onClose={() => setMobileMenuOpen(false)}>
-            <Dialog.Panel className="fixed inset-0 overflow-y-auto bg-white dark:bg-black">
+            <Dialog.Panel className="fixed inset-0 z-50 overflow-y-auto bg-white dark:bg-black">
               <div className="flex items-center justify-between p-6">
                 <a href="#" className="-m-1.5 p-1.5">
                   <h1 className="text-black dark:text-white font-bold text-2xl">
@@ -393,10 +392,11 @@ export default function Nav() {
                     className="-m-2.5 rounded-md p-2.5 dark:text-white text-black"
                     onClick={() => setMobileMenuOpen(false)}>
                     <span className="sr-only">Close menu</span>
-                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                    <XMarkIcon className="size-6" aria-hidden="true" />
                   </button>
                 )}
               </div>
+
               <BurgerMenu />
               {isLoggedIn ? (
                 <div className="fixed bottom-0 p-6 w-full border-t border-zinc-700">
@@ -431,6 +431,22 @@ export default function Nav() {
                           Sign up &uarr;
                         </div>
                       </Link>
+                      <div className="flex flex-row gap-3">
+                        <button>
+                          <Link
+                            href="/search"
+                            className="h-6 w-6"
+                            onClick={handleLinkClick}>
+                            <MagnifyingGlassIcon
+                              className="h-6 w-6 "
+                              aria-hidden="true"
+                            />
+                          </Link>
+                        </button>
+                        <button onClick={OpenCart} className="size-6">
+                          <Cart />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
