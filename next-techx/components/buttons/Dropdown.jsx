@@ -1,5 +1,5 @@
-import {useState , useEffect} from "react";
-import { Smartphone, Apple, Laptop, Gamepad2, Cog} from "lucide-react";
+import { useState, useEffect } from "react";
+import { Apple, Gamepad2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -18,43 +18,48 @@ import { MixIcon } from "@radix-ui/react-icons";
 
 // INFO: Data from API
 const categoriesConfig = [
-  { label: "Apple", icon: Apple, endpoints: [
-    { name: "Iphone", endpoint: "/GetDataForListProduct/Iphone" },
-    { name: "AirPods", endpoint: "/GetDataForListProduct/AirPods" },
-    { name: "AppleWatch", endpoint: "/GetDataForListProduct/AppleWatch" },
-    { name: "Macbook", endpoint: "/GetDataForListProduct/Macbook" },
-    { name: "Ipad", endpoint: "/GetDataForListProduct/Ipad" },
-  ]},
-  { label: "Consoles", icon: Gamepad2, endpoints: [{ name: "Consoles", endpoint: "/GetDataForListProduct/Console" }] },
+  { label: Apple, name: "Iphone", endpoint: "/GetDataForListProduct/Iphone" },
+  { label: Apple, name: "AirPods", endpoint: "/GetDataForListProduct/AirPods" },
+  {
+    label: Apple,
+    name: "AppleWatch",
+    endpoint: "/GetDataForListProduct/AppleWatch",
+  },
+  { label: Apple, name: "Macbook", endpoint: "/GetDataForListProduct/Macbook" },
+  { label: Apple, name: "Ipad", endpoint: "/GetDataForListProduct/Ipad" },
+  {
+    label: Gamepad2,
+    name: "Consoles",
+    endpoint: "/GetDataForListProduct/Console",
+  },
 ];
 
 const DropMenu = () => {
   const [categories, setCategories] = useState([]);
 
-  // INFO: Fetch data from API
   useEffect(() => {
     const fetchData = async () => {
       const results = await Promise.all(
         categoriesConfig.map(async (category) => {
-          if (!category.endpoints || category.endpoints.length === 0) {
+          if (!category.endpoint) {
             return { ...category, items: [] };
           }
 
-          const items = await Promise.all(
-            category.endpoints.map(async (endpoint) => {
-              if(endpoint.name === "In progress") return { name: endpoint.name, products: [] }
-              const response = await fetch(`https://techx-server.tech${endpoint.endpoint}`, {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              });
-              const data = await response.json();
-              return { name: endpoint.name, products: data };
-            })
+          const response = await fetch(
+            `https://techx-server.tech${category.endpoint}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            },
           );
-          return { ...category, items };
-        })
+          const data = await response.json();
+          return {
+            ...category,
+            items: [{ name: category.name, products: data }],
+          };
+        }),
       );
       setCategories(results);
     };
@@ -62,11 +67,10 @@ const DropMenu = () => {
     fetchData();
   }, []);
 
-  // INFO: If data item is empty, show text "In progress"
- return (
+  return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="hidden lg:flex ">
+        <Button className="hidden lg:flex">
           <MixIcon className="mr-1" height={20} />
           Catalog
         </Button>
@@ -76,34 +80,31 @@ const DropMenu = () => {
           <DropdownMenuGroup key={category.label}>
             <DropdownMenuSub>
               <DropdownMenuSubTrigger>
-                <category.icon className="mr-2 h-4 w-4" />
-                {category.label}
+                {category.name === "Consoles" ? (
+                  <Gamepad2 className="mr-2 h-4 w-4" />
+                ) : (
+                  <Apple className="mr-2 h-4 w-4" />
+                )}
+                {category.name}
               </DropdownMenuSubTrigger>
               <DropdownMenuPortal>
                 <DropdownMenuSubContent className="flex flex-wrap flex-col max-h-[500px] overflow-y-auto ml-3">
-                  {category.items.map((item) => (
-                    <div key={item.name} className="p-1 m-2">
-                      <div className="flex flex-col">
-                        <DropdownMenuItem as="div" className="w-full text-center">
-                          <div className="flex items-center">
-                            <category.icon className="mr-2 h-4 w-4" />
-                            {item.name}
-                          </div>
-                          <DropdownMenuSeparator />
-                        </DropdownMenuItem>
-                        {item.products.map((product) => (
-                          <div key={product.id} className="flex pl-2">
-                            <a
-                              href={`/product-detail?id=${product.id}`}
-                              className="py-1 text-sm dark:text-white text-black hover:text-gray-500"
-                            >
-                              {product.model}
-                            </a>
-                          </div>
-                        ))}
+                  {category.items[0]?.products.length > 0 ? (
+                    category.items[0].products.map((product) => (
+                      <div key={product.id} className="flex pl-2">
+                        <a
+                          href={`/product-detail?id=${product.id}`}
+                          className="py-1 text-sm dark:text-white text-black hover:text-gray-500"
+                        >
+                          {product.model}
+                        </a>
                       </div>
+                    ))
+                  ) : (
+                    <div className="py-1 text-sm dark:text-white text-black text-center">
+                      In progress
                     </div>
-                  ))}
+                  )}
                 </DropdownMenuSubContent>
               </DropdownMenuPortal>
             </DropdownMenuSub>
