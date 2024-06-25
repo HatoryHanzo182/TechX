@@ -71,15 +71,6 @@ const Signup = () =>
     catch (error) { console.log("Error during registration: ", error); }
   };
 
-  const RegistrationViaGoogle = async () =>
-  {
-    console.log("RegistrationViaGoogle");
-    
-    const g_data = await signIn("google")
-
-    console.log(g_data.email);
-  }
-
   const handleInputChange = (index, e) => 
   {
     const input = e.target;
@@ -201,7 +192,7 @@ const Signup = () =>
               Sign in here
             </Link>
           </p>
-          <Button className=" mt-6 " onClick={ () => RegistrationViaGoogle() }>
+          <Button className=" mt-6 " onClick={() => signIn("google")}>
             <svg role="img" viewBox="0 0 24 24" className="mr-2 h-4 w-4">
               <path
                 fill="currentColor"

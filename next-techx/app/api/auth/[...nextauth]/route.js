@@ -18,7 +18,7 @@ export const authOptions = {
     async signIn({user, account, profile, email, credentials}) 
     {
       console.log("signIn", user, account, profile, email, credentials);
-      return { user, account, profile, email, credentials };
+      return true;  // Возвращает true, разрешая вход, или false для его блокирования
     },
 
     // Вызывается при создании сессии
