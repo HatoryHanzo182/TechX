@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { PullOutOfSession } from "@/lib/session";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
+import { SessionProvider } from "next-auth/react";
 
 const AuthContext = createContext(null);
 
@@ -54,9 +55,11 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, isLoggedIn }}>
-      {children}
-    </AuthContext.Provider>
+    <SessionProvider>
+      <AuthContext.Provider value={{ user, isLoggedIn }}>
+        {children}
+      </AuthContext.Provider>
+    </SessionProvider>
   );
 };
 
