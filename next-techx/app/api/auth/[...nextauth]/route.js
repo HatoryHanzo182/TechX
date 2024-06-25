@@ -40,10 +40,6 @@ export const authOptions = {
       }
       return token;
     },
-
-    async redirect({ url, baseUrl }) {
-      return baseUrl;
-    },
   },
 };
 

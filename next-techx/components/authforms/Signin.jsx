@@ -32,75 +32,75 @@ const Signin = () => {
     return () => clearTimeout(timer); // Очистка таймера
   }, [showAlert]);
 
-  const LoginViaGoogle = async () =>
-  {
-    const google_auth_email = user_gouth.email
+  const LoginViaGoogle = async () => {
+    await signIn("google");
+    console.log(user_gouth);
+    const google_auth_email = user_gouth?.email;
 
-    try 
-    {
+    try {
       const ResUserExists = await fetch(
         "https://techx-server.tech:443/CheckUserExists", // <<----- Проверяет есть ли пользователь в базе.
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: google_auth_email }),
-        }
+        },
       );
-      
+
       console.log(google_auth_email);
 
       const { existing_user } = await ResUserExists.json();
 
-      if (existing_user) 
-      {
-        try 
-        {
-          const reply_token = await fetch("https://techx-server.tech:443/GenerateToken", //   <<------ Создадим токен.
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: google_auth_email }),
-          });
+      if (existing_user) {
+        try {
+          const reply_token = await fetch(
+            "https://techx-server.tech:443/GenerateToken", //   <<------ Создадим токен.
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email: google_auth_email }),
+            },
+          );
 
           const { token } = await reply_token.json();
 
           localStorage.setItem("token", token);
 
-          const CreateSessionResponse = await fetch("https://techx-server.tech:443/CreateSession",
-          {
-            method: "POST",
-            headers: {"Content-Type": "application/json", Authorization: `Bearer ${token}` },
-            body: JSON.stringify({ email: google_auth_email }),
-          });
+          const CreateSessionResponse = await fetch(
+            "https://techx-server.tech:443/CreateSession",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({ email: google_auth_email }),
+            },
+          );
 
           const create_session_data = await CreateSessionResponse.json();
 
-          if (create_session_data) 
-          {
+          if (create_session_data) {
             // <---- Сессия создана.
             window.location.href = "/";
             console.log("Sessia is complite");
           } //    <<<----- Ошибка при создании сесси.
-          else
-              console.log("Sessia is not complite");
-        } 
-        catch (error) 
-        {
-            setError("Error during signing the token.");
-            setShowAlert(true);
-            console.error("Error during signing the token:", error);
+          else console.log("Sessia is not complite");
+        } catch (error) {
+          setError("Error during signing the token.");
+          setShowAlert(true);
+          console.error("Error during signing the token:", error);
         }
-      } 
-      else 
-      {
+      } else {
         setShowAlert(true);
         setError("User not found");
         console.error("User not found");
         return;
       }
-    } 
-    catch (error) { console.log("Error during registration: ", error); }
-  }
+    } catch (error) {
+      console.log("Error during registration: ", error);
+    }
+  };
 
   const handleSumbit = async (e) => {
     e.preventDefault();
@@ -118,7 +118,7 @@ const Signin = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email }),
-        }
+        },
       );
 
       const { existing_user } = await ResUserExists.json();
@@ -131,7 +131,7 @@ const Signin = () => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
-          }
+          },
         );
 
         const { success } = await ResProofPass.json();
@@ -144,7 +144,7 @@ const Signin = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email }),
-              }
+              },
             );
 
             const { token } = await reply_token.json();
@@ -160,7 +160,7 @@ const Signin = () => {
                   Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({ email }),
-              }
+              },
             );
 
             const create_session_data = await CreateSessionResponse.json();

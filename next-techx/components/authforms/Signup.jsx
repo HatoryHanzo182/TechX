@@ -20,7 +20,8 @@ const Signup = () => {
   const [error, setError] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [conf_u, SetConfU] = useState();
-  const [is_modal_confirm_mail_open, SetisModalConfirmMailOpen] = useState(false);
+  const [is_modal_confirm_mail_open, SetisModalConfirmMailOpen] =
+    useState(false);
   const input_confirm_refs = [useRef(), useRef(), useRef(), useRef()];
   const { loading, user_gouth } = useUserData();
   const router = useRouter();
@@ -41,7 +42,7 @@ const Signup = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email }),
-        }
+        },
       );
 
       const { existing_user } = await ResUserExists.json();
@@ -60,7 +61,7 @@ const Signup = () => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email }),
-          }
+          },
         );
 
         const { conf } = await SendConf.json();
@@ -71,12 +72,13 @@ const Signup = () => {
       console.log("Error during registration: ", error);
     }
   };
-  
-  const LoginViaGoogle = async () =>
-  {
-    setUsername(user_gouth.name.replace(/\s/g, ""));
-    setEmail(user_gouth.email);
-  }
+
+  const LoginViaGoogle = async () => {
+    await signIn("google", { callbackUrl: "/signin" });
+    console.log(user_gouth);
+    setUsername(user_gouth?.name.replace(/\s/g, ""));
+    setEmail(user_gouth?.email);
+  };
 
   const handleInputChange = (index, e) => {
     const input = e.target;
@@ -98,18 +100,15 @@ const Signup = () => {
     const code = input_confirm_refs.map((ref) => ref.current.value).join("");
 
     if (conf_u === code) {
-      const res = await fetch(
-        "https://techx-server.tech:443/NewUser",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name,
-            email,
-            password: await bcrypt.hash(password, 10),
-          }),
-        }
-      );
+      const res = await fetch("https://techx-server.tech:443/NewUser", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          password: await bcrypt.hash(password, 10),
+        }),
+      });
 
       if (res.ok) window.location.href = "/signin";
       else
@@ -195,7 +194,7 @@ const Signup = () => {
               Sign in here
             </Link>
           </p>
-          <Button className=" mt-6 " onClick={ () => LoginViaGoogle() }>
+          <Button className=" mt-6 " onClick={() => LoginViaGoogle()}>
             <svg role="img" viewBox="0 0 24 24" className="mr-2 h-4 w-4">
               <path
                 fill="currentColor"
@@ -323,9 +322,9 @@ const Signup = () => {
             position: relative;
             box-shadow: 10px 10px 10px rgba(0, 0, 0, .1);
           }
-          
+
           /*----heading and description-----*/
-          
+
           .info {
             margin-bottom: 20px;
             display: flex;
@@ -333,25 +332,25 @@ const Signup = () => {
             align-items: center;
             text-align: center;
           }
-          
+
           .title {
             font-size: 1.5rem;
             font-weight: 900;
           }
-          
+
           .description {
             margin-top: 10px;
             font-size: 1rem;
           }
-          
+
           /*----input-fields------*/
-          
+
           .form .input-fields {
             display: flex;
             justify-content: space-between;
             gap: 10px;
           }
-          
+
           .form .input-fields input {
             height: 2.5em;
             width: 2.5em;
@@ -364,22 +363,22 @@ const Signup = () => {
             border: 2.5px solid var(--eer-black);
             background-color: var(--eer-black);
           }
-          
+
           .form .input-fields input:focus {
             border: 1px solid var(--af-white);
             box-shadow: inset 10px 10px 10px rgba(0, 0, 0, .15);
             transform: scale(1.05);
             transition: 0.5s;
           }
-          
+
           /*-----verify and clear buttons-----*/
-          
+
           .action-btns {
             display: flex;
             margin-top: 20px;
             gap: 0.5rem;
           }
-          
+
           .verify {
             padding: 10px 20px;
             text-decoration: none;
@@ -394,12 +393,12 @@ const Signup = () => {
             transition: 0.3s ease;
             user-select: none;
           }
-          
+
           .verify:hover,.verify:focus {
             color: var(--night-rider);
             background: var(--white);
           }
-          
+
           .clear {
             padding: 10px 20px;
             text-decoration: none;
@@ -413,15 +412,15 @@ const Signup = () => {
             transition: 0.3s ease;
             user-select: none;
           }
-          
+
           .clear:hover,.clear:focus {
             color: var(--tomato);
             background-color: transparent;
             border: 1px solid var(--tomato);
           }
-          
+
           /*-----close button------*/
-          
+
           .close {
             position: absolute;
             right: 10px;
@@ -437,7 +436,7 @@ const Signup = () => {
             font-weight: 600;
             transition: .5s ease;
           }
-          
+
           .close:hover {
             background-color: var(--tomato);
             color: var(--white);
