@@ -11,7 +11,7 @@ function Confuse(str)  // <-- This function takes a string and returns the SHA-2
     });
 }
 
-function Validator() {
+async function Validator() {
   // <-- Password check function.
   const _admin_password = document.getElementById("id-admin-password").value;
 
@@ -20,11 +20,12 @@ function Validator() {
     return;
   }
 
+  const currentPasswordHash = await window.electron.invoke(
+    "GetPasswordHashFromLocalStorage",
+  );
+
   Confuse(_admin_password).then((hashed_pass) => {
-    if (
-      hashed_pass ===
-      "c1c224b03cd9bc7b6a86d77f5dace40191766c485cd55dc48caf9ac873335d6f"
-    )
+    if (hashed_pass === currentPasswordHash.hash)
       electron.send("ShowAdminPanel");
     else ShowErrorMessage("Incorrect password");
   });

@@ -11,7 +11,61 @@ function CloseModalWindowChangePassword() {
   _change_password_mw.style.display = "none";
 }
 
+const Confuse = async (str) => {
+  return crypto.subtle
+    .digest("SHA-256", new TextEncoder().encode(str))
+    .then((buffer) => {
+      return Array.prototype.map
+        .call(new Uint8Array(buffer), (x) => ("00" + x.toString(16)).slice(-2))
+        .join("");
+    });
+};
+
+async function changePassword() {
+  const _old_password = document.getElementById(
+    "id-old-password-setting",
+  ).value;
+  const _new_password = document.getElementById(
+    "id-new-password-setting",
+  ).value;
+
+  const currentPasswordHash = await window.electron.invoke(
+    "GetPasswordHashFromLocalStorage",
+  );
+
+  if (!currentPasswordHash.success) {
+    ShowErrorMessage(currentPasswordHash.message);
+    return;
+  }
+
+  const oldPasswordHash = await Confuse(_old_password);
+
+  if (currentPasswordHash.hash == oldPasswordHash) {
+    const newPasswordHash = await Confuse(_new_password);
+
+    const result = await window.electron.invoke(
+      "UpdatePasswordHashFromLocalStorage",
+      newPasswordHash,
+    );
+
+    if (!result.success) {
+      ShowErrorMessage(result.message);
+    } else {
+      ShowSuccessMessage("Password changed successfully.");
+      CloseModalWindowChangePassword();
+      document.getElementById("id-old-password-setting").value = "";
+      document.getElementById("id-new-password-setting").value = "";
+    }
+  } else {
+    ShowErrorMessage("Old password is incorrect.");
+  }
+}
+
 function ShowErrorMessage(message) {
+  alert(message);
+}
+
+function ShowSuccessMessage(message) {
   alert(message);
 }
 
@@ -21,6 +75,9 @@ document
 document
   .getElementById("id-cancel-change-password-setting")
   .addEventListener("click", CloseModalWindowChangePassword);
+document
+  .getElementById("id-change-password-setting")
+  .addEventListener("click", changePassword);
 
 //#endregion
 
