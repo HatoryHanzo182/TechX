@@ -5,14 +5,14 @@ export const useUserData = () => {
 
   const getData = () => {
     if (status === "loading") {
-      return { loading: true, user: null };
+      return { loading: true, user_gouth: null };
     }
 
     if (status === "authenticated") {
-      return { loading: false, user: session.user };
+      return { loading: false, user_gouth: session.user };
     }
 
-    return { loading: false, user: null };
+    return { loading: false, user_gouth: null };
   };
 
   return { ...getData() };

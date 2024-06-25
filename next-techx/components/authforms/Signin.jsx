@@ -8,11 +8,13 @@ import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useRouter } from "next/navigation";
 import { set } from "mongoose";
+import { useUserData } from "@/lib/useUserData";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { loading, user_gouth } = useUserData();
 
   const router = useRouter();
 
@@ -29,6 +31,76 @@ const Signin = () => {
 
     return () => clearTimeout(timer); // Очистка таймера
   }, [showAlert]);
+
+  const LoginViaGoogle = async () =>
+  {
+    const google_auth_email = user_gouth.email
+
+    try 
+    {
+      const ResUserExists = await fetch(
+        "https://techx-server.tech:443/CheckUserExists", // <<----- Проверяет есть ли пользователь в базе.
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: google_auth_email }),
+        }
+      );
+      
+      console.log(google_auth_email);
+
+      const { existing_user } = await ResUserExists.json();
+
+      if (existing_user) 
+      {
+        try 
+        {
+          const reply_token = await fetch("https://techx-server.tech:443/GenerateToken", //   <<------ Создадим токен.
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: google_auth_email }),
+          });
+
+          const { token } = await reply_token.json();
+
+          localStorage.setItem("token", token);
+
+          const CreateSessionResponse = await fetch("https://techx-server.tech:443/CreateSession",
+          {
+            method: "POST",
+            headers: {"Content-Type": "application/json", Authorization: `Bearer ${token}` },
+            body: JSON.stringify({ email: google_auth_email }),
+          });
+
+          const create_session_data = await CreateSessionResponse.json();
+
+          if (create_session_data) 
+          {
+            // <---- Сессия создана.
+            window.location.href = "/";
+            console.log("Sessia is complite");
+          } //    <<<----- Ошибка при создании сесси.
+          else
+              console.log("Sessia is not complite");
+        } 
+        catch (error) 
+        {
+            setError("Error during signing the token.");
+            setShowAlert(true);
+            console.error("Error during signing the token:", error);
+        }
+      } 
+      else 
+      {
+        setShowAlert(true);
+        setError("User not found");
+        console.error("User not found");
+        return;
+      }
+    } 
+    catch (error) { console.log("Error during registration: ", error); }
+  }
 
   const handleSumbit = async (e) => {
     e.preventDefault();
@@ -170,7 +242,7 @@ const Signin = () => {
             />
             Get started with Google
           </button> */}
-          <Button onClick={() => signIn("google")} className="  mt-6 ">
+          <Button onClick={() => LoginViaGoogle()} className="  mt-6 ">
             <svg role="img" viewBox="0 0 24 24" className="mr-2 h-4 w-4">
               <path
                 fill="currentColor"

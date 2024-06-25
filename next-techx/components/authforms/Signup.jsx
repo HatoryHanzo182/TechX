@@ -20,9 +20,9 @@ const Signup = () => {
   const [error, setError] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [conf_u, SetConfU] = useState();
-  const [is_modal_confirm_mail_open, SetisModalConfirmMailOpen] =
-    useState(false);
+  const [is_modal_confirm_mail_open, SetisModalConfirmMailOpen] = useState(false);
   const input_confirm_refs = [useRef(), useRef(), useRef(), useRef()];
+  const { loading, user_gouth } = useUserData();
   const router = useRouter();
 
   const handleSumbit = async (e) => {
@@ -71,14 +71,11 @@ const Signup = () => {
       console.log("Error during registration: ", error);
     }
   };
-
-  const LoginViaGoogle = () =>
+  
+  const LoginViaGoogle = async () =>
   {
-    const { loading, user } = useUserData();
-
-    console.log(user.name)
-    // setUsername(user.name);
-    // setEmail(user.email);
+    setUsername(user_gouth.name.replace(/\s/g, ""));
+    setEmail(user_gouth.email);
   }
 
   const handleInputChange = (index, e) => {
@@ -230,6 +227,7 @@ const Signup = () => {
                 <input
                   type="text"
                   id="login-name"
+                  value={name}
                   onChange={(e) => setUsername(e.target.value)}
                   className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
                   placeholder="Name"
@@ -242,6 +240,7 @@ const Signup = () => {
                 <input
                   type="email"
                   id="login-email"
+                  value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
                   placeholder="Email"
