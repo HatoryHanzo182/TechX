@@ -76,32 +76,33 @@ export default function Nav() {
     }
   }, [menuOpen]);
 
-  const handleSignOut = async (e) => {
+  const handleSignOut = async (e) => 
+  {
     e.preventDefault();
 
-    try {
+    try 
+    {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(
-        "https://techx-server.tech:443/RemoveFromSession",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const response = await fetch("https://techx-server.tech:443/RemoveFromSession",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      });
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok) 
+      {
         console.log(data.message);
         localStorage.removeItem("token");
         localStorage.removeItem("Cart");
-        window.location.reload();
-      } else console.error(data.message);
-    } catch (error) {
+        window.location.href = "/";
+      } 
+      else console.error(data.message);
+    } 
+    catch (error) 
+    {
       console.error("Error:", error);
     }
   };
