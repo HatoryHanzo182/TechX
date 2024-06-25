@@ -161,18 +161,20 @@ const BurgerMenu = () => {
         categories.map((category) => (
           <div
             key={category.name}
-            className="flex justify-between items-center text-black dark:text-white px-4 py-2 border-b border-zinc-700"
+            className="flex items-center text-black dark:text-white px-4 py-2 border-b border-zinc-700"
           >
             <button
               onClick={() => showCategoryItems(category)}
-              className="flex items-center w-full"
+              className="flex items-center justify-between w-full"
             >
-              {React.createElement(category.label, {
-                className: "h-5 w-5 mr-2",
-              })}
-              {category.name}
+              <div className="flex items-center">
+                {React.createElement(category.label, {
+                  className: "h-5 w-5 mr-2",
+                })}
+                {category.name}
+              </div>
+              <ChevronRight className="h-5 w-5" />
             </button>
-            <ChevronRight className="h-5 w-5" />
           </div>
         ))
       ) : (

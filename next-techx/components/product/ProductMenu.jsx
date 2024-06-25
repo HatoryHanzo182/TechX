@@ -42,8 +42,7 @@ function ProductSelection() {
 
   const [products, setProducts] = useState([]);
 
-  useEffect(() => 
-  {
+  useEffect(() => {
     const ToGetData = async (type_p) => {
       setProducts([]);
       try {
@@ -52,7 +51,7 @@ function ProductSelection() {
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-          }
+          },
         );
 
         if (formatted_data.ok) setProducts(await formatted_data.json());
@@ -95,21 +94,21 @@ function ProductSelection() {
         setMemoryFilter((prev) =>
           prev.includes(value)
             ? prev.filter((item) => item !== value)
-            : [...prev, value]
+            : [...prev, value],
         );
         break;
       case "color":
         setColorFilter((prev) =>
           prev.includes(value)
             ? prev.filter((item) => item !== value)
-            : [...prev, value]
+            : [...prev, value],
         );
         break;
       case "version":
         setVersionFilter((prev) =>
           prev.includes(value)
             ? prev.filter((item) => item !== value)
-            : [...prev, value]
+            : [...prev, value],
         );
         break;
       default:
@@ -123,7 +122,7 @@ function ProductSelection() {
         (memoryFilter.length === 0 || memoryFilter.includes(product.memory)) &&
         (colorFilter.length === 0 || colorFilter.includes(product.color)) &&
         (versionFilter.length === 0 ||
-          versionFilter.some((version) => product.model.includes(version)))
+          versionFilter.some((version) => product.model.includes(version))),
     );
   };
 
@@ -243,18 +242,23 @@ function ProductSelection() {
                   {product.memory} ({product.color}){" "}
                 </div>
                 <div className="flex justify-between items-center mt-3">
-                  { product.descont_price !== 0 ? 
-                  (
+                  {product.descont_price !== 0 ? (
                     <>
-                      <div className="text-black dark:text-white"> {product.descont_price} $ </div>
-                      <div className="text-red-500 line-through">{product.price} $</div>
+                      <div className="text-black dark:text-white">
+                        {" "}
+                        {product.descont_price} ${" "}
+                      </div>
+                      <div className="text-red-500 line-through">
+                        {product.price} $
+                      </div>
                     </>
                   ) : (
                     <>
-                      <div className="text-black dark:text-white">{product.price} $ </div>
+                      <div className="text-black dark:text-white">
+                        {product.price} ${" "}
+                      </div>
                     </>
-                  )} 
-
+                  )}
                 </div>
               </div>
             </Link>
