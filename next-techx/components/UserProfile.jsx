@@ -1,26 +1,25 @@
 "use client";
-import { useSession } from "next-auth/react";
+import { useUserData } from "@/lib/useUserData";
 
 export default function UserProfile() {
-  const { data: session, status } = useSession();
+  const { loading, user } = useUserData();
 
-  if (status === "loading") {
+  if (loading) {
     return <p>Loading...</p>;
   }
 
-  if (status === "unauthenticated") {
+  if (!user) {
     return <p>You are not logged in</p>;
   }
 
   return (
     <div>
+      {console.log(user.name, user.email)}
       <h1>User Profile</h1>
-      {session && (
-        <div>
-          <p>Name: {session.user.name}</p>
-          <p>Email: {session.user.email}</p>
-        </div>
-      )}
+      <div>
+        <p>Name: {user.name}</p>
+        <p>Email: {user.email}</p>
+      </div>
     </div>
   );
 }

@@ -9,6 +9,17 @@ export const authOptions = {
     }),
   ],
   secret: process.env.SECRET,
+  logger: {
+    error(code, ...message) {
+      console.error(code, ...message);
+    },
+    warn(code, ...message) {
+      console.warn(code, ...message);
+    },
+    debug(code, ...message) {
+      console.log(code, ...message);
+    },
+  },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       return true;
@@ -37,4 +48,5 @@ export const authOptions = {
 };
 
 const handler = NextAuth(authOptions);
+
 export { handler as GET, handler as POST };
