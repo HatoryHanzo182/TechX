@@ -15,8 +15,7 @@ export const authOptions = {
   // Коллбеки для управления процессом аутентификации и сессии
   callbacks: {
     // Вызывается при попытке входа
-    async signIn({user, account, profile, email, credentials}) 
-    {
+    async signIn({user, account, profile, email, credentials}) {
       console.log("signIn", user, account, profile, email, credentials);
       return true;  // Возвращает true, разрешая вход, или false для его блокирования
     },

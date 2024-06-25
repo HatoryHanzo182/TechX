@@ -9,104 +9,103 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { PullOutOfSession } from "../../lib/session";
+import { set } from "mongoose";
+// import SquaresAnimation from "../SquaresAnimation";
 
-const Signup = () => 
-{
+const Signup = () => {
   const [name, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [conf_u, SetConfU] = useState();
-  const [is_modal_confirm_mail_open, SetisModalConfirmMailOpen] = useState(false);
+  const [is_modal_confirm_mail_open, SetisModalConfirmMailOpen] =
+    useState(false);
   const input_confirm_refs = [useRef(), useRef(), useRef(), useRef()];
   const router = useRouter();
 
-  const handleSumbit = async (e) => 
-  {
+  const handleSumbit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !password) 
-    {
+    if (!name || !email || !password) {
       setError("All fields are necessary.");
       setShowAlert(true);
       return;
     }
 
-    try 
-    {
-      const ResUserExists = await fetch( "https://techx-server.tech:443/CheckUserExists",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      const { existing_user } = await ResUserExists.json();
-
-      if (existing_user) 
-      {
-        showAlert(true);
-        setError("User exists");
-        
-        console.error("User exists", error);
-        return;
-      } 
-      else 
-      {
-        SetisModalConfirmMailOpen(true);
-
-        const SendConf = await fetch("https://techx-server.tech:443/SendConfirmationCodeEmail",
+    try {
+      const ResUserExists = await fetch(
+        "https://techx-server.tech:443/CheckUserExists",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email }),
-        });
+        }
+      );
+
+      const { existing_user } = await ResUserExists.json();
+
+      if (existing_user) {
+        showAlert(true);
+        setError("User exists");
+        console.error("User exists", error);
+        return;
+      } else {
+        SetisModalConfirmMailOpen(true);
+
+        const SendConf = await fetch(
+          "https://techx-server.tech:443/SendConfirmationCodeEmail",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email }),
+          }
+        );
 
         const { conf } = await SendConf.json();
 
         SetConfU(conf);
       }
-    } 
-    catch (error) { console.log("Error during registration: ", error); }
+    } catch (error) {
+      console.log("Error during registration: ", error);
+    }
   };
 
-  const handleInputChange = (index, e) => 
-  {
+  const handleInputChange = (index, e) => {
     const input = e.target;
 
-    if (input.value.length === 1) 
-    {
+    if (input.value.length === 1) {
       if (index < input_confirm_refs.length - 1)
         input_confirm_refs[index + 1].current.focus();
     }
   };
 
-  const handleClearClick = () => 
-  {
-    input_confirm_refs.forEach((ref) => { ref.current.value = ""; });
+  const handleClearClick = () => {
+    input_confirm_refs.forEach((ref) => {
+      ref.current.value = "";
+    });
     input_confirm_refs[0].current.focus();
   };
 
-  const handleVerifyClick = async () => 
-  {
+  const handleVerifyClick = async () => {
     const code = input_confirm_refs.map((ref) => ref.current.value).join("");
 
-    if (conf_u === code) 
-    {
-      const res = await fetch("https://techx-server.tech:443/NewUser",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          password: await bcrypt.hash(password, 10),
-        }),
-      });
+    if (conf_u === code) {
+      const res = await fetch(
+        "https://techx-server.tech:443/NewUser",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email,
+            password: await bcrypt.hash(password, 10),
+          }),
+        }
+      );
 
-      if (res.ok) 
-        window.location.href = "/signin";
+      if (res.ok) window.location.href = "/signin";
       else
         <div className="fixed right-0 z-50 top-32 mr-4 mt-4 w-[250px]">
           {showAlert && error && (
@@ -117,9 +116,7 @@ const Signup = () =>
             </Alert>
           )}
         </div>;
-    } 
-    else 
-    {
+    } else {
       <div className="fixed right-0 top-32 mr-4 mt-4 w-[250px]">
         {showAlert && error && (
           <Alert>
