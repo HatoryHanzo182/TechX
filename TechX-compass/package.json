@@ -6,7 +6,8 @@
   },
   "scripts": {
     "compass": "electron index.js",
-    "package-win-compass": "electron-packager . TechX-Compass --platform=win32 --arch=x64 --out=C:\\Users\\scrin\\Documents\\MyDocument --icon=src\\img\\icon.ico --overwrite --desktopShortcut"
+    "package-win-compass": "electron-packager . TechX-Compass --platform=win32 --arch=x64 --out=C:\\Users\\scrin\\Documents\\MyDocument --icon=src\\img\\icon.ico --overwrite --desktopShortcut",
+    "package-mac-compass": "electron-packager . TechX-Compass --platform=darwin --arch=x64 --out=C:\\Users\\scrin\\Documents\\MyDocument --icon=src/img/icon.icns --overwrite --app-bundle-id=com.TechX.TechX-Compass --appVersion=1.0.0 --mac-package-name=TechX-Compass --mac-sign"
   },
   "dependencies": {
     "chart.js": "^4.4.3",
