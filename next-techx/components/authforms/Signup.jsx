@@ -9,7 +9,7 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { PullOutOfSession } from "../../lib/session";
+import { useUserData } from "@/lib/useUserData";
 import { set } from "mongoose";
 // import SquaresAnimation from "../SquaresAnimation";
 
@@ -71,6 +71,15 @@ const Signup = () => {
       console.log("Error during registration: ", error);
     }
   };
+
+  const LoginViaGoogle = () =>
+  {
+    const { loading, user } = useUserData();
+
+    console.log(user.name)
+    // setUsername(user.name);
+    // setEmail(user.email);
+  }
 
   const handleInputChange = (index, e) => {
     const input = e.target;
@@ -189,7 +198,7 @@ const Signup = () => {
               Sign in here
             </Link>
           </p>
-          <Button className=" mt-6 " onClick={() => signIn("google")}>
+          <Button className=" mt-6 " onClick={ () => LoginViaGoogle() }>
             <svg role="img" viewBox="0 0 24 24" className="mr-2 h-4 w-4">
               <path
                 fill="currentColor"

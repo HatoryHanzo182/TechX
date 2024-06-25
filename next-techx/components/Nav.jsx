@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bars3Icon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
-
 import Link from "next/link";
 import { MagnifyingGlassIcon, PersonIcon } from "@radix-ui/react-icons";
 import {
@@ -34,7 +33,6 @@ import {
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Separator } from "@radix-ui/react-separator";
 import { Input } from "./ui/input.jsx";
-import UserProfile from "./UserProfile.jsx";
 
 const navigation = [
   { name: "Product", href: "#", icon: LayoutGrid },
@@ -174,7 +172,6 @@ export default function Nav() {
                 </button>
               </div>
             )}
-            <UserProfile />
             {isLoggedIn ? (
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                 <div className="mt-2 mr-2 flex flex-row ">
