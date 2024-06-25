@@ -1,11 +1,12 @@
 {
   "devDependencies": {
     "electron": "^28.2.0",
-    "electron-builder": "^24.13.3"
+    "electron-builder": "^24.13.3",
+    "electron-packager": "^17.1.2"
   },
   "scripts": {
     "compass": "electron index.js",
-    "build-compass": "electron-builder"
+    "package-win-compass": "electron-packager . TechX-Compass --platform=win32 --arch=x64 --out=C:\\Users\\scrin\\Documents\\MyDocument --icon=src\\img\\icon.ico --overwrite --desktopShortcut"
   },
   "dependencies": {
     "chart.js": "^4.4.3",
