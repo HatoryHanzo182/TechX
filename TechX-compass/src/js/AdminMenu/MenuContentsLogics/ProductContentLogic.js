@@ -840,8 +840,8 @@ function DisplayTable()
         <td>${product.discount}</td>
         <td>
           <select class="status-dropdown">
-            <option value="active">Activate</option>
-            <option value="no active">Deactivate</option>
+            <option value="active" ${product.status === 'active' ? 'selected' : ''}>Activate</option>
+            <option value="no active" >Deactivate</option>
           </select>
         </td>
         <td><ion-icon class="bruch-meneger-product" name="brush-outline"></ion-icon></td>
@@ -898,7 +898,7 @@ async function OnTrashIconClick()
         } 
         else 
         {
-          ShowErrorMessage(response.message);
+          //ShowErrorMessage(response.message);
           console.error('Error deleting product:', response.message);
         }
       } 
@@ -1146,8 +1146,6 @@ function RemoveProductFromDB(product)
   {
     if (data.success)
       ShowSuccessMessage(`${data.message}`);
-    else
-      ShowErrorMessage(`${data.message}`);
   })
   .catch(error => { console.error('Error:', error); });
 }
@@ -1202,8 +1200,6 @@ async function ChangeDataProduct()
 
   const data = {_deleted_img, _img_product_paths_change_data7, _new_carousel, new_data}
 
-  console.log(data);
-  
   await window.electron.invoke('UpdateCangeProductData', data).then(response => 
   {
     
@@ -1219,8 +1215,8 @@ async function ChangeDataProduct()
       UpdateProductStatusInLocalStorage(data.new_data.Model, response.status)
       ShowContentProductManage();
     }
-    else
-      ShowErrorMessage(response.message);
+    // else
+    //   ShowErrorMessage(response.message);
 
   })
   .catch(error => { console.error("Error sending data to main process: ", error);});

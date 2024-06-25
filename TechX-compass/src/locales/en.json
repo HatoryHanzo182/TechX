@@ -3,8 +3,8 @@
     "label": "Product Management",
     "create_new_product": "Create new product",
     "create_new_product_desc": "Here you can create a product for your website. Some of the vehicle models are already saved, so you do not have to manually fill in all the characteristics. After creating the product, go to the 'All Products' tab.",
-    "edit_product": "Edit Product",
-    "edit_product_desc": "Edit the details of your products.",
+    "edit_product": "Product management",
+    "edit_product_desc": "All your products will be displayed here. After adding products, you can display it on the site, or leave the best time. If the product is no longer needed, the delete function is available.",
     "manage_products": "Manage Products",
     "manage_products_desc": "View and manage all your products."
   },

@@ -42,7 +42,7 @@ export class IpadDataModel
         this.#description = inputs[15].value;
         this.#images = img_product_paths;
         this.#incarousel = in_carousel;
-        this.#status = "not active";
+        this.#status = "no active";
     }
 
     async AddToLocalStorage() 

@@ -1,3 +1,5 @@
+import { ShowSuccessMessage, ShowErrorMessage } from "../AdminMenu.js";
+
 //#region [Modal window settings.]
 const _change_password_mw = document.getElementById(
   "id-modal-settings-content",
@@ -59,14 +61,6 @@ async function changePassword() {
   } else {
     ShowErrorMessage("Old password is incorrect.");
   }
-}
-
-function ShowErrorMessage(message) {
-  alert(message);
-}
-
-function ShowSuccessMessage(message) {
-  alert(message);
 }
 
 document

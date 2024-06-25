@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "brand": "Apple",
+    "category": "iPhone",
+    "model": "123",
+    "processor": "123",
+    "memory": "123jhkj",
+    "display_size": "123eqtywre",
+    "battery": "123",
+    "os": "123",
+    "camera": "123",
+    "color": "123njnk",
+    "price": "123",
+    "descont_price": "123",
+    "description": "132",
+    "images": [
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\a372690cd305443a94ff242db35b7698.jpeg",
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\apple-iphone-3gs-16gb-black-1.1000x1000.jpg",
+      "C:\\My resources\\Work\\GraduationProject\\TechX\\TechX-compass\\src\\CompassLocalStorage\\ProductsImg\\apple-iphone-3gs-16gb-black-5.1000x.jpg"
+    ],
+    "incarousel": true,
+    "status": "no active"
+  }
+]

@@ -40,7 +40,7 @@ export class WatchDataModel
         this.#description = inputs[14].value;
         this.#images = img_product_paths;
         this.#incarousel = in_carousel;
-        this.#status = "not active";
+        this.#status = "no active";
     }
 
     async AddToLocalStorage() 

@@ -28,7 +28,7 @@ export class AirpodsDataModel
         this.#description = inputs[8].value;
         this.#images = img_product_paths;
         this.#incarousel = in_carousel;
-        this.#status = "not active";
+        this.#status = "no active";
     }
 
     async AddToLocalStorage() 
