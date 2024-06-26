@@ -6,10 +6,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import bcrypt from "bcryptjs";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { useUserData } from "@/lib/useUserData";
+// import { useUserData } from "@/lib/useUserData";
 import { set } from "mongoose";
 // import SquaresAnimation from "../SquaresAnimation";
 
@@ -23,8 +23,15 @@ const Signup = () => {
   const [is_modal_confirm_mail_open, SetisModalConfirmMailOpen] =
     useState(false);
   const input_confirm_refs = [useRef(), useRef(), useRef(), useRef()];
-  const { loading, user_gouth } = useUserData();
+  const { data: session, status } = useSession();
   const router = useRouter();
+
+  useEffect(() => {
+    if (session) {
+      setUsername(session.user.name.replace(/\s/g, ""));
+      setEmail(session.user.email);
+    }
+  }, [session]);
 
   const handleSumbit = async (e) => {
     e.preventDefault();
@@ -74,10 +81,11 @@ const Signup = () => {
   };
 
   const LoginViaGoogle = async () => {
-    await signIn("google", { callbackUrl: "/signin" });
-    console.log(user_gouth);
-    setUsername(user_gouth?.name.replace(/\s/g, ""));
-    setEmail(user_gouth?.email);
+    try {
+      await signIn("google");
+    } catch (error) {
+      console.error("Error logging in with Google", error);
+    }
   };
 
   const handleInputChange = (index, e) => {
