@@ -1,10 +1,38 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
-import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -14,40 +42,44 @@ import Link from "next/link";
 import { PullOutOfSession } from "@/lib/session";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { OrdersTable } from "../OrdersTable";
+import { MessageCard } from "../MessageCard";
 
-export function ProfilePage() 
-{
+export function ProfilePage() {
   const { user } = useAuth();
   const [user_favorite, SetUserFavorite] = useState([]);
   const [liked_products, SetLikedProducts] = useState({});
   const [change_name, SetChangeName] = useState(user ? user.name : change_name);
-  const [change_phone_number, SetChangePhoneNumber] = useState(user && user.phone_number != "null" ? user.phone_number : "");
-  const [change_delivery_address, SetDeliveryAddress] = useState(user && user.delivery_address != "null" ? user.delivery_address : "");
+  const [change_phone_number, SetChangePhoneNumber] = useState(
+    user && user.phone_number != "null" ? user.phone_number : ""
+  );
+  const [change_delivery_address, SetDeliveryAddress] = useState(
+    user && user.delivery_address != "null" ? user.delivery_address : ""
+  );
 
-  useEffect(() => 
-  {
-    const GetFavorites = async () => 
-    {
+  useEffect(() => {
+    const GetFavorites = async () => {
       const u_data = await PullOutOfSession();
       const favorite_data = [];
 
-      for (const u in u_data.favourites) 
-      {
-        const formatted_data = await fetch(`https://techx-server.tech:443/GetFavoriteProduct/${u_data.favourites[u]}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        });
+      for (const u in u_data.favourites) {
+        const formatted_data = await fetch(
+          `https://techx-server.tech:443/GetFavoriteProduct/${u_data.favourites[u]}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
 
-        if (formatted_data.ok) 
-        {
+        if (formatted_data.ok) {
           favorite_data.push(await formatted_data.json());
 
           SetUserFavorite(favorite_data);
 
           const initial_liked_state = {};
 
-          favorite_data.forEach((item) => { initial_liked_state[item.id] = true; });
+          favorite_data.forEach((item) => {
+            initial_liked_state[item.id] = true;
+          });
 
           SetLikedProducts(initial_liked_state);
         }
@@ -61,79 +93,78 @@ export function ProfilePage()
     }
   }, []);
 
-  const ToggleLike = async (id, e) => 
-  {
+  const ToggleLike = async (id, e) => {
     e.preventDefault();
 
-    SetLikedProducts((prevState) => (
-    {
+    SetLikedProducts((prevState) => ({
       ...prevState,
       [id]: !prevState[id],
     }));
 
     const is_liked = liked_products[id];
-    const endpoint = is_liked ? `DeleteFavoriteProduct/${id}` : `AddFavoriteProduct/${id}`;
+    const endpoint = is_liked
+      ? `DeleteFavoriteProduct/${id}`
+      : `AddFavoriteProduct/${id}`;
 
-    await fetch(`https://techx-server.tech:443/${endpoint}`, 
-    {
+    await fetch(`https://techx-server.tech:443/${endpoint}`, {
       method: "POST",
-      headers: 
-      {
+      headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
   };
 
-  const handleChangeName = (event) => { SetChangeName(event.target.value); };
-  
-  const handleChangePhoneNumber = (e) => 
-  {
+  const handleChangeName = (event) => {
+    SetChangeName(event.target.value);
+  };
+
+  const handleChangePhoneNumber = (e) => {
     let input = e.target.value;
     let formatted_input = "+";
-  
-    input = input.replace(/\D/g, '');
-  
-    if (input.length > 0)
-      formatted_input += input.charAt(0);
-    if (input.length > 1)
-      formatted_input += input.charAt(1);
-    if (input.length > 2)
-      formatted_input += " (" + input.substr(2, 3);
-    if (input.length > 5)
-      formatted_input += ") " + input.substr(5, 7);
-  
-    SetChangePhoneNumber(formatted_input); 
-  };
-  
-  const handleDeliveryAddress = (event) => { SetDeliveryAddress(event.target.value); };
 
-  const ChangeUserData = async () =>
-  {
-    if (!change_name || !change_phone_number) 
-    {
+    input = input.replace(/\D/g, "");
+
+    if (input.length > 0) formatted_input += input.charAt(0);
+    if (input.length > 1) formatted_input += input.charAt(1);
+    if (input.length > 2) formatted_input += " (" + input.substr(2, 3);
+    if (input.length > 5) formatted_input += ") " + input.substr(5, 7);
+
+    SetChangePhoneNumber(formatted_input);
+  };
+
+  const handleDeliveryAddress = (event) => {
+    SetDeliveryAddress(event.target.value);
+  };
+
+  const ChangeUserData = async () => {
+    if (!change_name || !change_phone_number) {
       console.log("Please fill in all required fields.");
       return;
     }
-  
-    const response = await fetch("https://techx-server.tech:443/CnangeProfilData",
-    {
-      method: "POST",
-      headers: 
-      {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({change_name, change_phone_number, change_delivery_address})
-    });
 
-    if (!response.ok)
-      throw new Error(`HTTP error! Status: ${response.status}`);
+    const response = await fetch(
+      "https://techx-server.tech:443/CnangeProfilData",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          change_name,
+          change_phone_number,
+          change_delivery_address,
+        }),
+      }
+    );
+
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
     const data = await response.json();
 
     window.location.reload();
-  }
+  };
 
   return (
     <main>
@@ -150,7 +181,9 @@ export function ProfilePage()
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <Tabs defaultValue="account" className="w-full justify-center items-center  px-10 ">
+      <Tabs
+        defaultValue="account"
+        className="w-full justify-center items-center  px-10 ">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="account">Account</TabsTrigger>
           <TabsTrigger value="password">Favourites</TabsTrigger>
@@ -176,29 +209,47 @@ export function ProfilePage()
               <div className="space-y-1">
                 <Label htmlFor="name">Name</Label>
                 <div className="flex flex-row">
-                  <Input id="name" disabled className="cursor-pointer w-1/2" defaultValue={user ? user.name : ""}/>
+                  <Input
+                    id="name"
+                    disabled
+                    className="cursor-pointer w-1/2"
+                    defaultValue={user ? user.name : ""}
+                  />
                 </div>
               </div>
               <div className="space-y-1">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" disabled className="cursor-pointer w-1/2" defaultValue={user ? user.email : ""}/>
+                <Input
+                  id="email"
+                  disabled
+                  className="cursor-pointer w-1/2"
+                  defaultValue={user ? user.email : ""}
+                />
               </div>
               {/* Dialog 2 */}
               <div className="space-y-1">
                 <Label htmlFor="number">Phone Number</Label>
                 <div className="flex flex-row">
-                  <Input id="number" disabled className="cursor-default w-1/2" defaultValue={user ? user.phone_number : ""}/>
+                  <Input
+                    id="number"
+                    disabled
+                    className="cursor-default w-1/2"
+                    defaultValue={user ? user.phone_number : ""}
+                  />
                 </div>
               </div>
               {/* Dialog 3 */}
               <div className="space-y-1">
                 <Label htmlFor="address">Delivery Address</Label>
                 <div className="flex flex-row">
-                  <Input id="address" disabled className="cursor-pointer w-1/2" defaultValue={user ? user.delivery_address : ""}/>
+                  <Input
+                    id="address"
+                    disabled
+                    className="cursor-pointer w-1/2"
+                    defaultValue={user ? user.delivery_address : ""}
+                  />
                   <Dialog className="p-2">
-                    <DialogTrigger asChild>
-
-                    </DialogTrigger>
+                    <DialogTrigger asChild></DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
                       <DialogHeader>
                         <DialogTitle>Edit Address</DialogTitle>
@@ -263,16 +314,22 @@ export function ProfilePage()
                       <Label htmlFor="name" className="text-right">
                         Name
                       </Label>
-                      <Input id="name-change" value = {change_name} onChange={handleChangeName} className="col-span-3"/>
+                      <Input
+                        id="name-change"
+                        value={change_name}
+                        onChange={handleChangeName}
+                        className="col-span-3"
+                      />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
                       <Label htmlFor="name" className="text-right">
                         Phone Number
                       </Label>
                       <Input
-                        id="phone-change" 
-                        value = {change_phone_number}
-                        className="col-span-3" onChange={handleChangePhoneNumber }
+                        id="phone-change"
+                        value={change_phone_number}
+                        className="col-span-3"
+                        onChange={handleChangePhoneNumber}
                       />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
@@ -281,13 +338,16 @@ export function ProfilePage()
                       </Label>
                       <Input
                         id="adress-change"
-                        value = {change_delivery_address}
-                        className="col-span-3"  onChange={handleDeliveryAddress}
+                        value={change_delivery_address}
+                        className="col-span-3"
+                        onChange={handleDeliveryAddress}
                       />
                     </div>
                   </div>
                   <DialogFooter>
-                    <Button type="submit" onClick={() => ChangeUserData()}>Save changes</Button>
+                    <Button type="submit" onClick={() => ChangeUserData()}>
+                      Save changes
+                    </Button>
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
@@ -308,8 +368,7 @@ export function ProfilePage()
                             href={{
                               pathname: "/product-detail",
                               query: { id: u_f.id },
-                            }}
-                          >
+                            }}>
                             <img
                               src={`https://techx-server.tech:443/GetImage/${u_f.images}`}
                               alt={u_f.model}
@@ -324,8 +383,7 @@ export function ProfilePage()
                           </Link>
                           <span
                             className="ml-6"
-                            onClick={(e) => ToggleLike(u_f.id, e)}
-                          >
+                            onClick={(e) => ToggleLike(u_f.id, e)}>
                             {liked_products[u_f.id] ? (
                               <AiFillHeart size="22" />
                             ) : (
@@ -374,7 +432,11 @@ export function ProfilePage()
           <Card>
             <CardHeader>
               <CardTitle>Settings</CardTitle>
-              <CardDescription>Customize your experience</CardDescription>
+              <CardDescription>
+                <div className="mt-2">
+                  <MessageCard />
+                </div>
+              </CardDescription>
             </CardHeader>
           </Card>
         </TabsContent>

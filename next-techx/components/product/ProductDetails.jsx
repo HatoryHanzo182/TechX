@@ -846,21 +846,11 @@ const ProductDetails = () => {
           transition={{ duration: 0.5 }}
         />
         <div className=" mx-10 py-12 px-4 sm:px-6 lg:px-8 dark:bg-[#1d1d1d] shadow-lg rounded-lg">
-          <h2 className="text-3xl font-extrabold tracking-tight dark:text-white text-center sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight dark:text-white text-center sm:text-4xl">
             Write Review
           </h2>
-          <form className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
-            {!show_logged_content ? (
-              <Input
-                type="text"
-                placeholder="Name"
-                className="block w-full px-4 py-3 rounded-lg shadow-sm  sm:text-sm "
-                value={user_name}
-                onChange={(e) => SetUserName(e.target.value)}
-              />
-            ) : null}
-
-            <div className="px-3 py-0.5 flex flex-row items-center justify-center">
+          <form className="mt-6 grid grid-rows-2 gap-y-4  sm:gap-x-8  ">
+            <div className="px-3 py-0.5 flex flex-row items-center justify-start">
               <p className="text-center p-3 py-[0.4] text-lg text-black dark:text-white font-bold">
                 Grade
               </p>
@@ -927,10 +917,19 @@ const ProductDetails = () => {
                 </>
               </span>
             </div>
+            {!show_logged_content ? (
+              <Input
+                type="text"
+                placeholder="Name"
+                className="block w-1/2  p-5 rounded-lg shadow-sm  sm:text-sm "
+                value={user_name}
+                onChange={(e) => SetUserName(e.target.value)}
+              />
+            ) : null}
             <Input
               type="text"
               placeholder="Review"
-              className="block w-full p-4 rounded-lg shadow-sm  sm:text-sm "
+              className="block w-1/2  p-5 rounded-lg shadow-sm  sm:text-sm "
               value={user_review}
               onChange={(e) => SetUserReview(e.target.value)}
             />
