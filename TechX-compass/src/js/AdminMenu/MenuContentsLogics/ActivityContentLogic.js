@@ -9,7 +9,7 @@ async function LoadAllStatistics()
 {
   try 
   {
-    const response = await fetch('http://localhost:3000/api/activity/GetProductStatistics', 
+    const response = await fetch('https://techx-server.tech:443/api/activity/GetProductStatistics', 
     {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
