@@ -72,7 +72,7 @@ const OrdersPage = () => {
         user_sum: CountTotal(),
         stored_array: stored_array,
       };
-    
+<<<<<<< HEAD
       try 
       {
         const response = await fetch("https://techx-server.tech:443/Order", 
@@ -213,24 +213,51 @@ const OrdersPage = () => {
           </div>
           <div className="w-full md:w-1/3 bg-white  dark:bg-[#1d1d1d] shadow-lg p-6">
             <h2 className="text-2xl font-bold mb-6">Order Summary</h2>
+<<<<<<< HEAD
             {stored_array.length > 0 ? 
             (<>
               <ScrollArea className="h-96 w-full ">
                 {stored_array.map((item, index) => (
                   <div key={index} className="grid grid-cols-4 items-center gap-4 mt-3">
                     <div>
-                      <img src={`https://techx-server.tech:443/GetImage/${item.img}`} alt="img" className="w-14"/>
+                      <img src={`https://techx-server.tech:443/product/GetImage/${item.img}`} alt="img" className="w-14"/>
+=======
+            {stored_array.length > 0 ? (
+              <>
+                <ScrollArea className="h-96 w-full ">
+                  {stored_array.map((item, index) => (
+                    <div
+                      key={index}
+                      className="grid grid-cols-4 items-center gap-4 mt-3">
+                      <div>
+                        <img
+                          src={`https://techx-server.tech:443/GetImage/${item.img}`}
+                          alt="img"
+                          className="w-14"
+                        />
+                      </div>
+                      <div>{item.model}</div>
+                      <div>{item.price}$</div>
+                      <div>
+                        <svg
+                          width="15"
+                          height="15"
+                          viewBox="0 0 15 15"
+                          color="red"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          onClick={() => RemoveFromCart(index)}>
+                          <path
+                            d="M5.5 1C5.22386 1 5 1.22386 5 1.5C5 1.77614 5.22386 2 5.5 2H9.5C9.77614 2 10 1.77614 10 1.5C10 1.22386 9.77614 1 9.5 1H5.5ZM3 3.5C3 3.22386 3.22386 3 3.5 3H5H10H11.5C11.7761 3 12 3.22386 12 3.5C12 3.77614 11.7761 4 11.5 4H11V12C11 12.5523 10.5523 13 10 13H5C4.44772 13 4 12.5523 4 12V4L3.5 4C3.22386 4 3 3.77614 3 3.5ZM5 4H10V12H5V4Z"
+                            fill="currentColor"
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"></path>
+                        </svg>
+                      </div>
+>>>>>>> 5295f1f4b031b43de5e93b9dbd68e31897756097
                     </div>
-                    <div>{item.model}</div>
-                    <div>{item.price}$</div>
-                    <div>
-                      <svg width="15" height="15" viewBox="0 0 15 15" color="red" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => RemoveFromCart(index)}>
-                        <path d="M5.5 1C5.22386 1 5 1.22386 5 1.5C5 1.77614 5.22386 2 5.5 2H9.5C9.77614 2 10 1.77614 10 1.5C10 1.22386 9.77614 1 9.5 1H5.5ZM3 3.5C3 3.22386 3.22386 3 3.5 3H5H10H11.5C11.7761 3 12 3.22386 12 3.5C12 3.77614 11.7761 4 11.5 4H11V12C11 12.5523 10.5523 13 10 13H5C4.44772 13 4 12.5523 4 12V4L3.5 4C3.22386 4 3 3.77614 3 3.5ZM5 4H10V12H5V4Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
-                      </svg>
-                    </div>
-                  </div>
-                ))}
-              </ScrollArea>
+                  ))}
+                </ScrollArea>
                 <div className="flex flex-col">
                   <Label className="text-lg mb-5">
                     Total : {CountTotal()}$

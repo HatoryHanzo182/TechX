@@ -46,7 +46,7 @@ const DropMenu = () => {
           }
 
           const response = await fetch(
-            `https://techx-server.tech:443/product/${category.endpoint}`,
+            `https://techx-server.tech:443/product${category.endpoint}`,
             {
               method: "GET",
               headers: {
