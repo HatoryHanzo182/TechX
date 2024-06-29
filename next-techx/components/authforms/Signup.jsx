@@ -49,7 +49,7 @@ const Signup = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email }),
-        },
+        }
       );
 
       const { existing_user } = await ResUserExists.json();
@@ -68,7 +68,7 @@ const Signup = () => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email }),
-          },
+          }
         );
 
         const { conf } = await SendConf.json();
@@ -146,8 +146,7 @@ const Signup = () => {
     <div className="flex flex-wrap w-full">
       <div
         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-        aria-hidden="true"
-      >
+        aria-hidden="true">
         <div
           className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           style={{
@@ -170,21 +169,10 @@ const Signup = () => {
 
         <div className="mx-auto my-10 py-16 px-8 xl:w-[50rem] mt-44">
           <span className="rounded-full bg-white px-3 py-1 font-medium text-blue-600 ">
-            New Feature
+            Welcome
           </span>
-          <p className="my-6 text-3xl font-semibold leading-10">
-            Create animations with{" "}
-          </p>
-          <p className="mb-4">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt
-            necessitatibus nostrum repellendus ab totam.
-          </p>
-          <a
-            href="#"
-            className="font-semibold tracking-wide  underline underline-offset-4"
-          >
-            Learn More
-          </a>
+
+          <p className="mb-4">Thank you for choosing us, happy shopping</p>
         </div>
       </div>
       <div className="flex w-full lg:w-1/2 flex-col">
@@ -197,8 +185,7 @@ const Signup = () => {
             Already using wobble?
             <Link
               href="/signin"
-              className="ml-1 whitespace-nowrap font-semibold text-gray-400  underline "
-            >
+              className="ml-1 whitespace-nowrap font-semibold text-gray-400  underline ">
               Sign in here
             </Link>
           </p>
@@ -206,8 +193,7 @@ const Signup = () => {
             <svg role="img" viewBox="0 0 24 24" className="mr-2 h-4 w-4">
               <path
                 fill="currentColor"
-                d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
-              ></path>
+                d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"></path>
             </svg>
             Google
           </Button>
@@ -226,8 +212,7 @@ const Signup = () => {
           </div>
           <form
             className="flex flex-col items-stretch pt-3 md:pt-8"
-            onSubmit={handleSumbit}
-          >
+            onSubmit={handleSumbit}>
             {/* Input fields and Sign Up button */}
             <div className="flex flex-col pt-4">
               <div className="relative flex overflow-hidden rounded-md border-2 transition text-white">
@@ -455,8 +440,7 @@ const Signup = () => {
             <form className="form">
               <span
                 className="close"
-                onClick={() => SetisModalConfirmMailOpen(false)}
-              >
+                onClick={() => SetisModalConfirmMailOpen(false)}>
                 X
               </span>
               <div className="info">
