@@ -171,8 +171,17 @@ const Signup = () => {
           <span className="rounded-full bg-white px-3 py-1 font-medium text-blue-600 ">
             Welcome
           </span>
-
-          <p className="mb-4">Thank you for choosing us, happy shopping</p>
+          <p className="my-6 text-3xl font-semibold leading-10">
+            Create your free account
+          </p>
+          <p className="mb-4">
+            Thank you for choosing us, have a successful shopping
+          </p>
+          <a
+            href="/"
+            className="font-semibold tracking-wide  underline underline-offset-4">
+            Learn More
+          </a>
         </div>
       </div>
       <div className="flex w-full lg:w-1/2 flex-col">
