@@ -48,114 +48,117 @@ function CreateMainWindow()
 let review_count = 0;
 let order_count = 0;
 
-function CreateTray() {
+function CreateTray() 
+{
   _tray = new Tray(path.join(__dirname, "src", "img", "icon.png"));
 
   const context_menu = Menu.buildFromTemplate([
+  {
+    label: "Open",
+    click: () => { _app_window.show(); },
+  },
+  {
+    label: order_count === 0 ? "Order" : `(${order_count}) Order`,
+    click: () => 
     {
-      label: "Open",
-      click: () => {
-        _app_window.show();
-      },
-    },
-    {
-      label: order_count === 0 ? "Order" : `(${order_count}) Order`,
-      click: () => {
-        order_count = 0;
+      order_count = 0;
 
-        UpdateContextMenu();
+      UpdateContextMenu();
 
-        _app_window.show();
-        _app_window.webContents.send("ShowOrder");
-      },
+      _app_window.show();
+      _app_window.webContents.send("ShowOrder");
     },
+  },
+  {
+    label: review_count === 0 ? "Reviews" : `(${review_count}) Reviews`,
+    click: () => 
     {
-      label: review_count === 0 ? "Reviews" : `(${review_count}) Reviews`,
-      click: () => {
-        review_count = 0;
+      review_count = 0;
 
-        UpdateContextMenu();
+      UpdateContextMenu();
 
-        _app_window.show();
-        _app_window.webContents.send("ShowReview");
-      },
+      _app_window.show();
+      _app_window.webContents.send("ShowReview");
     },
+  },
+  {
+    label: "Block",
+    click: () => 
     {
-      label: "Block",
-      click: () => {
-        _app_window.loadFile(
-          path.join(__dirname, "src", "components", "Authorization.html"),
-        );
-      },
+      _app_window.loadFile(path.join(__dirname, "src", "components", "Authorization.html"));
     },
+  },
+  {
+    label: "Close",
+    click: () => 
     {
-      label: "Close",
-      click: () => {
-        app.quit();
-        _tray.destroy();
-      },
+      app.quit();
+      _tray.destroy();
     },
-  ]);
+  }]);
 
   _tray.setToolTip("TechX-compass");
   _tray.setContextMenu(context_menu);
-  _tray.on("click", () => {
-    _app_window.show();
-  });
-  _app_window.on("close", (event) => {
-    if (!app.isQuitting) {
+
+  _tray.on("click", () => { _app_window.show(); });
+
+  _app_window.on("close", (event) => 
+  {
+    if (!app.isQuitting) 
+    {
       event.preventDefault();
       _app_window.hide();
     }
   });
 }
 
-function UpdateContextMenu() {
+function UpdateContextMenu() 
+{
+
   const context_menu = Menu.buildFromTemplate([
+  {
+    label: "Open",
+    click: () => { _app_window.show(); }
+  },
+  {
+    label: order_count === 0 ? "Order" : `(${order_count}) Order`,
+    click: () => 
     {
-      label: "Open",
-      click: () => {
-        _app_window.show();
-      },
-    },
-    {
-      label: order_count === 0 ? "Order" : `(${order_count}) Order`,
-      click: () => {
-        order_count = 0;
+      order_count = 0;
 
-        UpdateContextMenu();
+      UpdateContextMenu();
 
-        _app_window.show();
-        _app_window.webContents.send("ShowOrder");
-      },
-    },
+      _app_window.show();
+      _app_window.webContents.send("ShowOrder");
+    }
+  },
+  {
+    label: review_count === 0 ? "Reviews" : `(${review_count}) Reviews`,
+    click: () => 
     {
-      label: review_count === 0 ? "Reviews" : `(${review_count}) Reviews`,
-      click: () => {
-        review_count = 0;
-
-        UpdateContextMenu();
-
-        _app_window.show();
-        _app_window.webContents.send("ShowReview");
-      },
-    },
+      review_count = 0;
+      
+      UpdateContextMenu();
+      
+      _app_window.show();
+      _app_window.webContents.send("ShowReview");
+    }
+  },
+  {
+    label: "Block",
+    click: () => 
     {
-      label: "Block",
-      click: () => {
-        _app_window.loadFile(
-          path.join(__dirname, "src", "components", "Authorization.html"),
-        );
-      },
+      _app_window.loadFile(path.join(__dirname, "src", "components", "Authorization.html"));
     },
+  },
+  {
+    label: "Close",
+    click: () => 
     {
-      label: "Close",
-      click: () => {
-        app.quit();
-        _tray.destroy();
-      },
+      app.quit();
+      _tray.destroy();
     },
-  ]);
+  }]);
 
   _tray.setContextMenu(context_menu);
 }
