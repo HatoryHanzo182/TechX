@@ -1100,7 +1100,7 @@ async function AddProduct(product)
 
       form_data.append('image', file);
 
-      const upload_response = await fetch("https://techx-server.tech:443/AddNewProductImg", 
+      const upload_response = await fetch("http://localhost:3000/api/product/AddNewProductImg", 
       {
         method: 'POST',
         body: form_data,
@@ -1120,7 +1120,7 @@ async function AddProduct(product)
   
   const new_produc_object = { product, server_img: img_path_genirated_server };
 
-  const res_user_exists = await fetch("https://techx-server.tech:443/AddProduct",
+  const res_user_exists = await fetch("http://localhost:3000/api/product/AddProduct",
   {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -1135,7 +1135,7 @@ async function AddProduct(product)
 
 function RemoveProductFromDB(product)
 {
-  fetch('https://techx-server.tech:443/RemoveProductFromDB', 
+  fetch('http://localhost:3000/api/product/RemoveProductFromDB', 
   {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

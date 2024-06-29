@@ -6,9 +6,9 @@ let number_reviews = 0;
 
 function LoadAllReviews() 
 {
-    fetch('https://techx-server.tech:443/GetProductReview', 
+    fetch('http://localhost:3000/api/activity/GetProductReview', 
     {
-      method: 'POST',
+      method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     }).then(response => 
     {
@@ -59,7 +59,7 @@ function CollectReviewCard(review_data)
                     <p id="id-review-text" class="some">${review.review}</p>
                 </div>
                 <div class="thumb-review">
-                    <img id="id-img-review" src="https://techx-server.tech:443/GetImage/${review.product_arr.images[0]}" height="250px" width="250px" alt="img-review">
+                    <img id="id-img-review" src="http://localhost:3000/product/GetImage/${review.product_arr.images[0]}" height="250px" width="250px" alt="img-review">
                 </div>
                 <div class="detial-review">
                     <div class="title-review">
@@ -117,7 +117,7 @@ function AdminСhecked(id)
 {
     try 
     {
-        fetch('https://techx-server.tech:443/AdminChecked', 
+        fetch('http://localhost:3000/api/activity/AdminChecked', 
         {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -248,7 +248,7 @@ function DeleteReview()
 {
     CancelDeleteReview();
 
-    fetch('https://techx-server.tech:443/RemovingReviewById', 
+    fetch('http://localhost:3000/api/activity/RemovingReviewById', 
     {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -63,9 +63,9 @@ export function ProfilePage() {
 
       for (const u in u_data.favourites) {
         const formatted_data = await fetch(
-          `https://techx-server.tech:443/GetFavoriteProduct/${u_data.favourites[u]}`,
+          `https://techx-server.tech:443/profile/favorite/GetFavoriteProduct/${u_data.favourites[u]}`,
           {
-            method: "POST",
+            method: "GET",
             headers: { "Content-Type": "application/json" },
           }
         );
@@ -106,7 +106,7 @@ export function ProfilePage() {
       ? `DeleteFavoriteProduct/${id}`
       : `AddFavoriteProduct/${id}`;
 
-    await fetch(`https://techx-server.tech:443/${endpoint}`, {
+    await fetch(`https://techx-server.tech:443/profile/favorite/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -144,7 +144,7 @@ export function ProfilePage() {
     }
 
     const response = await fetch(
-      "https://techx-server.tech:443/CnangeProfilData",
+      "https://techx-server.tech:443/profile/ChangeProfileData",
       {
         method: "POST",
         headers: {
@@ -370,7 +370,7 @@ export function ProfilePage() {
                               query: { id: u_f.id },
                             }}>
                             <img
-                              src={`https://techx-server.tech:443/GetImage/${u_f.images}`}
+                              src={`https://techx-server.tech:443/product/GetImage/${u_f.images}`}
                               alt={u_f.model}
                               className="mb-3"
                             />

@@ -84,7 +84,7 @@ export default function Nav() {
     {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("https://techx-server.tech:443/RemoveFromSession",
+      const response = await fetch("https://techx-server.tech:443/session/RemoveFromSession",
       {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
@@ -94,7 +94,6 @@ export default function Nav() {
 
       if (response.ok) 
       {
-        console.log(data.message);
         localStorage.removeItem("token");
         localStorage.removeItem("Cart");
         window.location.href = "/";
@@ -126,7 +125,7 @@ export default function Nav() {
 
     try {
       const response = await fetch(
-        `https://techx-server.tech:443/SearchForProducts`,
+        `https://techx-server.tech:443/product/SearchForProducts`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -135,7 +134,6 @@ export default function Nav() {
       );
 
       const data = await response.json();
-
       SetSearchResults(data);
     } catch (error) {
       console.error("Error searching:", error);
@@ -209,7 +207,7 @@ export default function Nav() {
                                     <img
                                       width="50"
                                       height="50"
-                                      src={`https://techx-server.tech:443/GetImage/${result.images}`}
+                                      src={`https://techx-server.tech:443/product/GetImage/${result.images}`}
                                       alt="SearchImage"
                                     />
                                     {result.model} / {result.price}$
@@ -323,7 +321,7 @@ export default function Nav() {
                                     <img
                                       width="50"
                                       height="50"
-                                      src={`https://techx-server.tech:443/GetImage/${result.images}`}
+                                      src={`https://techx-server.tech:443/product/GetImage/${result.images}`}
                                       alt="SearchImage"
                                       className="mr-2"
                                     />

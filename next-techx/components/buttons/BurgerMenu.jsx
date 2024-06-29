@@ -126,9 +126,9 @@ const BurgerMenu = () => {
           }
 
           const response = await fetch(
-            `https://techx-server.tech${category.endpoint}`,
+            `https://techx-server.tech:443/product/${category.endpoint}`,
             {
-              method: "POST",
+              method: "GET",
               headers: {
                 "Content-Type": "application/json",
               },

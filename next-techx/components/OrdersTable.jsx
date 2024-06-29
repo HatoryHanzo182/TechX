@@ -21,7 +21,7 @@ export function OrdersTable() {
 
       try {
         const response = await fetch(
-          "https://techx-server.tech:443/GetOrderHistory",
+          "https://techx-server.tech:443/profile/order/GetOrderHistory",
           {
             method: "POST",
             headers: {
@@ -66,7 +66,7 @@ export function OrdersTable() {
               <TableCell className="font-medium">{(index += 1)}</TableCell>
               <TableCell>
                 <img
-                  src={`https://techx-server.tech:443/GetImage/${product.images[0]}`}
+                  src={`https://techx-server.tech:443/product/GetImage/${product.images[0]}`}
                   className="w-12 h-12 flex flex-row"
                   alt="Product"
                 />

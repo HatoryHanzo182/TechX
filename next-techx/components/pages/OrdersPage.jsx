@@ -79,10 +79,9 @@ const OrdersPage = () =>
         user_sum: CountTotal(),
         stored_array: stored_array
       };
-    
       try 
       {
-        const response = await fetch("https://techx-server.tech:443/Order", 
+        const response = await fetch("https://techx-server.tech:443/profile/order/CreateOrder", 
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -206,7 +205,7 @@ const OrdersPage = () =>
                 {stored_array.map((item, index) => (
                   <div key={index} className="grid grid-cols-4 items-center gap-4 mt-3">
                     <div>
-                      <img src={`https://techx-server.tech:443/GetImage/${item.img}`} alt="img" className="w-14"/>
+                      <img src={`https://techx-server.tech:443/product/GetImage/${item.img}`} alt="img" className="w-14"/>
                     </div>
                     <div>{item.model}</div>
                     <div>{item.price}$</div>

@@ -44,7 +44,7 @@ const Signup = () => {
 
     try {
       const ResUserExists = await fetch(
-        "https://techx-server.tech:443/CheckUserExists",
+        "https://techx-server.tech:443/auth/CheckUserExists",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -63,7 +63,7 @@ const Signup = () => {
         SetisModalConfirmMailOpen(true);
 
         const SendConf = await fetch(
-          "https://techx-server.tech:443/SendConfirmationCodeEmail",
+          "https://techx-server.tech:443/auth/SendConfirmationCodeEmail",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -108,7 +108,7 @@ const Signup = () => {
     const code = input_confirm_refs.map((ref) => ref.current.value).join("");
 
     if (conf_u === code) {
-      const res = await fetch("https://techx-server.tech:443/NewUser", {
+      const res = await fetch("https://techx-server.tech:443/auth/NewUser", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

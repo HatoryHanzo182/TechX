@@ -47,9 +47,9 @@ function ProductSelection() {
       setProducts([]);
       try {
         const formatted_data = await fetch(
-          `https://techx-server.tech:443/GetDataForListProduct/${type_p}`,
+          `https://techx-server.tech:443/product/GetDataForListProduct/${type_p}`,
           {
-            method: "POST",
+            method: "GET",
             headers: { "Content-Type": "application/json" },
           },
         );
@@ -217,7 +217,7 @@ function ProductSelection() {
               }}>
               <div className="dark:bg-[#1d1d1d] p-4 rounded-lg  shadow-lg ">
                 <img
-                  src={`https://techx-server.tech:443/GetImage/${product.images}`}
+                  src={`https://techx-server.tech:443/product/GetImage/${product.images}`}
                   alt={`${product.model}`}
                   className="mb-3"
                 />

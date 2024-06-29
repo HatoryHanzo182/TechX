@@ -8,9 +8,9 @@ let orders = [];
 
 function LoadAllOrders() 
 {
-    fetch('https://techx-server.tech:443/GetOrder', 
+    fetch('http://localhost:3000/api/order/GetOrder', 
     {
-        method: 'POST',
+        method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
     .then(response => response.json())
@@ -74,7 +74,7 @@ function UpdateOrderTable(orders)
         {
             new_order_counter++;
 
-            fetch('https://techx-server.tech:443/MarkOrderVerification', 
+            fetch('http://localhost:3000/api/order/MarkOrderVerification', 
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -178,7 +178,7 @@ function HiddenNotOrderMessage()
 //#region [Change status sector.]
 function ChangeStatusOrder(order_id, new_status) 
 {
-    fetch('https://techx-server.tech:443/ChangeStatusOrder', 
+    fetch('http://localhost:3000/api/order/ChangeStatusOrder', 
     {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

@@ -25,9 +25,9 @@ export function ProductCarousel() {
     const ToGetData = async () => {
       try {
         const formatted_data = await fetch(
-          "https://techx-server.tech:443/GettingDataForCarusel",
+          "https://techx-server.tech:443/product/GettingDataForCarusel",
           {
-            method: "POST",
+            method: "GET",
             headers: { "Content-Type": "application/json" },
           }
         );
@@ -85,7 +85,7 @@ export function ProductCarousel() {
           <CarouselItem key={iteration} className="flex flex-row justify-center p-2">
             {c_data.slice(iteration * carouselSlideWidth, (iteration + 1) * carouselSlideWidth).map((d, Index) => (
               <Link key={d.id} href={{pathname: "/product-detail", query: { id: `${d.id}` }, }}>
-                <ProductCards key={Index} image={`https://techx-server.tech:443/GetImage/${d.images}`} title={d.model} color={d.color} price={d.price} descont_price={d.descont_price}/>
+                <ProductCards key={Index} image={`https://techx-server.tech:443/product/GetImage/${d.images}`} title={d.model} color={d.color} price={d.price} descont_price={d.descont_price}/>
               </Link>
             ))}
           </CarouselItem>
