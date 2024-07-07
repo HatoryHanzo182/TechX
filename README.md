@@ -4,10 +4,12 @@ The diploma project is aimed at the development and implementation of an e-comme
 electronic equipment and a store management system for business owners. 
 The project includes a server part that provides communication between the online store, the administrative application and the database for information transfer and processing.
 
-## TechX Store:
+## TechX Store
 TechX Store is a modern and convenient electronics store that allows consumers to easily find products, 
 providing a wide selection of products. Users can edit their profile, view order history, add products to 
 their favorites, leave reviews and much more.
+
+![image](https://github.com/HatoryHanzo182/TechX/assets/55142468/692ebc2c-20d3-45c9-9c1a-ab09ea5925dd)
 
 ### Main features:
 - **Registration and authorization of users**: Display and management of personal data and order history.
