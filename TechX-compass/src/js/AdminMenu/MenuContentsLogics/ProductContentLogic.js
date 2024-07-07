@@ -1120,8 +1120,6 @@ async function AddProduct(product)
   
   const new_produc_object = { product, server_img: img_path_genirated_server };
 
-  console.log(new_produc_object);
-
   const res_user_exists = await fetch("https://techx-server.tech:443/api/product/AddProduct",
   {
     method: "POST",

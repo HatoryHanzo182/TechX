@@ -113,31 +113,34 @@ export default function Nav() {
     // localStorage.setItem("Cart", JSON.stringify(ArrayCoast));
   };
 
-  const handleChangeSearch = (e) => {
+  const handleChangeSearch = (e) => 
+  {
     const query = e.target.value.trim();
 
-    if (query === "") return;
-    else Search(query);
+    if (query === "") 
+      return;
+    else 
+      Search(query);
   };
 
-  const Search = async (q) => {
+  const Search = async (q) => 
+  {
     search_results.length = 0;
 
-    try {
-      const response = await fetch(
-        `https://techx-server.tech:443/product/SearchForProducts`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: q }),
-        },
-      );
+    try 
+    {
+      const response = await fetch(`https://techx-server.tech:443/product/SearchForProducts`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: q }),
+      });
 
       const data = await response.json();
+      
       SetSearchResults(data);
-    } catch (error) {
-      console.error("Error searching:", error);
-    }
+    } 
+    catch (error) { console.error("Error searching:", error); }
   };
 
   return (

@@ -42,22 +42,23 @@ function ProductSelection() {
 
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const ToGetData = async (type_p) => {
+  useEffect(() => 
+  {
+    const ToGetData = async (type_p) => 
+    {
       setProducts([]);
-      try {
-        const formatted_data = await fetch(
-          `https://techx-server.tech:443/product/GetDataForListProduct/${type_p}`,
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          },
-        );
+      try 
+      {
+        const formatted_data = await fetch(`https://techx-server.tech:443/product/GetDataForListProduct/${type_p}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
 
-        if (formatted_data.ok) setProducts(await formatted_data.json());
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+        if (formatted_data.ok) 
+          setProducts(await formatted_data.json());
+      } 
+      catch (error) { console.error("Error fetching data:", error); }
     };
 
     const params = new URLSearchParams(window.location.search);

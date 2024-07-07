@@ -36,7 +36,7 @@ function UpdateOrderTable(orders)
     order_body.innerHTML = '';
     new_order_counter = 0;
 
-    orders.forEach(order => 
+    orders.slice().reverse().forEach(order => 
     {
         const order_row = document.createElement('tr');
 
@@ -142,14 +142,12 @@ function FilterOrders(orders, sort_order, status_filter)
 {
     let filtered_orders = orders.slice();
 
-    if (sort_order === 'newest') 
-        filtered_orders.sort((a, b) => new Date(b.date) - new Date(a.date));
-    else if (sort_order === 'oldest') 
-        filtered_orders.sort((a, b) => new Date(a.date) - new Date(b.date));
     if (status_filter !== 'all')
         filtered_orders = filtered_orders.filter(order => order.status.toLowerCase() === status_filter);
-
-    filtered_orders.reverse();
+    if (sort_order === 'oldest')
+        filtered_orders.sort((a, b) => orders.indexOf(a) - orders.indexOf(b));
+    else if (sort_order === 'newest')
+        filtered_orders.sort((a, b) => orders.indexOf(b) - orders.indexOf(a));
     
     return filtered_orders;
 }
@@ -199,8 +197,6 @@ function ChangeStatusOrder(order_id, new_status)
     })
     .catch(error => { console.error('Error:', error); });
 }
-
-
 //#endregion
 
 let interval_id;

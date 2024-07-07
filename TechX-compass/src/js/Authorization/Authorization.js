@@ -3,11 +3,15 @@
  */
 
 //#region [Password verification logic.]
-function Confuse(str)  // <-- This function takes a string and returns the SHA-256 
-{                     // hash of that string for the password verification function.
-    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(buffer =>
-    {
-        return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+function Confuse(str) {
+  // <-- This function takes a string and returns the SHA-256
+  // hash of that string for the password verification function.
+  return crypto.subtle
+    .digest("SHA-256", new TextEncoder().encode(str))
+    .then((buffer) => {
+      return Array.prototype.map
+        .call(new Uint8Array(buffer), (x) => ("00" + x.toString(16)).slice(-2))
+        .join("");
     });
 }
 
@@ -71,5 +75,6 @@ function BreakErrorMessage() {
   error_message.style.display = "none";
 }
 
+document.getElementById("id-close-error-message").onclick = BreakErrorMessage;
 document.getElementById("id-close-error-message").onclick = BreakErrorMessage;
 //#endregion 
