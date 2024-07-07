@@ -19,6 +19,11 @@ their favorites, leave reviews and much more.
 - **Security and Authorization**: Token generation for secure transmission of personal data including email, phone numbers and passwords.
 - **Notification and confirmation**: Sending emails to confirm registration and generating four-digit codes to confirm identity.
 
+## TECHX COMPASS
+A cross-platform program that will allow the website owner to conveniently manage the store. The program was implemented on the Electron framework.
+
+A cross-platform program that will allow the site owner to conveniently manage the store. Compass has a modern and convenient design for efficient work with the store. Thanks to an intuitive interface and a wide set of functions, administrators will be able to easily manage the assortment of goods, control stocks, process orders, analyze sales statistics and monitor feedback from customers. The application also supports real-time notifications, which allows you to quickly respond to changes and ensure a high level of service.
+
 ### Developers:
 - [HatoryHanzo182](https://github.com/HatoryHanzo182)
 - [gh0styx](https://github.com/gh0styx)
